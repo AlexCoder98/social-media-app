@@ -1,0 +1,46 @@
+.app__main-navigation {
+    display: flex;
+    justify-content: flex-end;
+    padding: .8rem 4rem;
+    border-bottom: 1px solid #ddd;
+}
+
+.app__logo-container {
+    flex-grow: 1;
+    text-align: left;
+}
+
+.app__logo-container>a {
+    width: fit-content;
+}
+
+.app__logo-container .app__logo-span {
+    text-transform: capitalize;
+    text-decoration: underline;
+}
+
+.app__navigation-variant {
+    display: flex;
+    list-style: none;
+}
+
+.app__nav-link {
+    display: block;
+    margin: 0 2px;
+    padding: .5rem 2rem;
+    font-size: 20px;
+    text-decoration: none;
+    color: #141414;
+    transition: .2s linear;
+    border-radius: 5px;
+}
+
+.app__nav-link:hover {
+    color: #ffffff;
+    background-color: #91caff;
+}
+
+.active {
+    color: #ffffff;
+    background-color: #91caff;
+}

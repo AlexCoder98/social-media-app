@@ -3,7 +3,9 @@ import { Route, Routes } from 'react-router-dom';
 import HomePage from '../../pages/Home';
 import SignInPage from '../../pages/SignIn';
 import SignUpPage from '../../pages/SignUp';
-import NotFoundPage from '../../pages/404Page';
+import NotFoundPage from '../../pages/404';
+
+import '../../styles/Main.css';
 
 const Main = () => {
     return (
