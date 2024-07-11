@@ -1,4 +1,7 @@
+import { Link } from 'react-router-dom';
+
 import InputElement from '../InputElement/InputElement';
+import Button from '../../Button/Button';
 
 import { signInFormInputsData } from '../../../helpers/form-data';
 
@@ -19,10 +22,18 @@ const SignInForm = () => {
                         placeholder={input.placeholder}
                     />
                 ))}
+                <p className="app__paragraph reset-password">
+                    Forgot your password? Click <Link to="/reset-password" title="Reset password">
+                        here to reset</Link>.</p>
             </main>
             <footer className="app__form-footer">
                 <div className="app__form-input-container">
-                    <input type="submit" className="app__input submit" id="submit" value="Sign In" />
+                    <Button
+                        className={"app__button submit"}
+                        type={"submit"}
+                        content={"Sign in"}
+                        title={"Sign in now"}
+                    />
                 </div>
             </footer>
         </form>

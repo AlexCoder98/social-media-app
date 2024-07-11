@@ -38,9 +38,11 @@
 .app__nav-link:hover {
     color: #ffffff;
     background-color: #91caff;
+    text-shadow: 0 0 1px #141414;
 }
 
 .active {
     color: #ffffff;
     background-color: #91caff;
+    text-shadow: 0 0 1px #141414;
 }
