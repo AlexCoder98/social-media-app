@@ -2,9 +2,9 @@ import { NavLink } from 'react-router-dom';
 
 import { NavigationLinkProps } from '../../../types/nav-link';
 
-const NavigationLink = ({ key, to, content, title }: NavigationLinkProps) => {
+const NavigationLink = ({ to, content, title }: NavigationLinkProps) => {
     return (
-        <li key={key} className="app__navigation-item-container">
+        <li className="app__navigation-item-container">
             <NavLink
                 to={to}
                 className={({ isActive }) => {
