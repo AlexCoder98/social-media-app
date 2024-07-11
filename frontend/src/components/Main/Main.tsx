@@ -11,12 +11,14 @@ const Main = () => {
     return (
         <main className="app__main">
             <img className="app__main-background" src="/files/images/network_1_cutted.png" alt="Network main background" />
-            <Routes>
-                <Route path='/' element={<HomePage />} index />
-                <Route path='/sign-in' element={<SignInPage />} />
-                <Route path='/sign-up' element={<SignUpPage />} />
-                <Route path='*' element={<NotFoundPage />} />
-            </Routes>
+            <section className="app__main-content">
+                <Routes>
+                    <Route path='/' element={<HomePage />} index />
+                    <Route path='/sign-in' element={<SignInPage />} />
+                    <Route path='/sign-up' element={<SignUpPage />} />
+                    <Route path='*' element={<NotFoundPage />} />
+                </Routes>
+            </section>
         </main>
     )
 }

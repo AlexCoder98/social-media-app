@@ -1,0 +1,6 @@
+.app__form-container {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    padding-top: 5rem;
+}

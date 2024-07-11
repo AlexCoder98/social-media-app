@@ -1,6 +1,12 @@
+import SignInForm from "../components/Forms/SignInForm/SignInForm";
+
+import '../styles/SignInPage.css';
+
 const SignInPage = () => {
     return (
-        <div>This is a Sign In page</div>
+        <div className="app__form-container">
+            <SignInForm />
+        </div>
     )
 }
 
