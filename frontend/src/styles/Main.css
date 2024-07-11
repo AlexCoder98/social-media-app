@@ -1,3 +1,23 @@
 .app__main {
     margin: 40px 0;
+    position: relative;
+}
+
+.app__main-background {
+    position: absolute;
+    top: 0;
+    left: 20px;
+    max-width: 50%;
+    animation: rotatePlanet 120s linear infinite;
+    z-index: -1;
+}
+
+@keyframes rotatePlanet {
+    0% {
+        transform: rotate(0)
+    }
+
+    100% {
+        transform: rotate(360deg);
+    }
 }

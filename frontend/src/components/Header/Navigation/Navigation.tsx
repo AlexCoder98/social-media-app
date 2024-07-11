@@ -1,4 +1,5 @@
 import { NavLink } from 'react-router-dom';
+import NavigationLink from './NavigationLink';
 
 import { navigationLinksData } from '../../../helpers/navigation-data';
 
@@ -20,17 +21,12 @@ const Navigation = () => {
             </div>
             <ul className="app__navigation-variant">
                 {navigationLinksData.map((navLink, i) =>
-                    <li key={i} className="app__navigation-item-container">
-                        <NavLink
-                            to={navLink.url}
-                            className={({ isActive }) => {
-                                return isActive ? 'app__nav-link active' : 'app__nav-link'
-                            }}
-                            title={navLink.title}
-                        >
-                            {navLink.content}
-                        </NavLink>
-                    </li>
+                    <NavigationLink
+                        key={i + 1}
+                        to={navLink.url}
+                        content={navLink.content}
+                        title={navLink.title}
+                    />
                 )}
             </ul>
         </nav >
