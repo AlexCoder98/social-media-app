@@ -3,8 +3,7 @@ import Header from "../components/Header/Header";
 const HomePage = () => {
     return (
         <div className="app__page home">
-            This is a Home Page
-            {/* <Header /> */}
+            <h1 style={{ textAlign: 'center' }}>This is the Home Page</h1>
         </div>
     )
 }

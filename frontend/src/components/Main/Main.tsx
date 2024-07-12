@@ -8,9 +8,6 @@ import NotFoundPage from '../../pages/404';
 import '../../styles/Main.css';
 
 const Main = () => {
-
-    // FIND OUT HOW TO CHANGE CLASS DEPENDING ON URL ADDRESS!!!!!
-    // FOR IMAGE BACKGROUND!!!
     return (
         <main className="app__main">
             <img

@@ -4,41 +4,45 @@ import { Link } from 'react-router-dom';
 import InputElement from '../InputElement/InputElement';
 import Button from '../../Button/Button';
 
-import { signInFormInputsData } from '../../../helpers/form-data';
+import { signUpFormInputsData } from '../../../helpers/form-data';
 
 import '../../../styles/Form.css';
 
-const SignInForm = () => {
-    const [signInFormValues, setSignInFormValues] = useState({
+const SignUpForm = () => {
+    const [signUpFormValues, setSignUpFormValues] = useState({
+        name: '',
+        surname: '',
         email: '',
         password: '',
+        repeatPassword: ''
     });
 
     const handleInputChange = (e: React.FormEvent) => {
-        setSignInFormValues({
-            ...signInFormValues,
+        setSignUpFormValues({
+            ...signUpFormValues,
             [(e.target as HTMLInputElement).name]: (e.target as HTMLInputElement).value,
         })
     }
+
 
     const handleFormSubmit = (e: React.SyntheticEvent) => {
         e.preventDefault();
         // console.log('Form submitted!');
         // console.log('Submitted data:');
-        // console.log(signInFormValues);
+        // console.log(signUpFormValues);
     }
 
     return (
         <form
             method="POST"
-            className="app__form log-in"
+            className="app__form sign-up"
             onSubmit={handleFormSubmit}
         >
             <header className="app__form-header">
-                <h2 className="app__form-h2">Sign in to Account</h2>
+                <h2 className="app__form-h2">Sign up now</h2>
             </header>
             <main className="app__form-main">
-                {signInFormInputsData.map((input, i) => (
+                {signUpFormInputsData.map((input, i) => (
                     <InputElement
                         key={i + 1}
                         type={input.type}
@@ -47,17 +51,17 @@ const SignInForm = () => {
                         method={handleInputChange}
                     />
                 ))}
-                <p className="app__paragraph reset-password">
-                    Forgot your password? Click <Link to="/reset-password" title="Reset password">
-                        here to reset</Link>.</p>
+                <p className="app__paragraph sign-in">
+                    If you already have an account <Link to="/sign-in" title="Go to sign in page">
+                        sign in</Link>.</p>
             </main>
             <footer className="app__form-footer">
                 <div className="app__form-input-container">
                     <Button
                         className={"app__button submit"}
                         type={"submit"}
-                        content={"Sign in"}
-                        title={"Sign in now"}
+                        content={"Sign up"}
+                        title={"Sign up now"}
                     />
                 </div>
             </footer>
@@ -65,4 +69,4 @@ const SignInForm = () => {
     )
 }
 
-export default SignInForm;
+export default SignUpForm;

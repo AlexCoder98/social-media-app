@@ -1,6 +1,10 @@
+import SignUpForm from "../components/Forms/SignUpForm/SignUpForm";
+
 const SignUpPage = () => {
     return (
-        <div>This is a Sign Up page</div>
+        <div className="app__form-container">
+            <SignUpForm />
+        </div>
     )
 }
 

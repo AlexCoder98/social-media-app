@@ -17,7 +17,7 @@
     z-index: -1;
 }
 
-.aside {
+.app__main-background.aside {
     left: 0;
 }
 
