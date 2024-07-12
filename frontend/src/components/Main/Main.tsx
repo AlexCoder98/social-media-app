@@ -14,8 +14,7 @@ const Main = () => {
     return (
         <main className="app__main">
             <img
-                // className="app__main-background" 
-                className={document.URL.toString() === 'http://localhost:3000/' ? 'app__main-background centered' : 'app__main-background'}
+                className="app__main-background"
                 src="/files/images/network_1_cutted.png"
                 alt="Network main background"
             />

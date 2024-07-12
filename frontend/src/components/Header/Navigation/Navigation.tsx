@@ -6,6 +6,17 @@ import { navigationLinksData } from '../../../helpers/navigation-data';
 import '../../../styles/Navigation.css';
 
 const Navigation = () => {
+
+    const changeBgPosition = (e: React.MouseEvent<HTMLAnchorElement>) => {
+        const anchorTitle = (e.target as HTMLAnchorElement | HTMLSpanElement).title;
+        const bgElement = document.querySelector('.app__main-background') as HTMLImageElement;
+        if (anchorTitle === 'Go to home page') {
+            bgElement.classList.remove('aside');
+        } else {
+            bgElement.classList.add('aside');
+        }
+    }
+
     return (
         <nav className="app__main-navigation">
             <div className="app__logo-container">
@@ -15,8 +26,9 @@ const Navigation = () => {
                         return isActive ? 'app__nav-link active' : 'app__nav-link'
                     }}
                     title="Go to home page"
+                    onClick={changeBgPosition}
                 >
-                    my<span className="app__logo-span">SocialMediaApp</span>
+                    mySocialMediaApp
                 </NavLink>
             </div>
             <ul className="app__navigation-variant">
@@ -26,6 +38,7 @@ const Navigation = () => {
                         to={navLink.url}
                         content={navLink.content}
                         title={navLink.title}
+                        clickHandler={changeBgPosition}
                     />
                 )}
             </ul>

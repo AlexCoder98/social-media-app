@@ -14,11 +14,6 @@
     width: fit-content;
 }
 
-.app__logo-container .app__logo-span {
-    text-transform: capitalize;
-    text-decoration: underline;
-}
-
 .app__navigation-variant {
     display: flex;
     list-style: none;

@@ -1,22 +1,24 @@
 .app__main {
-    margin: 40px 0;
+    width: 80%;
+    margin: 40px auto;
     min-height: 50rem;
     position: relative;
 }
 
 .app__main-background {
     position: absolute;
+    width: 800px;
     top: 0;
-    left: 20px;
-    max-width: 50%;
+    left: calc(50% - 400px);
+    right: 50%;
+    transform-origin: center;
     animation: rotatePlanet 120s linear infinite;
+    transition: .3s ease-in-out;
     z-index: -1;
 }
 
-.centered {
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
+.aside {
+    left: 0;
 }
 
 @keyframes rotatePlanet {
@@ -27,9 +29,4 @@
     100% {
         transform: rotate(360deg);
     }
-}
-
-.app__main-content {
-    width: 80%;
-    margin: 0 auto;
 }
