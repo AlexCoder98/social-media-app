@@ -1,5 +1,6 @@
-import { useState } from 'react';
+import { useState, useContext } from 'react';
 import { Link } from 'react-router-dom';
+import { AppContext } from '../../../context/AppContext';
 
 import InputElement from '../InputElement/InputElement';
 import Button from '../../Button/Button';
@@ -9,6 +10,7 @@ import { signUpFormInputsData } from '../../../helpers/form-data';
 import '../../../styles/Form.css';
 
 const SignUpForm = () => {
+    const { dispatchFn } = useContext(AppContext);
     const [signUpFormValues, setSignUpFormValues] = useState({
         name: '',
         surname: '',
@@ -27,9 +29,7 @@ const SignUpForm = () => {
 
     const handleFormSubmit = (e: React.SyntheticEvent) => {
         e.preventDefault();
-        // console.log('Form submitted!');
-        // console.log('Submitted data:');
-        // console.log(signUpFormValues);
+        dispatchFn({ type: 'CHANGE_LOGIN_STATUS', payload: true })
     }
 
     return (
