@@ -29,7 +29,7 @@ const SignUpForm = () => {
 
     const handleFormSubmit = (e: React.SyntheticEvent) => {
         e.preventDefault();
-        dispatchFn({ type: 'CHANGE_LOGIN_STATUS', payload: true })
+        dispatchFn({ type: 'changed_login_status', isLogged: true })
     }
 
     return (

@@ -4,7 +4,7 @@ type NavigationLinksType = {
     title: string;
 }[]
 
-export const navigationLinksData: NavigationLinksType = [
+export const navigationLoggedOutLinksData: NavigationLinksType = [
     {
         content: 'Sign in',
         url: '/sign-in',
@@ -14,5 +14,28 @@ export const navigationLinksData: NavigationLinksType = [
         content: 'Sign up',
         url: '/sign-up',
         title: 'Sign up'
+    },
+];
+
+export const navigationLoggedInLinksData: NavigationLinksType = [
+    {
+        content: 'Home',
+        url: '/home',
+        title: 'Home'
+    },
+    {
+        content: 'Posts',
+        url: '/posts',
+        title: 'Posts'
+    },
+    {
+        content: 'Profile',
+        url: '/profile',
+        title: 'Profile'
+    },
+    {
+        content: 'Sign out',
+        url: '/',
+        title: 'Sign out'
     },
 ]

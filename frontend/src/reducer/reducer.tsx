@@ -1,15 +1,16 @@
 export type ACTIONTYPE =
-  | { type: 'CHANGE_LOGIN_STATUS', payload: boolean }
+  | { type: 'changed_login_status', isLogged: boolean }
 
 export const initialAppState = {
-  isUserLoggedIn: false
+  isUserLoggedIn: false,
 }
 
 export const reducer = (state: typeof initialAppState, action: ACTIONTYPE) => {
   switch (action.type) {
-    case 'CHANGE_LOGIN_STATUS':
-      return { isUserLoggedIn: action.payload };
+    case 'changed_login_status': {
+      return { isUserLoggedIn: action.isLogged };
+    }
     default:
-      throw new Error('Something went wrong with the state menagement');
+      throw new Error(`Unknowing action: ${action.type}`);
   }
 }

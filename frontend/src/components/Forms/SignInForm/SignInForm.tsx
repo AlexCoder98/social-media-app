@@ -26,7 +26,7 @@ const SignInForm = () => {
 
     const handleFormSubmit = (e: React.SyntheticEvent) => {
         e.preventDefault();
-        dispatchFn({ type: 'CHANGE_LOGIN_STATUS', payload: true })
+        dispatchFn({ type: 'changed_login_status', isLogged: true })
     }
 
     return (
@@ -49,7 +49,7 @@ const SignInForm = () => {
                     />
                 ))}
                 <p className="app__paragraph reset-password">
-                    Forgot your password? Click <Link to="/reset-password" title="Reset password">
+                    Forgot a password? Click <Link to="/reset-password" title="Reset password">
                         here to reset</Link>.</p>
             </main>
             <footer className="app__form-footer">

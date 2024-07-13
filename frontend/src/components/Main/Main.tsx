@@ -10,12 +10,12 @@ import '../../styles/Main.css';
 const Main = () => {
     return (
         <main className="app__main">
-            <img
-                className="app__main-background"
-                src="/files/images/network_1_cutted.png"
-                alt="Network main background"
-            />
             <section className="app__main-content">
+                <img
+                    className="app__main-background"
+                    src="/files/images/network_1_cutted.png"
+                    alt="Network main background"
+                />
                 <Routes>
                     <Route path='/' element={<HomePage />} index />
                     <Route path='/sign-in' element={<SignInPage />} />

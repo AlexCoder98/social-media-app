@@ -2,6 +2,10 @@
     width: 80%;
     margin: 40px auto;
     min-height: 50rem;
+    /* position: relative; */
+}
+
+.app__main-content {
     position: relative;
 }
 

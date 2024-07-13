@@ -1,11 +1,17 @@
+import { useContext } from 'react';
 import { NavLink } from 'react-router-dom';
+import { AppContext } from '../../../context/AppContext';
+
 import NavigationLink from './NavigationLink';
 
-import { navigationLinksData } from '../../../helpers/navigation-data';
+import { navigationLoggedOutLinksData, navigationLoggedInLinksData } from '../../../helpers/navigation-data';
 
 import '../../../styles/Navigation.css';
 
 const Navigation = () => {
+    const { state } = useContext(AppContext);
+
+    let navigationType = state.isUserLoggedIn ? navigationLoggedInLinksData : navigationLoggedOutLinksData;
 
     const changeBgPosition = (e: React.MouseEvent<HTMLAnchorElement>) => {
         const anchorTitle = (e.target as HTMLAnchorElement | HTMLSpanElement).title;
@@ -32,7 +38,7 @@ const Navigation = () => {
                 </NavLink>
             </div>
             <ul className="app__navigation-variant">
-                {navigationLinksData.map((navLink, i) =>
+                {navigationType.map((navLink, i) =>
                     <NavigationLink
                         key={i + 1}
                         to={navLink.url}
