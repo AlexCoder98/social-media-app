@@ -1,5 +1,4 @@
 import { useReducer } from 'react';
-import { BrowserRouter } from 'react-router-dom';
 
 import Header from './components/Header/Header';
 import Main from './components/Main/Main';
@@ -20,14 +19,12 @@ function App() {
   console.log('State in App component ' + state.isUserLoggedIn);
 
   return (
-    <BrowserRouter>
-      <AppContext.Provider value={appContextProviderValue}>
-        <div className="app__wrapper">
-          <Header />
-          <Main />
-        </div>
-      </AppContext.Provider>
-    </BrowserRouter>
+    <AppContext.Provider value={appContextProviderValue}>
+      <div className="app__wrapper">
+        <Header />
+        <Main />
+      </div>
+    </AppContext.Provider>
   );
 }
 

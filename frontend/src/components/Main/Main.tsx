@@ -22,21 +22,23 @@ const Main = () => {
     return (
         <main className="app__main">
             <section className="app__main-content">
-                {/* {!state.isUserLoggedIn && ( */}
-                <img
-                    className="app__main-background"
-                    src="/files/images/network_1_cutted.png"
-                    alt="Network main background"
-                />
-                {/* // )} */}
+                {!state.isUserLoggedIn && (
+                    <img
+                        className="app__main-background"
+                        src="/files/images/network_1_cutted.png"
+                        alt="Network main background"
+                    />
+                )}
                 <Routes>
                     <Route path='/' element={<HomePage />} index />
                     <Route path='/sign-in' element={<SignInPage />} />
                     <Route path='/sign-up' element={<SignUpPage />} />
                     <Route path='/reset-password' element={<ResetPasswordPage />} />
                     <Route path='/main' element={<MainPage />} />
-                    <Route path='/posts' element={<PostsPage />} />
-                    <Route path='/posts/:postId' element={<PostPage />} />
+                    <Route path='/posts'>
+                        <Route index element={<PostsPage />}></Route>
+                        <Route path=':postId' element={<PostPage />} />
+                    </Route>
                     <Route path='/profile' element={<ProfilePage />} />
                     <Route path='*' element={<NotFoundPage />} />
                 </Routes>
