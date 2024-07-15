@@ -4,6 +4,8 @@ import { AppContext } from '../../../context/AppContext';
 
 import NavigationLink from './NavigationLink';
 
+import { changeBgPosition } from '../../../utils/change-bg-position';
+
 import { navigationLoggedOutLinksData, navigationLoggedInLinksData } from '../../../helpers/navigation-data';
 
 import '../../../styles/Navigation.css';
@@ -13,15 +15,6 @@ const Navigation = () => {
 
     let navigationType = state.isUserLoggedIn ? navigationLoggedInLinksData : navigationLoggedOutLinksData;
 
-    const changeBgPosition = (e: React.MouseEvent<HTMLAnchorElement>) => {
-        const anchorTitle = (e.target as HTMLAnchorElement | HTMLSpanElement).title;
-        const bgElement = document.querySelector('.app__main-background') as HTMLImageElement;
-        if (anchorTitle === 'Go to home page') {
-            bgElement.classList.remove('aside');
-        } else {
-            bgElement.classList.add('aside');
-        }
-    }
 
     return (
         <nav className="app__main-navigation">

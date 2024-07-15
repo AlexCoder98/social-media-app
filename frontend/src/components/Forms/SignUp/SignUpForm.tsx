@@ -16,7 +16,7 @@ const SignUpForm = () => {
         surname: '',
         email: '',
         password: '',
-        repeatPassword: ''
+        passwordRepeated: ''
     });
 
     const handleInputChange = (e: React.FormEvent) => {
