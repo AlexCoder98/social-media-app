@@ -1,5 +1,5 @@
 import { useContext } from 'react';
-import { NavLink } from 'react-router-dom';
+import { NavLink, Link } from 'react-router-dom';
 import { AppContext } from '../../../context/AppContext';
 
 import NavigationLink from './NavigationLink';
@@ -19,16 +19,14 @@ const Navigation = () => {
     return (
         <nav className="app__main-navigation">
             <div className="app__logo-container">
-                <NavLink
+                <Link
                     to="/"
-                    className={({ isActive }) => {
-                        return isActive ? 'app__nav-link active' : 'app__nav-link'
-                    }}
+                    className="app__nav-link"
                     title="Go to home page"
-                    onClick={changeBgPosition}
+                // onClick={changeBgPosition}
                 >
                     mySocialMediaApp
-                </NavLink>
+                </Link>
             </div>
             <ul className="app__navigation-variant">
                 {navigationType.map((navLink, i) =>
@@ -37,7 +35,7 @@ const Navigation = () => {
                         to={navLink.url}
                         content={navLink.content}
                         title={navLink.title}
-                        clickHandler={changeBgPosition}
+                    // clickHandler={changeBgPosition}
                     />
                 )}
             </ul>

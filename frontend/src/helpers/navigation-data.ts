@@ -19,8 +19,8 @@ export const navigationLoggedOutLinksData: NavigationLinksType = [
 
 export const navigationLoggedInLinksData: NavigationLinksType = [
     {
-        content: 'Home',
-        url: '/main',
+        content: 'Main page',
+        url: '/main-page',
         title: 'Home'
     },
     {
@@ -35,7 +35,7 @@ export const navigationLoggedInLinksData: NavigationLinksType = [
     },
     {
         content: 'Sign out',
-        url: '/',
+        url: '/out',
         title: 'Sign out'
     },
 ]

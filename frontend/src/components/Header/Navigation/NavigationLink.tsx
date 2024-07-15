@@ -12,7 +12,7 @@ const NavigationLink = ({ clickHandler, to, content, title }: NavigationLinkProp
                     return isActive ? 'app__nav-link active' : 'app__nav-link'
                 }}
                 title={title}
-                onClick={clickHandler}
+            // onClick={clickHandler}
             >
                 {content}
             </NavLink>
