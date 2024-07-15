@@ -32,7 +32,7 @@ const SignInForm = () => {
     return (
         <form
             method="POST"
-            className="app__form log-in"
+            className="app__form sign-in"
             onSubmit={handleFormSubmit}
         >
             <header className="app__form-header">

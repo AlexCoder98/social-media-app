@@ -20,7 +20,7 @@ export const navigationLoggedOutLinksData: NavigationLinksType = [
 export const navigationLoggedInLinksData: NavigationLinksType = [
     {
         content: 'Home',
-        url: '/home',
+        url: '/main',
         title: 'Home'
     },
     {
