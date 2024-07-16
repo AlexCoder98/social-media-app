@@ -1,13 +1,20 @@
-import { useParams } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
+
+import Post from "../components/Post/Post";
+
+import '../styles/Post.css';
 
 const PostPage = () => {
-    const { postId } = useParams();
-
-    console.log(postId);
-
+    const navigate = useNavigate();
     return (
         <div className="app__page post">
-            <h1 style={{ textAlign: 'center' }}>This is the Post Page with the post nr: {postId}</h1>
+            <aside className="app__aside-section">
+                <button
+                    className="app__button back"
+                    onClick={() => navigate(-1)}
+                >Go back</button>
+            </aside>
+            <Post />
         </div>
     )
 }

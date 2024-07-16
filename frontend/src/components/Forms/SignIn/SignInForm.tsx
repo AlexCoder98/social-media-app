@@ -55,7 +55,7 @@ const SignInForm = () => {
             <footer className="app__form-footer">
                 <div className="app__form-input-container">
                     <Button
-                        className={"app__button submit"}
+                        className={"app__action-button submit"}
                         type={"submit"}
                         content={"Sign in"}
                         title={"Sign in now"}

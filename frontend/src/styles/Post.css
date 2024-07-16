@@ -1,0 +1,44 @@
+.app__aside-section {
+    padding: 20px;
+}
+
+.app__page.post {
+    display: flex;
+    align-items: flex-start;
+}
+
+.app__post-single {
+    width: 70%;
+    margin: 0 auto;
+}
+
+.app__post-head {
+    display: flex;
+    align-items: center;
+}
+
+.app__post-h3 {
+    flex-grow: 1;
+    text-align: center;
+}
+
+.app__post-img-wrapper {
+    margin-bottom: 2rem;
+    border-radius: 5px;
+}
+
+.app__paragraph {
+    margin-bottom: 15px;
+    font-size: 14px;
+    text-align: justify;
+    line-height: 1.5;
+    color: #141414;
+}
+
+.app__post-bottom {
+    justify-content: space-around;
+}
+
+.app__post-single .app__button {
+    width: 30%;
+}

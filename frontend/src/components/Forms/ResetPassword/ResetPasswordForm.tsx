@@ -53,7 +53,7 @@ const ResetPasswordForm = () => {
             <footer className="app__form-footer">
                 <div className="app__form-input-container">
                     <Button
-                        className={"app__button submit"}
+                        className={"app__action-button submit"}
                         type={"submit"}
                         content={"Reset password"}
                         title={"Reset password"}

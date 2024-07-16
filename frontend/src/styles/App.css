@@ -8,6 +8,7 @@
     box-sizing: border-box;
 }
 
-html {
+html,
+button {
     font-family: "Nunito", "Arial", sans-serif;
 }

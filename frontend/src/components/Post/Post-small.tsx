@@ -1,30 +1,34 @@
 import { Link } from "react-router-dom"
+import Button from "../Button/Button"
 
-import { PostType } from "../../types/post"
+import { PostPropsType } from "../../types/post"
 
-const SmallPost = ({ title, imgSrc, imgAlt, link, linkContent }: PostType) => {
+const SmallPost = ({ id, title, imgSrc, imgAlt }: PostPropsType) => {
     return (
-        <li className="app__post">
+        <li className="app__post" data-id={id}>
             <header className="app__post-head">
                 <h3 className="app__post-h3">
                     {title}
                 </h3>
             </header>
             <main className="app__post-body">
-                <div className="app__post-img-wrapper">
-                    <img
-                        className="app__post-img"
-                        src={imgSrc}
-                        alt={imgAlt} />
+                <div
+                    className="app__post-img-wrapper"
+                    style={{ backgroundImage: `url(${imgSrc})` }}>
                 </div>
             </main>
             <footer className="app__post-bottom">
                 <Link
-                    to={link as string}
-                    className="app__post-link"
-                >
-                    {linkContent}
-                </Link>
+                    to={`${id}`}
+                    className="app__button post"
+                    title={`Go to post ${title}`}
+                >Read more</Link>
+                <Button
+                    className={"app__button delete"}
+                    content={"Delete"}
+                    title={"Delete post"}
+                    type={"button"}
+                />
             </footer>
         </li>
     )
