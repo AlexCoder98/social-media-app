@@ -26,7 +26,7 @@ const SignInForm = () => {
 
     const handleFormSubmit = (e: React.SyntheticEvent) => {
         e.preventDefault();
-        dispatchFn({ type: 'changed_login_status', isLogged: true })
+        dispatchFn({ type: 'changed_login_status', isLogged: true });
     }
 
     return (

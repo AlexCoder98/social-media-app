@@ -33,9 +33,4 @@ export const navigationLoggedInLinksData: NavigationLinksType = [
         url: '/profile',
         title: 'Profile'
     },
-    {
-        content: 'Sign out',
-        url: '/out',
-        title: 'Sign out'
-    },
 ]
