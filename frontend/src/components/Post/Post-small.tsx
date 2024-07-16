@@ -14,7 +14,8 @@ const SmallPost = ({ id, title, imgSrc, imgAlt }: PostPropsType) => {
             <main className="app__post-body">
                 <div
                     className="app__post-img-wrapper"
-                    style={{ backgroundImage: `url(${imgSrc})` }}>
+                    style={{ backgroundImage: `url(${imgSrc})` }}
+                >
                 </div>
             </main>
             <footer className="app__post-bottom">

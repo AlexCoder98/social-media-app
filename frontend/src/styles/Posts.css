@@ -1,5 +1,5 @@
 .app__posts-list {
-    margin: 4rem auto;
+    margin: 2rem auto;
     display: grid;
     grid-template-columns: repeat(2, 1fr);
     justify-content: space-between;
@@ -8,9 +8,10 @@
 }
 
 .app__post {
-    width: 60%;
+    width: 70%;
     margin: 0 auto;
     border: 1px solid #ddd;
+    border-radius: 5px;
 }
 
 .app__post-head {
@@ -18,31 +19,21 @@
 }
 
 .app__post-h3 {
-    font-size: 24px;
-    font-weight: 500;
-    color: #141414;
+    font-size: 22px;
 }
 
+.app__post-img-wrapper {
+    height: 250px;
+    background-position: center;
+    background-size: cover;
+}
 
 .app__post-head,
 .app__post-bottom {
     padding: 20px;
 }
 
-.app__post-img-wrapper {
-    min-height: 250px;
-    background-position: center;
-    background-size: cover;
-    background-repeat: no-repeat;
-}
-
 .app__post-bottom {
     display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
-
-.app__posts-list .app__post-bottom>* {
-    width: 44%;
-    text-align: center;
+    justify-content: space-around;
 }
