@@ -1,6 +1,6 @@
 import { InputElementProps } from '../../../types/form-input';
 
-const InputElement = ({ method, type, id, placeholder, tagType }: InputElementProps) => {
+const InputElement = ({ method, type, id, placeholder, tagType, value }: InputElementProps) => {
     return (
         <div className="app__form-input-container">
             {
@@ -12,6 +12,7 @@ const InputElement = ({ method, type, id, placeholder, tagType }: InputElementPr
                         name={id}
                         placeholder={placeholder}
                         onChange={method}
+                        value={value}
                     />
                 ) : (
                     <textarea
@@ -20,6 +21,7 @@ const InputElement = ({ method, type, id, placeholder, tagType }: InputElementPr
                         className="app__input"
                         placeholder="Add some text..."
                         onChange={method}
+                        value={value}
                     >
                     </textarea>
                 )

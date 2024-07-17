@@ -1,10 +1,10 @@
-import { useParams } from 'react-router-dom';
+import EditPostForm from '../components/Forms/EditPostForm/EditPostForm';
 
 const EditPostPage = () => {
-    const { postId } = useParams();
-
     return (
-        <div>Edit post nr: {postId}</div>
+        <div className="app__page edit-post">
+            <EditPostForm />
+        </div>
     )
 }
 

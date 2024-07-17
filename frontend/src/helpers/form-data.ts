@@ -3,6 +3,7 @@ type FormInputsData = {
     id: string;
     placeholder: string;
     type?: string;
+    value?: string;
 }
 
 export const signInFormInputsData: FormInputsData[] = [

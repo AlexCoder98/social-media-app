@@ -4,4 +4,5 @@ export type InputElementProps = {
     id: string;
     placeholder: string;
     method: (e: React.FormEvent) => void;
+    value?: string;
 }

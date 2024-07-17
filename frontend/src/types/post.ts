@@ -6,3 +6,9 @@ export type PostType = {
 }
 
 export type PostPropsType = PostType & { id: number };
+
+export type EditPostLocationType = {
+    title: string;
+    imageUrl: string;
+    description: string;
+}

@@ -1,4 +1,4 @@
-import { useParams } from "react-router-dom";
+import { useParams, Link } from "react-router-dom";
 
 import Button from "../Button/Button";
 
@@ -23,18 +23,28 @@ const Post = () => {
                 >
                 </div>
                 <div className="app__post-single-text-container">
-                    {post.text!.map(p => (
-                        <p className="app__paragraph">{p}</p>
+                    {post.text!.map((p, i) => (
+                        <p
+                            key={i}
+                            className="app__paragraph"
+                        >
+                            {p}
+                        </p>
                     ))}
                 </div>
             </main>
             <footer className="app__post-single-bottom">
-                <Button
+                <Link
+                    to="edit"
                     className={"app__button"}
-                    content={"Edit"}
                     title={"Edit post"}
                     type={"button"}
-                />
+                    state={{
+                        title: post.title,
+                        imageUrl: post.imgSrc,
+                        description: post.text?.join(" ")
+                    }}
+                >Edit</Link>
                 <Button
                     className={"app__button delete"}
                     content={"Delete"}

@@ -1,8 +1,4 @@
-import { useContext } from 'react';
-
 import { Route, Routes } from 'react-router-dom';
-
-import { AppContext } from '../../context/AppContext';
 
 import HomePage from '../../pages/Home';
 import SignInPage from '../../pages/SignIn';
@@ -19,8 +15,6 @@ import NotFoundPage from '../../pages/404';
 import '../../styles/Main.css';
 
 const Main = () => {
-    const { state } = useContext(AppContext);
-
     return (
         <main className="app__main">
             <section className="app__main-content">
