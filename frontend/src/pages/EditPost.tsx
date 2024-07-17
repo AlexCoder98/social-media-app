@@ -1,4 +1,4 @@
-import EditPostForm from '../components/Forms/EditPostForm/EditPostForm';
+import EditPostForm from '../components/Forms/EditPost/EditPost';
 
 const EditPostPage = () => {
     return (
