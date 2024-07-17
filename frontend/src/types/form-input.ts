@@ -1,4 +1,5 @@
 export type InputElementProps = {
+    tagType: string;
     type: string;
     id: string;
     placeholder: string;

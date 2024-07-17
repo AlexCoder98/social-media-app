@@ -7,6 +7,14 @@
     list-style: none;
 }
 
+.app__section.create-new {
+    margin-top: 20px;
+    padding: 2rem 0;
+    border-top: 1px solid #ddd;
+    border-bottom: 1px solid #ddd;
+    text-align: center;
+}
+
 .app__post {
     width: 70%;
     margin: 0 auto;

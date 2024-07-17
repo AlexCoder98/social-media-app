@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import SmallPost from "../components/Post/Post-small";
 
 import { postsData } from "../helpers/posts-data";
@@ -9,6 +10,13 @@ const PostsPage = () => {
     return (
         <div className="app__page posts">
             <h1 style={{ textAlign: 'center' }}>This is the Posts Page</h1>
+            <section className="app__section create-new">
+                <Link
+                    to={"create-new"}
+                    className="app__button"
+                    title="Create new post"
+                >Create post</Link>
+            </section>
             <ul className="app__posts-list">
                 {postsData.map((post, i) => (
                     <SmallPost

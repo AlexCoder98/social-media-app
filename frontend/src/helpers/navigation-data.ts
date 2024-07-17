@@ -21,7 +21,7 @@ export const navigationLoggedInLinksData: NavigationLinksType = [
     {
         content: 'Main page',
         url: '/main-page',
-        title: 'Home'
+        title: 'Main'
     },
     {
         content: 'Posts',

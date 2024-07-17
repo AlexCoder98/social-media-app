@@ -11,6 +11,8 @@ import ResetPasswordPage from '../../pages/ResetPassword';
 import MainPage from '../../pages/Main';
 import PostsPage from '../../pages/Posts';
 import PostPage from '../../pages/Post';
+import EditPostPage from '../../pages/EditPost';
+import CreatePostPage from '../../pages/CreatePost';
 import ProfilePage from '../../pages/Profile';
 import NotFoundPage from '../../pages/404';
 
@@ -22,13 +24,6 @@ const Main = () => {
     return (
         <main className="app__main">
             <section className="app__main-content">
-                {/* {!state.isUserLoggedIn && (
-                    <img
-                        className="app__main-background"
-                        src="/files/images/network_1_cutted.png"
-                        alt="Network main background"
-                    />
-                )} */}
                 <Routes>
                     <Route path='/' element={<HomePage />} index />
                     <Route path='/sign-in' element={<SignInPage />} />
@@ -38,6 +33,8 @@ const Main = () => {
                     <Route path='/posts'>
                         <Route index element={<PostsPage />}></Route>
                         <Route path=':postId' element={<PostPage />} />
+                        <Route path=':postId/edit' element={<EditPostPage />} />
+                        <Route path='create-new' element={<CreatePostPage />} />
                     </Route>
                     <Route path='/profile' element={<ProfilePage />} />
                     <Route path='*' element={<NotFoundPage />} />

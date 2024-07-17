@@ -1,47 +1,46 @@
 import { useState, useContext } from 'react';
-import { Link } from 'react-router-dom';
-import { AppContext } from '../../../context/AppContext';
 
+import { AppContext } from '../../../context/AppContext';
 import InputElement from '../InputElement/InputElement';
 import Button from '../../Button/Button';
 
+import { postFormData } from '../../../helpers/form-data';
 
-import { signInFormInputsData } from '../../../helpers/form-data';
-
-import '../../../styles/Form.css';
-
-const SignInForm = () => {
+const CreatePostForm = () => {
     const { dispatchFn } = useContext(AppContext);
-    const [signInFormValues, setSignInFormValues] = useState({
-        email: '',
-        password: '',
+    const [createPostFormValues, setCreatePostFormValues] = useState({
+        title: '',
+        imageUrl: '',
+        description: '',
     });
 
     const handleInputChange = (e: React.FormEvent) => {
-        setSignInFormValues({
-            ...signInFormValues,
+        setCreatePostFormValues({
+            ...createPostFormValues,
             [(e.target as HTMLInputElement).name]: (e.target as HTMLInputElement).value,
-        })
+        });
+
+        console.log(createPostFormValues);
     }
 
-    const handleFormSubmit = (e: React.SyntheticEvent) => {
+    const handleOnSubmit = (e: React.SyntheticEvent) => {
         e.preventDefault();
-        dispatchFn({ type: 'changed_login_status', isLogged: true });
+        console.log(createPostFormValues);
     }
 
     return (
         <form
             method="POST"
-            className="app__form sign-in"
-            onSubmit={handleFormSubmit}
+            className="app__form create-post"
+            onSubmit={handleOnSubmit}
         >
             <header className="app__form-header">
-                <h2 className="app__form-h2">Sign in to Account</h2>
+                <h2 className="app__form-h2">Create a Post</h2>
             </header>
             <main className="app__form-main">
-                {signInFormInputsData.map((input, i) => (
+                {postFormData.map((input, i) => (
                     <InputElement
-                        tagType={"input"}
+                        tagType={input.tagType}
                         key={i + 1}
                         type={input.type!}
                         id={input.id}
@@ -49,17 +48,14 @@ const SignInForm = () => {
                         method={handleInputChange}
                     />
                 ))}
-                <p className="app__paragraph reset-password">
-                    Forgot a password? Click <Link to="/reset-password" title="Reset password">
-                        here to reset</Link>.</p>
             </main>
             <footer className="app__form-footer">
                 <div className="app__form-input-container">
                     <Button
                         className={"app__action-button submit"}
                         type={"submit"}
-                        content={"Sign in"}
-                        title={"Sign in now"}
+                        content={"Create post"}
+                        title={"Create post"}
                     />
                 </div>
             </footer>
@@ -67,4 +63,4 @@ const SignInForm = () => {
     )
 }
 
-export default SignInForm;
+export default CreatePostForm;

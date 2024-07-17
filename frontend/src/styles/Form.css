@@ -63,3 +63,7 @@
     color: #515151;
     text-decoration: underline;
 }
+
+textarea.app__input {
+    min-height: 250px;
+}

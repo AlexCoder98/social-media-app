@@ -11,7 +11,7 @@ const PostPage = () => {
             <aside className="app__aside-section">
                 <button
                     className="app__button back"
-                    onClick={() => navigate(-1)}
+                    onClick={() => navigate('/posts')}
                 >Go back</button>
             </aside>
             <Post />

@@ -9,6 +9,8 @@
 }
 
 html,
-button {
+button,
+input,
+textarea {
     font-family: "Nunito", "Arial", sans-serif;
 }

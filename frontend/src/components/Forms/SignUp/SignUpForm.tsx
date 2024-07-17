@@ -44,8 +44,9 @@ const SignUpForm = () => {
             <main className="app__form-main">
                 {signUpFormInputsData.map((input, i) => (
                     <InputElement
+                        tagType={"input"}
                         key={i + 1}
-                        type={input.type}
+                        type={input.type!}
                         id={input.id}
                         placeholder={input.placeholder}
                         method={handleInputChange}
