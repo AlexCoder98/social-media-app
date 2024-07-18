@@ -1,12 +1,11 @@
 import { useState } from 'react';
-import { useDispatch } from 'react-redux';
 import { Link, useNavigate } from 'react-router-dom';
 
 import InputElement from '../InputElement/InputElement';
 import Button from '../../Button/Button';
 
-import { AppDispatch } from '../../../state/store';
 import { signIn } from '../../../state/user/userSlice';
+import { useAppDispatch } from '../../hooks/redux';
 
 import { signInFormInputsData } from '../../../helpers/form-data';
 
@@ -14,7 +13,7 @@ import '../../../styles/Form.css';
 
 
 const SignInForm = () => {
-    const dispath = useDispatch<AppDispatch>();
+    const dispath = useAppDispatch();
 
     const navigate = useNavigate();
     const [signInFormValues, setSignInFormValues] = useState({

@@ -1,13 +1,12 @@
-import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 
-import { AppDispatch } from "../state/store";
 import { signOut } from '../state/user/userSlice';
+import { useAppDispatch } from "../components/hooks/redux";
 
 import Button from "../components/Button/Button";
 
 const ProfilePage = () => {
-    const dispatch = useDispatch<AppDispatch>();
+    const dispatch = useAppDispatch();
     const navigate = useNavigate();
 
     const handleSignOut = () => {

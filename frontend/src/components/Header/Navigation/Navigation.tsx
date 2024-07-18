@@ -1,16 +1,15 @@
-import { useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 
 import NavigationLink from './NavigationLink';
 
-import { RootState } from '../../../state/store';
+import { useAppSelector } from '../../hooks/redux';
 
 import { navigationLoggedOutLinksData, navigationLoggedInLinksData } from '../../../helpers/navigation-data';
 
 import '../../../styles/Navigation.css';
 
 const Navigation = () => {
-    const isUserSignedIn = useSelector((state: RootState) => state.user.isSignedIn);
+    const isUserSignedIn = useAppSelector((state) => state.users.isSignedIn);
     const navigationType = isUserSignedIn ? navigationLoggedInLinksData : navigationLoggedOutLinksData;
 
     return (
