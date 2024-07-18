@@ -1,0 +1,47 @@
+.app__page.profile {
+    /* background-color: skyblue; */
+}
+
+.profile__header {
+    display: flex;
+}
+
+.profile__photo-wrapper {
+    width: 300px;
+    height: 300px;
+    border: 1px solid #ddd;
+    border-radius: 50%;
+    overflow: hidden;
+    position: relative;
+}
+
+.profile__photo {
+    width: 100%;
+    height: auto;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.profile__about-me {
+    width: 100%;
+    padding-left: 3rem;
+}
+
+.profile__general-info {
+    flex-grow: 1;
+    display: flex;
+    flex-wrap: nowrap;
+    align-items: center;
+    margin-bottom: 3rem;
+    /* background-color: lightcoral; */
+}
+
+.profile__name {
+    font-size: 26px;
+}
+
+.profile__name-container {
+    flex-grow: 1;
+}
