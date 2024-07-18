@@ -1,16 +1,21 @@
-import { useState, useContext } from 'react';
+import { useState } from 'react';
+import { useDispatch } from 'react-redux';
 import { Link, useNavigate } from 'react-router-dom';
-import { AppContext } from '../../../context/AppContext';
 
 import InputElement from '../InputElement/InputElement';
 import Button from '../../Button/Button';
+
+import { AppDispatch } from '../../../state/store';
+import { signIn } from '../../../state/user/userSlice';
 
 import { signInFormInputsData } from '../../../helpers/form-data';
 
 import '../../../styles/Form.css';
 
+
 const SignInForm = () => {
-    const { dispatchFn } = useContext(AppContext);
+    const dispath = useDispatch<AppDispatch>();
+
     const navigate = useNavigate();
     const [signInFormValues, setSignInFormValues] = useState({
         email: '',
@@ -26,7 +31,7 @@ const SignInForm = () => {
 
     const handleFormSubmit = (e: React.SyntheticEvent) => {
         e.preventDefault();
-        dispatchFn({ type: 'changed_login_status', isLogged: true });
+        dispath(signIn());
         navigate('/main-page');
     }
 

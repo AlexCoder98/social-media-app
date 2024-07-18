@@ -1,16 +1,18 @@
-import { useContext } from 'react';
+import { useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
-import { AppContext } from '../../../context/AppContext';
 
 import NavigationLink from './NavigationLink';
+
+import { RootState } from '../../../state/store';
 
 import { navigationLoggedOutLinksData, navigationLoggedInLinksData } from '../../../helpers/navigation-data';
 
 import '../../../styles/Navigation.css';
 
 const Navigation = () => {
-    const { state } = useContext(AppContext);
-    let navigationType = state.isUserLoggedIn ? navigationLoggedInLinksData : navigationLoggedOutLinksData;
+    const isUserSignedIn = useSelector((state: RootState) => state.user.isSignedIn);
+    const navigationType = isUserSignedIn ? navigationLoggedInLinksData : navigationLoggedOutLinksData;
+
     return (
         <nav className="app__main-navigation">
             <div className="app__logo-container">

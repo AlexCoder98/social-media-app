@@ -1,16 +1,19 @@
-import { useState, useContext } from 'react';
+import { useState } from 'react';
+import { useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom';
-import { AppContext } from '../../../context/AppContext';
 
 import InputElement from '../InputElement/InputElement';
 import Button from '../../Button/Button';
+
+import { AppDispatch } from '../../../state/store';
+import { signIn } from '../../../state/user/userSlice';
 
 import { signUpFormInputsData } from '../../../helpers/form-data';
 
 import '../../../styles/Form.css';
 
 const SignUpForm = () => {
-    const { dispatchFn } = useContext(AppContext);
+    const dispatch = useDispatch<AppDispatch>();
     const [signUpFormValues, setSignUpFormValues] = useState({
         name: '',
         surname: '',
@@ -29,7 +32,7 @@ const SignUpForm = () => {
 
     const handleFormSubmit = (e: React.SyntheticEvent) => {
         e.preventDefault();
-        dispatchFn({ type: 'changed_login_status', isLogged: true })
+        dispatch(signIn())
     }
 
     return (

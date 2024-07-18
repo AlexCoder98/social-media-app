@@ -1,13 +1,11 @@
-import { useState, useContext } from 'react';
+import { useState } from 'react';
 
-import { AppContext } from '../../../context/AppContext';
 import InputElement from '../InputElement/InputElement';
 import Button from '../../Button/Button';
 
 import { postFormData } from '../../../helpers/form-data';
 
 const CreatePostForm = () => {
-    const { dispatchFn } = useContext(AppContext);
     const [createPostFormValues, setCreatePostFormValues] = useState({
         title: '',
         imageUrl: '',
@@ -19,13 +17,10 @@ const CreatePostForm = () => {
             ...createPostFormValues,
             [(e.target as HTMLInputElement).name]: (e.target as HTMLInputElement).value,
         });
-
-        console.log(createPostFormValues);
     }
 
     const handleOnSubmit = (e: React.SyntheticEvent) => {
         e.preventDefault();
-        console.log(createPostFormValues);
     }
 
     return (

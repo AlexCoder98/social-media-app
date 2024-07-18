@@ -1,17 +1,17 @@
-import { useContext } from "react";
+import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
+
+import { AppDispatch } from "../state/store";
+import { signOut } from '../state/user/userSlice';
 
 import Button from "../components/Button/Button";
 
-import { AppContext } from "../context/AppContext";
-
-
 const ProfilePage = () => {
-    const { dispatchFn } = useContext(AppContext);
+    const dispatch = useDispatch<AppDispatch>();
     const navigate = useNavigate();
 
     const handleSignOut = () => {
-        dispatchFn({ type: 'changed_login_status', isLogged: false });
+        dispatch(signOut());
         navigate('/');
     }
 
