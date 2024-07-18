@@ -17,6 +17,7 @@ const SignUpForm = () => {
     const [signUpFormValues, setSignUpFormValues] = useState({
         name: '',
         surname: '',
+        profileImage: '',
         email: '',
         password: '',
         passwordRepeated: ''

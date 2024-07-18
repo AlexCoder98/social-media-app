@@ -37,6 +37,12 @@ export const signUpFormInputsData: FormInputsData[] = [
     {
         tagType: 'input',
         type: 'text',
+        id: 'profileImage',
+        placeholder: 'Profile image url'
+    },
+    {
+        tagType: 'input',
+        type: 'text',
         id: 'email',
         placeholder: 'Email',
     },

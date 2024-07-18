@@ -20,6 +20,27 @@ const ProfilePage = () => {
 
     return (
         <div className="app__page profile">
+            <header className="profile__header">
+                <div className="profile__img-wrapper">
+                    <img
+                        className="profile__photo"
+                        src=""
+                        alt=""
+                    />
+                </div>
+                <section className="profile__general-info">
+                    <div className="profile__name-container">
+                        <h2 className="profile__name">First name and Last name</h2>
+                        <p className="profile__status">Status</p>
+                    </div>
+                </section>
+            </header>
+            <main className="profile__main">
+                <section className="profile__about-me-wrapper">
+                    <h3 className="profile__about-me-h3">About me</h3>
+                    <p className="profile__about-me text">About me text</p>
+                </section>
+            </main>
             <h1 style={{ textAlign: 'center' }}>This is the Profile Page</h1>
             <p>Click here to sign out</p>
             <Button

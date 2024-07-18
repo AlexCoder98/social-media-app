@@ -3,6 +3,7 @@ import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 type User = {
     name: string;
     surname: string;
+    profileImage: string;
     email: string;
     password: string;
 }
@@ -17,6 +18,7 @@ const initialState: UserStateType = {
     userObj: {
         name: '',
         surname: '',
+        profileImage: '',
         email: '',
         password: ''
     }
@@ -33,6 +35,7 @@ const userSlice = createSlice({
             state.isSignedIn = false;
         },
         signUp: (state, action: PayloadAction<User>) => {
+            state.isSignedIn = true;
             state.userObj = action.payload;
         }
     }

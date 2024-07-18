@@ -14,7 +14,6 @@ ReactDOM.createRoot(
       <BrowserRouter>
         <App />
       </BrowserRouter>
-
     </Provider>
   </React.StrictMode>
 );
