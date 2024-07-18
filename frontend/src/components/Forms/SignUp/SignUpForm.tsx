@@ -1,11 +1,11 @@
 import { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 import InputElement from '../InputElement/InputElement';
 import Button from '../../Button/Button';
 
 import { useAppDispatch } from '../../hooks/redux';
-import { signIn } from '../../../state/user/userSlice';
+import { signUp } from '../../../state/user/userSlice';
 
 import { signUpFormInputsData } from '../../../helpers/form-data';
 
@@ -13,6 +13,7 @@ import '../../../styles/Form.css';
 
 const SignUpForm = () => {
     const dispatch = useAppDispatch();
+    const navigate = useNavigate();
     const [signUpFormValues, setSignUpFormValues] = useState({
         name: '',
         surname: '',
@@ -28,10 +29,10 @@ const SignUpForm = () => {
         })
     }
 
-
     const handleFormSubmit = (e: React.SyntheticEvent) => {
         e.preventDefault();
-        dispatch(signIn())
+        dispatch(signUp(signUpFormValues));
+        navigate('/main-page');
     }
 
     return (

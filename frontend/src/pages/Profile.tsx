@@ -1,13 +1,17 @@
 import { useNavigate } from "react-router-dom";
 
 import { signOut } from '../state/user/userSlice';
-import { useAppDispatch } from "../components/hooks/redux";
+import { useAppDispatch, useAppSelector } from "../components/hooks/redux";
 
 import Button from "../components/Button/Button";
 
 const ProfilePage = () => {
+    const user = useAppSelector(state => state.users.userObj);
     const dispatch = useAppDispatch();
     const navigate = useNavigate();
+
+    console.log('Signed Up User');
+    console.log(user);
 
     const handleSignOut = () => {
         dispatch(signOut());

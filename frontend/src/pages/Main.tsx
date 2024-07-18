@@ -1,9 +1,12 @@
 import SmallPost from '../components/Post/Post-small';
 import { postsData } from '../helpers/posts-data';
+import { useAppSelector } from '../components/hooks/redux';
 import '../styles/MainPage.css';
 
 const MainPage = () => {
-    console.log(postsData);
+    const user = useAppSelector(state => state.users.userObj);
+    console.log('User obj on Main page');
+    console.log(user);
 
     return (
         <div className="app__page main">
