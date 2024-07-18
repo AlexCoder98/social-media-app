@@ -1,10 +1,9 @@
 import { useState, useContext } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { AppContext } from '../../../context/AppContext';
 
 import InputElement from '../InputElement/InputElement';
 import Button from '../../Button/Button';
-
 
 import { signInFormInputsData } from '../../../helpers/form-data';
 
@@ -12,6 +11,7 @@ import '../../../styles/Form.css';
 
 const SignInForm = () => {
     const { dispatchFn } = useContext(AppContext);
+    const navigate = useNavigate();
     const [signInFormValues, setSignInFormValues] = useState({
         email: '',
         password: '',
@@ -27,6 +27,7 @@ const SignInForm = () => {
     const handleFormSubmit = (e: React.SyntheticEvent) => {
         e.preventDefault();
         dispatchFn({ type: 'changed_login_status', isLogged: true });
+        navigate('/main-page');
     }
 
     return (
@@ -46,6 +47,7 @@ const SignInForm = () => {
                         type={input.type!}
                         id={input.id}
                         placeholder={input.placeholder}
+                        value={signInFormValues[input.id as keyof typeof signInFormValues]}
                         method={handleInputChange}
                     />
                 ))}

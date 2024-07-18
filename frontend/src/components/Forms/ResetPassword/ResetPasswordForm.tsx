@@ -47,6 +47,7 @@ const ResetPasswordForm = () => {
                         type={input.type!}
                         id={input.id}
                         placeholder={input.placeholder}
+                        value={resetPasswordFormValues[input.id as keyof typeof resetPasswordFormValues]}
                         method={handleInputChange}
                     />
                 ))}

@@ -45,6 +45,7 @@ const CreatePostForm = () => {
                         type={input.type!}
                         id={input.id}
                         placeholder={input.placeholder}
+                        value={createPostFormValues[input.id as keyof typeof createPostFormValues]}
                         method={handleInputChange}
                     />
                 ))}

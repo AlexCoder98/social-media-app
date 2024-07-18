@@ -49,6 +49,7 @@ const SignUpForm = () => {
                         type={input.type!}
                         id={input.id}
                         placeholder={input.placeholder}
+                        value={signUpFormValues[input.id as keyof typeof signUpFormValues]}
                         method={handleInputChange}
                     />
                 ))}
