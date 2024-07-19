@@ -1,8 +1,15 @@
+:root {
+    --navLinkColor: #353535;
+    --navLinkHoverColor: #fff;
+    --navLinkHoverBgc: #353535;
+    --borderColor: #d0d0d0;
+}
+
 .app__main-navigation {
     display: flex;
     justify-content: flex-end;
     padding: .8rem 4rem;
-    border-bottom: 1px solid #ddd;
+    border-bottom: 1px solid var(--borderColor);
 }
 
 .app__logo-container {
@@ -21,23 +28,21 @@
 
 .app__nav-link {
     display: block;
-    margin: 0 2px;
+    margin: 0 .5rem;
     padding: .5rem 2rem;
     font-size: 20px;
     text-decoration: none;
-    color: #141414;
+    color: var(--navLinkColor);
     transition: .2s linear;
     border-radius: 5px;
 }
 
 .app__nav-link:hover {
-    color: #ffffff;
-    background-color: #91caff;
-    text-shadow: 0 0 1px #141414;
+    color: var(--navLinkHoverColor);
+    background-color: var(--navLinkHoverBgc);
 }
 
 .active {
-    color: #ffffff;
-    background-color: #91caff;
-    text-shadow: 0 0 1px #141414;
+    color: var(--navLinkHoverColor);
+    background-color: var(--navLinkHoverBgc);
 }

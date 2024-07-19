@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import { useAppDispatch } from "../hooks/redux";
 
 import { PostStateType } from "../../state/posts/postsSlice";
@@ -6,13 +6,13 @@ import { deletePost } from '../../state/posts/postsSlice'
 
 const Post = ({ id, title, image, description }: PostStateType) => {
     const dispatch = useAppDispatch();
-
+    const location = useLocation();
     const handleOnDeletePost = (postId: string) => {
         dispatch(deletePost(postId));
     }
 
     return (
-        <li className="app__post" data-id={id}>
+        <li className="app__post">
             <header className="app__post-head">
                 <h3 className="app__post-h3">
                     {title}
@@ -30,20 +30,22 @@ const Post = ({ id, title, image, description }: PostStateType) => {
                     </p>
                 </div>
             </main>
-            <footer className="app__post-bottom">
-                <Link
-                    to={`${id}`}
-                    className="app__button post"
-                    title={`Go to post ${title}`}
-                >Read more</Link>
-                <button
-                    className="app__button delete"
-                    title="Delete post"
-                    onClick={() => handleOnDeletePost(id)}
-                >
-                    Delete
-                </button>
-            </footer>
+            {location.pathname.includes('posts') && (
+                <footer className="app__post-bottom">
+                    <Link
+                        to={`${id}`}
+                        className="app__button post"
+                        title={`Go to post ${title}`}
+                    >Read more</Link>
+                    <button
+                        className="app__button delete"
+                        title="Delete post"
+                        onClick={() => handleOnDeletePost(id)}
+                    >
+                        Delete
+                    </button>
+                </footer>
+            )}
         </li>
     )
 }
