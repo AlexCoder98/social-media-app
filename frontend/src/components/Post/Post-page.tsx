@@ -5,7 +5,7 @@ import { deletePost } from '../../state/posts/postsSlice';
 
 import '../../styles/Post.css';
 
-const Post = () => {
+const SinglePost = () => {
     const { postId } = useParams();
     const navigate = useNavigate();
     const posts = useAppSelector(state => state.posts.posts);
@@ -55,4 +55,4 @@ const Post = () => {
     )
 }
 
-export default Post;
+export default SinglePost;

@@ -24,7 +24,7 @@ const PostsPage = () => {
                         <SmallPost
                             key={i + 1}
                             id={post.id}
-                            title={`${post.title} ${i + 1}`}
+                            title={post.title}
                             image={post.image}
                             description={post.description}
                         />

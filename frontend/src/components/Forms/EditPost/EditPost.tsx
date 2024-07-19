@@ -1,15 +1,22 @@
 import { useState } from 'react';
-import { useLocation } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 
 import InputElement from '../InputElement/InputElement';
 import Button from '../../Button/Button';
+
+import { useAppDispatch } from '../../hooks/redux';
+import { editPost } from '../../../state/posts/postsSlice';
 
 import { postFormData } from '../../../helpers/form-data';
 import { EditPostLocationType } from '../../../types/post';
 
 const EditPostForm = () => {
     const location = useLocation();
+    const navigate = useNavigate();
     const state = location.state as EditPostLocationType;
+    const dispatch = useAppDispatch();
+
+    const postId = location.pathname.split('/').find(el => el.match(/\d/g));
 
     const [editPostFormValues, setEditPostFormValues] = useState({
         title: state.title,
@@ -26,6 +33,14 @@ const EditPostForm = () => {
 
     const handleOnSubmit = (e: React.SyntheticEvent) => {
         e.preventDefault();
+        const updatedPost = {
+            id: postId!,
+            title: editPostFormValues['title'],
+            image: editPostFormValues['imageUrl'],
+            description: editPostFormValues['description'],
+        }
+        dispatch(editPost(updatedPost))
+        navigate(-1);
     }
 
     return (

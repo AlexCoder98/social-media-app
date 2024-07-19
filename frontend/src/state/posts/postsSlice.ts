@@ -23,7 +23,10 @@ const postsSlice = createSlice({
             state.posts = state.posts.concat(action.payload);
         },
         editPost: (state, action: PayloadAction<PostStateType>) => {
-            state.posts = [...state.posts, action.payload]
+            const updtPostIndex = state.posts.findIndex(post => post.id === action.payload.id);
+            if (updtPostIndex !== -1) {
+                state.posts[updtPostIndex] = action.payload;
+            }
         },
         deletePost: (state, action: PayloadAction<string>) => {
             state.posts = state.posts.filter(post => post.id !== action.payload);
@@ -31,5 +34,5 @@ const postsSlice = createSlice({
     }
 });
 
-export const { addPost, deletePost } = postsSlice.actions;
+export const { addPost, editPost, deletePost } = postsSlice.actions;
 export default postsSlice.reducer;

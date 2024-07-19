@@ -4,7 +4,7 @@ import { useAppDispatch } from "../hooks/redux";
 import { PostStateType } from "../../state/posts/postsSlice";
 import { deletePost } from '../../state/posts/postsSlice'
 
-const SmallPost = ({ id, title, image, description }: PostStateType) => {
+const Post = ({ id, title, image, description }: PostStateType) => {
     const dispatch = useAppDispatch();
 
     const handleOnDeletePost = (postId: string) => {
@@ -48,4 +48,4 @@ const SmallPost = ({ id, title, image, description }: PostStateType) => {
     )
 }
 
-export default SmallPost;
+export default Post;
