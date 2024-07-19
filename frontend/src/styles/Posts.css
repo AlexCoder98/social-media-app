@@ -4,6 +4,7 @@
 
 .app__posts-page-header {
     display: flex;
+    padding-bottom: .5rem;
     border-bottom: 1px solid var(--borderColor);
 }
 
@@ -16,21 +17,12 @@
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     justify-content: space-between;
-    column-gap: 20px;
+    column-gap: 5rem;
     list-style: none;
 }
 
-/* .app__section.create-new {
-    margin-top: 20px;
-    padding: 2rem 0;
-    border-top: 1px solid #ddd;
-    border-bottom: 1px solid #ddd;
-    text-align: center;
-} */
-
 .app__post {
-    width: 70%;
-    margin: 0 auto;
+    width: 100%;
     border: 1px solid #ddd;
     border-radius: 5px;
 }

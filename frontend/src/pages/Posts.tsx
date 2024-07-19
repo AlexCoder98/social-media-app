@@ -12,7 +12,7 @@ const PostsPage = () => {
         <div className="app__page posts">
             <header className="app__posts-page-header">
                 <h1 className="app__h1">My Posts</h1>
-                <section className="app__posts-create-new-wrapper">
+                <section className="app__posts-buttons-wrapper">
                     <Link
                         to={"create-new"}
                         className="app__button add"

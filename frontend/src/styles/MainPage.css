@@ -1,0 +1,4 @@
+.app__main-page-header {
+    display: flex;
+    border-bottom: 1px solid var(--borderColor);
+}

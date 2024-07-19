@@ -1,5 +1,19 @@
-.app__page.profile {
-    /* background-color: skyblue; */
+.app__profile-page-header {
+    display: flex;
+    padding-bottom: .5rem;
+    border-bottom: 1px solid var(--borderColor);
+}
+
+.app__profile-page-header .app__h1 {
+    flex-grow: 1;
+}
+
+.app__profile-buttons-wrapper .app__button {
+    vertical-align: super;
+}
+
+.app__profile-page-main {
+    margin: 2rem auto;
 }
 
 .profile__header {
