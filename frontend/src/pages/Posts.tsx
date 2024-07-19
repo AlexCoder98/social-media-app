@@ -10,14 +10,16 @@ const PostsPage = () => {
 
     return (
         <div className="app__page posts">
-            <h1>This is the Posts Page</h1>
-            <section className="app__section create-new">
-                <Link
-                    to={"create-new"}
-                    className="app__button"
-                    title="Create new post"
-                >Create post</Link>
-            </section>
+            <header className="app__posts-page-header">
+                <h1 className="app__h1">My Posts</h1>
+                <section className="app__posts-create-new-wrapper">
+                    <Link
+                        to={"create-new"}
+                        className="app__button add"
+                        title="Create new post"
+                    >New</Link>
+                </section>
+            </header>
             {posts.length ? (
                 <ul className="app__posts-list">
                     {posts.map((post, i) => (

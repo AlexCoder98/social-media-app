@@ -1,3 +1,16 @@
+:root {
+    --borderColor: #d0d0d0;
+}
+
+.app__posts-page-header {
+    display: flex;
+    border-bottom: 1px solid var(--borderColor);
+}
+
+.app__posts-page-header .app__h1 {
+    flex-grow: 1;
+}
+
 .app__posts-list {
     margin: 2rem auto;
     display: grid;
@@ -7,13 +20,13 @@
     list-style: none;
 }
 
-.app__section.create-new {
+/* .app__section.create-new {
     margin-top: 20px;
     padding: 2rem 0;
     border-top: 1px solid #ddd;
     border-bottom: 1px solid #ddd;
     text-align: center;
-}
+} */
 
 .app__post {
     width: 70%;

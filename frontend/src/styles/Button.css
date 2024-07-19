@@ -8,6 +8,8 @@
     --deleteButtonColor: #fff;
     --deleteButtonBgc: #ea1313;
     --deleteButtonHoverBgc: #b10808;
+    --addButtonBgc: #24ae24;
+    --addButtonHoverBgc: #1a901a;
 }
 
 .app__action-button {
@@ -40,7 +42,8 @@
     cursor: pointer;
 }
 
-.app__button:not(.delete):hover {
+.app__button:not(.delete):hover,
+.app__button:not(.add):hover {
     background-color: var(--buttonHoverBgc);
 }
 
@@ -51,4 +54,12 @@
 
 .app__button.delete:hover {
     background-color: var(--deleteButtonHoverBgc);
+}
+
+.app__button.add {
+    background-color: var(--addButtonBgc);
+}
+
+.app__button.add:hover {
+    background-color: var(--addButtonHoverBgc);
 }

@@ -6,8 +6,9 @@ const MainPage = () => {
     const posts = useAppSelector(state => state.posts.posts);
     return (
         <div className="app__page main">
-            <h1>This is the main page</h1>
-            <hr />
+            <header className="app__posts-page-header">
+                <h1 className="app__h1">My Posts</h1>
+            </header>
             {posts.length ? (
                 <ul className="app__posts-list">
                     {posts.map((post, i) => (

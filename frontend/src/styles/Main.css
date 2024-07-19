@@ -1,8 +1,7 @@
 .app__main {
-    width: 80%;
+    width: 60%;
     margin: 40px auto;
     min-height: 50rem;
-    /* position: relative; */
 }
 
 .app__main-content {

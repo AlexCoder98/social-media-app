@@ -14,3 +14,7 @@ input,
 textarea {
     font-family: "Nunito", "Arial", sans-serif;
 }
+
+.app__h1 {
+    font-size: 30px;
+}
