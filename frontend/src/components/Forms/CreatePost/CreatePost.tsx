@@ -1,11 +1,17 @@
 import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { useAppDispatch } from '../../hooks/redux';
 
 import InputElement from '../InputElement/InputElement';
 import Button from '../../Button/Button';
 
+import { addPost } from '../../../state/posts/postsSlice';
+
 import { postFormData } from '../../../helpers/form-data';
 
 const CreatePostForm = () => {
+    const dispatch = useAppDispatch();
+    const navigate = useNavigate();
     const [createPostFormValues, setCreatePostFormValues] = useState({
         title: '',
         imageUrl: '',
@@ -21,6 +27,14 @@ const CreatePostForm = () => {
 
     const handleOnSubmit = (e: React.SyntheticEvent) => {
         e.preventDefault();
+        const newPost = {
+            id: Math.random().toString(),
+            title: createPostFormValues['title'],
+            image: createPostFormValues['imageUrl'],
+            description: createPostFormValues['description']
+        }
+        dispatch(addPost(newPost));
+        navigate('/posts');
     }
 
     return (

@@ -28,7 +28,6 @@ const ProfilePage = () => {
                 <div className="profile__photo-wrapper">
                     <img
                         className="profile__photo"
-                        // src={profileImage}
                         src="https://cdn.pixabay.com/photo/2016/03/31/19/57/avatar-1295404_1280.png"
                         alt={`${name} ${surname} avatar`}
                     />

@@ -1,15 +1,16 @@
 import { Link } from "react-router-dom";
-import SmallPost from "../components/Post/Post-small";
+import SmallPost from "../components/Post/Post";
 
-import { postsData } from "../helpers/posts-data";
+import { useAppSelector } from "../components/hooks/redux";
 
 import '../styles/Posts.css';
 
 const PostsPage = () => {
+    const posts = useAppSelector(state => state.posts.posts);
 
     return (
         <div className="app__page posts">
-            <h1 style={{ textAlign: 'center' }}>This is the Posts Page</h1>
+            <h1>This is the Posts Page</h1>
             <section className="app__section create-new">
                 <Link
                     to={"create-new"}
@@ -17,17 +18,21 @@ const PostsPage = () => {
                     title="Create new post"
                 >Create post</Link>
             </section>
-            <ul className="app__posts-list">
-                {postsData.map((post, i) => (
-                    <SmallPost
-                        id={i + 1}
-                        key={i + 1}
-                        title={`${post.title} ${i + 1}`}
-                        imgSrc={post.imgSrc}
-                        imgAlt={post.imgAlt}
-                    />
-                ))}
-            </ul>
+            {posts.length ? (
+                <ul className="app__posts-list">
+                    {posts.map((post, i) => (
+                        <SmallPost
+                            key={i + 1}
+                            id={post.id}
+                            title={`${post.title} ${i + 1}`}
+                            image={post.image}
+                            description={post.description}
+                        />
+                    ))}
+                </ul>
+            ) : (
+                <h2>No posts yet</h2>
+            )}
         </div>
     )
 }

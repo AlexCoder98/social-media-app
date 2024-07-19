@@ -1,59 +1,51 @@
-import { useParams, Link } from "react-router-dom";
+import { Link } from "react-router-dom";
+import { useAppDispatch } from "../hooks/redux";
 
-import Button from "../Button/Button";
+import { PostStateType } from "../../state/posts/postsSlice";
+import { deletePost } from '../../state/posts/postsSlice'
 
-import { postsData } from "../../helpers/posts-data";
-import { PostPropsType } from "../../types/post";
+const SmallPost = ({ id, title, image, description }: PostStateType) => {
+    const dispatch = useAppDispatch();
 
-import '../../styles/Post.css';
-
-const Post = () => {
-    const { postId } = useParams();
-    const post = (postsData as PostPropsType[]).find(post => post.id.toString() === postId)!;
+    const handleOnDeletePost = (postId: string) => {
+        dispatch(deletePost(postId));
+    }
 
     return (
-        <div className="app__post-single">
-            <header className="app__post-single-head">
-                <h3 className="app__post-single-h3">{post.title}</h3>
+        <li className="app__post" data-id={id}>
+            <header className="app__post-head">
+                <h3 className="app__post-h3">
+                    {title}
+                </h3>
             </header>
-            <main className="app__post-single-body">
+            <main className="app__post-body">
                 <div
-                    className="app__post-single-img-wrapper"
-                    style={{ backgroundImage: `url(${post.imgSrc})` }}
+                    className="app__post-img-wrapper"
+                    style={{ backgroundImage: `url(${image})` }}
                 >
                 </div>
-                <div className="app__post-single-text-container">
-                    {post.text!.map((p, i) => (
-                        <p
-                            key={i}
-                            className="app__paragraph"
-                        >
-                            {p}
-                        </p>
-                    ))}
+                <div className="app__post-description-wrapper">
+                    <p className="app__post-description">
+                        {description}
+                    </p>
                 </div>
             </main>
-            <footer className="app__post-single-bottom">
+            <footer className="app__post-bottom">
                 <Link
-                    to="edit"
-                    className={"app__button"}
-                    title={"Edit post"}
-                    type={"button"}
-                    state={{
-                        title: post.title,
-                        imageUrl: post.imgSrc,
-                        description: post.text?.join(" ")
-                    }}
-                >Edit</Link>
-                <Button
-                    className={"app__button delete"}
-                    content={"Delete"}
-                    title={"Delete post"}
-                    type={"button"}
-                />
+                    to={`${id}`}
+                    className="app__button post"
+                    title={`Go to post ${title}`}
+                >Read more</Link>
+                <button
+                    className="app__button delete"
+                    title="Delete post"
+                    onClick={() => handleOnDeletePost(id)}
+                >
+                    Delete
+                </button>
             </footer>
-        </div>
+        </li>
     )
 }
 
-export default Post;
+export default SmallPost;

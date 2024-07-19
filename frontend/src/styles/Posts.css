@@ -37,8 +37,13 @@
 }
 
 .app__post-head,
+.app__post-description-wrapper,
 .app__post-bottom {
     padding: 20px;
+}
+
+.app__post-description-wrapper {
+    text-align: center;
 }
 
 .app__post-bottom {

@@ -7,21 +7,15 @@
 }
 
 .profile__photo-wrapper {
-    width: 300px;
-    height: 300px;
+    width: 400px;
     border: 1px solid #ddd;
     border-radius: 50%;
     overflow: hidden;
-    position: relative;
 }
 
 .profile__photo {
     width: 100%;
     height: auto;
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
 }
 
 .profile__about-me {
@@ -35,7 +29,6 @@
     flex-wrap: nowrap;
     align-items: center;
     margin-bottom: 3rem;
-    /* background-color: lightcoral; */
 }
 
 .profile__name {
