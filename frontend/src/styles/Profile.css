@@ -8,8 +8,9 @@
     flex-grow: 1;
 }
 
-.app__profile-buttons-wrapper .app__button {
-    vertical-align: super;
+.app__profile-buttons-wrapper {
+    display: flex;
+    gap: 10px;
 }
 
 .app__profile-page-main {

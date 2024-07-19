@@ -1,4 +1,4 @@
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 
 import { signOut } from '../state/user/userSlice';
 import { useAppDispatch, useAppSelector } from "../components/hooks/redux";
@@ -27,6 +27,11 @@ const ProfilePage = () => {
             <header className="app__profile-page-header">
                 <h1 className="app__h1">Profile</h1>
                 <section className="app__profile-buttons-wrapper">
+                    <Link
+                        className="app__button edit-profile"
+                        to="edit-profile"
+                        title="Edit your profile"
+                    >Edit</Link>
                     <Button
                         className={"app__button"}
                         content={"Sign out"}

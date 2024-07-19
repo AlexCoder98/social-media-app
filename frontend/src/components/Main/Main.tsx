@@ -10,6 +10,7 @@ import PostPage from '../../pages/Post';
 import EditPostPage from '../../pages/EditPost';
 import CreatePostPage from '../../pages/CreatePost';
 import ProfilePage from '../../pages/Profile';
+import EditProfilePage from '../../pages/EditProfile';
 import NotFoundPage from '../../pages/404';
 
 import '../../styles/Main.css';
@@ -25,12 +26,15 @@ const Main = () => {
                     <Route path='/reset-password' element={<ResetPasswordPage />} />
                     <Route path='/main-page' element={<MainPage />} />
                     <Route path='/posts'>
-                        <Route index element={<PostsPage />}></Route>
+                        <Route index element={<PostsPage />} />
                         <Route path=':postId' element={<PostPage />} />
                         <Route path=':postId/edit' element={<EditPostPage />} />
                         <Route path='create-new' element={<CreatePostPage />} />
                     </Route>
-                    <Route path='/profile' element={<ProfilePage />} />
+                    <Route path='/profile'>
+                        <Route index element={<ProfilePage />} />
+                        <Route path='edit-profile' element={<EditProfilePage />} />
+                    </Route>
                     <Route path='*' element={<NotFoundPage />} />
                 </Routes>
             </section>

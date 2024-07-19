@@ -1,0 +1,20 @@
+.app__form.edit-profile {
+    width: 100%;
+    padding: 0;
+    border: none;
+}
+
+.app__edit-profile-top {
+    width: 100%;
+    display: flex;
+    gap: 2rem;
+}
+
+.app__edit-profile-top>* {
+    flex-grow: 1;
+}
+
+.app__edit-profile-bottom {
+    align-self: flex-start;
+    width: calc(50% - 1rem);
+}

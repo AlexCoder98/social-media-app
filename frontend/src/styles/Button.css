@@ -57,10 +57,12 @@
     background-color: var(--deleteButtonHoverBgc);
 }
 
-.app__button.add {
+.app__button.add,
+.app__button.edit-profile {
     background-color: var(--addButtonBgc);
 }
 
-.app__button.add:hover {
+.app__button.add:hover,
+.app__button.edit-profile:hover {
     background-color: var(--addButtonHoverBgc);
 }
