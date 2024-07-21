@@ -37,12 +37,6 @@ export const signUpFormInputsData: FormInputsData[] = [
     {
         tagType: 'input',
         type: 'text',
-        id: 'profileImage',
-        placeholder: 'Profile image url'
-    },
-    {
-        tagType: 'input',
-        type: 'text',
         id: 'email',
         placeholder: 'Email',
     },
@@ -98,6 +92,6 @@ export const postFormData: FormInputsData[] = [
         tagType: 'textarea',
         type: 'text',
         id: 'description',
-        placeholder: 'Type some text...'
+        placeholder: 'Add post description'
     }
 ]

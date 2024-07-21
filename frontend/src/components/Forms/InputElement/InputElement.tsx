@@ -16,10 +16,10 @@ const InputElement = ({ method, type, id, placeholder, tagType, value }: InputEl
                     />
                 ) : (
                     <textarea
-                        id="description"
-                        name="description"
+                        id={id}
+                        name={id}
                         className="app__input"
-                        placeholder="Add some text..."
+                        placeholder={placeholder}
                         onChange={method}
                         value={value}
                     >

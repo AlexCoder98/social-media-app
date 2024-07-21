@@ -1,12 +1,27 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
-type User = {
+type UserNecessaryData = {
     name: string;
     surname: string;
-    profileImage: string;
     email: string;
     password: string;
 }
+
+type Additional<T> = {
+    [P in keyof T]?: T[P]
+};
+
+type UserAdditionalData = {
+    profileImage: string;
+    status: string;
+    aboutMe: string
+}
+
+type User = {
+    necessary: UserNecessaryData;
+    additional: Additional<UserAdditionalData>
+}
+
 
 interface UserStateType {
     isSignedIn: boolean;
@@ -16,11 +31,17 @@ interface UserStateType {
 const initialState: UserStateType = {
     isSignedIn: false,
     userObj: {
-        name: '',
-        surname: '',
-        profileImage: '',
-        email: '',
-        password: ''
+        necessary: {
+            name: '',
+            surname: '',
+            email: '',
+            password: '',
+        },
+        additional: {
+            profileImage: '',
+            status: '',
+            aboutMe: ''
+        }
     }
 }
 
@@ -34,12 +55,15 @@ const userSlice = createSlice({
         signOut: (state) => {
             state.isSignedIn = false;
         },
-        signUp: (state, action: PayloadAction<User>) => {
+        signUp: (state, action: PayloadAction<UserNecessaryData>) => {
             state.isSignedIn = true;
+            state.userObj.necessary = action.payload;
+        },
+        editProfile: (state, action: PayloadAction<User>) => {
             state.userObj = action.payload;
         }
     }
 });
 
-export const { signIn, signOut, signUp } = userSlice.actions;
+export const { signIn, signOut, signUp, editProfile } = userSlice.actions;
 export default userSlice.reducer;
