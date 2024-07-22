@@ -3,8 +3,8 @@ import express, { Express } from 'express';
 const app: Express = express();
 const port = 8080;
 
-app.get('/', (req, res, next) => {
-    res.send('Change now');
+app.get('/users', (req, res, next) => {
+    res.json({ "users": ["user 1", "user 2", "user 3"] });
 })
 
 app.listen(port, () => {
