@@ -1,0 +1,20 @@
+{
+  "name": "backend",
+  "version": "1.0.0",
+  "description": "Backend for social media app project",
+  "main": "app.ts",
+  "scripts": {
+    "start": "nodemon src/app.ts"
+  },
+  "author": "Oleksandr Yuchuk",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.19.2"
+  },
+  "devDependencies": {
+    "@types/express": "^4.17.21",
+    "@types/node": "^20.14.11",
+    "nodemon": "^3.1.4",
+    "ts-node": "^10.9.2"
+  }
+}
