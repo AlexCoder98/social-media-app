@@ -5,7 +5,7 @@ import InputElement from '../InputElement/InputElement';
 import Button from '../../Button/Button';
 
 import { signIn } from '../../../state/user/userSlice';
-import { useAppDispatch } from '../../hooks/redux';
+import { useAppDispatch } from '../../../hooks/redux';
 
 import { signInFormInputsData } from '../../../helpers/form-data';
 

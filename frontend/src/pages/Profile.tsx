@@ -1,7 +1,7 @@
 import { useNavigate, Link } from "react-router-dom";
 
 import { signOut } from '../state/user/userSlice';
-import { useAppDispatch, useAppSelector } from "../components/hooks/redux";
+import { useAppDispatch, useAppSelector } from "../hooks/redux";
 
 import Button from "../components/Button/Button";
 

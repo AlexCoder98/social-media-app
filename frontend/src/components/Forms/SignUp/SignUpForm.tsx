@@ -4,7 +4,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import InputElement from '../InputElement/InputElement';
 import Button from '../../Button/Button';
 
-import { useAppDispatch } from '../../hooks/redux';
+import { useAppDispatch } from '../../../hooks/redux';
 import { signUp } from '../../../state/user/userSlice';
 
 import { signUpFormInputsData } from '../../../helpers/form-data';

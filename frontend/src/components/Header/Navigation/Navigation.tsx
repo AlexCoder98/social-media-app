@@ -2,7 +2,7 @@ import { Link } from 'react-router-dom';
 
 import NavigationLink from './NavigationLink';
 
-import { useAppSelector } from '../../hooks/redux';
+import { useAppSelector } from '../../../hooks/redux';
 
 import { navigationLoggedOutLinksData, navigationLoggedInLinksData } from '../../../helpers/navigation-data';
 

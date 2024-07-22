@@ -1,5 +1,5 @@
 import SmallPost from '../components/Post/Post';
-import { useAppSelector } from '../components/hooks/redux';
+import { useAppSelector } from '../hooks/redux';
 import '../styles/MainPage.css';
 
 const MainPage = () => {

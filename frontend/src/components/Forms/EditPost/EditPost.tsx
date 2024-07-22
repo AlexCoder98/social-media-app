@@ -4,7 +4,7 @@ import { useLocation, useNavigate } from 'react-router-dom';
 import InputElement from '../InputElement/InputElement';
 import Button from '../../Button/Button';
 
-import { useAppDispatch } from '../../hooks/redux';
+import { useAppDispatch } from '../../../hooks/redux';
 import { editPost } from '../../../state/posts/postsSlice';
 
 import { postFormData } from '../../../helpers/form-data';

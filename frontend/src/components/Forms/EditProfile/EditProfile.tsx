@@ -3,7 +3,7 @@ import { useState } from "react";
 import InputElement from "../InputElement/InputElement"
 import Button from "../../Button/Button";
 
-import { useAppSelector, useAppDispatch } from "../../hooks/redux";
+import { useAppSelector, useAppDispatch } from "../../../hooks/redux";
 import { editProfile } from '../../../state/user/userSlice';
 
 import { EditProfileType } from "../../../types/edit-profile";

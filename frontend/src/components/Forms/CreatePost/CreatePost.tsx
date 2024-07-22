@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { useAppDispatch } from '../../hooks/redux';
+import { useAppDispatch } from '../../../hooks/redux';
 
 import InputElement from '../InputElement/InputElement';
 import Button from '../../Button/Button';

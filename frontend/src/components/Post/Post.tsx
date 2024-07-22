@@ -1,5 +1,5 @@
 import { Link, useLocation } from "react-router-dom";
-import { useAppDispatch } from "../hooks/redux";
+import { useAppDispatch } from "../../hooks/redux";
 
 import { PostStateType } from "../../state/posts/postsSlice";
 import { deletePost } from '../../state/posts/postsSlice'

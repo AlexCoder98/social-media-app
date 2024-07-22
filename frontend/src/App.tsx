@@ -1,7 +1,7 @@
 import Header from './components/Header/Header';
 import Main from './components/Main/Main';
 
-import { useAppSelector } from './components/hooks/redux';
+import { useAppSelector } from './hooks/redux';
 
 import './styles/App.css';
 

@@ -1,0 +1,21 @@
+.app__404-page-header {
+    display: flex;
+    padding-bottom: .5rem;
+    border-bottom: 1px solid var(--borderColor);
+}
+
+.app__404-page-header .app__h1 {
+    flex-grow: 1;
+}
+
+.app__404-page-main {
+    margin: 10rem 0;
+}
+
+.app__404-page-img-wrapper {
+    text-align: center;
+}
+
+.app__404-page-img {
+    max-width: 30%;
+}
