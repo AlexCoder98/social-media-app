@@ -122,7 +122,7 @@ const EditProfileForm = () => {
                             id={"editAboutUser"}
                             type={"text"}
                             tagType={"textarea"}
-                            placeholder={"New personal information"}
+                            placeholder={"New user information"}
                             value={editFormValues['editAboutUser']}
                             method={handleInputChange}
                         />

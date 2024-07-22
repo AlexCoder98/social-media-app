@@ -18,3 +18,8 @@ textarea {
 .app__h1 {
     font-size: 30px;
 }
+
+.app__h2 {
+    font-size: 28px;
+    text-align: center;
+}

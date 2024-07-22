@@ -43,6 +43,7 @@ const CreatePostForm = () => {
             method="POST"
             className="app__form create-post"
             onSubmit={handleOnSubmit}
+            style={{ margin: '0 auto' }}
         >
             <header className="app__form-header">
                 <h2 className="app__form-h2">Create a Post</h2>

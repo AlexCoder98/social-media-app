@@ -33,7 +33,7 @@ const PostsPage = () => {
                     ))}
                 </ul>
             ) : (
-                <h2>No posts yet</h2>
+                <h2 className="app__h2" style={{ margin: '5rem 0' }}>No posts yet</h2>
             )}
         </div>
     )
