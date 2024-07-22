@@ -19,10 +19,11 @@ const CreatePostForm = () => {
     });
 
     const handleInputChange = (e: React.FormEvent) => {
-        setCreatePostFormValues({
-            ...createPostFormValues,
-            [(e.target as HTMLInputElement).name]: (e.target as HTMLInputElement).value,
-        });
+        const { name, value } = e.target as HTMLInputElement;
+        setCreatePostFormValues((prevCreateFormValues) => ({
+            ...prevCreateFormValues,
+            [name]: value,
+        }));
     }
 
     const handleOnSubmit = (e: React.SyntheticEvent) => {

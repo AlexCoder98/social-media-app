@@ -56,7 +56,6 @@ const ProfilePage = () => {
                             <div className="profile__name-container">
                                 <h2 className="profile__name">
                                     <span className="profile__first-name">{name}</span> <span className="profile__first-name">{surname}</span>
-                                    {/* <span className="profile__first-name">{name}</span> <span className="profile__first-name">{surname}</span> */}
                                 </h2>
                                 {status && <p className="profile__status">{status}</p>}
                             </div>

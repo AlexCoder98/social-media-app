@@ -25,10 +25,11 @@ const EditPostForm = () => {
     });
 
     const handleInputChange = (e: React.FormEvent) => {
-        setEditPostFormValues({
-            ...editPostFormValues,
-            [(e.target as HTMLInputElement).name]: (e.target as HTMLInputElement).value,
-        });
+        const { name, value } = e.target as HTMLInputElement;
+        setEditPostFormValues((prevEditPostFormValues) => ({
+            ...prevEditPostFormValues,
+            [name]: value,
+        }));
     }
 
     const handleOnSubmit = (e: React.SyntheticEvent) => {

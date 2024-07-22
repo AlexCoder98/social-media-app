@@ -21,17 +21,18 @@ const EditProfileForm = () => {
         editSurname: surname,
         editStatus: status!,
         editProfileImage: profileImage!,
-        editAboutMe: aboutMe!,
+        editAboutUser: aboutMe!,
         editEmail: email,
         editPassword: password,
         editPasswordRepeat: ''
     });
 
-    const handleOnInputChange = (e: React.FormEvent) => {
-        setEditFormValues({
-            ...editFormValues,
-            [(e.target as HTMLInputElement).name]: (e.target as HTMLInputElement).value,
-        });
+    const handleInputChange = (e: React.FormEvent) => {
+        const { name, value } = e.target as HTMLInputElement;
+        setEditFormValues((prevEditFormValues) => ({
+            ...prevEditFormValues,
+            [name]: value,
+        }));
         console.log(editFormValues);
     }
 
@@ -47,13 +48,27 @@ const EditProfileForm = () => {
             additional: {
                 status: editFormValues.editStatus,
                 profileImage: editFormValues.editProfileImage,
-                aboutMe: editFormValues.editAboutMe
+                aboutMe: editFormValues.editAboutUser
             }
         }
         dispatch(editProfile(updatedUser));
+        alert('Profiled data have been updated.');
 
         console.log('Updated USER');
         console.log(updatedUser);
+    }
+
+    const handleOnCancel = () => {
+        setEditFormValues({
+            editName: name,
+            editSurname: surname,
+            editStatus: status!,
+            editProfileImage: profileImage!,
+            editAboutUser: aboutMe!,
+            editEmail: email,
+            editPassword: password,
+            editPasswordRepeat: ''
+        });
     }
 
     return (
@@ -72,7 +87,7 @@ const EditProfileForm = () => {
                             tagType={"input"}
                             placeholder={"New name"}
                             value={editFormValues['editName']}
-                            method={handleOnInputChange}
+                            method={handleInputChange}
                         />
                         <InputElement
                             id={"editSurname"}
@@ -80,7 +95,7 @@ const EditProfileForm = () => {
                             tagType={"input"}
                             placeholder={"New surname"}
                             value={editFormValues['editSurname']}
-                            method={handleOnInputChange}
+                            method={handleInputChange}
                         />
                         <InputElement
                             id={"editStatus"}
@@ -88,7 +103,7 @@ const EditProfileForm = () => {
                             tagType={"input"}
                             placeholder={"New status"}
                             value={editFormValues['editStatus']}
-                            method={handleOnInputChange}
+                            method={handleInputChange}
                         />
                         <InputElement
                             id={"editProfileImage"}
@@ -96,7 +111,7 @@ const EditProfileForm = () => {
                             tagType={"input"}
                             placeholder={"New profile image"}
                             value={editFormValues['editProfileImage']}
-                            method={handleOnInputChange}
+                            method={handleInputChange}
                         />
                     </div>
                 </div>
@@ -104,12 +119,12 @@ const EditProfileForm = () => {
                     <h3 className="app__h3">About me</h3>
                     <div className="app__edit-profile-inputs-container">
                         <InputElement
-                            id={"editAboutMe"}
+                            id={"editAboutUser"}
                             type={"text"}
                             tagType={"textarea"}
                             placeholder={"New personal information"}
-                            value={editFormValues['editAboutMe']}
-                            method={handleOnInputChange}
+                            value={editFormValues['editAboutUser']}
+                            method={handleInputChange}
                         />
                     </div>
                 </div>
@@ -124,7 +139,7 @@ const EditProfileForm = () => {
                             tagType={"input"}
                             placeholder={"New email"}
                             value={editFormValues['editEmail']}
-                            method={handleOnInputChange}
+                            method={handleInputChange}
                         />
                         <InputElement
                             id={"editPassword"}
@@ -132,7 +147,7 @@ const EditProfileForm = () => {
                             tagType={"input"}
                             placeholder={"New password"}
                             value={editFormValues['editPassword']}
-                            method={handleOnInputChange}
+                            method={handleInputChange}
                         />
                         <InputElement
                             id={"editPasswordRepeat"}
@@ -140,16 +155,17 @@ const EditProfileForm = () => {
                             tagType={"input"}
                             placeholder={"New password"}
                             value={editFormValues['editPasswordRepeat']}
-                            method={handleOnInputChange}
+                            method={handleInputChange}
                         />
                     </div>
                 </div>
                 <div className="app__edit-profile-buttons-container">
                     <Button
                         className={"app__button delete"}
-                        type={"submit"}
+                        type={"button"}
                         title={"Cancel changes"}
                         content={"Cancel"}
+                        method={handleOnCancel}
                     />
                     <Button
                         className={"app__button add"}

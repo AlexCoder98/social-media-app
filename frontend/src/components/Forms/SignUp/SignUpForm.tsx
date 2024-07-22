@@ -14,6 +14,7 @@ import '../../../styles/Form.css';
 const SignUpForm = () => {
     const dispatch = useAppDispatch();
     const navigate = useNavigate();
+
     const [signUpFormValues, setSignUpFormValues] = useState({
         name: '',
         surname: '',
@@ -23,10 +24,11 @@ const SignUpForm = () => {
     });
 
     const handleInputChange = (e: React.FormEvent) => {
-        setSignUpFormValues({
-            ...signUpFormValues,
-            [(e.target as HTMLInputElement).name]: (e.target as HTMLInputElement).value,
-        })
+        const { name, value } = e.target as HTMLInputElement;
+        setSignUpFormValues((prevSignUpFormValues) => ({
+            ...prevSignUpFormValues,
+            [name]: value,
+        }));
     }
 
     const handleFormSubmit = (e: React.SyntheticEvent) => {

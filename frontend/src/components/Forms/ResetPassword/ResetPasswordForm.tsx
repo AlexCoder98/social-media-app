@@ -10,19 +10,19 @@ import { resetPasswordFormInputsData } from '../../../helpers/form-data';
 import '../../../styles/Form.css';
 
 const ResetPasswordForm = () => {
+    const navigate = useNavigate();
     const [resetPasswordFormValues, setResetPasswordFormValues] = useState({
         email: '',
         newPassword: '',
         newPasswordRepeated: ''
     });
 
-    const navigate = useNavigate();
-
     const handleInputChange = (e: React.FormEvent) => {
-        setResetPasswordFormValues({
-            ...resetPasswordFormValues,
-            [(e.target as HTMLInputElement).name]: (e.target as HTMLInputElement).value,
-        });
+        const { name, value } = e.target as HTMLInputElement;
+        setResetPasswordFormValues((prevResetPasswordFormValues) => ({
+            ...prevResetPasswordFormValues,
+            [name]: value,
+        }));
     }
 
     const handleFormSubmit = (e: React.SyntheticEvent) => {

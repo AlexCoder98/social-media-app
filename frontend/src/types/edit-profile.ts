@@ -3,7 +3,7 @@ export type EditProfileType = {
     editSurname: string;
     editStatus: string;
     editProfileImage: string;
-    editAboutMe: string;
+    editAboutUser: string;
     editEmail: string;
     editPassword: string;
     editPasswordRepeat: string;

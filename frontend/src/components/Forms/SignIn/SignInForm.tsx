@@ -14,19 +14,20 @@ import '../../../styles/Form.css';
 
 const SignInForm = () => {
     const dispath = useAppDispatch();
-
     const navigate = useNavigate();
+
     const [signInFormValues, setSignInFormValues] = useState({
         email: '',
         password: '',
     });
 
     const handleInputChange = (e: React.FormEvent) => {
-        setSignInFormValues({
-            ...signInFormValues,
-            [(e.target as HTMLInputElement).name]: (e.target as HTMLInputElement).value,
-        })
-    }
+        const { name, value } = e.target as HTMLInputElement;
+        setSignInFormValues((prevSignInFormValues) => ({
+            ...prevSignInFormValues,
+            [name]: value,
+        }));
+    };
 
     const handleFormSubmit = (e: React.SyntheticEvent) => {
         e.preventDefault();
