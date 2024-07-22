@@ -1,7 +1,7 @@
 import { lazy, Suspense } from 'react';
 import { Route, Routes } from 'react-router-dom';
 
-import LoadingPage from '../../pages/Loading';
+import Loading from '../Loading/Loading';
 
 import '../../styles/Main.css';
 
@@ -22,12 +22,14 @@ const Main = () => {
     return (
         <main className="app__main">
             <section className="app__main-content">
-                <Suspense fallback={<LoadingPage />}>
+                <Suspense fallback={<Loading />}>
                     <Routes>
-                        <Route path='/' element={<HomePage />} index />
-                        <Route path='/sign-in' element={<SignInPage />} />
-                        <Route path='/sign-up' element={<SignUpPage />} />
-                        <Route path='/reset-password' element={<ResetPasswordPage />} />
+                        <Route path='/'>
+                            <Route index element={<HomePage />} />
+                            <Route path='/sign-in' element={<SignInPage />} />
+                            <Route path='/sign-up' element={<SignUpPage />} />
+                            <Route path='/reset-password' element={<ResetPasswordPage />} />
+                        </Route>
                         <Route path='/main-page' element={<MainPage />} />
                         <Route path='/posts'>
                             <Route index element={<PostsPage />} />
