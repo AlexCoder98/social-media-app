@@ -22,7 +22,6 @@ type User = {
     additional: Additional<UserAdditionalData>
 }
 
-
 interface UserStateType {
     isSignedIn: boolean;
     userObj: User;
