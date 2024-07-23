@@ -111,5 +111,4 @@ export const signOut = createAsyncThunk(
     }
 )
 
-// export const { signOut } = userSlice.actions;
 export default userSlice.reducer;
