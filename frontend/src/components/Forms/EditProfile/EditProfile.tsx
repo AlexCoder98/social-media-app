@@ -4,13 +4,13 @@ import InputElement from "../InputElement/InputElement"
 import Button from "../../Button/Button";
 
 import { useAppSelector, useAppDispatch } from "../../../hooks/redux";
-import { editProfile } from '../../../state/user/userSlice';
+import { updateUserData } from '../../../state/user/userSlice';
 
 import { EditProfileType } from "../../../types/edit-profile";
 import '../../../styles/EditProfile.css';
 
 const EditProfileForm = () => {
-    const user = useAppSelector(state => state.users);
+    const user = useAppSelector(state => state.users.userObj);
     const dispatch = useAppDispatch();
 
     const { name, surname, email, password } = user.necessary;
@@ -39,13 +39,11 @@ const EditProfileForm = () => {
     const handleOnSubmit = (e: React.SyntheticEvent) => {
         e.preventDefault();
         const updatedUser = {
-            isSignedIn: true,
             necessary: {
                 name: editFormValues.editName,
                 surname: editFormValues.editSurname,
                 email: editFormValues.editEmail,
                 password: editFormValues.editPassword,
-                passwordRepeated: editFormValues.editPasswordRepeat
             },
             additional: {
                 status: editFormValues.editStatus,
@@ -53,8 +51,10 @@ const EditProfileForm = () => {
                 aboutMe: editFormValues.editAboutUser
             }
         }
-        dispatch(editProfile(updatedUser));
-        alert('Profiled data have been updated.');
+        dispatch(updateUserData(updatedUser))
+            .then(() => {
+                alert('User data have been updated!');
+            });
 
         console.log('Updated USER');
         console.log(updatedUser);

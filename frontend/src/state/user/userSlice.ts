@@ -1,11 +1,10 @@
-import { createAsyncThunk, createSlice, PayloadAction } from "@reduxjs/toolkit";
+import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 
 type UserNecessaryData = {
     name: string;
     surname: string;
     email: string;
     password: string;
-    passwordRepeated: string;
 }
 
 type Additional<T> = {
@@ -18,61 +17,99 @@ type UserAdditionalData = {
     aboutMe: string
 }
 
-interface UserStateType {
-    isSignedIn: boolean;
+type User = {
     necessary: UserNecessaryData;
     additional: Additional<UserAdditionalData>
 }
 
-const initialState: UserStateType = {
-    isSignedIn: false,
-    necessary: {
-        name: '',
-        surname: '',
-        email: '',
-        password: '',
-        passwordRepeated: ''
-    },
-    additional: {
-        profileImage: '',
-        status: '',
-        aboutMe: ''
-    }
+type IsSignedIn = 'signed in' | 'signed out';
 
+interface UserStateType {
+    isSignedIn: IsSignedIn;
+    userObj: User
+}
+
+const initialState: UserStateType = {
+    isSignedIn: 'signed out',
+    userObj: {
+        necessary: {
+            name: '',
+            surname: '',
+            email: '',
+            password: '',
+        },
+        additional: {
+            profileImage: '',
+            status: '',
+            aboutMe: ''
+        }
+    }
 }
 
 const userSlice = createSlice({
     name: 'user',
     initialState,
-    reducers: {
-        signIn: (state, action: PayloadAction<boolean>) => {
-            state.isSignedIn = action.payload;
-        },
-        signOut: (state, action: PayloadAction<boolean>) => {
-            state.isSignedIn = action.payload;
-        },
-        // signUp: (state, action: PayloadAction<UserNecessaryData>) => {
-        //     state.necessary = action.payload;
-        // },
-        editProfile: (state, action: PayloadAction<UserStateType>) => {
-            state.isSignedIn = action.payload.isSignedIn;
-            state.necessary = action.payload.necessary;
-            state.additional = action.payload.additional;
-        }
-    },
+    reducers: {},
     extraReducers: (builder) => {
-        builder.addCase(signUp.fulfilled, (state, { payload }) => {
-            state.necessary = payload;
-        })
+        builder
+            .addCase(signUp.pending, () => {
+                console.log('Loading...');
+            })
+            .addCase(signUp.fulfilled, (state, action) => {
+                state.userObj.necessary = action.payload;
+            })
+            .addCase(signIn.pending, () => {
+                console.log('Signing in...');
+            })
+            .addCase(signIn.fulfilled, (state, action) => {
+                state.isSignedIn = action.payload;
+            })
+            .addCase(updateUserData.pending, () => {
+                console.log('Saving changes...');
+            })
+            .addCase(updateUserData.fulfilled, (state, action) => {
+                state.userObj = action.payload;
+            })
+            .addCase(signOut.pending, () => {
+                console.log('Signing out...');
+            })
+            .addCase(signOut.fulfilled, (state, action) => {
+                state.isSignedIn = action.payload;
+            })
     }
 });
 
 export const signUp = createAsyncThunk(
+    'user/signUp',
+    async (newUser: UserNecessaryData) => {
+        await new Promise((resolve) => setTimeout(resolve, 1000));
+        return newUser;
+    }
+);
+
+export const signIn = createAsyncThunk(
+    'user/signIn',
+    async (isSignedIn: IsSignedIn) => {
+        await new Promise((resolve) => setTimeout(resolve, 1000));
+        return isSignedIn;
+    }
+);
+
+export const updateUserData = createAsyncThunk(
+    'user/updateProfile',
+    async (updatedUserData: User) => {
+        await new Promise((resolve) => setTimeout(resolve, 1000));
+        return updatedUserData;
+    }
+);
+
+export const signOut = createAsyncThunk(
     'user/signOut',
-    async ({ payload }: PayloadAction<UserNecessaryData>) => {
-        return payload;
+    async (isSignedIn: IsSignedIn) => {
+        await new Promise((resolve) => setTimeout(resolve, 1000));
+        return isSignedIn;
     }
 )
 
-export const { signIn, signOut, editProfile } = userSlice.actions;
+// export const { signOut } = userSlice.actions;
 export default userSlice.reducer;

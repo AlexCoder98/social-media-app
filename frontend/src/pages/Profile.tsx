@@ -12,14 +12,14 @@ const ProfilePage = () => {
     const dispatch = useAppDispatch();
     const navigate = useNavigate();
 
-    const { name, surname } = user.necessary;
-    const { profileImage, status, aboutMe } = user.additional;
+    const { name, surname } = user.userObj.necessary;
+    const { profileImage, status, aboutMe } = user.userObj.additional;
 
     console.log('Signed Up User');
     console.log(user);
 
     const handleSignOut = () => {
-        dispatch(signOut(false));
+        dispatch(signOut('signed out'));
         navigate('/');
     }
 

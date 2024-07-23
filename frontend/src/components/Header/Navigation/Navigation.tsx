@@ -10,9 +10,9 @@ import '../../../styles/Navigation.css';
 
 const Navigation = () => {
     const isUserSignedIn = useAppSelector((state) => state.users.isSignedIn);
-    const navigationType = isUserSignedIn ? navigationLoggedInLinksData : navigationLoggedOutLinksData;
+    const navigationType = isUserSignedIn === 'signed in' ? navigationLoggedInLinksData : navigationLoggedOutLinksData;
 
-    console.log(isUserSignedIn);
+    console.log('USER STATUS: ' + isUserSignedIn);
 
     return (
         <nav className="app__main-navigation">
