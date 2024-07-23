@@ -41,7 +41,9 @@ const EditPostForm = () => {
             description: editPostFormValues['description'],
         }
         dispatch(editPost(updatedPost))
-        navigate(-1);
+            .then(() => {
+                navigate(-1);
+            });
     }
 
     return (

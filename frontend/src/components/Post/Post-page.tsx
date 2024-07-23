@@ -13,8 +13,10 @@ const SinglePost = () => {
     const post = posts.find(post => post.id === postId)!;
 
     const handleOnDeletePost = (postId: string) => {
-        dispatch(deletePost(postId));
-        navigate('/posts');
+        dispatch(deletePost(postId))
+            .then(() => {
+                navigate('/posts');
+            });
 
     }
 

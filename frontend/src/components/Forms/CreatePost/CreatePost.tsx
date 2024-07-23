@@ -34,8 +34,10 @@ const CreatePostForm = () => {
             image: createPostFormValues['imageUrl'],
             description: createPostFormValues['description']
         }
-        dispatch(addPost(newPost));
-        navigate('/posts');
+        dispatch(addPost(newPost))
+            .then(() => {
+                navigate('/posts');
+            });
     }
 
     return (
