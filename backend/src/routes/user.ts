@@ -2,16 +2,10 @@ import express from 'express';
 
 const router = express.Router();
 
-router.get('sign-in');
+router.get('/profile');
 
-router.post('/sign-in');
+router.get('/edit');
 
-router.get('/sign-up');
-
-router.post('/sign-up');
-
-router.get('/reset-password');
-
-router.post('/reset-password');
+router.post('/edit');
 
 export default router;
