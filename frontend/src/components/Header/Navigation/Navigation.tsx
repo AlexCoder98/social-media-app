@@ -12,6 +12,8 @@ const Navigation = () => {
     const isUserSignedIn = useAppSelector((state) => state.users.isSignedIn);
     const navigationType = isUserSignedIn ? navigationLoggedInLinksData : navigationLoggedOutLinksData;
 
+    console.log(isUserSignedIn);
+
     return (
         <nav className="app__main-navigation">
             <div className="app__logo-container">

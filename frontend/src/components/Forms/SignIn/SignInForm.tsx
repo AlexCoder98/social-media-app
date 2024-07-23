@@ -31,7 +31,7 @@ const SignInForm = () => {
 
     const handleFormSubmit = (e: React.SyntheticEvent) => {
         e.preventDefault();
-        dispath(signIn());
+        dispath(signIn(true));
         navigate('/main-page');
     }
 

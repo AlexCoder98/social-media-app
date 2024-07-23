@@ -31,10 +31,30 @@ const SignUpForm = () => {
         }));
     }
 
-    const handleFormSubmit = (e: React.SyntheticEvent) => {
+    const handleFormSubmit = async (e: React.SyntheticEvent) => {
         e.preventDefault();
-        dispatch(signUp(signUpFormValues));
-        navigate('/main-page');
+        const response = await fetch('/sign-up',
+            {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(signUpFormValues)
+            }
+        );
+
+        const data = await response.json();
+        dispatch(signUp({ payload: signUpFormValues, type: 'string' }));
+        console.log(data);
+        //         .then(res => {
+        //         console.log(res);
+        //         console.log('THEN');
+        //         dispatch(signUp(signUpFormValues));
+        //         navigate('/main-page');
+        //     })
+        // .catch(err => {
+        //     console.log(err);
+        // })
     }
 
     return (

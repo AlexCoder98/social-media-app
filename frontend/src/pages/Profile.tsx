@@ -8,7 +8,7 @@ import Button from "../components/Button/Button";
 import '../styles/Profile.css';
 
 const ProfilePage = () => {
-    const user = useAppSelector(state => state.users.userObj);
+    const user = useAppSelector(state => state.users);
     const dispatch = useAppDispatch();
     const navigate = useNavigate();
 
@@ -19,7 +19,7 @@ const ProfilePage = () => {
     console.log(user);
 
     const handleSignOut = () => {
-        dispatch(signOut());
+        dispatch(signOut(false));
         navigate('/');
     }
 

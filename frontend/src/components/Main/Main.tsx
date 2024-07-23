@@ -4,6 +4,7 @@ import { Route, Routes } from 'react-router-dom';
 import Loading from '../Loading/Loading';
 
 import '../../styles/Main.css';
+import { useAppSelector } from '../../hooks/redux';
 
 const HomePage = lazy(() => import('../../pages/Home'));
 const SignInPage = lazy(() => import('../../pages/SignIn'));
@@ -19,6 +20,11 @@ const EditProfilePage = lazy(() => import('../../pages/EditProfile'));
 const NotFoundPage = lazy(() => import('../../pages/404'));
 
 const Main = () => {
+    const state = useAppSelector((state) => state.users);
+
+    console.log('STATE');
+    console.log(state);
+
     return (
         <main className="app__main">
             <section className="app__main-content">

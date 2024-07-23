@@ -10,7 +10,7 @@ import { EditProfileType } from "../../../types/edit-profile";
 import '../../../styles/EditProfile.css';
 
 const EditProfileForm = () => {
-    const user = useAppSelector(state => state.users.userObj);
+    const user = useAppSelector(state => state.users);
     const dispatch = useAppDispatch();
 
     const { name, surname, email, password } = user.necessary;
@@ -39,11 +39,13 @@ const EditProfileForm = () => {
     const handleOnSubmit = (e: React.SyntheticEvent) => {
         e.preventDefault();
         const updatedUser = {
+            isSignedIn: true,
             necessary: {
                 name: editFormValues.editName,
                 surname: editFormValues.editSurname,
                 email: editFormValues.editEmail,
                 password: editFormValues.editPassword,
+                passwordRepeated: editFormValues.editPasswordRepeat
             },
             additional: {
                 status: editFormValues.editStatus,
