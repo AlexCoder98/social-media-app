@@ -1,6 +1,8 @@
 import express, { Express } from 'express';
 import mongoose from 'mongoose';
 
+import { allowCrossDomain } from './middleware/cors';
+
 import { PORT, MONGODB_NAME, MONGODB_PASSWORD, MONGODB_COLLECTION_NAME } from './credentials/credentials';
 
 import userRoutes from './routes/user';
@@ -13,13 +15,11 @@ const MONGODB_URI = `mongodb+srv://${MONGODB_NAME}:${MONGODB_PASSWORD}@cluster0.
 
 app.use(express.json());
 
+app.use(allowCrossDomain);
+
 app.use(userRoutes);
 app.use(authRoutes);
 app.use(postRoutes);
-
-app.get('/users', (req, res, next) => {
-    res.json({ "users": ["user 1", "user 2", "user 3"] });
-})
 
 mongoose
     .connect(MONGODB_URI)
