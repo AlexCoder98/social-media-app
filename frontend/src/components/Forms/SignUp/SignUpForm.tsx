@@ -43,7 +43,10 @@ const SignUpForm = () => {
             .then(() => {
                 navigate('/sign-in');
                 console.log('Signed up');
-            });
+            })
+            .catch(err => {
+                console.log(err);
+            })
     }
 
     return (

@@ -26,7 +26,7 @@ type IsSignedIn = 'signed in' | 'signed out';
 
 interface UserStateType {
     isSignedIn: IsSignedIn;
-    userObj: User
+    userObj: User;
 }
 
 const initialState: UserStateType = {
@@ -43,7 +43,7 @@ const initialState: UserStateType = {
             status: '',
             aboutMe: ''
         }
-    }
+    },
 }
 
 const userSlice = createSlice({
