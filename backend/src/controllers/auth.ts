@@ -1,6 +1,18 @@
 import { Request, Response, NextFunction } from 'express';
 
-export const postSignUp = (req: Request, res: Response, next: NextFunction) => {
-    res.status(200).send({ "Message": "Form submitted" });
-    console.log(req.body);
+import { User } from '../models/user';
+
+export const postSignUp = async (req: Request, res: Response, next: NextFunction) => {
+    const { name, surname, email, password } = req.body;
+    const user = new User({
+        name: name,
+        surname: surname,
+        email: email,
+        password: password,
+        status: '',
+        profileImage: '',
+        aboutMe: '',
+    });
+    await user.save();
+    res.status(200).send({ "Message": "Registration succedeed." });
 }
