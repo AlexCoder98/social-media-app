@@ -40,12 +40,13 @@ const SignUpForm = () => {
             password: signUpFormValues.password,
         }
         dispatch(signUp(newUser))
+            // .unwrap()
             .then(() => {
                 navigate('/sign-in');
                 console.log('Signed up');
             })
             .catch(err => {
-                console.log(err);
+                console.log(err.message);
             })
     }
 
