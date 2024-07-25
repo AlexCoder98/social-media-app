@@ -21,10 +21,10 @@ app.use(userRoutes);
 app.use(authRoutes);
 app.use(postRoutes);
 
-// app.use((err: Error, req: Request, res: Response, next: NextFunction) => {
-//     console.error(err.message);
-//     res.status(404).send('Something wrong!');
-// })
+app.use((err: Error, req: Request, res: Response, next: NextFunction) => {
+    console.error(err.message);
+    res.status(404).send('Something wrong!');
+})
 
 mongoose
     .connect(MONGODB_URI)
