@@ -42,7 +42,7 @@ const SignUpForm = () => {
         dispatch(signUp(newUser))
             // .unwrap()
             .then(() => {
-                navigate('/sign-in');
+                // navigate('/sign-in');
                 console.log('Signed up');
             })
             .catch(err => {
