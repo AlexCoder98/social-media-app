@@ -1,4 +1,4 @@
-import express, { Express } from 'express';
+import express, { Express, NextFunction, Request, Response } from 'express';
 import mongoose from 'mongoose';
 
 import { allowCrossDomain } from './middleware/cors';
@@ -20,6 +20,11 @@ app.use(allowCrossDomain);
 app.use(userRoutes);
 app.use(authRoutes);
 app.use(postRoutes);
+
+// app.use((err: Error, req: Request, res: Response, next: NextFunction) => {
+//     console.error(err.message);
+//     res.status(404).send('Something wrong!');
+// })
 
 mongoose
     .connect(MONGODB_URI)
