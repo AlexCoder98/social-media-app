@@ -5,6 +5,8 @@ import { allowCrossDomain } from './middleware/cors';
 
 import { PORT, MONGODB_NAME, MONGODB_PASSWORD, MONGODB_COLLECTION_NAME } from './credentials/credentials';
 
+import { errorHandler } from './controllers/error';
+
 import userRoutes from './routes/user';
 import authRoutes from './routes/auth';
 import postRoutes from './routes/post';
@@ -21,10 +23,7 @@ app.use(userRoutes);
 app.use(authRoutes);
 app.use(postRoutes);
 
-app.use((err: Error, req: Request, res: Response, next: NextFunction) => {
-    console.error(err.message);
-    res.status(404).send('Something wrong!');
-})
+app.use(errorHandler);
 
 mongoose
     .connect(MONGODB_URI)

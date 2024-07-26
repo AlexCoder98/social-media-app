@@ -20,12 +20,21 @@ router.post(
         .isLength({ min: 2 }),
     body('email')
         .trim()
-        .isEmpty()
         .isEmail()
         .custom(async value => {
             const user = await User.findOne({ email: value });
             if (user) {
                 throw new Error('E-mail already in use');
+            }
+        }),
+    body('password')
+        .trim()
+        .isLength({ min: 8 }),
+    body('passwordConfirmation')
+        .trim()
+        .custom(async (value, { req }) => {
+            if (value != req.body.password) {
+                throw new Error('Password confirmation failed.');
             }
         }),
     postSignUp

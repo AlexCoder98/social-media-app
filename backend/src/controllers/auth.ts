@@ -3,18 +3,17 @@ import { validationResult } from 'express-validator';
 
 import { User } from '../models/user';
 
+import CustomError from '../utils/error';
+
 export const postSignUp = async (req: Request, res: Response, next: NextFunction) => {
-    const result = validationResult(req);
-
-    console.log('Result');
-    console.log(result.array());
-
-    if (result.array().length > 0) {
-        const errorMsg = result.array()[0].msg;
-        res.status(404).send({ "Message": "Bad bad" });
-        throw new Error(errorMsg);
-    } else {
-        console.log('XDDDDD');
+    try {
+        const errors = validationResult(req);
+        if (!errors.isEmpty()) {
+            const placeOfError = Object.keys(errors.mapped())[0];
+            const message = `${errors.array()[0].msg} in ${placeOfError} field.`;
+            const error = new CustomError(message, 404);
+            throw error;
+        }
 
         const { name, surname, email, password } = req.body;
         const user = new User({
@@ -27,15 +26,15 @@ export const postSignUp = async (req: Request, res: Response, next: NextFunction
             aboutMe: '',
         });
 
-        try {
-            await user.save();
-            return res
-                .status(200)
-                .send({ "Message": "Registration succedeed." })
-        } catch (err) {
-            const msg = 'Error. No valid data provided.';
-            const error = new Error(msg);
-            next(error);
-        }
+        await user.save();
+        return res
+            .status(200)
+            .send({ "Message": "Registration succedeed." })
+    } catch (err) {
+        next(err);
     }
+
+
+
+
 }
