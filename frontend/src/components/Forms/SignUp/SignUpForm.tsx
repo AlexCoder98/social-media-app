@@ -7,6 +7,8 @@ import Button from '../../Button/Button';
 import { useAppDispatch } from '../../../hooks/redux';
 import { signUp } from '../../../state/user/userSlice';
 
+import { cleanInputFields } from '../../../utils/cleanInputs';
+
 import { signUpFormInputsData } from '../../../helpers/form-data';
 
 import '../../../styles/Form.css';
@@ -20,7 +22,7 @@ const SignUpForm = () => {
         surname: '',
         email: '',
         password: '',
-        passwordRepeated: ''
+        passwordConfirmation: ''
     });
 
     const handleInputChange = (e: React.FormEvent) => {
@@ -38,12 +40,16 @@ const SignUpForm = () => {
             surname: signUpFormValues.surname,
             email: signUpFormValues.email,
             password: signUpFormValues.password,
+            passwordConfirmation: signUpFormValues.passwordConfirmation,
+        }
+
+        if (signUpFormValues.passwordConfirmation !== signUpFormValues.password) {
+            alert('Error! Password was not confirmed!');
+            return;
         }
         dispatch(signUp(newUser))
-            // .unwrap()
             .then(() => {
-                // navigate('/sign-in');
-                console.log('Signed up');
+                cleanInputFields('.app__form.sign-up .app__input');
             })
             .catch(err => {
                 console.log(err.message);

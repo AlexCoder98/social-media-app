@@ -5,6 +5,7 @@ type UserNecessaryData = {
     surname: string;
     email: string;
     password: string;
+    passwordConfirmation?: string;
 }
 
 type Additional<T> = {
@@ -37,6 +38,7 @@ const initialState: UserStateType = {
             surname: '',
             email: '',
             password: '',
+            passwordConfirmation: '',
         },
         additional: {
             profileImage: '',
@@ -55,8 +57,8 @@ const userSlice = createSlice({
             .addCase(signUp.pending, () => {
                 console.log('Loading...');
             })
-            .addCase(signUp.fulfilled, (state, action) => {
-                state.userObj.necessary = action.payload;
+            .addCase(signUp.fulfilled, (state, { payload }) => {
+                state.userObj.necessary = payload as UserNecessaryData;
             })
             .addCase(signIn.pending, () => {
                 console.log('Signing in...');

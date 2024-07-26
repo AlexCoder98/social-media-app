@@ -14,7 +14,7 @@ const ResetPasswordForm = () => {
     const [resetPasswordFormValues, setResetPasswordFormValues] = useState({
         email: '',
         newPassword: '',
-        newPasswordRepeated: ''
+        newPasswordConfirmation: ''
     });
 
     const handleInputChange = (e: React.FormEvent) => {
@@ -23,6 +23,7 @@ const ResetPasswordForm = () => {
             ...prevResetPasswordFormValues,
             [name]: value,
         }));
+        console.log(name, value);
     }
 
     const handleFormSubmit = (e: React.SyntheticEvent) => {

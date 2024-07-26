@@ -49,8 +49,8 @@ export const signUpFormInputsData: FormInputsData[] = [
     {
         tagType: 'input',
         type: 'password',
-        id: 'passwordRepeated',
-        placeholder: 'Repeat your password'
+        id: 'passwordConfirmation',
+        placeholder: 'Confirm password'
     },
 ]
 
@@ -70,7 +70,7 @@ export const resetPasswordFormInputsData: FormInputsData[] = [
     {
         tagType: 'input',
         type: 'password',
-        id: 'newPasswordRepeated',
+        id: 'newPasswordConfirmation',
         placeholder: 'Repeat your new password'
     }
 ]
