@@ -2,7 +2,7 @@ import express from 'express';
 import { body } from 'express-validator';
 
 import { User } from '../models/user';
-import { postSignUp } from '../controllers/auth';
+import { postSignUp, postSignIn } from '../controllers/auth';
 
 const router = express.Router();
 
@@ -13,14 +13,19 @@ router.post(
     body('name')
         .trim()
         .notEmpty()
-        .isLength({ min: 2 }),
+        .withMessage('Name field cannot be empty')
+        .isLength({ min: 2 })
+        .withMessage('Invalid name'),
     body('surname')
         .trim()
         .notEmpty()
-        .isLength({ min: 2 }),
+        .withMessage('Surname field cannot be empty')
+        .isLength({ min: 2 })
+        .withMessage('Invalid surname'),
     body('email')
         .trim()
         .isEmail()
+        .withMessage('Invalid email')
         .custom(async value => {
             const user = await User.findOne({ email: value });
             if (user) {
@@ -29,12 +34,13 @@ router.post(
         }),
     body('password')
         .trim()
-        .isLength({ min: 3 }),
+        .isLength({ min: 3 })
+        .withMessage('Invalid password'),
     body('passwordConfirmation')
         .trim()
         .custom(async (value, { req }) => {
             if (value != req.body.password) {
-                throw new Error('Password confirmation failed.');
+                throw new Error('Password confirmation failed');
             }
         }),
     postSignUp
@@ -42,7 +48,7 @@ router.post(
 
 router.get('/sign-in');
 
-router.post('/sign-in');
+router.post('/sign-in', postSignIn);
 
 router.get('/reset-password');
 

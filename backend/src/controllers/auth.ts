@@ -6,16 +6,11 @@ import { User } from '../models/user';
 import CustomError from '../utils/error';
 
 export const postSignUp = async (req: Request, res: Response, next: NextFunction) => {
-
-    console.log('Req body');
-    console.log(req.body);
-
     try {
         const errors = validationResult(req);
         if (!errors.isEmpty()) {
-            const placeOfError = Object.keys(errors.mapped())[0];
-            const message = `${errors.array()[0].msg} in ${placeOfError} field.`;
-            const error = new CustomError(message, 404);
+            const message = errors.array()[0].msg;
+            const error = new CustomError(message, 409);
             throw error;
         }
 
@@ -32,13 +27,23 @@ export const postSignUp = async (req: Request, res: Response, next: NextFunction
 
         await user.save();
         return res
-            .status(200)
-            .send({ "message": "Registration succedeed." })
+            .status(201)
+            .send({ "message": "Registration succedeed" })
     } catch (err) {
         next(err);
     }
+}
 
+export const postSignIn = async (req: Request, res: Response, next: NextFunction) => {
+    try {
+        const { email, password } = req.body;
 
+        // const user = await User.findOne({email: email});
+        // if(user) {
 
+        // }
 
+    } catch (err) {
+        next(err);
+    }
 }
