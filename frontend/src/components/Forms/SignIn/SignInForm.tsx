@@ -31,11 +31,15 @@ const SignInForm = () => {
 
     const handleFormSubmit = (e: React.SyntheticEvent) => {
         e.preventDefault();
-        dispath(signIn('signed in'))
-            .then(() => {
-                navigate('/main-page');
-                console.log('Logged in');
-            });
+        const signInData = {
+            email: signInFormValues.email,
+            password: signInFormValues.password,
+        }
+        dispath(signIn(signInData));
+        //     .then(() => {
+        //         navigate('/main-page');
+        //         console.log('Logged in');
+        //     });
     }
 
     return (

@@ -20,10 +20,7 @@ const EditProfilePage = lazy(() => import('../../pages/EditProfile'));
 const NotFoundPage = lazy(() => import('../../pages/404'));
 
 const Main = () => {
-    // const state = useAppSelector((state) => state.users);
-
-    // console.log('STATE');
-    // console.log(state);
+    const { isSignedIn } = useAppSelector((state) => state.users);
 
     return (
         <main className="app__main">
@@ -36,17 +33,21 @@ const Main = () => {
                             <Route path='/sign-up' element={<SignUpPage />} />
                             <Route path='/reset-password' element={<ResetPasswordPage />} />
                         </Route>
-                        <Route path='/main-page' element={<MainPage />} />
-                        <Route path='/posts'>
-                            <Route index element={<PostsPage />} />
-                            <Route path=':postId' element={<PostPage />} />
-                            <Route path=':postId/edit' element={<EditPostPage />} />
-                            <Route path='create-new' element={<CreatePostPage />} />
-                        </Route>
-                        <Route path='/profile'>
-                            <Route index element={<ProfilePage />} />
-                            <Route path='edit-profile' element={<EditProfilePage />} />
-                        </Route>
+                        {isSignedIn && (
+                            <>
+                                <Route path='/main-page' element={<MainPage />} />
+                                <Route path='/posts'>
+                                    <Route index element={<PostsPage />} />
+                                    <Route path=':postId' element={<PostPage />} />
+                                    <Route path=':postId/edit' element={<EditPostPage />} />
+                                    <Route path='create-new' element={<CreatePostPage />} />
+                                </Route>
+                                <Route path='/profile'>
+                                    <Route index element={<ProfilePage />} />
+                                    <Route path='edit-profile' element={<EditProfilePage />} />
+                                </Route>
+                            </>
+                        )}
                         <Route path='*' element={<NotFoundPage />} />
                     </Routes>
                 </Suspense>

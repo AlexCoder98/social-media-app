@@ -19,7 +19,7 @@ const ProfilePage = () => {
     console.log(user);
 
     const handleSignOut = () => {
-        dispatch(signOut('signed out'));
+        dispatch(signOut(false));
         navigate('/');
     }
 

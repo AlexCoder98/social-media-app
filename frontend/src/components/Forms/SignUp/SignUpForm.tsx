@@ -14,7 +14,7 @@ import { signUpFormInputsData } from '../../../helpers/form-data';
 import '../../../styles/Form.css';
 
 const SignUpForm = () => {
-    const state = useAppSelector((state) => state.users);
+    const { errorMessage, successMessage } = useAppSelector((state) => state.users);
     const dispatch = useAppDispatch();
     const navigate = useNavigate();
 
@@ -44,19 +44,14 @@ const SignUpForm = () => {
             passwordConfirmation: signUpFormValues.passwordConfirmation,
         }
 
-        if (signUpFormValues.passwordConfirmation !== signUpFormValues.password) {
-            alert('Error! Password was not confirmed!');
-            return;
-        }
-        await dispatch(signUp(newUser))
-            .then(() => {
-                console.log(state);
-            })
+        await dispatch(signUp(newUser));
+        await cleanInputFields('.app__form.sign-up .app__input');
     }
 
     return (
         <>
-            {state.errorMessage ? <p>{state.errorMessage}</p> : null}
+            {successMessage && <p className="app__form-message success">{successMessage}</p>}
+            {errorMessage && <p className="app__form-message error">{errorMessage}</p>}
             <form
                 method="POST"
                 className="app__form sign-up"

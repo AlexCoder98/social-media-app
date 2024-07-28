@@ -29,17 +29,15 @@ type User = {
     additional: Additional<UserAdditionalData>
 }
 
-type IsSignedIn = 'signed in' | 'signed out';
-
 interface UserStateType {
-    isSignedIn: IsSignedIn;
+    isSignedIn: boolean;
     userObj: User;
     successMessage: null | string;
     errorMessage: null | string;
 }
 
 const initialState: UserStateType = {
-    isSignedIn: 'signed out',
+    isSignedIn: false,
     userObj: {
         necessary: {
             name: '',
@@ -69,16 +67,13 @@ export const signUp = createAsyncThunk(
                 },
                 body: JSON.stringify(newUser),
             });
-
             const result = await response.json();
-
-            if (response.status !== 200) {
+            if (response.status !== 201) {
                 throw new Error((result as RequestResponse).message);
             } else {
                 return (result as { message: string }).message;
             }
         } catch (err) {
-            console.log(err);
             return thunkAPI.rejectWithValue((err as Error).message);
         }
     }
@@ -86,9 +81,24 @@ export const signUp = createAsyncThunk(
 
 export const signIn = createAsyncThunk(
     'user/signIn',
-    async (isSignedIn: IsSignedIn) => {
-        await new Promise((resolve) => setTimeout(resolve, 1000));
-        return isSignedIn;
+    async (signInData: { email: string, password: string }, thunkAPI) => {
+        try {
+            const response = await fetch('http://localhost:8080/sign-in', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(signInData),
+            });
+
+            const result = await response.json();
+            if (response.status !== 200) {
+                throw new Error((result as RequestResponse).message);
+            }
+            return result as { isSignedIn: boolean, userObj: User };
+        } catch (err) {
+            return thunkAPI.rejectWithValue((err as Error).message);
+        }
     }
 );
 
@@ -102,7 +112,7 @@ export const updateUserData = createAsyncThunk(
 
 export const signOut = createAsyncThunk(
     'user/signOut',
-    async (isSignedIn: IsSignedIn) => {
+    async (isSignedIn: boolean) => {
         await new Promise((resolve) => setTimeout(resolve, 1000));
         return isSignedIn;
     }
@@ -128,8 +138,9 @@ const userSlice = createSlice({
             .addCase(signIn.pending, () => {
                 console.log('Signing in...');
             })
-            .addCase(signIn.fulfilled, (state, action) => {
-                state.isSignedIn = action.payload;
+            .addCase(signIn.fulfilled, (state, { payload }) => {
+                state.isSignedIn = payload.isSignedIn;
+                state.userObj = payload.userObj;
             })
             .addCase(updateUserData.pending, () => {
                 console.log('Saving changes...');
