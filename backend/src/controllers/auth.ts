@@ -6,6 +6,10 @@ import { User } from '../models/user';
 import CustomError from '../utils/error';
 
 export const postSignUp = async (req: Request, res: Response, next: NextFunction) => {
+
+    console.log('Req body');
+    console.log(req.body);
+
     try {
         const errors = validationResult(req);
         if (!errors.isEmpty()) {
@@ -29,7 +33,7 @@ export const postSignUp = async (req: Request, res: Response, next: NextFunction
         await user.save();
         return res
             .status(200)
-            .send({ "Message": "Registration succedeed." })
+            .send({ "message": "Registration succedeed." })
     } catch (err) {
         next(err);
     }

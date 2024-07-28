@@ -29,7 +29,7 @@ router.post(
         }),
     body('password')
         .trim()
-        .isLength({ min: 8 }),
+        .isLength({ min: 3 }),
     body('passwordConfirmation')
         .trim()
         .custom(async (value, { req }) => {
