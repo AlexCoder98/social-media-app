@@ -20,10 +20,10 @@ const EditProfilePage = lazy(() => import('../../pages/EditProfile'));
 const NotFoundPage = lazy(() => import('../../pages/404'));
 
 const Main = () => {
-    const state = useAppSelector((state) => state.users);
+    // const state = useAppSelector((state) => state.users);
 
-    console.log('STATE');
-    console.log(state);
+    // console.log('STATE');
+    // console.log(state);
 
     return (
         <main className="app__main">
