@@ -1,7 +1,7 @@
 import { useParams, Link, useNavigate } from "react-router-dom";
 
 import { useAppSelector, useAppDispatch } from "../../hooks/redux";
-import { deletePost } from '../../state/posts/postsSlice';
+import { deletePost } from '../../state/post/postSlice';
 
 import '../../styles/Post.css';
 

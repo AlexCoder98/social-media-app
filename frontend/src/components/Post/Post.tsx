@@ -1,8 +1,8 @@
 import { Link, useLocation } from "react-router-dom";
 import { useAppDispatch } from "../../hooks/redux";
 
-import { PostStateType } from "../../state/posts/postsSlice";
-import { deletePost } from '../../state/posts/postsSlice'
+import { PostStateType } from "../../state/post/postSlice";
+import { deletePost } from '../../state/post/postSlice'
 
 const Post = ({ id, title, image, description }: PostStateType) => {
     const dispatch = useAppDispatch();

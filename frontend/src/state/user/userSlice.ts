@@ -7,6 +7,7 @@ type RequestResponse = {
 }
 
 type UserNecessaryData = {
+    // _id: string;
     name: string;
     surname: string;
     email: string;
@@ -40,6 +41,7 @@ const initialState: UserStateType = {
     isSignedIn: false,
     userObj: {
         necessary: {
+            // _id: '',
             name: '',
             surname: '',
             email: '',
@@ -68,6 +70,9 @@ export const signUp = createAsyncThunk(
                 body: JSON.stringify(newUser),
             });
             const result = await response.json();
+
+            console.log(result);
+
             if (response.status !== 201) {
                 throw new Error((result as RequestResponse).message);
             } else {
@@ -92,10 +97,18 @@ export const signIn = createAsyncThunk(
             });
 
             const result = await response.json();
+
+            console.log('RESPONSE');
+            console.log(response);
+
+            console.log('RESULT');
+            console.log(result);
+
             if (response.status !== 200) {
                 throw new Error((result as RequestResponse).message);
+            } else {
+                return result as { isSignedIn: boolean, userObj: User & { _id: string } };
             }
-            return result as { isSignedIn: boolean, userObj: User };
         } catch (err) {
             return thunkAPI.rejectWithValue((err as Error).message);
         }
@@ -141,6 +154,10 @@ const userSlice = createSlice({
             .addCase(signIn.fulfilled, (state, { payload }) => {
                 state.isSignedIn = payload.isSignedIn;
                 state.userObj = payload.userObj;
+                state.errorMessage = null;
+            })
+            .addCase(signIn.rejected, (state, { payload }) => {
+                state.errorMessage = payload as string;
             })
             .addCase(updateUserData.pending, () => {
                 console.log('Saving changes...');

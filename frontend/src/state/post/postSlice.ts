@@ -15,8 +15,8 @@ const initialState: PostsStateType = {
     posts: [],
 }
 
-const postsSlice = createSlice({
-    name: 'posts',
+const postSlice = createSlice({
+    name: 'post',
     initialState,
     reducers: {},
     extraReducers: (builder) => {
@@ -46,7 +46,7 @@ const postsSlice = createSlice({
 });
 
 export const addPost = createAsyncThunk(
-    'posts/addPost',
+    'post/addPost',
     async (newPost: PostStateType) => {
         await new Promise((resolve) => setTimeout(resolve, 1000));
         return newPost;
@@ -54,7 +54,7 @@ export const addPost = createAsyncThunk(
 );
 
 export const editPost = createAsyncThunk(
-    'posts/createPost',
+    'post/createPost',
     async (editedPost: PostStateType) => {
         await new Promise((resolve) => setTimeout(resolve, 1000));
         return editedPost;
@@ -62,11 +62,11 @@ export const editPost = createAsyncThunk(
 );
 
 export const deletePost = createAsyncThunk(
-    'posts/deletePost',
+    'post/deletePost',
     async (postId: string) => {
         await new Promise((resolve) => setTimeout(resolve, 1000));
         return postId;
     }
 );
 
-export default postsSlice.reducer;
+export default postSlice.reducer;

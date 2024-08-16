@@ -5,7 +5,7 @@ import InputElement from '../InputElement/InputElement';
 import Button from '../../Button/Button';
 
 import { useAppDispatch } from '../../../hooks/redux';
-import { editPost } from '../../../state/posts/postsSlice';
+import { editPost } from '../../../state/post/postSlice';
 
 import { postFormData } from '../../../helpers/form-data';
 import { EditPostLocationType } from '../../../types/post';

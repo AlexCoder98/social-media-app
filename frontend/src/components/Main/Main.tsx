@@ -20,19 +20,25 @@ const EditProfilePage = lazy(() => import('../../pages/EditProfile'));
 const NotFoundPage = lazy(() => import('../../pages/404'));
 
 const Main = () => {
-    const { isSignedIn } = useAppSelector((state) => state.users);
+    const { isSignedIn, userObj } = useAppSelector((state) => state.users);
+
+    console.log(isSignedIn);
+    console.log('USER');
+    console.log(userObj);
 
     return (
         <main className="app__main">
             <section className="app__main-content">
                 <Suspense fallback={<Loading />}>
                     <Routes>
-                        <Route path='/'>
-                            <Route index element={<HomePage />} />
-                            <Route path='/sign-in' element={<SignInPage />} />
-                            <Route path='/sign-up' element={<SignUpPage />} />
-                            <Route path='/reset-password' element={<ResetPasswordPage />} />
-                        </Route>
+                        {!isSignedIn && (
+                            <Route path='/'>
+                                <Route index element={<HomePage />} />
+                                <Route path='/sign-in' element={<SignInPage />} />
+                                <Route path='/sign-up' element={<SignUpPage />} />
+                                <Route path='/reset-password' element={<ResetPasswordPage />} />
+                            </Route>
+                        )}
                         {isSignedIn && (
                             <>
                                 <Route path='/main-page' element={<MainPage />} />
