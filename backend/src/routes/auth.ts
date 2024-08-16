@@ -48,7 +48,16 @@ router.post(
 
 router.get('/sign-in');
 
-router.post('/sign-in', postSignIn);
+router.post('/sign-in',
+    body('email')
+        .trim()
+        .isEmail()
+        .withMessage('Invalid email'),
+    body('password')
+        .trim()
+        .isLength({ min: 3 })
+        .withMessage('Invalid password'),
+    postSignIn);
 
 router.get('/reset-password');
 
