@@ -2,6 +2,7 @@ import express, { Express } from 'express';
 import mongoose from 'mongoose';
 
 import { allowCrossDomain } from './middleware/cors';
+import { isAuthenticated } from './middleware/auth';
 
 import { PORT, MONGODB_NAME, MONGODB_PASSWORD, MONGODB_COLLECTION_NAME } from './credentials/credentials';
 
@@ -18,6 +19,7 @@ const MONGODB_URI = `mongodb+srv://${MONGODB_NAME}:${MONGODB_PASSWORD}@cluster0.
 app.use(express.json());
 
 app.use(allowCrossDomain);
+app.use(isAuthenticated);
 
 app.use(userRoutes);
 app.use(authRoutes);

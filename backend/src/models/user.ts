@@ -16,7 +16,13 @@ const userSchema = new Schema<UserSchemaType>({
     },
     status: String,
     profileImage: String,
-    aboutMe: String
+    aboutMe: String,
+    posts: [
+        {
+            type: Schema.Types.ObjectId,
+            ref: 'Post'
+        }
+    ],
 });
 
 export const User = model<UserSchemaType>('User', userSchema);

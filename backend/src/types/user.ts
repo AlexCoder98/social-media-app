@@ -1,3 +1,5 @@
+import { PostSchemaType } from './post';
+
 export interface UserSchemaType {
     name: string;
     surname: string;
@@ -5,5 +7,6 @@ export interface UserSchemaType {
     password: string;
     profileImage?: string;
     status?: string;
-    aboutMe?: string
+    aboutMe?: string,
+    posts: PostSchemaType[],
 }

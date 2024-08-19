@@ -1,27 +1,10 @@
 import { Request, Response, NextFunction } from 'express';
 import { validationResult } from 'express-validator';
+import jwt from 'jsonwebtoken';
 
 import { User } from '../models/user';
 
 import CustomError from '../utils/error';
-
-type SignInRespone = {
-    isSignedIn: boolean,
-    _id: string;
-    userObj: {
-        necessary: {
-            name: string;
-            surname: string;
-            email: string;
-            password: string;
-        },
-        additional: {
-            status: string;
-            profileImage: string;
-            aboutMe: string;
-        }
-    }
-}
 
 export const postSignUp = async (req: Request, res: Response, next: NextFunction) => {
     try {
@@ -59,7 +42,6 @@ export const postSignIn = async (req: Request, res: Response, next: NextFunction
     const { email, password } = req.body;
     try {
         console.log(email, password);
-
         const user = await User.findOne({ email: email });
         if (!user) {
             const message = 'User with provided email does not exist.';
@@ -71,26 +53,18 @@ export const postSignIn = async (req: Request, res: Response, next: NextFunction
             const error = new CustomError(message, 401);
             throw error;
         }
-        const resBody: SignInRespone = {
-            isSignedIn: true,
-            _id: user._id.toString(),
-            userObj: {
-                necessary: {
-                    name: user.name,
-                    surname: user.surname,
-                    email: user.email,
-                    password: user.password,
-                },
-                additional: {
-                    status: user.status as string,
-                    profileImage: user.profileImage as string,
-                    aboutMe: user.aboutMe as string,
-                }
-            },
-        }
+
+        const accessToken = jwt.sign({
+            email: user.email,
+            userId: user._id.toString(),
+        }, 'supersecretstring');
+
         res
             .status(200)
-            .json(resBody)
+            .json({
+                accessToken: accessToken,
+                userId: user._id.toString()
+            });
     } catch (err) {
         next(err);
     }
