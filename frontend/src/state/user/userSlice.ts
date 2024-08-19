@@ -7,7 +7,7 @@ type RequestResponse = {
 }
 
 type UserNecessaryData = {
-    // _id: string;
+    _id?: string | null;
     name: string;
     surname: string;
     email: string;
@@ -33,15 +33,17 @@ type User = {
 interface UserStateType {
     isSignedIn: boolean;
     userObj: User;
-    successMessage: null | string;
-    errorMessage: null | string;
+    errors: {
+        signUpError: string | null;
+        signInError: string | null;
+    }
 }
 
 const initialState: UserStateType = {
     isSignedIn: false,
     userObj: {
         necessary: {
-            // _id: '',
+            _id: null,
             name: '',
             surname: '',
             email: '',
@@ -54,8 +56,10 @@ const initialState: UserStateType = {
             aboutMe: ''
         }
     },
-    successMessage: '',
-    errorMessage: '',
+    errors: {
+        signUpError: null,
+        signInError: null,
+    }
 }
 
 export const signUp = createAsyncThunk(
@@ -107,7 +111,7 @@ export const signIn = createAsyncThunk(
             if (response.status !== 200) {
                 throw new Error((result as RequestResponse).message);
             } else {
-                return result as { isSignedIn: boolean, userObj: User & { _id: string } };
+                return result as { _id: string };
             }
         } catch (err) {
             return thunkAPI.rejectWithValue((err as Error).message);
@@ -141,23 +145,23 @@ const userSlice = createSlice({
                 console.log('Loading...');
             })
             .addCase(signUp.fulfilled, (state, { payload }) => {
-                state.successMessage = payload;
-                state.errorMessage = null;
+                state.errors.signUpError = payload;
             })
             .addCase(signUp.rejected, (state, { payload }) => {
-                state.successMessage = null;
-                state.errorMessage = payload as string;
+                state.errors.signUpError = payload as string;
+                state.errors.signInError = null;
             })
             .addCase(signIn.pending, () => {
                 console.log('Signing in...');
             })
             .addCase(signIn.fulfilled, (state, { payload }) => {
-                state.isSignedIn = payload.isSignedIn;
-                state.userObj = payload.userObj;
-                state.errorMessage = null;
+                state.isSignedIn = true;
+                state.userObj.necessary._id = payload._id;
+                state.errors.signInError = null;
             })
             .addCase(signIn.rejected, (state, { payload }) => {
-                state.errorMessage = payload as string;
+                state.errors.signInError = payload as string;
+                state.errors.signUpError = null;
             })
             .addCase(updateUserData.pending, () => {
                 console.log('Saving changes...');

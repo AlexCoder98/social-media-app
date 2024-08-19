@@ -13,7 +13,7 @@ import '../../../styles/Form.css';
 
 
 const SignInForm = () => {
-    const { errorMessage, successMessage } = useAppSelector(state => state.users);
+    const { errors, messages } = useAppSelector(state => state.authentication);
     const dispath = useAppDispatch();
     const navigate = useNavigate();
 
@@ -36,17 +36,17 @@ const SignInForm = () => {
             email: signInFormValues.email,
             password: signInFormValues.password,
         }
-        dispath(signIn(signInData))
-        // .then(() => {
-        //     navigate('/main-page');
-        //     console.log('Logged in!');
-        // });
+
+        dispath(signIn(signInData)).then(result => {
+            if (result.meta.requestStatus === 'fulfilled') {
+                navigate('/main-page');
+            }
+        });
     }
 
     return (
         <>
-            {successMessage && <p className="app__form-message success">{successMessage}</p>}
-            {errorMessage && <p className="app__form-message error">{errorMessage}</p>}
+            {errors.signInError && <p className="app__form-message error">{errors.signInError}</p>}
             <form
                 method="POST"
                 className="app__form sign-in"

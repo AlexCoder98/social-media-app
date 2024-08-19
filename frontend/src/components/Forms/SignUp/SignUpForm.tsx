@@ -1,22 +1,19 @@
 import { useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 import InputElement from '../InputElement/InputElement';
 import Button from '../../Button/Button';
 
 import { useAppSelector, useAppDispatch } from '../../../hooks/redux';
-import { signUp } from '../../../state/user/userSlice';
-
-import { cleanInputFields } from '../../../utils/cleanInputs';
+import { signUp } from '../../../state/authentication/authSlice';
 
 import { signUpFormInputsData } from '../../../helpers/form-data';
 
 import '../../../styles/Form.css';
 
 const SignUpForm = () => {
-    const { errorMessage, successMessage } = useAppSelector((state) => state.users);
+    const { errors, messages } = useAppSelector((state) => state.authentication);
     const dispatch = useAppDispatch();
-    const navigate = useNavigate();
 
     const [signUpFormValues, setSignUpFormValues] = useState({
         name: '',
@@ -44,14 +41,24 @@ const SignUpForm = () => {
             passwordConfirmation: signUpFormValues.passwordConfirmation,
         }
 
-        await dispatch(signUp(newUser));
-        await cleanInputFields('.app__form.sign-up .app__input');
+        await dispatch(signUp(newUser))
+            .then(result => {
+                if (result.meta.requestStatus === 'fulfilled') {
+                    setSignUpFormValues({
+                        name: '',
+                        surname: '',
+                        email: '',
+                        password: '',
+                        passwordConfirmation: ''
+                    });
+                }
+            });
     }
 
     return (
         <>
-            {successMessage && <p className="app__form-message success">{successMessage}</p>}
-            {errorMessage && <p className="app__form-message error">{errorMessage}</p>}
+            {errors.signUpError && <p className="app__form-message error">{errors.signUpError}</p>}
+            {messages.signUpMessage && <p className="app__form-message success">{messages.signUpMessage}</p>}
             <form
                 method="POST"
                 className="app__form sign-up"
