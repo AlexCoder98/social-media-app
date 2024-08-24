@@ -1,9 +1,8 @@
 export type UserNecessaryData = {
-    name: string;
-    surname: string;
-    email: string;
-    password: string;
-    passwordConfirmation?: string;
+    name: string | null;
+    surname: string | null;
+    email: string | null;
+    password: string | null;
 };
 
 type Additional<T> = {
@@ -11,12 +10,12 @@ type Additional<T> = {
 };
 
 type UserAdditionalData = {
-    profileImage: string;
-    status: string;
-    aboutMe: string;
+    profileImage: string | null;
+    status: string | null;
+    aboutMe: string | null;
 };
 
-type UserInitialType = {
+export type UserInitialStateType = {
     necessary: UserNecessaryData;
     additional: Additional<UserAdditionalData>;
 }

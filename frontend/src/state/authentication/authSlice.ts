@@ -5,7 +5,8 @@ import { UserNecessaryData } from '../../types/reducers/user';
 
 const initialState: AuthStateType = {
     isAuth: false,
-    _id: null,
+    accessToken: '',
+    userId: '',
     messages: {
         signUpMessage: null,
     },
@@ -51,10 +52,14 @@ export const signIn = createAsyncThunk(
                 body: JSON.stringify(signInData),
             });
             const result = await response.json();
+
+            console.log('RESULT IN SIGN IN ACTION');
+            console.log(result);
+
             if (response.status !== 200) {
                 throw new Error((result as RequestResponseType).message);
             } else {
-                return result as { _id: string };
+                return result as { accessToken: string, userId: string };
             }
         } catch (err) {
             return thunkAPI.rejectWithValue((err as Error).message);
@@ -65,7 +70,6 @@ export const signIn = createAsyncThunk(
 export const signOut = createAsyncThunk(
     'auth/signOut',
     async (isAuth: boolean) => {
-        await new Promise((resolve) => setTimeout(resolve, 1000));
         return isAuth;
     }
 )
@@ -86,6 +90,29 @@ const authSlice = createSlice({
             .addCase(signUp.rejected, (state, { payload }) => {
                 state.messages.signUpMessage = null;
                 state.errors.signUpError = payload as string;
+            })
+            .addCase(signIn.pending, () => {
+                console.log('Loading...');
+            })
+            .addCase(signIn.fulfilled, (state, { payload }) => {
+                state.isAuth = true;
+                state.accessToken = payload.accessToken;
+                state.userId = payload.userId;
+                state.errors.signInError = null;
+            })
+            .addCase(signIn.rejected, (state, { payload }) => {
+                state.userId = null;
+                state.accessToken = null;
+                state.isAuth = false;
+                state.errors.signInError = payload as string;
+            })
+            .addCase(signOut.pending, () => {
+                console.log('Loading...');
+            })
+            .addCase(signOut.fulfilled, (state, { payload }) => {
+                state.isAuth = payload;
+                state.accessToken = null;
+                state.userId = null;
             })
     }
 });

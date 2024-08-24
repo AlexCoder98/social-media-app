@@ -1,6 +1,7 @@
 export type AuthStateType = {
     isAuth: boolean;
-    _id: string | null;
+    accessToken: string | null;
+    userId: string | null;
     messages: {
         signUpMessage: string | null;
     }

@@ -1,16 +1,22 @@
 import { Link } from "react-router-dom";
 
+import { useAppSelector } from "../hooks/redux";
+
 import '../styles/404.css';
 import '../styles/Button.css';
 
 const NotFoundPage = () => {
+    const { isAuth } = useAppSelector((state) => state.authentication);
+
+    console.log('isAuth: ' + isAuth);
+
     return (
         <div className="app__404-page-wrapper">
             <header className="app__404-page-header">
                 <h1 className="app__h1">Error occurred. Page not found.</h1>
                 <section className="app__404-page-buttons-wrapper">
                     <Link
-                        to="/"
+                        to={isAuth ? "main-page" : "/"}
                         className="app__button"
                         title="Back to home page"
                     >

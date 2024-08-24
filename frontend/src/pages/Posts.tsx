@@ -6,7 +6,10 @@ import { useAppSelector } from "../hooks/redux";
 import '../styles/Posts.css';
 
 const PostsPage = () => {
-    const posts = useAppSelector(state => state.posts.posts);
+    // const posts = useAppSelector(state => state.posts.posts);
+
+    const { userId } = useAppSelector(state => state.authentication)
+    console.log('USER ID ' + userId);
 
     return (
         <div className="app__page posts">
@@ -20,7 +23,7 @@ const PostsPage = () => {
                     >New</Link>
                 </section>
             </header>
-            {posts.length ? (
+            {/* {posts.length ? (
                 <ul className="app__posts-list">
                     {posts.map((post, i) => (
                         <SmallPost
@@ -34,7 +37,7 @@ const PostsPage = () => {
                 </ul>
             ) : (
                 <h2 className="app__h2" style={{ margin: '5rem 0' }}>No posts yet</h2>
-            )}
+            )} */}
         </div>
     )
 }

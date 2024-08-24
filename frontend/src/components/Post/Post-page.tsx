@@ -8,9 +8,9 @@ import '../../styles/Post.css';
 const SinglePost = () => {
     const { postId } = useParams();
     const navigate = useNavigate();
-    const posts = useAppSelector(state => state.posts.posts);
+    // const posts = useAppSelector(state => state.posts.posts);
     const dispatch = useAppDispatch();
-    const post = posts.find(post => post.id === postId)!;
+    // const post = posts.find(post => post.id === postId)!;
 
     const handleOnDeletePost = (postId: string) => {
         dispatch(deletePost(postId))
@@ -23,16 +23,16 @@ const SinglePost = () => {
     return (
         <div className="app__post-single">
             <header className="app__post-single-head">
-                <h3 className="app__post-single-h3">{post.title}</h3>
+                {/* <h3 className="app__post-single-h3">{post.title}</h3> */}
             </header>
             <main className="app__post-single-body">
                 <div
                     className="app__post-single-img-wrapper"
-                    style={{ backgroundImage: `url(${post.image})` }}
+                // style={{ backgroundImage: `url(${post.image})` }}
                 >
                 </div>
                 <div className="app__post-single-text-container">
-                    <p className="app__paragraph">{post.description}</p>
+                    {/* <p className="app__paragraph">{post.description}</p> */}
                 </div>
             </main>
             <footer className="app__post-single-bottom">
@@ -41,16 +41,16 @@ const SinglePost = () => {
                     className={"app__button"}
                     title={"Edit post"}
                     type={"button"}
-                    state={{
-                        title: post.title,
-                        imageUrl: post.image,
-                        description: post.description
-                    }}
+                // state={{
+                //     title: post.title,
+                //     imageUrl: post.image,
+                //     description: post.description
+                // }}
                 >Edit</Link>
                 <button
                     className="app__button delete"
                     title="Delete post"
-                    onClick={() => handleOnDeletePost(post.id)}
+                // onClick={() => handleOnDeletePost(post.id)}
                 >Delete</button>
             </footer>
         </div>

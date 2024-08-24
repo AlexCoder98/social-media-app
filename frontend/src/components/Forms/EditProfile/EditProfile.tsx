@@ -4,26 +4,26 @@ import InputElement from "../InputElement/InputElement"
 import Button from "../../Button/Button";
 
 import { useAppSelector, useAppDispatch } from "../../../hooks/redux";
-import { updateUserData } from '../../../state/user/userSlice';
+// import { updateUserData } from '../../../state/user/userSlice';
 
 import { EditProfileType } from "../../../types/edit-profile";
 import '../../../styles/EditProfile.css';
 
 const EditProfileForm = () => {
-    const user = useAppSelector(state => state.users.userObj);
+    const user = useAppSelector(state => state.user);
     const dispatch = useAppDispatch();
 
     const { name, surname, email, password } = user.necessary;
     const { status, profileImage, aboutMe } = user.additional;
 
     const [editFormValues, setEditFormValues] = useState<EditProfileType>({
-        editName: name,
-        editSurname: surname,
+        editName: name!,
+        editSurname: surname!,
         editStatus: status!,
         editProfileImage: profileImage!,
         editAboutUser: aboutMe!,
-        editEmail: email,
-        editPassword: password,
+        editEmail: email!,
+        editPassword: password!,
         editPasswordRepeat: ''
     });
 
@@ -51,10 +51,10 @@ const EditProfileForm = () => {
                 aboutMe: editFormValues.editAboutUser
             }
         }
-        dispatch(updateUserData(updatedUser))
-            .then(() => {
-                alert('User data have been updated!');
-            });
+        // dispatch(updateUserData(updatedUser))
+        //     .then(() => {
+        //         alert('User data have been updated!');
+        //     });
 
         console.log('Updated USER');
         console.log(updatedUser);
@@ -62,13 +62,13 @@ const EditProfileForm = () => {
 
     const handleOnCancel = () => {
         setEditFormValues({
-            editName: name,
-            editSurname: surname,
+            editName: name!,
+            editSurname: surname!,
             editStatus: status!,
             editProfileImage: profileImage!,
             editAboutUser: aboutMe!,
-            editEmail: email,
-            editPassword: password,
+            editEmail: email!,
+            editPassword: password!,
             editPasswordRepeat: ''
         });
     }

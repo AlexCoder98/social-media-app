@@ -1,6 +1,8 @@
+import { useState, useLayoutEffect } from "react";
 import { useNavigate, Link } from "react-router-dom";
 
-import { signOut } from '../state/user/userSlice';
+import { getUser } from "../state/user/userSlice";
+import { signOut } from "../state/authentication/authSlice";
 import { useAppDispatch, useAppSelector } from "../hooks/redux";
 
 import Button from "../components/Button/Button";
@@ -8,15 +10,21 @@ import Button from "../components/Button/Button";
 import '../styles/Profile.css';
 
 const ProfilePage = () => {
-    const user = useAppSelector(state => state.users);
+    const { userId, accessToken } = useAppSelector(state => state.authentication);
+    const user = useAppSelector(state => state.user);
     const dispatch = useAppDispatch();
     const navigate = useNavigate();
 
-    const { name, surname } = user.userObj.necessary;
-    const { profileImage, status, aboutMe } = user.userObj.additional;
+    useLayoutEffect(() => {
+        const reqData = {
+            accessToken: accessToken!,
+            userId: userId!
+        };
+        dispatch(getUser(reqData))
+    }, [userId]);
 
-    console.log('Signed Up User');
-    console.log(user);
+    const { name, surname } = user.necessary;
+    const { profileImage, status, aboutMe } = user.additional;
 
     const handleSignOut = () => {
         dispatch(signOut(false));
@@ -30,7 +38,7 @@ const ProfilePage = () => {
                 <section className="app__profile-buttons-wrapper">
                     <Link
                         className="app__button edit-profile"
-                        to="edit-profile"
+                        to="edit"
                         title="Edit your profile"
                     >Edit profile</Link>
                     <Button

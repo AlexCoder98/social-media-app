@@ -7,8 +7,8 @@ import postsSlice from "./post/postSlice";
 export const store = configureStore({
     reducer: {
         authentication: authSlice,
-        users: userSlice,
-        posts: postsSlice
+        user: userSlice,
+        post: postsSlice
     },
 });
 

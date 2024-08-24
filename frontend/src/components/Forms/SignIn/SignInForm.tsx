@@ -4,7 +4,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import InputElement from '../InputElement/InputElement';
 import Button from '../../Button/Button';
 
-import { signIn } from '../../../state/user/userSlice';
+import { signIn } from '../../../state/authentication/authSlice';
 import { useAppDispatch, useAppSelector } from '../../../hooks/redux';
 
 import { signInFormInputsData } from '../../../helpers/form-data';
@@ -39,6 +39,10 @@ const SignInForm = () => {
 
         dispath(signIn(signInData)).then(result => {
             if (result.meta.requestStatus === 'fulfilled') {
+                setSignInFormValues({
+                    email: '',
+                    password: ''
+                });
                 navigate('/main-page');
             }
         });

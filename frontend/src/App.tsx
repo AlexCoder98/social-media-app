@@ -6,7 +6,7 @@ import { useAppSelector } from './hooks/redux';
 import './styles/App.css';
 
 function App() {
-  const users = useAppSelector(state => state.users);
+  const user = useAppSelector(state => state.user);
   // console.log('POSTS ARRAY');
   // console.log(posts);
 
