@@ -8,13 +8,13 @@ router.get('/main-page', isAuthenticated);
 
 router.get('/posts', isAuthenticated);
 
-router.post('/posts');
+router.post('/posts', isAuthenticated);
 
 router.get('/posts/create-new', isAuthenticated);
 
 router.post('/posts/create-new', isAuthenticated);
 
-router.get('/posts/:postId');
+router.get('/posts/:postId', isAuthenticated);
 
 router.get('/posts/:postId/edit', isAuthenticated);
 

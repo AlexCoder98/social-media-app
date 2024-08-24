@@ -58,7 +58,6 @@ export const postSignIn = async (req: Request, res: Response, next: NextFunction
             email: user.email,
             userId: user._id.toString(),
         }, 'supersecretstring');
-
         res
             .status(200)
             .json({

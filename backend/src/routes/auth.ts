@@ -6,8 +6,6 @@ import { postSignUp, postSignIn } from '../controllers/auth';
 
 const router = express.Router();
 
-router.get('/sign-up');
-
 router.post(
     '/sign-up',
     body('name')
@@ -46,8 +44,6 @@ router.post(
     postSignUp
 );
 
-router.get('/sign-in');
-
 router.post('/sign-in',
     body('email')
         .trim()
@@ -58,8 +54,6 @@ router.post('/sign-in',
         .isLength({ min: 3 })
         .withMessage('Invalid password'),
     postSignIn);
-
-router.get('/reset-password');
 
 router.post('/reset-password');
 
