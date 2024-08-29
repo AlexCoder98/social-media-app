@@ -1,6 +1,7 @@
 import { Request, Response, NextFunction } from 'express';
 import { validationResult } from 'express-validator';
 import jwt from 'jsonwebtoken';
+import bcrypt from 'bcrypt';
 
 import { User } from '../models/user';
 
@@ -16,11 +17,13 @@ export const postSignUp = async (req: Request, res: Response, next: NextFunction
         }
 
         const { name, surname, email, password } = req.body;
+        const hashedPassword = await bcrypt.hash(password, 7);
+
         const user = new User({
             name: name,
             surname: surname,
             email: email,
-            password: password,
+            password: hashedPassword,
             status: '',
             profileImage: '',
             aboutMe: '',
@@ -48,7 +51,9 @@ export const postSignIn = async (req: Request, res: Response, next: NextFunction
             const error = new CustomError(message, 401);
             throw error;
         }
-        if (password !== user.password) {
+
+        const isPasswordValid = await bcrypt.compare(password, user.password);
+        if (!isPasswordValid) {
             const message = 'Invalid password provided.';
             const error = new CustomError(message, 401);
             throw error;
@@ -58,11 +63,13 @@ export const postSignIn = async (req: Request, res: Response, next: NextFunction
             email: user.email,
             userId: user._id.toString(),
         }, 'supersecretstring');
+
         res
             .status(200)
             .json({
                 accessToken: accessToken,
-                userId: user._id.toString()
+                userId: user._id.toString(),
+                isAuth: 'true'
             });
     } catch (err) {
         next(err);

@@ -10,3 +10,13 @@ export interface UserSchemaType {
     aboutMe?: string,
     posts: PostSchemaType[],
 }
+
+export type ReqBodyUserType = {
+    name: string;
+    surname: string;
+    email: string;
+    password: string;
+    status: string;
+    profileImage: string;
+    aboutMe: string;
+}

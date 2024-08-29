@@ -4,7 +4,6 @@ import { ErrorWithStatus } from "../types/error";
 export const errorHandler = (err: ErrorWithStatus, req: Request, res: Response, next: NextFunction) => {
     err.statusCode = err.statusCode || 500;
     err.status = err.status || 'fail';
-    console.log('Message ' + err.message);
     res.status(err.statusCode).send({
         statusCode: err.statusCode,
         status: err.status,

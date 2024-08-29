@@ -2,14 +2,14 @@ import express from 'express';
 
 import { isAuthenticated } from '../middleware/auth';
 
-import { getUser } from '../controllers/user';
+import { getUser, getEditProfile, postEditProfile } from '../controllers/user';
 
 const router = express.Router();
 
 router.get('/profile/:userId', isAuthenticated, getUser);
 
-router.get('/edit', isAuthenticated);
+router.get('/profile/:userId/edit', isAuthenticated, getEditProfile);
 
-router.post('/edit', isAuthenticated);
+router.put('/profile/:userId/edit', isAuthenticated, postEditProfile);
 
 export default router;

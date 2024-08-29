@@ -8,8 +8,8 @@ import { PORT, MONGODB_NAME, MONGODB_PASSWORD, MONGODB_COLLECTION_NAME } from '.
 
 import { errorHandler } from './controllers/error';
 
-import userRoutes from './routes/user';
 import authRoutes from './routes/auth';
+import userRoutes from './routes/user';
 import postRoutes from './routes/post';
 
 const app: Express = express();
@@ -21,8 +21,8 @@ app.use(express.json());
 app.use(allowCrossDomain);
 app.use(isAuthenticated);
 
-app.use(userRoutes);
 app.use(authRoutes);
+app.use(userRoutes);
 app.use(postRoutes);
 
 app.use(errorHandler);
