@@ -10,7 +10,7 @@ import '../../../styles/Navigation.css';
 
 const Navigation = () => {
     const { isAuth, userId } = useAppSelector((state) => state.authentication);
-    const navigationType = isAuth ? navigationLoggedInLinksData : navigationLoggedOutLinksData;
+    const navigationType = isAuth === 'true' ? navigationLoggedInLinksData : navigationLoggedOutLinksData;
 
     return (
         <nav className="app__main-navigation">

@@ -1,4 +1,4 @@
-import { useState, useLayoutEffect } from "react";
+import { useLayoutEffect } from "react";
 import { useNavigate, Link } from "react-router-dom";
 
 import { getUser } from "../state/user/userSlice";
@@ -10,7 +10,8 @@ import Button from "../components/Button/Button";
 import '../styles/Profile.css';
 
 const ProfilePage = () => {
-    const { userId, accessToken } = useAppSelector(state => state.authentication);
+    const accessToken = sessionStorage.getItem('accessToken');
+    const userId = sessionStorage.getItem('userId');
     const user = useAppSelector(state => state.user);
     const dispatch = useAppDispatch();
     const navigate = useNavigate();
@@ -23,12 +24,15 @@ const ProfilePage = () => {
         dispatch(getUser(reqData))
     }, [userId]);
 
-    const { name, surname } = user.necessary;
-    const { profileImage, status, aboutMe } = user.additional;
+    const { name, surname, profileImage, status, aboutMe } = user;
 
     const handleSignOut = () => {
-        dispatch(signOut(false));
-        navigate('/');
+        dispatch(signOut('false'))
+            .then(result => {
+                if (result.meta.requestStatus === 'fulfilled') {
+                    navigate('/');
+                }
+            });
     }
 
     return (
@@ -66,9 +70,6 @@ const ProfilePage = () => {
                                     <span className="profile__first-name">{name}</span> <span className="profile__first-name">{surname}</span>
                                 </h2>
                                 {status && <p className="profile__status">{status}</p>}
-                            </div>
-                            <div className="profile__sign-out-wrapper">
-
                             </div>
                         </section>
                         <article className="profile__about-me-wrapper">

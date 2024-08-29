@@ -39,6 +39,10 @@ const SignInForm = () => {
 
         dispath(signIn(signInData)).then(result => {
             if (result.meta.requestStatus === 'fulfilled') {
+                const { accessToken, userId, isAuth } = result.payload as { accessToken: string, userId: string, isAuth: string };
+                sessionStorage.setItem('accessToken', accessToken);
+                sessionStorage.setItem('userId', userId);
+                sessionStorage.setItem('isAuth', isAuth);
                 setSignInFormValues({
                     email: '',
                     password: ''

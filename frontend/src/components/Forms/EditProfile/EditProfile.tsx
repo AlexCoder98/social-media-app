@@ -1,31 +1,54 @@
-import { useState } from "react";
+import { useState, useLayoutEffect } from "react";
 
 import InputElement from "../InputElement/InputElement"
 import Button from "../../Button/Button";
 
-import { useAppSelector, useAppDispatch } from "../../../hooks/redux";
-// import { updateUserData } from '../../../state/user/userSlice';
+import { useAppDispatch } from "../../../hooks/redux";
+import { getEditProfile, postEditProfile } from "../../../state/user/userSlice";
 
+import { UserInitialStateType } from '../../../types/reducers/user';
 import { EditProfileType } from "../../../types/edit-profile";
+
 import '../../../styles/EditProfile.css';
 
 const EditProfileForm = () => {
-    const user = useAppSelector(state => state.user);
+    const accessToken = sessionStorage.getItem('accessToken');
+    const userId = sessionStorage.getItem('userId');
     const dispatch = useAppDispatch();
 
-    const { name, surname, email, password } = user.necessary;
-    const { status, profileImage, aboutMe } = user.additional;
+    const reqData = {
+        accessToken: accessToken!,
+        userId: userId!,
+    };
 
     const [editFormValues, setEditFormValues] = useState<EditProfileType>({
-        editName: name!,
-        editSurname: surname!,
-        editStatus: status!,
-        editProfileImage: profileImage!,
-        editAboutUser: aboutMe!,
-        editEmail: email!,
-        editPassword: password!,
+        editName: '',
+        editSurname: '',
+        editStatus: '',
+        editProfileImage: '',
+        editAboutUser: '',
+        editEmail: '',
+        editPassword: '',
         editPasswordRepeat: ''
     });
+
+    useLayoutEffect(() => {
+        dispatch(getEditProfile(reqData)).then(result => {
+            if (result.meta.requestStatus === 'fulfilled') {
+                const userObj = result.payload as UserInitialStateType;
+                setEditFormValues({
+                    editName: userObj.name,
+                    editSurname: userObj.surname,
+                    editEmail: userObj.email,
+                    editPassword: userObj.password,
+                    editPasswordRepeat: '',
+                    editStatus: userObj.status!,
+                    editProfileImage: userObj.profileImage!,
+                    editAboutUser: userObj.aboutMe!
+                })
+            }
+        });
+    }, [userId]);
 
     const handleInputChange = (e: React.FormEvent) => {
         const { name, value } = e.target as HTMLInputElement;
@@ -33,43 +56,44 @@ const EditProfileForm = () => {
             ...prevEditFormValues,
             [name]: value,
         }));
-        console.log(editFormValues);
     }
 
     const handleOnSubmit = (e: React.SyntheticEvent) => {
         e.preventDefault();
         const updatedUser = {
-            necessary: {
-                name: editFormValues.editName,
-                surname: editFormValues.editSurname,
-                email: editFormValues.editEmail,
-                password: editFormValues.editPassword,
-            },
-            additional: {
-                status: editFormValues.editStatus,
-                profileImage: editFormValues.editProfileImage,
-                aboutMe: editFormValues.editAboutUser
-            }
+            accessToken: accessToken!,
+            userId: userId!,
+            name: editFormValues.editName,
+            surname: editFormValues.editSurname,
+            email: editFormValues.editEmail,
+            password: editFormValues.editPassword,
+            status: editFormValues.editStatus,
+            profileImage: editFormValues.editProfileImage,
+            aboutMe: editFormValues.editAboutUser
         }
-        // dispatch(updateUserData(updatedUser))
-        //     .then(() => {
-        //         alert('User data have been updated!');
-        //     });
-
-        console.log('Updated USER');
-        console.log(updatedUser);
+        dispatch(postEditProfile(updatedUser))
+            .then((result) => {
+                if (result.meta.requestStatus === 'fulfilled') {
+                    alert('Profile has been updated!');
+                }
+            });
     }
 
     const handleOnCancel = () => {
-        setEditFormValues({
-            editName: name!,
-            editSurname: surname!,
-            editStatus: status!,
-            editProfileImage: profileImage!,
-            editAboutUser: aboutMe!,
-            editEmail: email!,
-            editPassword: password!,
-            editPasswordRepeat: ''
+        dispatch(getEditProfile(reqData)).then(result => {
+            if (result.meta.requestStatus === 'fulfilled') {
+                const userObj = result.payload as UserInitialStateType;
+                setEditFormValues({
+                    editName: userObj.name,
+                    editSurname: userObj.surname,
+                    editEmail: userObj.email,
+                    editPassword: userObj.password,
+                    editPasswordRepeat: '',
+                    editStatus: userObj.status!,
+                    editProfileImage: userObj.profileImage!,
+                    editAboutUser: userObj.aboutMe!
+                })
+            }
         });
     }
 
