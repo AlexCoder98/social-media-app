@@ -1,15 +1,15 @@
 import { Link, useLocation } from "react-router-dom";
 import { useAppDispatch } from "../../hooks/redux";
 
-import { PostStateType } from "../../state/post/postSlice";
-import { deletePost } from '../../state/post/postSlice'
+// import { PostStateType } from "../../state/post/postSlice";
+// import { deletePost } from '../../state/post/postSlice'
 
-const Post = ({ id, title, image, description }: PostStateType) => {
+const Post = ({ id, title, image, description }: any) => {
     const dispatch = useAppDispatch();
     const location = useLocation();
-    const handleOnDeletePost = (postId: string) => {
-        dispatch(deletePost(postId));
-    }
+    // const handleOnDeletePost = (postId: string) => {
+    //     dispatch(deletePost(postId));
+    // }
 
     return (
         <li className="app__post">
@@ -40,7 +40,7 @@ const Post = ({ id, title, image, description }: PostStateType) => {
                     <button
                         className="app__button delete"
                         title="Delete post"
-                        onClick={() => handleOnDeletePost(id)}
+                    // onClick={() => handleOnDeletePost(id)}
                     >
                         Delete
                     </button>

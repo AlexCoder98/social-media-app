@@ -1,15 +1,25 @@
+import { useLayoutEffect } from "react";
 import { Link } from "react-router-dom";
+
+import { getPosts } from "../state/post/postSlice";
+
 import SmallPost from "../components/Post/Post";
 
-import { useAppSelector } from "../hooks/redux";
+import { useAppDispatch, useAppSelector } from "../hooks/redux";
 
 import '../styles/Posts.css';
 
 const PostsPage = () => {
-    // const posts = useAppSelector(state => state.posts.posts);
+    const dispatch = useAppDispatch();
+    const accessToken = sessionStorage.getItem('accessToken') as string;
 
-    const { userId } = useAppSelector(state => state.authentication)
-    console.log('USER ID ' + userId);
+    useLayoutEffect(() => {
+        dispatch(getPosts(accessToken));
+    }, [accessToken]);
+
+    const { posts } = useAppSelector(state => state.post);
+    // console.log('POSTS');
+    // console.log(posts);
 
     return (
         <div className="app__page posts">
@@ -23,12 +33,12 @@ const PostsPage = () => {
                     >New</Link>
                 </section>
             </header>
-            {/* {posts.length ? (
+            {posts.length ? (
                 <ul className="app__posts-list">
                     {posts.map((post, i) => (
                         <SmallPost
                             key={i + 1}
-                            id={post.id}
+                            id={post.postId}
                             title={post.title}
                             image={post.image}
                             description={post.description}
@@ -37,7 +47,7 @@ const PostsPage = () => {
                 </ul>
             ) : (
                 <h2 className="app__h2" style={{ margin: '5rem 0' }}>No posts yet</h2>
-            )} */}
+            )}
         </div>
     )
 }

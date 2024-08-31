@@ -1,72 +1,89 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 
-export interface PostStateType {
-    id: string;
-    title: string;
-    image: string;
-    description: string;
-}
+import { PostInitialStateType, PostsInitialStateType, PostReqType, PostResponseType } from '../../types/reducers/post';
 
-interface PostsStateType {
-    posts: PostStateType[];
-}
+import { RequestResponseType } from '../../types/reducers/auth';
 
-const initialState: PostsStateType = {
+const initialState: PostsInitialStateType = {
     posts: [],
-}
+    error: '',
+    message: ''
+};
 
+export const createPost = createAsyncThunk(
+    'post/addPost',
+    async (reqData: PostReqType, thunkAPI) => {
+        try {
+            const response = await fetch(`http://localhost:8080/posts/create-new`, {
+                method: 'POST',
+                headers: {
+                    Authorization: `Bearer ${reqData.accessToken}`,
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(reqData.post)
+            });
+
+            const result = await response.json();
+            if (response.status !== 201) {
+                throw new Error((result as RequestResponseType).message);
+            } else {
+                return (result as { message: string }).message;
+            }
+        } catch (err) {
+            thunkAPI.rejectWithValue((err as Error).message);
+        }
+    }
+);
+
+export const getPosts = createAsyncThunk(
+    'post/getPosts',
+    async (accessToken: string, thunkAPI) => {
+        try {
+            const response = await fetch(`http://localhost:8080/posts`, {
+                method: 'GET',
+                headers: {
+                    Authorization: `Bearer ${accessToken}`,
+                    'Content-Type': 'application/json'
+                }
+            });
+
+            const result = await response.json();
+
+            if (response.status !== 200) {
+                throw new Error((result as RequestResponseType).message);
+            } else {
+                return result as PostResponseType[];
+            }
+        } catch (err) {
+            return thunkAPI.rejectWithValue((err as Error).message);
+        }
+    }
+)
 const postSlice = createSlice({
     name: 'post',
     initialState,
     reducers: {},
     extraReducers: (builder) => {
         builder
-            .addCase(addPost.pending, () => {
-                console.log('Adding a post...')
+            .addCase(createPost.pending, () => {
+                console.log('Creating a post...');
             })
-            .addCase(addPost.fulfilled, (state, { payload }) => {
-                state.posts = state.posts.concat(payload);
+            .addCase(createPost.fulfilled, (state, { payload }) => {
+                state.message = payload as string;
+                state.error = '';
             })
-            .addCase(editPost.pending, () => {
-                console.log('Editing a post...')
+            .addCase(createPost.rejected, (state, { payload }) => {
+                state.message = '';
+                state.error = payload as string;
             })
-            .addCase(editPost.fulfilled, (state, { payload }) => {
-                const editedPostIndex = state.posts.findIndex(post => post.id === payload.id);
-                if (editedPostIndex !== -1) {
-                    state.posts[editedPostIndex] = payload;
-                }
+            .addCase(getPosts.pending, () => {
+                console.log('Fetching posts...');
             })
-            .addCase(deletePost.pending, () => {
-                console.log('Deleting a post...');
+            .addCase(getPosts.fulfilled, (state, { payload }) => {
+                state.posts = payload;
             })
-            .addCase(deletePost.fulfilled, (state, { payload }) => {
-                state.posts = state.posts.filter(post => post.id !== payload);
-            })
+
     }
 });
-
-export const addPost = createAsyncThunk(
-    'post/addPost',
-    async (newPost: PostStateType) => {
-        await new Promise((resolve) => setTimeout(resolve, 1000));
-        return newPost;
-    }
-);
-
-export const editPost = createAsyncThunk(
-    'post/createPost',
-    async (editedPost: PostStateType) => {
-        await new Promise((resolve) => setTimeout(resolve, 1000));
-        return editedPost;
-    }
-);
-
-export const deletePost = createAsyncThunk(
-    'post/deletePost',
-    async (postId: string) => {
-        await new Promise((resolve) => setTimeout(resolve, 1000));
-        return postId;
-    }
-);
 
 export default postSlice.reducer;

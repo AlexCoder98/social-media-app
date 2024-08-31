@@ -5,7 +5,7 @@ import InputElement from '../InputElement/InputElement';
 import Button from '../../Button/Button';
 
 import { useAppDispatch } from '../../../hooks/redux';
-import { editPost } from '../../../state/post/postSlice';
+// import { editPost } from '../../../state/post/postSlice';
 
 import { postFormData } from '../../../helpers/form-data';
 import { EditPostLocationType } from '../../../types/post';
@@ -40,10 +40,10 @@ const EditPostForm = () => {
             image: editPostFormValues['imageUrl'],
             description: editPostFormValues['description'],
         }
-        dispatch(editPost(updatedPost))
-            .then(() => {
-                navigate(-1);
-            });
+        // dispatch(editPost(updatedPost))
+        //     .then(() => {
+        //         navigate(-1);
+        //     });
     }
 
     return (

@@ -1,7 +1,7 @@
 import { useParams, Link, useNavigate } from "react-router-dom";
 
 import { useAppSelector, useAppDispatch } from "../../hooks/redux";
-import { deletePost } from '../../state/post/postSlice';
+// import { deletePost } from '../../state/post/postSlice';
 
 import '../../styles/Post.css';
 
@@ -12,13 +12,13 @@ const SinglePost = () => {
     const dispatch = useAppDispatch();
     // const post = posts.find(post => post.id === postId)!;
 
-    const handleOnDeletePost = (postId: string) => {
-        dispatch(deletePost(postId))
-            .then(() => {
-                navigate('/posts');
-            });
+    // const handleOnDeletePost = (postId: string) => {
+    //     dispatch(deletePost(postId))
+    //         .then(() => {
+    //             navigate('/posts');
+    //         });
 
-    }
+    // }
 
     return (
         <div className="app__post-single">
