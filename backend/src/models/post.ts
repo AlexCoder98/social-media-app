@@ -14,10 +14,10 @@ const postSchema = new Schema<PostSchemaType>({
         type: String,
         required: true
     },
-    user: {
+    creator: {
         type: Schema.Types.ObjectId,
         ref: 'User'
-    }
-});
+    },
+}, { timestamps: true });
 
 export const Post = model<PostSchemaType>('Post', postSchema);

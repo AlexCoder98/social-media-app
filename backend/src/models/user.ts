@@ -23,6 +23,6 @@ const userSchema = new Schema<UserSchemaType>({
             ref: 'Post'
         }
     ],
-});
+}, { timestamps: true });
 
 export const User = model<UserSchemaType>('User', userSchema);

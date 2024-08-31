@@ -4,5 +4,10 @@ export interface PostSchemaType {
     title: string;
     image: string;
     description: string;
-    user: Types.ObjectId;
+    creator: {
+        _id: Types.ObjectId;
+        name: string;
+        surname: string;
+    };
+    creationDate: Date
 }
