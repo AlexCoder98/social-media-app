@@ -1,3 +1,5 @@
+import { Types } from 'mongoose';
+
 import { PostSchemaType } from './post';
 
 export interface UserSchemaType {
@@ -5,10 +7,10 @@ export interface UserSchemaType {
     surname: string;
     email: string;
     password: string;
+    posts: Types.Array<PostSchemaType>,
     profileImage?: string;
     status?: string;
     aboutMe?: string,
-    posts: PostSchemaType[],
 }
 
 export type ReqBodyUserType = {

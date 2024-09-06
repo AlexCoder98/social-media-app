@@ -1,6 +1,7 @@
 import { Types } from 'mongoose';
 
 export interface PostSchemaType {
+    _id: Types.ObjectId;
     title: string;
     image: string;
     description: string;
