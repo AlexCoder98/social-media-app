@@ -1,3 +1,10 @@
+export interface PostPropsType {
+    id: string;
+    title: string;
+    image: string;
+    description: string;
+}
+
 export type PostType = {
     title: string;
     imgSrc: string;
@@ -5,10 +12,8 @@ export type PostType = {
     text?: string[];
 }
 
-export type PostPropsType = PostType & { id: number };
-
-export type EditPostLocationType = {
+export type EditPostType = {
     title: string;
-    imageUrl: string;
+    image: string;
     description: string;
 }

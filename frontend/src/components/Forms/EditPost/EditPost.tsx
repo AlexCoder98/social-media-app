@@ -1,28 +1,43 @@
-import { useState } from 'react';
-import { useLocation, useNavigate } from 'react-router-dom';
+import { useState, useLayoutEffect } from 'react';
+import { useParams, useNavigate } from 'react-router-dom';
 
 import InputElement from '../InputElement/InputElement';
 import Button from '../../Button/Button';
 
 import { useAppDispatch } from '../../../hooks/redux';
-// import { editPost } from '../../../state/post/postSlice';
+import { getEditPost, postEditPost } from '../../../state/post/postSlice';
 
 import { postFormData } from '../../../helpers/form-data';
-import { EditPostLocationType } from '../../../types/post';
+import { EditPostType } from '../../../types/post';
 
 const EditPostForm = () => {
-    const location = useLocation();
-    const navigate = useNavigate();
-    const state = location.state as EditPostLocationType;
+    const accessToken = sessionStorage.getItem('accessToken');
+    const { postId } = useParams();
     const dispatch = useAppDispatch();
-
-    const postId = location.pathname.split('/').find(el => el.match(/\d/g));
+    const navigate = useNavigate();
 
     const [editPostFormValues, setEditPostFormValues] = useState({
-        title: state.title,
-        imageUrl: state.imageUrl,
-        description: state.description,
+        title: '',
+        image: '',
+        description: '',
     });
+
+    useLayoutEffect(() => {
+        const reqData = {
+            accessToken: accessToken!,
+            postId: postId!
+        };
+        dispatch(getEditPost(reqData)).then(result => {
+            if (result.meta.requestStatus === 'fulfilled') {
+                const postEditData = result.payload as EditPostType;
+                setEditPostFormValues({
+                    title: postEditData.title,
+                    image: postEditData.image,
+                    description: postEditData.description,
+                });
+            }
+        })
+    }, [postId])
 
     const handleInputChange = (e: React.FormEvent) => {
         const { name, value } = e.target as HTMLInputElement;
@@ -34,16 +49,29 @@ const EditPostForm = () => {
 
     const handleOnSubmit = (e: React.SyntheticEvent) => {
         e.preventDefault();
-        const updatedPost = {
-            id: postId!,
-            title: editPostFormValues['title'],
-            image: editPostFormValues['imageUrl'],
-            description: editPostFormValues['description'],
+        const reqData = {
+            post: {
+                title: editPostFormValues['title'],
+                image: editPostFormValues['image'],
+                description: editPostFormValues['description'],
+            },
+            accessData: {
+                accessToken: accessToken!,
+                postId: postId!,
+            }
         }
-        // dispatch(editPost(updatedPost))
-        //     .then(() => {
-        //         navigate(-1);
-        //     });
+        dispatch(postEditPost(reqData)).then(result => {
+            if (result.meta.requestStatus === 'fulfilled') {
+                setEditPostFormValues({
+                    title: '',
+                    image: '',
+                    description: '',
+                });
+                setTimeout(() => {
+                    navigate(-1);
+                }, 1000);
+            }
+        })
     }
 
     return (
@@ -64,7 +92,7 @@ const EditPostForm = () => {
                         id={input.id}
                         placeholder={input.placeholder}
                         method={handleInputChange}
-                        value={editPostFormValues[input.id as keyof EditPostLocationType]}
+                        value={editPostFormValues[input.id as keyof EditPostType]}
                     />
                 ))}
             </main>

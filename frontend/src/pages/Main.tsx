@@ -1,19 +1,30 @@
+import { useLayoutEffect } from 'react';
+
+import { getAllPosts } from '../state/post/postSlice';
+
 import SmallPost from '../components/Post/Post';
-import { useAppSelector } from '../hooks/redux';
+import { useAppSelector, useAppDispatch } from '../hooks/redux';
 import '../styles/MainPage.css';
 
 const MainPage = () => {
-    const user = useAppSelector(state => state.user);
+    const accessToken = sessionStorage.getItem('accessToken') as string;
+    const dispatch = useAppDispatch();
 
-    console.log('USER ON MAIN PAGE');
-    console.log(user);
+    useLayoutEffect(() => {
+        dispatch(getAllPosts(accessToken))
+    }, [accessToken]);
+
+    const { posts } = useAppSelector(state => state.post);
+
+    console.log('POSTS ON MAIN PAGE');
+    console.log(posts);
 
     return (
         <div className="app__page main">
             <header className="app__main-page-header">
                 <h1 className="app__h1">Main Page</h1>
             </header>
-            {/* {posts.length ? (
+            {posts.length ? (
                 <ul className="app__posts-list">
                     {posts.map((post, i) => (
                         <SmallPost
@@ -27,7 +38,7 @@ const MainPage = () => {
                 </ul>
             ) : (
                 <h2 className="app__h2" style={{ margin: '5rem 0' }}>No posts yet</h2>
-            )} */}
+            )}
         </div>
     )
 }

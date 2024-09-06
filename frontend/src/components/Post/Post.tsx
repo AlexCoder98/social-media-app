@@ -1,15 +1,9 @@
 import { Link, useLocation } from "react-router-dom";
-import { useAppDispatch } from "../../hooks/redux";
 
-// import { PostStateType } from "../../state/post/postSlice";
-// import { deletePost } from '../../state/post/postSlice'
+import { PostPropsType } from "../../types/post";
 
-const Post = ({ id, title, image, description }: any) => {
-    const dispatch = useAppDispatch();
+const Post = ({ id, title, image, description }: PostPropsType) => {
     const location = useLocation();
-    // const handleOnDeletePost = (postId: string) => {
-    //     dispatch(deletePost(postId));
-    // }
 
     return (
         <li className="app__post">
@@ -30,20 +24,13 @@ const Post = ({ id, title, image, description }: any) => {
                     </p>
                 </div>
             </main>
-            {location.pathname.includes('posts') && (
+            {location.pathname.endsWith('posts') && (
                 <footer className="app__post-bottom">
                     <Link
-                        to={`${id}`}
+                        to={id}
                         className="app__button post"
-                        title={`Go to post ${title}`}
+                        title={'Read more'}
                     >Read more</Link>
-                    <button
-                        className="app__button delete"
-                        title="Delete post"
-                    // onClick={() => handleOnDeletePost(id)}
-                    >
-                        Delete
-                    </button>
                 </footer>
             )}
         </li>

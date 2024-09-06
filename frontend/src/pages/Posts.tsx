@@ -18,8 +18,6 @@ const PostsPage = () => {
     }, [accessToken]);
 
     const { posts } = useAppSelector(state => state.post);
-    // console.log('POSTS');
-    // console.log(posts);
 
     return (
         <div className="app__page posts">
@@ -38,7 +36,7 @@ const PostsPage = () => {
                     {posts.map((post, i) => (
                         <SmallPost
                             key={i + 1}
-                            id={post.postId}
+                            id={post.id}
                             title={post.title}
                             image={post.image}
                             description={post.description}

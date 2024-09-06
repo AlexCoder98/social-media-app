@@ -1,13 +1,5 @@
-// export type PostInitialStateType = {
-//     _id: string;
-//     title: string;
-//     description: string;
-//     creator?: string;
-//     creationDate: string;
-//     image?: string;
-// }
 export type PostInitialStateType = {
-    postId: string;
+    id: string;
     title: string;
     image: string;
     description: string;
@@ -19,6 +11,7 @@ export type PostInitialStateType = {
 
 export type PostsInitialStateType = {
     posts: PostInitialStateType[];
+    post: PostInitialStateType | null;
     error: string;
     message: string;
 }
@@ -33,7 +26,7 @@ export type PostReqType = {
 }
 
 export type PostResponseType = {
-    postId: string;
+    id: string;
     title: string;
     image: string;
     description: string;
@@ -41,4 +34,9 @@ export type PostResponseType = {
         name: string;
         surname: string;
     };
+}
+
+export type GetPostReqType = {
+    accessToken: string;
+    postId: string;
 }

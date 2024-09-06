@@ -16,7 +16,7 @@ export const getUser = createAsyncThunk(
     'user/getUser',
     async (getUserReq: UserReqType, thunkAPI) => {
         try {
-            const response = await fetch(`http://localhost:8080/profile/:${getUserReq.userId}`, {
+            const response = await fetch(`http://localhost:8080/profile/${getUserReq.userId}`, {
                 method: 'GET',
                 headers: {
                     Authorization: `Bearer ${getUserReq.accessToken}`,
@@ -40,7 +40,7 @@ export const getEditProfile = createAsyncThunk(
     'user/getEditProfile',
     async (getUserReq: UserReqType, thunkAPI) => {
         try {
-            const response = await fetch(`http://localhost:8080/profile/:${getUserReq.userId}/edit`, {
+            const response = await fetch(`http://localhost:8080/profile/${getUserReq.userId}/edit`, {
                 method: 'GET',
                 headers: {
                     Authorization: `Bearer ${getUserReq.accessToken}`,
@@ -63,7 +63,7 @@ export const postEditProfile = createAsyncThunk(
     'user/postEditProfile',
     async (userObj: UserReqType & UserInitialStateType, thunkAPI) => {
         try {
-            const response = await fetch(`http://localhost:8080/profile/:${userObj.userId}/edit`, {
+            const response = await fetch(`http://localhost:8080/profile/${userObj.userId}/edit`, {
                 method: 'PUT',
                 headers: {
                     Authorization: `Bearer ${userObj.accessToken}`,
@@ -72,7 +72,12 @@ export const postEditProfile = createAsyncThunk(
                 body: JSON.stringify(userObj),
             });
 
-            console.log(await response.json());
+            const result = await response.json();
+            if (response.status !== 200) {
+                throw new Error((result as RequestResponseType).message);
+            } else {
+                return result as UserInitialStateType;
+            }
         } catch (err) {
             return thunkAPI.rejectWithValue((err as Error).message);
         }
@@ -111,6 +116,21 @@ const userSlice = createSlice({
                 state.aboutMe = payload.aboutMe;
             })
             .addCase(getEditProfile.rejected, (state, { payload }) => {
+                console.log(payload);
+            })
+            .addCase(postEditProfile.pending, () => {
+                console.log('Updating user profile...')
+            })
+            .addCase(postEditProfile.fulfilled, (state, { payload }) => {
+                state.name = payload.name;
+                state.surname = payload.surname;
+                state.email = payload.email;
+                state.password = payload.password;
+                state.profileImage = payload.profileImage;
+                state.status = payload.status;
+                state.aboutMe = payload.aboutMe;
+            })
+            .addCase(postEditProfile.rejected, (state, { payload }) => {
                 console.log(payload);
             })
     }
