@@ -16,7 +16,7 @@ const Navigation = () => {
         <nav className="app__main-navigation">
             <div className="app__logo-container">
                 <Link
-                    to={isAuth ? "main-page" : "/"}
+                    to={isAuth === 'false' ? '/' : 'main-page'}
                     className="app__nav-link"
                     title="Home page"
                 >mySocialMediaApp</Link>

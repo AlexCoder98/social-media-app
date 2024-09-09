@@ -1,8 +1,8 @@
 import { useLayoutEffect } from "react";
 import { useNavigate, Link } from "react-router-dom";
 
-import { getUser } from "../state/user/userSlice";
-import { signOut } from "../state/authentication/authSlice";
+import { getUser } from "../state/user/actions";
+import { signOut } from "../state/authentication/actions";
 import { useAppDispatch, useAppSelector } from "../hooks/redux";
 
 import Button from "../components/Button/Button";
@@ -55,28 +55,26 @@ const ProfilePage = () => {
                 </section>
             </header>
             <main className="app__profile-page-main">
-                <section className="profile__header">
-                    <div className="profile__photo-wrapper">
-                        <img
-                            className="profile__photo"
-                            src={profileImage ? profileImage : 'https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png'}
-                            alt={`${name} ${surname} avatar`}
-                        />
+                <section className="app__profile">
+                    <div className="app__profile-head">
+                        <div className="profile__photo-wrapper">
+                            <img
+                                className="profile__photo"
+                                src={profileImage ? profileImage : 'https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png'}
+                                alt={`${name} ${surname} avatar`}
+                            />
+                        </div>
+                        <div className="profile__name-section">
+                            <h2 className="profile__name">
+                                <span className="profile__first-name">{name}</span> <span className="profile__first-name">{surname}</span>
+                            </h2>
+                            {status && <p className="profile__status">{status}</p>}
+                        </div>
                     </div>
-                    <div className="profile__about-me">
-                        <section className="profile__general-info">
-                            <div className="profile__name-container">
-                                <h2 className="profile__name">
-                                    <span className="profile__first-name">{name}</span> <span className="profile__first-name">{surname}</span>
-                                </h2>
-                                {status && <p className="profile__status">{status}</p>}
-                            </div>
-                        </section>
-                        <article className="profile__about-me-wrapper">
-                            <h3 className="profile__about-me-h3">About me</h3>
-                            <p className="profile__text">{aboutMe ? aboutMe : 'No additional info provided :('}</p>
-                        </article>
-                    </div>
+                    <hr className="app__separator" />
+                    <article className="profile__body">
+                        <p className="profile__text">{aboutMe ? aboutMe : 'No additional info provided :('}</p>
+                    </article>
                 </section>
             </main>
         </div>

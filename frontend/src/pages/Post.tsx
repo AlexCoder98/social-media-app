@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import Post from "../components/Post/Post-page";
 
 import '../styles/Post.css';
+import '../styles/Button.css';
 
 const PostPage = () => {
     const navigate = useNavigate();

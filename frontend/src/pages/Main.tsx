@@ -1,10 +1,11 @@
 import { useLayoutEffect } from 'react';
 
-import { getAllPosts } from '../state/post/postSlice';
+import { getAllPosts } from '../state/post/actions';
 
 import SmallPost from '../components/Post/Post';
 import { useAppSelector, useAppDispatch } from '../hooks/redux';
 import '../styles/MainPage.css';
+import '../styles/Posts.css';
 
 const MainPage = () => {
     const accessToken = sessionStorage.getItem('accessToken') as string;

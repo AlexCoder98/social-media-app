@@ -3,7 +3,7 @@ import { useParams, Link, useNavigate } from "react-router-dom";
 
 import { useAppSelector, useAppDispatch } from "../../hooks/redux";
 
-import { getPost, deletePost } from "../../state/post/postSlice";
+import { getPost, deletePost } from "../../state/post/actions";
 
 import '../../styles/Post.css';
 

@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import EditProfileForm from '../components/Forms/EditProfile/EditProfile';
 
 import '../styles/EditProfilePage.css';
+import '../styles/Form.css';
 
 const EditProfilePage = () => {
     return (

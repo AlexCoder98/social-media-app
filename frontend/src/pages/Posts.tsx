@@ -1,13 +1,14 @@
 import { useLayoutEffect } from "react";
 import { Link } from "react-router-dom";
 
-import { getPosts } from "../state/post/postSlice";
+import { getPosts } from "../state/post/actions";
 
 import SmallPost from "../components/Post/Post";
 
 import { useAppDispatch, useAppSelector } from "../hooks/redux";
 
 import '../styles/Posts.css';
+import '../styles/Button.css';
 
 const PostsPage = () => {
     const dispatch = useAppDispatch();

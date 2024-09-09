@@ -4,7 +4,7 @@ import InputElement from "../InputElement/InputElement"
 import Button from "../../Button/Button";
 
 import { useAppDispatch } from "../../../hooks/redux";
-import { getEditProfile, postEditProfile } from "../../../state/user/userSlice";
+import { getEditProfile, postEditProfile } from "../../../state/user/actions";
 
 import { UserInitialStateType } from '../../../types/reducers/user';
 import { EditProfileType } from "../../../types/edit-profile";
@@ -56,6 +56,8 @@ const EditProfileForm = () => {
             ...prevEditFormValues,
             [name]: value,
         }));
+
+        console.log(name, value);
     }
 
     const handleOnSubmit = (e: React.SyntheticEvent) => {
@@ -67,6 +69,7 @@ const EditProfileForm = () => {
             surname: editFormValues.editSurname,
             email: editFormValues.editEmail,
             password: editFormValues.editPassword,
+            confirmPassword: editFormValues.editPasswordRepeat,
             status: editFormValues.editStatus,
             profileImage: editFormValues.editProfileImage,
             aboutMe: editFormValues.editAboutUser
@@ -87,7 +90,7 @@ const EditProfileForm = () => {
                     editName: userObj.name,
                     editSurname: userObj.surname,
                     editEmail: userObj.email,
-                    editPassword: userObj.password,
+                    editPassword: '',
                     editPasswordRepeat: '',
                     editStatus: userObj.status!,
                     editProfileImage: userObj.profileImage!,
@@ -111,7 +114,7 @@ const EditProfileForm = () => {
                             id={"editName"}
                             type={"text"}
                             tagType={"input"}
-                            placeholder={"New name"}
+                            placeholder={"Name"}
                             value={editFormValues['editName']}
                             method={handleInputChange}
                         />
@@ -119,7 +122,7 @@ const EditProfileForm = () => {
                             id={"editSurname"}
                             type={"text"}
                             tagType={"input"}
-                            placeholder={"New surname"}
+                            placeholder={"Surname"}
                             value={editFormValues['editSurname']}
                             method={handleInputChange}
                         />
@@ -127,7 +130,7 @@ const EditProfileForm = () => {
                             id={"editStatus"}
                             type={"text"}
                             tagType={"input"}
-                            placeholder={"New status"}
+                            placeholder={"Status"}
                             value={editFormValues['editStatus']}
                             method={handleInputChange}
                         />
@@ -135,20 +138,20 @@ const EditProfileForm = () => {
                             id={"editProfileImage"}
                             type={"text"}
                             tagType={"input"}
-                            placeholder={"New profile image"}
+                            placeholder={"Profile image"}
                             value={editFormValues['editProfileImage']}
                             method={handleInputChange}
                         />
                     </div>
                 </div>
-                <div className="app__edit-profile-about-me">
-                    <h3 className="app__h3">About me</h3>
+                <div className="app__edit-profile-bio">
+                    <h3 className="app__h3">Biography</h3>
                     <div className="app__edit-profile-inputs-container">
                         <InputElement
                             id={"editAboutUser"}
                             type={"text"}
                             tagType={"textarea"}
-                            placeholder={"New user information"}
+                            placeholder={"Bio"}
                             value={editFormValues['editAboutUser']}
                             method={handleInputChange}
                         />
@@ -156,14 +159,14 @@ const EditProfileForm = () => {
                 </div>
             </section>
             <section className="app__edit-profile-bottom">
+                <h3 className="app__h3">Authentication</h3>
                 <div className="app__edit-profile-auth">
-                    <h3 className="app__h3">Authentication</h3>
                     <div className="app__edit-profile-inputs-container">
                         <InputElement
                             id={"editEmail"}
                             type={"text"}
                             tagType={"input"}
-                            placeholder={"New email"}
+                            placeholder={"Email"}
                             value={editFormValues['editEmail']}
                             method={handleInputChange}
                         />
@@ -179,7 +182,7 @@ const EditProfileForm = () => {
                             id={"editPasswordRepeat"}
                             type={"text"}
                             tagType={"input"}
-                            placeholder={"New password"}
+                            placeholder={"Confirm new password"}
                             value={editFormValues['editPasswordRepeat']}
                             method={handleInputChange}
                         />

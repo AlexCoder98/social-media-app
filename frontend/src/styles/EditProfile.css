@@ -9,30 +9,38 @@
     margin-bottom: 1rem;
 }
 
+.app__edit-profile-top {
+    display: flex;
+    gap: 2rem;
+    margin-bottom: 2rem;
+}
+
 .app__edit-profile-top,
 .app__edit-profile-bottom {
     width: 100%;
-    display: flex;
-    gap: 2rem;
 }
 
-.app__edit-profile-top>* {
+.app__edit-profile-top .app__edit-profile-general {
     flex-grow: 1;
 }
 
-.app__edit-profile-bottom>* {
-    width: 50%;
+.app__edit-profile-top .app__edit-profile-bio {
+    flex-grow: 2;
+}
+
+.app__edit-profile-auth {
+    display: flex;
+}
+
+.app__edit-profile-auth .app__edit-profile-inputs-container {
+    display: flex;
+    gap: 20px;
+    justify-content: space-between;
+    margin-bottom: 2rem;
 }
 
 .app__edit-profile-buttons-container {
     display: flex;
+    gap: 20px;
     justify-content: end;
-    padding-bottom: .7rem;
-    gap: 1rem;
-    width: 50%;
-}
-
-.app__edit-profile-buttons-container>* {
-    height: fit-content;
-    align-self: flex-end;
 }

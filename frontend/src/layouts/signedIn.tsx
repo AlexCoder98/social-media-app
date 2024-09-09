@@ -1,6 +1,5 @@
 import { lazy } from 'react';
 import { Route, Routes } from 'react-router-dom';
-// import { useAppSelector } from '../hooks/redux';
 
 const MainPage = lazy(() => import('../pages/Main'));
 const PostsPage = lazy(() => import('../pages/Posts'));
@@ -12,10 +11,6 @@ const EditProfilePage = lazy(() => import('../pages/EditProfile'));
 const NotFoundPage = lazy(() => import('../pages/404'));
 
 const SignedInLayout = () => {
-    // const { userId } = useAppSelector((state) => state.authentication);
-
-    // console.log(userId);
-
     return (
         <Routes>
             <Route path='/main-page' element={<MainPage />} />

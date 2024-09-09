@@ -1,11 +1,11 @@
 import { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 import InputElement from '../InputElement/InputElement';
 import Button from '../../Button/Button';
 
 import { useAppSelector, useAppDispatch } from '../../../hooks/redux';
-import { signUp } from '../../../state/authentication/authSlice';
+import { signUp } from '../../../state/authentication/actions';
 
 import { signUpFormInputsData } from '../../../helpers/form-data';
 
@@ -14,6 +14,7 @@ import '../../../styles/Form.css';
 const SignUpForm = () => {
     const { errors, messages } = useAppSelector((state) => state.authentication);
     const dispatch = useAppDispatch();
+    const navigate = useNavigate();
 
     const [signUpFormValues, setSignUpFormValues] = useState({
         name: '',
@@ -51,6 +52,9 @@ const SignUpForm = () => {
                         password: '',
                         passwordConfirmation: ''
                     });
+                    setTimeout(() => {
+                        navigate('/sign-in');
+                    }, 1000);
                 }
             });
     }
