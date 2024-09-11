@@ -6,21 +6,6 @@ import { User } from "../models/user";
 import { PostSchemaType } from "../types/post";
 
 import CustomError from "../utils/error";
-import { ObjectId } from "mongoose";
-
-type PostCreatorType = {
-    _id: ObjectId;
-    name: string;
-    surname: string;
-}
-
-type ResPostType = {
-    postId: string;
-    title: string;
-    image: string;
-    description: string;
-    creator: PostCreatorType;
-}
 
 export const postCreatePost = async (req: Request, res: Response, next: NextFunction) => {
     const { title, image, description } = req.body as PostSchemaType;

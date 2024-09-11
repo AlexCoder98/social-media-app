@@ -1,4 +1,6 @@
 import { Request, Response, NextFunction } from 'express';
+import bcrypt from 'bcrypt';
+import { validationResult } from 'express-validator';
 
 import { User } from '../models/user';
 import CustomError from '../utils/error';
@@ -45,7 +47,6 @@ export const getEditProfile = async (req: Request, res: Response, next: NextFunc
             name: user.name,
             surname: user.surname,
             email: user.email,
-            password: user.password,
             profileImage: user.profileImage,
             status: user.status,
             aboutMe: user.aboutMe,
@@ -62,6 +63,13 @@ export const getEditProfile = async (req: Request, res: Response, next: NextFunc
 export const postEditProfile = async (req: Request, res: Response, next: NextFunction) => {
     const { name, surname, email, password, status, profileImage, aboutMe } = req.body as ReqBodyUserType;
     try {
+        const errors = validationResult(req);
+        if (!errors.isEmpty()) {
+            const message = errors.array()[0].msg;
+            const error = new CustomError(message, 409);
+            throw error;
+        }
+
         const user = await User.findById(req.userId);
         if (!user) {
             const message = 'Error. User not found.';
@@ -69,11 +77,13 @@ export const postEditProfile = async (req: Request, res: Response, next: NextFun
             throw error;
         }
 
+        const hashedPassword = await bcrypt.hash(password, 7);
+
         await user.updateOne({
             name: name,
             surname: surname,
             email: email,
-            password: password,
+            password: hashedPassword,
             status: status,
             profileImage: profileImage,
             aboutMe: aboutMe,
@@ -85,6 +95,6 @@ export const postEditProfile = async (req: Request, res: Response, next: NextFun
             .status(200)
             .json({ "message": "Profile has been updated successfully!" });
     } catch (err) {
-        next();
+        next(err);
     }
 }
