@@ -12,6 +12,20 @@ import { EditProfileType } from "../../../types/edit-profile";
 import '../../../styles/EditProfile.css';
 
 const EditProfileForm = () => {
+    const [editFormValues, setEditFormValues] = useState<EditProfileType>({
+        name: '',
+        surname: '',
+        status: '',
+        profileImage: '',
+        bio: '',
+        email: '',
+        password: '',
+        passwordConfirmation: '',
+    });
+
+    const [errorMsg, setErrorMsg] = useState<string>('');
+    const [successMsg, setSuccessMsg] = useState<string>('');
+
     const accessToken = sessionStorage.getItem('accessToken');
     const userId = sessionStorage.getItem('userId');
     const dispatch = useAppDispatch();
@@ -21,30 +35,19 @@ const EditProfileForm = () => {
         userId: userId!,
     };
 
-    const [editFormValues, setEditFormValues] = useState<EditProfileType>({
-        editName: '',
-        editSurname: '',
-        editStatus: '',
-        editProfileImage: '',
-        editAboutUser: '',
-        editEmail: '',
-        editPassword: '',
-        editPasswordRepeat: ''
-    });
-
     useLayoutEffect(() => {
         dispatch(getEditProfile(reqData)).then(result => {
             if (result.meta.requestStatus === 'fulfilled') {
                 const userObj = result.payload as UserInitialStateType;
                 setEditFormValues({
-                    editName: userObj.name,
-                    editSurname: userObj.surname,
-                    editEmail: userObj.email,
-                    editPassword: userObj.password,
-                    editPasswordRepeat: '',
-                    editStatus: userObj.status!,
-                    editProfileImage: userObj.profileImage!,
-                    editAboutUser: userObj.aboutMe!
+                    name: userObj.name,
+                    surname: userObj.surname,
+                    status: userObj.status!,
+                    profileImage: userObj.profileImage!,
+                    bio: userObj.aboutMe!,
+                    email: userObj.email,
+                    password: '',
+                    passwordConfirmation: '',
                 })
             }
         });
@@ -56,8 +59,6 @@ const EditProfileForm = () => {
             ...prevEditFormValues,
             [name]: value,
         }));
-
-        console.log(name, value);
     }
 
     const handleOnSubmit = (e: React.SyntheticEvent) => {
@@ -65,19 +66,30 @@ const EditProfileForm = () => {
         const updatedUser = {
             accessToken: accessToken!,
             userId: userId!,
-            name: editFormValues.editName,
-            surname: editFormValues.editSurname,
-            email: editFormValues.editEmail,
-            password: editFormValues.editPassword,
-            confirmPassword: editFormValues.editPasswordRepeat,
-            status: editFormValues.editStatus,
-            profileImage: editFormValues.editProfileImage,
-            aboutMe: editFormValues.editAboutUser
+            name: editFormValues.name,
+            surname: editFormValues.surname,
+            status: editFormValues.status,
+            profileImage: editFormValues.profileImage,
+            aboutMe: editFormValues.bio,
+            email: editFormValues.email,
+            password: editFormValues.password,
+            confirmPassword: editFormValues.passwordConfirmation,
         }
         dispatch(postEditProfile(updatedUser))
             .then((result) => {
+                if (result.meta.requestStatus === 'rejected') {
+                    const msg = result.payload as string;
+                    setErrorMsg(msg);
+                    setTimeout(() => {
+                        setErrorMsg('');
+                    }, 1000);
+                }
                 if (result.meta.requestStatus === 'fulfilled') {
-                    alert('Profile has been updated!');
+                    const msg = 'Profile has been updated!'
+                    setSuccessMsg(msg);
+                    setTimeout(() => {
+                        setSuccessMsg('');
+                    }, 1000);
                 }
             });
     }
@@ -87,124 +99,128 @@ const EditProfileForm = () => {
             if (result.meta.requestStatus === 'fulfilled') {
                 const userObj = result.payload as UserInitialStateType;
                 setEditFormValues({
-                    editName: userObj.name,
-                    editSurname: userObj.surname,
-                    editEmail: userObj.email,
-                    editPassword: '',
-                    editPasswordRepeat: '',
-                    editStatus: userObj.status!,
-                    editProfileImage: userObj.profileImage!,
-                    editAboutUser: userObj.aboutMe!
+                    name: userObj.name,
+                    surname: userObj.surname,
+                    status: userObj.status!,
+                    profileImage: userObj.profileImage!,
+                    bio: userObj.aboutMe!,
+                    email: userObj.email,
+                    password: '',
+                    passwordConfirmation: '',
                 })
             }
         });
     }
 
     return (
-        <form
-            method="POST"
-            className="app__form edit-profile"
-            onSubmit={handleOnSubmit}
-        >
-            <section className="app__edit-profile-top">
-                <div className="app__edit-profile-general">
-                    <h3 className="app__h3">General</h3>
-                    <div className="app__edit-profile-inputs-container">
-                        <InputElement
-                            id={"editName"}
-                            type={"text"}
-                            tagType={"input"}
-                            placeholder={"Name"}
-                            value={editFormValues['editName']}
-                            method={handleInputChange}
+        <>
+            {errorMsg && <p className="app__form-message error">{errorMsg}</p>}
+            {successMsg && <p className="app__form-message success">{successMsg}</p>}
+            <form
+                method="POST"
+                className="app__form edit-profile"
+                onSubmit={handleOnSubmit}
+            >
+                <section className="app__edit-profile-top">
+                    <div className="app__edit-profile-general">
+                        <h3 className="app__h3">General</h3>
+                        <div className="app__edit-profile-inputs-container">
+                            <InputElement
+                                id={"name"}
+                                type={"text"}
+                                tagType={"input"}
+                                placeholder={"Name"}
+                                value={editFormValues['name']}
+                                method={handleInputChange}
+                            />
+                            <InputElement
+                                id={"surname"}
+                                type={"text"}
+                                tagType={"input"}
+                                placeholder={"Surname"}
+                                value={editFormValues['surname']}
+                                method={handleInputChange}
+                            />
+                            <InputElement
+                                id={"status"}
+                                type={"text"}
+                                tagType={"input"}
+                                placeholder={"Status"}
+                                value={editFormValues['status']}
+                                method={handleInputChange}
+                            />
+                            <InputElement
+                                id={"profileImage"}
+                                type={"text"}
+                                tagType={"input"}
+                                placeholder={"Profile image"}
+                                value={editFormValues['profileImage']}
+                                method={handleInputChange}
+                            />
+                        </div>
+                    </div>
+                    <div className="app__edit-profile-bio">
+                        <h3 className="app__h3">Biography</h3>
+                        <div className="app__edit-profile-inputs-container">
+                            <InputElement
+                                id={"bio"}
+                                type={"text"}
+                                tagType={"textarea"}
+                                placeholder={"Bio"}
+                                value={editFormValues['bio']}
+                                method={handleInputChange}
+                            />
+                        </div>
+                    </div>
+                </section>
+                <section className="app__edit-profile-bottom">
+                    <h3 className="app__h3">Authentication</h3>
+                    <div className="app__edit-profile-auth">
+                        <div className="app__edit-profile-inputs-container">
+                            <InputElement
+                                id={"email"}
+                                type={"text"}
+                                tagType={"input"}
+                                placeholder={"Email"}
+                                value={editFormValues['email']}
+                                method={handleInputChange}
+                            />
+                            <InputElement
+                                id={"password"}
+                                type={"text"}
+                                tagType={"input"}
+                                placeholder={"New password"}
+                                value={editFormValues['password']}
+                                method={handleInputChange}
+                            />
+                            <InputElement
+                                id={"passwordConfirmation"}
+                                type={"text"}
+                                tagType={"input"}
+                                placeholder={"Confirm new password"}
+                                value={editFormValues['passwordConfirmation']}
+                                method={handleInputChange}
+                            />
+                        </div>
+                    </div>
+                    <div className="app__edit-profile-buttons-container">
+                        <Button
+                            className={"app__button delete"}
+                            type={"button"}
+                            title={"Cancel changes"}
+                            content={"Cancel"}
+                            method={handleOnCancel}
                         />
-                        <InputElement
-                            id={"editSurname"}
-                            type={"text"}
-                            tagType={"input"}
-                            placeholder={"Surname"}
-                            value={editFormValues['editSurname']}
-                            method={handleInputChange}
-                        />
-                        <InputElement
-                            id={"editStatus"}
-                            type={"text"}
-                            tagType={"input"}
-                            placeholder={"Status"}
-                            value={editFormValues['editStatus']}
-                            method={handleInputChange}
-                        />
-                        <InputElement
-                            id={"editProfileImage"}
-                            type={"text"}
-                            tagType={"input"}
-                            placeholder={"Profile image"}
-                            value={editFormValues['editProfileImage']}
-                            method={handleInputChange}
+                        <Button
+                            className={"app__button add"}
+                            type={"submit"}
+                            title={"Save changes"}
+                            content={"Save"}
                         />
                     </div>
-                </div>
-                <div className="app__edit-profile-bio">
-                    <h3 className="app__h3">Biography</h3>
-                    <div className="app__edit-profile-inputs-container">
-                        <InputElement
-                            id={"editAboutUser"}
-                            type={"text"}
-                            tagType={"textarea"}
-                            placeholder={"Bio"}
-                            value={editFormValues['editAboutUser']}
-                            method={handleInputChange}
-                        />
-                    </div>
-                </div>
-            </section>
-            <section className="app__edit-profile-bottom">
-                <h3 className="app__h3">Authentication</h3>
-                <div className="app__edit-profile-auth">
-                    <div className="app__edit-profile-inputs-container">
-                        <InputElement
-                            id={"editEmail"}
-                            type={"text"}
-                            tagType={"input"}
-                            placeholder={"Email"}
-                            value={editFormValues['editEmail']}
-                            method={handleInputChange}
-                        />
-                        <InputElement
-                            id={"editPassword"}
-                            type={"text"}
-                            tagType={"input"}
-                            placeholder={"New password"}
-                            value={editFormValues['editPassword']}
-                            method={handleInputChange}
-                        />
-                        <InputElement
-                            id={"editPasswordRepeat"}
-                            type={"text"}
-                            tagType={"input"}
-                            placeholder={"Confirm new password"}
-                            value={editFormValues['editPasswordRepeat']}
-                            method={handleInputChange}
-                        />
-                    </div>
-                </div>
-                <div className="app__edit-profile-buttons-container">
-                    <Button
-                        className={"app__button delete"}
-                        type={"button"}
-                        title={"Cancel changes"}
-                        content={"Cancel"}
-                        method={handleOnCancel}
-                    />
-                    <Button
-                        className={"app__button add"}
-                        type={"submit"}
-                        title={"Save changes"}
-                        content={"Save"}
-                    />
-                </div>
-            </section>
-        </form>
+                </section>
+            </form>
+        </>
     )
 }
 

@@ -15,13 +15,13 @@ const CreatePostForm = () => {
     const navigate = useNavigate();
     const [createPostFormValues, setCreatePostFormValues] = useState({
         title: '',
-        imageUrl: '',
+        image: '',
         description: '',
     });
 
     const { message, error } = useAppSelector(state => state.post);
 
-    console.log(message, error);
+    // console.log(message, error);
 
     const handleInputChange = (e: React.FormEvent) => {
         const { name, value } = e.target as HTMLInputElement;
@@ -37,15 +37,18 @@ const CreatePostForm = () => {
             accessToken: accessToken!,
             post: {
                 title: createPostFormValues['title'],
-                image: createPostFormValues['imageUrl'],
+                image: createPostFormValues['image'],
                 description: createPostFormValues['description'],
             }
         }
+
+        console.log(postReqData);
+
         dispatch(createPost(postReqData)).then(result => {
             if (result.meta.requestStatus === 'fulfilled') {
                 setCreatePostFormValues({
                     title: '',
-                    imageUrl: '',
+                    image: '',
                     description: ''
                 });
                 navigate(-1);

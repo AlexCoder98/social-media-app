@@ -2,7 +2,7 @@ export type UserInitialStateType = {
     name: string;
     surname: string;
     email: string;
-    password: string;
+    password?: string;
     profileImage?: string;
     status?: string;
     aboutMe?: string;

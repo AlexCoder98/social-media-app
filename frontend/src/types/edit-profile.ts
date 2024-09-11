@@ -1,10 +1,10 @@
 export type EditProfileType = {
-    editName: string;
-    editSurname: string;
-    editStatus: string;
-    editProfileImage: string;
-    editAboutUser: string;
-    editEmail: string;
-    editPassword: string;
-    editPasswordRepeat: string;
+    name: string;
+    surname: string;
+    status: string;
+    profileImage: string;
+    bio: string;
+    email: string;
+    password: string;
+    passwordConfirmation: string;
 }
