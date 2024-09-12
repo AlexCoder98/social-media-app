@@ -12,14 +12,6 @@ const initialState: AuthInitialStateType = {
     isAuth: sessionStorage.getItem('isAuth')! || 'false',
     accessToken: sessionStorage.getItem('accessToken')! || null,
     userId: sessionStorage.getItem('userId')! || null,
-    messages: {
-        signUpMessage: null,
-    },
-    errors: {
-        signUpError: null,
-        signInError: null,
-        resetPasswordError: null,
-    }
 };
 
 
@@ -34,12 +26,12 @@ const authSlice = createSlice({
                 console.log('Loading...');
             })
             .addCase(signUp.fulfilled, (state, { payload }) => {
-                state.messages.signUpMessage = payload;
-                state.errors.signUpError = null;
+                // state.messages.signUpMessage = payload;
+                // state.errors.signUpError = null;
             })
             .addCase(signUp.rejected, (state, { payload }) => {
-                state.messages.signUpMessage = null;
-                state.errors.signUpError = payload as string;
+                // state.messages.signUpMessage = null;
+                // state.errors.signUpError = payload as string;
             })
             .addCase(signIn.pending, () => {
                 console.log('Loading...');
@@ -48,13 +40,13 @@ const authSlice = createSlice({
                 state.isAuth = payload.isAuth;
                 state.accessToken = payload.accessToken;
                 state.userId = payload.userId;
-                state.errors.signInError = null;
+                // state.errors.signInError = null;
             })
             .addCase(signIn.rejected, (state, { payload }) => {
                 state.userId = null;
                 state.accessToken = null;
                 state.isAuth = 'false';
-                state.errors.signInError = payload as string;
+                // state.errors.signInError = payload as string;
             })
             .addCase(signOut.pending, () => {
                 console.log('Loading...');

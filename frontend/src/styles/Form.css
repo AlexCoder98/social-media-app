@@ -13,9 +13,14 @@
     --successMessageBorderColor: #00920a;
 }
 
+.app__form.sign-in,
+.app__form.sign-up,
+.app__form.reset-password {
+    width: 40%;
+    max-width: 450px;
+}
+
 .app__form {
-    /* width: 40%; */
-    /* max-width: 450px; */
     margin: 0 auto;
     display: flex;
     flex-direction: column;

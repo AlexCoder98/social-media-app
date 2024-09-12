@@ -13,7 +13,6 @@ import '../../../styles/Form.css';
 
 
 const SignInForm = () => {
-    const { errors, messages } = useAppSelector(state => state.authentication);
     const dispath = useAppDispatch();
     const navigate = useNavigate();
 
@@ -21,6 +20,8 @@ const SignInForm = () => {
         email: '',
         password: '',
     });
+
+    const [errorMsg, setErrorMsg] = useState<string>('');
 
     const handleInputChange = (e: React.FormEvent) => {
         const { name, value } = e.target as HTMLInputElement;
@@ -38,7 +39,15 @@ const SignInForm = () => {
         }
 
         dispath(signIn(signInData)).then(result => {
-            if (result.meta.requestStatus === 'fulfilled') {
+            const { requestStatus } = result.meta;
+            if (requestStatus === 'rejected') {
+                const message = result.payload as string;
+                setErrorMsg(message);
+                setTimeout(() => {
+                    setErrorMsg('');
+                }, 1000);
+            }
+            if (requestStatus === 'fulfilled') {
                 const { accessToken, userId, isAuth } = result.payload as { accessToken: string, userId: string, isAuth: string };
                 sessionStorage.setItem('accessToken', accessToken);
                 sessionStorage.setItem('userId', userId);
@@ -54,7 +63,7 @@ const SignInForm = () => {
 
     return (
         <>
-            {errors.signInError && <p className="app__form-message error">{errors.signInError}</p>}
+            {errorMsg && <p className="app__form-message error">{errorMsg}</p>}
             <form
                 method="POST"
                 className="app__form sign-in"

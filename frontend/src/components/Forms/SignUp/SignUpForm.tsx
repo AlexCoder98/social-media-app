@@ -4,7 +4,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import InputElement from '../InputElement/InputElement';
 import Button from '../../Button/Button';
 
-import { useAppSelector, useAppDispatch } from '../../../hooks/redux';
+import { useAppDispatch } from '../../../hooks/redux';
 import { signUp } from '../../../state/authentication/actions';
 
 import { signUpFormInputsData } from '../../../helpers/form-data';
@@ -12,10 +12,6 @@ import { signUpFormInputsData } from '../../../helpers/form-data';
 import '../../../styles/Form.css';
 
 const SignUpForm = () => {
-    const { errors, messages } = useAppSelector((state) => state.authentication);
-    const dispatch = useAppDispatch();
-    const navigate = useNavigate();
-
     const [signUpFormValues, setSignUpFormValues] = useState({
         name: '',
         surname: '',
@@ -23,6 +19,12 @@ const SignUpForm = () => {
         password: '',
         passwordConfirmation: ''
     });
+
+    const [errorMsg, setErrorMsg] = useState<string>('');
+    const [successMsg, setSuccessMsg] = useState<string>('');
+
+    const dispatch = useAppDispatch();
+    const navigate = useNavigate();
 
     const handleInputChange = (e: React.FormEvent) => {
         const { name, value } = e.target as HTMLInputElement;
@@ -42,27 +44,37 @@ const SignUpForm = () => {
             passwordConfirmation: signUpFormValues.passwordConfirmation,
         }
 
-        await dispatch(signUp(newUser))
-            .then(result => {
-                if (result.meta.requestStatus === 'fulfilled') {
-                    setSignUpFormValues({
-                        name: '',
-                        surname: '',
-                        email: '',
-                        password: '',
-                        passwordConfirmation: ''
-                    });
-                    setTimeout(() => {
-                        navigate('/sign-in');
-                    }, 1000);
-                }
-            });
+        await dispatch(signUp(newUser)).then(result => {
+            const { requestStatus } = result.meta;
+            if (requestStatus === 'rejected') {
+                const message = result.payload as string;
+                setErrorMsg(message);
+                setTimeout(() => {
+                    setErrorMsg('');
+                }, 2000);
+            }
+            if (requestStatus === 'fulfilled') {
+                const message = result.payload as string;
+                setSuccessMsg(message);
+                setSignUpFormValues({
+                    name: '',
+                    surname: '',
+                    email: '',
+                    password: '',
+                    passwordConfirmation: ''
+                });
+                setTimeout(() => {
+                    setSuccessMsg('');
+                    navigate('/sign-in');
+                }, 1500);
+            }
+        });
     }
 
     return (
         <>
-            {errors.signUpError && <p className="app__form-message error">{errors.signUpError}</p>}
-            {messages.signUpMessage && <p className="app__form-message success">{messages.signUpMessage}</p>}
+            {errorMsg && <p className="app__form-message error">{errorMsg}</p>}
+            {successMsg && <p className="app__form-message success">{successMsg}</p>}
             <form
                 method="POST"
                 className="app__form sign-up"

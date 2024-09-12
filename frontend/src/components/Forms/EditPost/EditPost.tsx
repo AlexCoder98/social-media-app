@@ -11,16 +11,18 @@ import { postFormData } from '../../../helpers/form-data';
 import { EditPostType } from '../../../types/post';
 
 const EditPostForm = () => {
-    const accessToken = sessionStorage.getItem('accessToken');
-    const { postId } = useParams();
-    const dispatch = useAppDispatch();
-    const navigate = useNavigate();
-
     const [editPostFormValues, setEditPostFormValues] = useState({
         title: '',
         image: '',
         description: '',
     });
+
+    const [errorMsg, setErrorMsg] = useState<string>('');
+
+    const accessToken = sessionStorage.getItem('accessToken');
+    const { postId } = useParams();
+    const dispatch = useAppDispatch();
+    const navigate = useNavigate();
 
     useLayoutEffect(() => {
         const reqData = {
@@ -28,7 +30,15 @@ const EditPostForm = () => {
             postId: postId!
         };
         dispatch(getEditPost(reqData)).then(result => {
-            if (result.meta.requestStatus === 'fulfilled') {
+            const { requestStatus } = result.meta;
+            if (requestStatus === 'rejected') {
+                const message = result.payload as string;
+                setErrorMsg(message);
+                setTimeout(() => {
+                    setErrorMsg('');
+                }, 2000);
+            }
+            if (requestStatus === 'fulfilled') {
                 const postEditData = result.payload as EditPostType;
                 setEditPostFormValues({
                     title: postEditData.title,
@@ -75,38 +85,41 @@ const EditPostForm = () => {
     }
 
     return (
-        <form
-            method="POST"
-            className="app__form edit-post"
-            onSubmit={handleOnSubmit}
-        >
-            <header className="app__form-header">
-                <h2 className="app__form-h2">Edit Post</h2>
-            </header>
-            <main className="app__form-main">
-                {postFormData.map((input, i) => (
-                    <InputElement
-                        tagType={input.tagType}
-                        key={i + 1}
-                        type={input.type!}
-                        id={input.id}
-                        placeholder={input.placeholder}
-                        method={handleInputChange}
-                        value={editPostFormValues[input.id as keyof EditPostType]}
-                    />
-                ))}
-            </main>
-            <footer className="app__form-footer">
-                <div className="app__form-input-container">
-                    <Button
-                        className={"app__action-button submit"}
-                        type={"submit"}
-                        content={"Save"}
-                        title={"Save"}
-                    />
-                </div>
-            </footer>
-        </form>
+        <>
+            {errorMsg && <p className="app__form-message error">{errorMsg}</p>}
+            <form
+                method="POST"
+                className="app__form edit-post"
+                onSubmit={handleOnSubmit}
+            >
+                <header className="app__form-header">
+                    <h2 className="app__form-h2">Edit Post</h2>
+                </header>
+                <main className="app__form-main">
+                    {postFormData.map((input, i) => (
+                        <InputElement
+                            tagType={input.tagType}
+                            key={i + 1}
+                            type={input.type!}
+                            id={input.id}
+                            placeholder={input.placeholder}
+                            method={handleInputChange}
+                            value={editPostFormValues[input.id as keyof EditPostType]}
+                        />
+                    ))}
+                </main>
+                <footer className="app__form-footer">
+                    <div className="app__form-input-container">
+                        <Button
+                            className={"app__action-button submit"}
+                            type={"submit"}
+                            content={"Save"}
+                            title={"Save"}
+                        />
+                    </div>
+                </footer>
+            </form>
+        </>
     )
 }
 
