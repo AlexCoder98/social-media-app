@@ -1,5 +1,7 @@
 import { Request, Response, NextFunction } from "express";
 
+import { validationResult } from "express-validator";
+
 import { Post } from "../models/post";
 import { User } from "../models/user";
 
@@ -9,7 +11,14 @@ import CustomError from "../utils/error";
 
 export const postCreatePost = async (req: Request, res: Response, next: NextFunction) => {
     const { title, image, description } = req.body as PostSchemaType;
+    const errors = validationResult(req);
     try {
+        if (!errors.isEmpty()) {
+            const message = errors.array()[0].msg;
+            const error = new CustomError(message, 422);
+            throw error;
+        }
+
         const newPost = await Post.create({
             title: title,
             image: image,
@@ -185,7 +194,14 @@ export const getEditPost = async (req: Request, res: Response, next: NextFunctio
 export const postEditPost = async (req: Request, res: Response, next: NextFunction) => {
     const { postId } = req.params;
     const { title, image, description } = req.body as { title: string; image: string; description: string };
+    const errors = validationResult(req);
     try {
+        if (!errors.isEmpty()) {
+            const message = errors.array()[0].msg;
+            const error = new CustomError(message, 422);
+            throw error;
+        }
+
         const post = await Post.findById(postId);
         if (!post) {
             const message = 'Post not found.';
