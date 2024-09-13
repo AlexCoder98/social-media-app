@@ -1,27 +1,26 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { useAppDispatch, useAppSelector } from '../../../hooks/redux';
+import { useAppDispatch } from '../../../hooks/redux';
 
 import InputElement from '../InputElement/InputElement';
 import Button from '../../Button/Button';
 
-import { createPost } from '../../../state/post/actions';
+import { postCreatePost } from '../../../state/post/actions';
 
 import { postFormData } from '../../../helpers/form-data';
 
 const CreatePostForm = () => {
-    const accessToken = sessionStorage.getItem('accessToken');
-    const dispatch = useAppDispatch();
-    const navigate = useNavigate();
     const [createPostFormValues, setCreatePostFormValues] = useState({
         title: '',
         image: '',
         description: '',
     });
 
-    const { message, error } = useAppSelector(state => state.post);
+    const [errorMsg, setErrorMsg] = useState<string>('');
 
-    // console.log(message, error);
+    const accessToken = sessionStorage.getItem('accessToken');
+    const dispatch = useAppDispatch();
+    const navigate = useNavigate();
 
     const handleInputChange = (e: React.FormEvent) => {
         const { name, value } = e.target as HTMLInputElement;
@@ -42,23 +41,38 @@ const CreatePostForm = () => {
             }
         }
 
-        console.log(postReqData);
+        dispatch(postCreatePost(postReqData)).then(result => {
+            const { requestStatus } = result.meta;
 
-        dispatch(createPost(postReqData)).then(result => {
-            if (result.meta.requestStatus === 'fulfilled') {
+            console.log('REQUEST STATUS');
+            console.log(requestStatus);
+
+            console.log('PAYLOAD');
+            console.log(result.payload);
+
+            if (requestStatus === 'rejected') {
+                const message = result.payload as string;
+                setErrorMsg(message);
+                setTimeout(() => {
+                    setErrorMsg('');
+                }, 2000);
+            }
+            if (requestStatus === 'fulfilled') {
                 setCreatePostFormValues({
                     title: '',
                     image: '',
                     description: ''
                 });
-                navigate(-1);
+                setTimeout(() => {
+                    navigate(-1);
+                }, 1000);
             }
         })
     }
 
     return (
         <>
-            {message && <p className="app__form-message success">{message}</p>}
+            {errorMsg && <p className="app__form-message error">{errorMsg}</p>}
             <form
                 method="POST"
                 className="app__form create-post"

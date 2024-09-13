@@ -31,13 +31,6 @@ const EditPostForm = () => {
         };
         dispatch(getEditPost(reqData)).then(result => {
             const { requestStatus } = result.meta;
-            if (requestStatus === 'rejected') {
-                const message = result.payload as string;
-                setErrorMsg(message);
-                setTimeout(() => {
-                    setErrorMsg('');
-                }, 2000);
-            }
             if (requestStatus === 'fulfilled') {
                 const postEditData = result.payload as EditPostType;
                 setEditPostFormValues({
@@ -71,7 +64,15 @@ const EditPostForm = () => {
             }
         }
         dispatch(postEditPost(reqData)).then(result => {
-            if (result.meta.requestStatus === 'fulfilled') {
+            const { requestStatus } = result.meta;
+            if (requestStatus === 'rejected') {
+                const message = result.payload as string;
+                setErrorMsg(message);
+                setTimeout(() => {
+                    setErrorMsg('');
+                }, 2000);
+            }
+            if (requestStatus === 'fulfilled') {
                 setEditPostFormValues({
                     title: '',
                     image: '',

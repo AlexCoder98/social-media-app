@@ -9,7 +9,7 @@ import {
 import { EditPostType } from '../../types/post';
 import { RequestResponseType } from '../../types/reducers/auth';
 
-export const createPost = createAsyncThunk(
+export const postCreatePost = createAsyncThunk(
     'post/addPost',
     async (reqData: PostReqType, thunkAPI) => {
         try {
@@ -29,7 +29,7 @@ export const createPost = createAsyncThunk(
                 return (result as { message: string }).message;
             }
         } catch (err) {
-            thunkAPI.rejectWithValue((err as Error).message);
+            return thunkAPI.rejectWithValue((err as Error).message);
         }
     }
 );

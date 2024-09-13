@@ -1,7 +1,7 @@
 import { createSlice } from '@reduxjs/toolkit';
 
 import {
-    createPost,
+    postCreatePost,
     getPosts,
     getAllPosts,
     getPost,
@@ -25,14 +25,14 @@ const postSlice = createSlice({
     reducers: {},
     extraReducers: (builder) => {
         builder
-            .addCase(createPost.pending, () => {
+            .addCase(postCreatePost.pending, () => {
                 console.log('Creating a post...');
             })
-            .addCase(createPost.fulfilled, (state, { payload }) => {
+            .addCase(postCreatePost.fulfilled, (state, { payload }) => {
                 state.message = payload as string;
                 state.error = '';
             })
-            .addCase(createPost.rejected, (state, { payload }) => {
+            .addCase(postCreatePost.rejected, (state, { payload }) => {
                 state.message = '';
                 state.error = payload as string;
             })
