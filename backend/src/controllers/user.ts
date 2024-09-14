@@ -77,7 +77,7 @@ export const postEditProfile = async (req: Request, res: Response, next: NextFun
             throw error;
         }
 
-        const hashedPassword = await bcrypt.hash(password, 7);
+        const hashedPassword = await bcrypt.hash(password, 10);
 
         await user.updateOne({
             name: name,

@@ -8,6 +8,7 @@ import { User } from '../models/user';
 import CustomError from '../utils/error';
 
 export const postSignUp = async (req: Request, res: Response, next: NextFunction) => {
+    const { name, surname, email, password } = req.body;
     try {
         const errors = validationResult(req);
         if (!errors.isEmpty()) {
@@ -16,8 +17,7 @@ export const postSignUp = async (req: Request, res: Response, next: NextFunction
             throw error;
         }
 
-        const { name, surname, email, password } = req.body;
-        const hashedPassword = await bcrypt.hash(password, 7);
+        const hashedPassword = await bcrypt.hash(password, 10);
 
         const user = new User({
             name: name,

@@ -48,7 +48,7 @@ export const getPosts = async (req: Request, res: Response, next: NextFunction) 
     try {
         const posts = await Post
             .find({ 'creator': userId })
-            .populate('creator', ['name', 'surname'])
+            .populate('creator', ['name', 'surname', 'profileImage'])
 
         if (!posts) {
             const message = 'No posts found.';
@@ -57,6 +57,10 @@ export const getPosts = async (req: Request, res: Response, next: NextFunction) 
         }
 
         const postsForResponse = posts.map(post => {
+            const day = post.createdAt.toISOString().split('T')[0];
+            const time = post.createdAt.toISOString().split('T')[1].slice(0, 8);
+            const creationDate = `${time} ${day}`;
+
             return {
                 id: post._id.toString(),
                 title: post.title,
@@ -65,7 +69,9 @@ export const getPosts = async (req: Request, res: Response, next: NextFunction) 
                 creator: {
                     name: post.creator.name,
                     surname: post.creator.surname,
-                }
+                    profileImage: post.creator.profileImage,
+                },
+                creationDate: creationDate
             }
         });
 
@@ -79,7 +85,7 @@ export const getAllPosts = async (req: Request, res: Response, next: NextFunctio
     try {
         const posts = await Post
             .find()
-            .populate('creator', ['name', 'surname'])
+            .populate('creator', ['name', 'surname', 'profileImage'])
 
         if (!posts) {
             const message = 'No posts found.';
@@ -88,6 +94,10 @@ export const getAllPosts = async (req: Request, res: Response, next: NextFunctio
         }
 
         const postsForResponse = posts.map(post => {
+            const day = post.createdAt.toISOString().split('T')[0];
+            const time = post.createdAt.toISOString().split('T')[1].slice(0, 8);
+            const creationDate = `${time} ${day}`;
+
             return {
                 id: post._id.toString(),
                 title: post.title,
@@ -96,7 +106,9 @@ export const getAllPosts = async (req: Request, res: Response, next: NextFunctio
                 creator: {
                     name: post.creator.name,
                     surname: post.creator.surname,
-                }
+                    profileImage: post.creator.profileImage,
+                },
+                creationDate: creationDate
             }
         });
 

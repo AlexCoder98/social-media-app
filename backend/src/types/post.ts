@@ -9,6 +9,7 @@ export interface PostSchemaType {
         _id: Types.ObjectId;
         name: string;
         surname: string;
+        profileImage: string;
     };
-    creationDate: Date
+    createdAt: Date;
 }
