@@ -9,7 +9,7 @@ import { getEditProfile, postEditProfile } from "../../../state/user/actions";
 import { UserInitialStateType } from '../../../types/reducers/user';
 import { EditProfileType } from "../../../types/edit-profile";
 
-import '../../../styles/EditProfile.css';
+import '../../../styles/components_styles/EditProfileForm.css';
 
 const EditProfileForm = () => {
     const [editFormValues, setEditFormValues] = useState<EditProfileType>({

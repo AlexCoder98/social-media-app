@@ -6,7 +6,7 @@ import { useAppSelector } from '../../../hooks/redux';
 
 import { navigationLoggedOutLinksData, navigationLoggedInLinksData } from '../../../helpers/navigation-data';
 
-import '../../../styles/Navigation.css';
+import '../../../styles/components_styles/Navigation.css';
 
 const Navigation = () => {
     const { isAuth, userId } = useAppSelector((state) => state.authentication);

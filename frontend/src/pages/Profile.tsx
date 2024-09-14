@@ -7,7 +7,7 @@ import { useAppDispatch, useAppSelector } from "../hooks/redux";
 
 import Button from "../components/Button/Button";
 
-import '../styles/Profile.css';
+import '../styles/pages_styles/ProfilePage.css';
 
 const ProfilePage = () => {
     const accessToken = sessionStorage.getItem('accessToken');

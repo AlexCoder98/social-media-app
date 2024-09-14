@@ -6,7 +6,9 @@ export type PostInitialStateType = {
     creator: {
         name: string;
         surname: string;
-    }
+        profileImage: string;
+    },
+    creationDate: string;
 }
 
 export type PostsInitialStateType = {
@@ -33,7 +35,9 @@ export type PostResponseType = {
     creator: {
         name: string;
         surname: string;
-    };
+        profileImage: string;
+    },
+    creationDate: string;
 }
 
 export type GetPostReqType = {

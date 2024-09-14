@@ -2,8 +2,8 @@ import { Link } from 'react-router-dom';
 
 import EditProfileForm from '../components/Forms/EditProfile/EditProfile';
 
-import '../styles/EditProfilePage.css';
-import '../styles/Form.css';
+import '../styles/pages_styles/EditProfilePage.css';
+import '../styles/components_styles/Form.css';
 
 const EditProfilePage = () => {
     return (

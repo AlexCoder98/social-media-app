@@ -1,7 +1,7 @@
 import EditPostForm from '../components/Forms/EditPost/EditPost';
 
-import '../styles/EditPost.css';
-import '../styles/Form.css';
+import '../styles/pages_styles/EditPostPage.css';
+import '../styles/components_styles/Form.css';
 
 const EditPostPage = () => {
     return (

@@ -1,7 +1,7 @@
 import CreatePostForm from '../components/Forms/CreatePost/CreatePost';
 
-import '../styles/CreatePostPage.css';
-import '../styles/Form.css';
+import '../styles/pages_styles/CreatePostPage.css';
+import '../styles/components_styles/Form.css';
 
 const CreatePostPage = () => {
     return (

@@ -1,11 +1,11 @@
 import { useNavigate } from "react-router-dom";
 
-import Post from "../components/Post/Post-page";
+import Post from "../components/Main/Post/PostDetails";
 
-import '../styles/Post.css';
-import '../styles/Button.css';
+import '../styles/components_styles/PostDetails.css';
+import '../styles/components_styles/Button.css';
 
-const PostPage = () => {
+const PostDetails = () => {
     const navigate = useNavigate();
     return (
         <div className="app__page post">
@@ -20,4 +20,4 @@ const PostPage = () => {
     )
 }
 
-export default PostPage;
+export default PostDetails;

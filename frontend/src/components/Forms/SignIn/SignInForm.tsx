@@ -5,11 +5,11 @@ import InputElement from '../InputElement/InputElement';
 import Button from '../../Button/Button';
 
 import { signIn } from '../../../state/authentication/actions';
-import { useAppDispatch, useAppSelector } from '../../../hooks/redux';
+import { useAppDispatch } from '../../../hooks/redux';
 
 import { signInFormInputsData } from '../../../helpers/form-data';
 
-import '../../../styles/Form.css';
+import '../../../styles/components_styles/Form.css';
 
 
 const SignInForm = () => {

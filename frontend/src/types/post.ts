@@ -3,6 +3,12 @@ export interface PostPropsType {
     title: string;
     image: string;
     description: string;
+    creator: {
+        name: string;
+        surname: string;
+        profileImage: string;
+    };
+    creationDate: string;
 }
 
 export type PostType = {

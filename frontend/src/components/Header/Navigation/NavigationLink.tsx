@@ -3,7 +3,6 @@ import { NavLink } from 'react-router-dom';
 import { NavigationLinkProps } from '../../../types/nav-link';
 
 const NavigationLink = ({ to, content, title }: NavigationLinkProps) => {
-
     return (
         <li className="app__navigation-item-container">
             <NavLink

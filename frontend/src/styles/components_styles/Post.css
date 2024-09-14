@@ -1,0 +1,60 @@
+.app__post {
+    width: 100%;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+}
+
+.post-head,
+.post-description-wrapper,
+.post-bottom {
+    padding: 10px;
+}
+
+.post__creation-details-wrapper {
+    display: flex;
+}
+
+.post__creator-photo {
+    width: 25px;
+    height: 25px;
+    margin-right: .5rem;
+    object-fit: cover;
+    object-position: center;
+    border-radius: 50%;
+}
+
+.post__creation-details {
+    flex-grow: 1;
+    display: flex;
+    margin-bottom: 20px;
+    line-height: 25px;
+}
+
+.post__creator-name {
+    flex-grow: 1;
+}
+
+.post__creator-name,
+.post__creation-date {
+    font-size: 12px;
+}
+
+.post-h3 {
+    text-align: center;
+    font-size: 22px;
+}
+
+.post-img-wrapper {
+    height: 250px;
+    background-position: center;
+    background-size: cover;
+}
+
+.post-description-wrapper {
+    text-align: center;
+}
+
+.post-bottom {
+    display: flex;
+    justify-content: space-around;
+}

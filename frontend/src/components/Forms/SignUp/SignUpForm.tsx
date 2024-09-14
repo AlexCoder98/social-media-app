@@ -9,7 +9,7 @@ import { signUp } from '../../../state/authentication/actions';
 
 import { signUpFormInputsData } from '../../../helpers/form-data';
 
-import '../../../styles/Form.css';
+import '../../../styles/components_styles/Form.css';
 
 const SignUpForm = () => {
     const [signUpFormValues, setSignUpFormValues] = useState({

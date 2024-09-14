@@ -2,10 +2,10 @@ import { useLayoutEffect } from 'react';
 
 import { getAllPosts } from '../state/post/actions';
 
-import SmallPost from '../components/Post/Post';
+import Post from '../components/Main/Post/Post';
 import { useAppSelector, useAppDispatch } from '../hooks/redux';
-import '../styles/MainPage.css';
-import '../styles/Posts.css';
+import '../styles/pages_styles/LoggedInMainPage.css';
+import '../styles/components_styles/Posts.css';
 
 const MainPage = () => {
     const accessToken = sessionStorage.getItem('accessToken') as string;
@@ -28,12 +28,18 @@ const MainPage = () => {
             {posts.length ? (
                 <ul className="app__posts-list">
                     {posts.map((post, i) => (
-                        <SmallPost
+                        <Post
                             key={i + 1}
                             id={post.id}
                             title={post.title}
                             image={post.image}
                             description={post.description}
+                            creator={{
+                                name: post.creator.name,
+                                surname: post.creator.surname,
+                                profileImage: post.creator.profileImage
+                            }}
+                            creationDate={post.creationDate}
                         />
                     ))}
                 </ul>

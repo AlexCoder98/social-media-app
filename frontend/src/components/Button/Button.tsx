@@ -1,6 +1,6 @@
 import { ButtonProps } from "../../types/button";
 
-import '../../styles/Button.css';
+import '../../styles/components_styles/Button.css';
 
 const Button = ({ method, className, content, type, title }: ButtonProps) => {
     return (

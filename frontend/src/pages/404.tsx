@@ -2,8 +2,8 @@ import { Link } from "react-router-dom";
 
 import { useAppSelector } from "../hooks/redux";
 
-import '../styles/404.css';
-import '../styles/Button.css';
+import '../styles/pages_styles/404.css';
+import '../styles/components_styles/Button.css';
 
 const NotFoundPage = () => {
     const { isAuth } = useAppSelector((state) => state.authentication);

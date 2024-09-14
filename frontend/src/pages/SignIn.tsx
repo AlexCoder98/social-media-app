@@ -1,6 +1,6 @@
 import SignInForm from "../components/Forms/SignIn/SignInForm";
 
-import '../styles/SignInPage.css';
+import '../styles/pages_styles/SignInPage.css';
 
 const SignInPage = () => {
     return (

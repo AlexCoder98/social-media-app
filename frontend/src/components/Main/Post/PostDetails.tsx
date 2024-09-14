@@ -1,11 +1,11 @@
 import { useLayoutEffect } from "react";
 import { useParams, Link, useNavigate } from "react-router-dom";
 
-import { useAppSelector, useAppDispatch } from "../../hooks/redux";
+import { useAppSelector, useAppDispatch } from "../../../hooks/redux";
 
-import { getPost, deletePost } from "../../state/post/actions";
+import { getPost, deletePost } from "../../../state/post/actions";
 
-import '../../styles/Post.css';
+import '../../../styles/components_styles/PostDetails.css';
 
 const SinglePost = () => {
     const accessToken = sessionStorage.getItem('accessToken');

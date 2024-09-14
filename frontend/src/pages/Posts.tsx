@@ -3,12 +3,12 @@ import { Link } from "react-router-dom";
 
 import { getPosts } from "../state/post/actions";
 
-import SmallPost from "../components/Post/Post";
+import Post from "../components/Main/Post/Post";
 
 import { useAppDispatch, useAppSelector } from "../hooks/redux";
 
-import '../styles/Posts.css';
-import '../styles/Button.css';
+import '../styles/components_styles/Posts.css';
+import '../styles/components_styles/Button.css';
 
 const PostsPage = () => {
     const dispatch = useAppDispatch();
@@ -35,12 +35,18 @@ const PostsPage = () => {
             {posts.length ? (
                 <ul className="app__posts-list">
                     {posts.map((post, i) => (
-                        <SmallPost
+                        <Post
                             key={i + 1}
                             id={post.id}
                             title={post.title}
                             image={post.image}
                             description={post.description}
+                            creator={{
+                                name: post.creator.name,
+                                surname: post.creator.surname,
+                                profileImage: post.creator.profileImage
+                            }}
+                            creationDate={post.creationDate}
                         />
                     ))}
                 </ul>

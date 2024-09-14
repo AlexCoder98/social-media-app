@@ -7,7 +7,7 @@ import { useAppSelector } from '../../hooks/redux';
 import SignedOutLayout from '../../layouts/signedOut';
 import SignedInLayout from '../../layouts/signedIn';
 
-import '../../styles/Main.css';
+import '../../styles/pages_styles/Main.css';
 
 const Main = () => {
     const { isAuth } = useAppSelector((state) => state.authentication);

@@ -7,7 +7,7 @@ import Button from '../../Button/Button';
 
 import { resetPasswordFormInputsData } from '../../../helpers/form-data';
 
-import '../../../styles/Form.css';
+import '../../../styles/components_styles/Form.css';
 
 const ResetPasswordForm = () => {
     const navigate = useNavigate();
