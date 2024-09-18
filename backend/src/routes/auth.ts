@@ -2,7 +2,11 @@ import express from 'express';
 import { body } from 'express-validator';
 
 import { User } from '../models/user';
-import { postSignUp, postSignIn } from '../controllers/auth';
+import {
+    postSignUp,
+    postSignIn,
+    postResetPassword
+} from '../controllers/auth';
 
 const router = express.Router();
 
@@ -37,14 +41,15 @@ router.post(
     body('passwordConfirmation')
         .trim()
         .custom(async (value, { req }) => {
-            if (value != req.body.password) {
+            if (value !== req.body.password) {
                 throw new Error('Password confirmation failed');
             }
         }),
     postSignUp
 );
 
-router.post('/sign-in',
+router.post(
+    '/sign-in',
     body('email')
         .trim()
         .isEmail()
@@ -55,6 +60,22 @@ router.post('/sign-in',
         .withMessage('Invalid password'),
     postSignIn);
 
-router.post('/reset-password');
+router.post(
+    '/reset-password',
+    body('email')
+        .trim()
+        .isEmail()
+        .withMessage('Invalid email'),
+    body('newPassword')
+        .trim()
+        .isLength({ min: 3 })
+        .withMessage('Invalid password'),
+    body('newPasswordConfirmation')
+        .custom(async (value, { req }) => {
+            if (value !== req.body.newPassword) {
+                throw new Error('Password confirmation failed');
+            }
+        }),
+    postResetPassword);
 
 export default router;

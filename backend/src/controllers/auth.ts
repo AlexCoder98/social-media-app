@@ -44,10 +44,9 @@ export const postSignUp = async (req: Request, res: Response, next: NextFunction
 export const postSignIn = async (req: Request, res: Response, next: NextFunction) => {
     const { email, password } = req.body;
     try {
-        console.log(email, password);
         const user = await User.findOne({ email: email });
         if (!user) {
-            const message = 'User with provided email does not exist.';
+            const message = 'User with provided email does not exist';
             const error = new CustomError(message, 401);
             throw error;
         }
@@ -71,6 +70,37 @@ export const postSignIn = async (req: Request, res: Response, next: NextFunction
                 userId: user._id.toString(),
                 isAuth: 'true'
             });
+    } catch (err) {
+        next(err);
+    }
+}
+
+export const postResetPassword = async (req: Request, res: Response, next: NextFunction) => {
+    const { email, newPassword } = req.body;
+    try {
+        const errors = validationResult(req);
+        if (!errors.isEmpty()) {
+            const message = errors.array()[0].msg;
+            const error = new CustomError(message, 400);
+            throw error;
+        };
+
+        const user = await User.findOne({ email: email });
+        if (!user) {
+            const message = 'User with provided email does not exist!';
+            const error = new CustomError(message, 404);
+            throw error;
+        };
+
+        const hashedPassword = await bcrypt.hash(newPassword, 10);
+        user.password = hashedPassword;
+
+        await user.save();
+
+        res
+            .status(200)
+            .json({ "message": "Password has been resetted successfully!" });
+
     } catch (err) {
         next(err);
     }
