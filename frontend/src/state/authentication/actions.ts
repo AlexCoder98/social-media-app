@@ -3,7 +3,8 @@ import { createAsyncThunk } from "@reduxjs/toolkit";
 import {
     RequestResponseType,
     SignInDataType,
-    SignUpDataType
+    SignUpDataType,
+    ResetPasswordType
 } from '../../types/reducers/auth';
 
 export const signUp = createAsyncThunk(
@@ -64,5 +65,29 @@ export const signOut = createAsyncThunk(
             accessToken: sessionStorage.getItem('accessToken'),
             userId: sessionStorage.getItem('userId'),
         };
+    }
+);
+
+export const resetPassword = createAsyncThunk(
+    'auth/resetPassword',
+    async (reqData: ResetPasswordType, thunkAPI) => {
+        try {
+            const response = await fetch('http://localhost:8080/reset-password', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(reqData)
+            });
+
+            const result = await response.json();
+            if (response.status !== 200) {
+                throw new Error((result as RequestResponseType).message);
+            } else {
+                return (result as { message: string }).message;
+            }
+        } catch (err) {
+            return thunkAPI.rejectWithValue((err as Error).message);
+        }
     }
 )

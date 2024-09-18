@@ -16,6 +16,12 @@ export type SignInDataType = {
     password: string;
 };
 
+export type ResetPasswordType = {
+    email: string;
+    newPassword: string;
+    newPasswordConfirmation: string;
+}
+
 export type RequestResponseType = {
     statusCode: number;
     status: 'fail' | 'error';

@@ -3,7 +3,8 @@ import { createSlice } from '@reduxjs/toolkit';
 import {
     signUp,
     signIn,
-    signOut
+    signOut,
+    resetPassword
 } from './actions';
 
 import { AuthInitialStateType } from '../../types/reducers/auth';
