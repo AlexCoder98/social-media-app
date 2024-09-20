@@ -12,7 +12,7 @@ export const getUser = createAsyncThunk(
     'user/getUser',
     async (getUserReq: UserReqType, thunkAPI) => {
         try {
-            const response = await fetch(`http://localhost:8080/profile/${getUserReq.userId}`, {
+            const response = await fetch(`http://localhost:8080/profile`, {
                 method: 'GET',
                 headers: {
                     Authorization: `Bearer ${getUserReq.accessToken}`,

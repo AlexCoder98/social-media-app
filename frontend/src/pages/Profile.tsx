@@ -42,7 +42,8 @@ const ProfilePage = () => {
                 <section className="app__profile-buttons-wrapper">
                     <Link
                         className="app__button edit-profile"
-                        to="edit"
+                        // to="edit"
+                        to="/settings/public-information"
                         title="Edit your profile"
                     >Edit profile</Link>
                     <Button

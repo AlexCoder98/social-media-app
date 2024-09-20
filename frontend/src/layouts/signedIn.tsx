@@ -8,6 +8,8 @@ const EditPostPage = lazy(() => import('../pages/EditPost'));
 const CreatePostPage = lazy(() => import('../pages/CreatePost'));
 const ProfilePage = lazy(() => import('../pages/Profile'));
 const EditProfilePage = lazy(() => import('../pages/EditProfile'));
+const EditPublicInformationPage = lazy(() => import('../pages/EditPublicInformationPage'));
+const EditAccessPage = lazy(() => import('../pages/EditAccessPage'));
 const NotFoundPage = lazy(() => import('../pages/404'));
 
 const SignedInLayout = () => {
@@ -20,10 +22,17 @@ const SignedInLayout = () => {
                 <Route path=':postId/edit' element={<EditPostPage />} />
                 <Route path='create-new' element={<CreatePostPage />} />
             </Route>
-            <Route path="/profile/:userId">
+            {/* <Route path="/profile/:userId">
                 <Route index element={<ProfilePage />} />
                 <Route path='edit' element={<EditProfilePage />} />
-            </Route>
+            </Route> */}
+            {/* <Route path="/profile"> */}
+            {/* <Route index element={<ProfilePage />} /> */}
+            {/* <Route path='settings' element={<EditProfilePage />} /> */}
+            {/* </Route> */}
+            <Route path="/profile" element={<ProfilePage />} />
+            <Route path="/settings/public-information" element={<EditPublicInformationPage />} />
+            {/* <Route path="/settings/access" element={<EditAccessPage />} /> */}
             <Route path='*' element={<NotFoundPage />} />
         </Routes>
     )
