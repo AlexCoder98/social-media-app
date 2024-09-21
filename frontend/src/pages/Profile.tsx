@@ -42,8 +42,7 @@ const ProfilePage = () => {
                 <section className="app__profile-buttons-wrapper">
                     <Link
                         className="app__button edit-profile"
-                        // to="edit"
-                        to="/settings/public-information"
+                        to="/settings/general"
                         title="Edit your profile"
                     >Edit profile</Link>
                     <Button
@@ -67,7 +66,7 @@ const ProfilePage = () => {
                         </div>
                         <div className="profile__name-section">
                             <h2 className="profile__name">
-                                <span className="profile__first-name">{name}</span> <span className="profile__first-name">{surname}</span>
+                                <span className="profile__first-name">{name}</span> <span className="profile__last-name">{surname}</span>
                             </h2>
                             {status && <p className="profile__status">{status}</p>}
                         </div>

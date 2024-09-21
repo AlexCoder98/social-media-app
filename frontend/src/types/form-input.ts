@@ -5,4 +5,5 @@ export type InputElementProps = {
     placeholder: string;
     method: (e: React.FormEvent) => void;
     value?: string;
+    label?: string;
 }

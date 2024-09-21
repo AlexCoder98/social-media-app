@@ -1,8 +1,9 @@
 import { InputElementProps } from '../../../types/form-input';
 
-const InputElement = ({ method, type, id, placeholder, tagType, value }: InputElementProps) => {
+const InputElement = ({ method, type, id, placeholder, tagType, value, label }: InputElementProps) => {
     return (
         <div className="app__form-input-container">
+            {label && <label htmlFor={id} className="app__label">{label}</label>}
             {
                 tagType === 'input' ? (
                     <input

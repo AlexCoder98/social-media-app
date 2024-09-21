@@ -19,3 +19,9 @@ export type FetchUserFromDbResType = {
     status: string;
     aboutMe: string;
 }
+
+export type FetchSettingsHeaderType = {
+    name: string;
+    surname: string;
+    profileImage: string;
+}

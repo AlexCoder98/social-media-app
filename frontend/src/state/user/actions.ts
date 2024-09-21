@@ -3,7 +3,8 @@ import { createAsyncThunk } from "@reduxjs/toolkit";
 import {
     UserInitialStateType,
     UserReqType,
-    FetchUserFromDbResType
+    FetchUserFromDbResType,
+    FetchSettingsHeaderType
 } from '../../types/reducers/user';
 
 import { RequestResponseType } from "../../types/reducers/auth";
@@ -83,3 +84,27 @@ export const postEditProfile = createAsyncThunk(
         }
     }
 )
+
+export const getSettings = createAsyncThunk(
+    'user/getSetting',
+    async (accessToken: string, thunkAPI) => {
+        try {
+            const response = await fetch(`http://localhost:8080/settings`, {
+                method: 'GET',
+                headers: {
+                    Authorization: `Bearer ${accessToken}`,
+                    'Content-Type': 'application/json'
+                }
+            });
+
+            const result = await response.json();
+            if (response.status !== 200) {
+                throw new Error((result as RequestResponseType).message);
+            } else {
+                return result as FetchSettingsHeaderType;
+            }
+        } catch (err) {
+            return thunkAPI.rejectWithValue((err as Error).message);
+        }
+    }
+);

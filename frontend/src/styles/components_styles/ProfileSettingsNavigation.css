@@ -1,0 +1,19 @@
+.app__profile-settings-navigation {
+    width: 300px;
+    min-height: 50vh;
+    padding-right: 1rem;
+    margin-right: 1rem;
+    border-right: 1px solid #ddd;
+}
+
+.profile-settings-navigation__links-list {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    list-style: none;
+}
+
+.profile-settings-navigation__links-list .app__nav-link {
+    margin: 0;
+    padding: .5rem;
+}

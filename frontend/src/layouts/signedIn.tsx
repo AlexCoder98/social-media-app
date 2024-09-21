@@ -1,5 +1,5 @@
 import { lazy } from 'react';
-import { Route, Routes } from 'react-router-dom';
+import { Outlet, Route, Routes } from 'react-router-dom';
 
 const MainPage = lazy(() => import('../pages/Main'));
 const PostsPage = lazy(() => import('../pages/Posts'));
@@ -7,9 +7,9 @@ const PostPage = lazy(() => import('../pages/Post'));
 const EditPostPage = lazy(() => import('../pages/EditPost'));
 const CreatePostPage = lazy(() => import('../pages/CreatePost'));
 const ProfilePage = lazy(() => import('../pages/Profile'));
-const EditProfilePage = lazy(() => import('../pages/EditProfile'));
-const EditPublicInformationPage = lazy(() => import('../pages/EditPublicInformationPage'));
-const EditAccessPage = lazy(() => import('../pages/EditAccessPage'));
+const SettingsPage = lazy(() => import('../pages/SettingsPage'));
+const EditPublicInformationPage = lazy(() => import('../pages/GeneralSettings'));
+const EditAccessPage = lazy(() => import('../pages/AccessSettings'));
 const NotFoundPage = lazy(() => import('../pages/404'));
 
 const SignedInLayout = () => {
@@ -31,8 +31,11 @@ const SignedInLayout = () => {
             {/* <Route path='settings' element={<EditProfilePage />} /> */}
             {/* </Route> */}
             <Route path="/profile" element={<ProfilePage />} />
-            <Route path="/settings/public-information" element={<EditPublicInformationPage />} />
-            {/* <Route path="/settings/access" element={<EditAccessPage />} /> */}
+            {/* <Route path="/settings" element={<SettingsPage />} /> */}
+            <Route path="/settings" element={<SettingsPage />} >
+                <Route path="general" element={<EditPublicInformationPage />} />
+                <Route path="access" element={<EditAccessPage />} />
+            </Route>
             <Route path='*' element={<NotFoundPage />} />
         </Routes>
     )

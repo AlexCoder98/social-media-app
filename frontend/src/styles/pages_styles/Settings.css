@@ -1,0 +1,43 @@
+.settings__header {
+    display: flex;
+    margin-bottom: 2rem;
+    padding-bottom: .5rem;
+    border-bottom: 1px solid #ddd;
+}
+
+.settings__user-data {
+    flex-grow: 1;
+    display: flex;
+    align-items: center;
+}
+
+.settings__img-wrapper {
+    width: 50px;
+    height: 50px;
+    margin-right: 1rem;
+    border-radius: 50%;
+    overflow: hidden;
+}
+
+.settings__profile-image {
+    width: 50px;
+    height: 50px;
+    object-fit: cover;
+    object-position: center;
+}
+
+.settings__main {
+    display: flex;
+}
+
+.settings__aside {
+    flex-grow: 1;
+}
+
+.aside__main {
+    margin: 1rem 0;
+}
+
+.settings__aside .app__input {
+    margin-top: 5px;
+}

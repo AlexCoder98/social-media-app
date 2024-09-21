@@ -37,13 +37,13 @@ export const navigationLoggedInLinksData: NavigationLinksType = [
 
 export const editProfileNavigationData: NavigationLinksType = [
     {
-        content: 'Public information',
-        url: '/profile/:userId/edit/public',
-        title: 'Public information'
+        content: 'General',
+        url: '/settings/general',
+        title: 'General settings'
     },
     {
         content: 'Access',
-        url: '/edit/access',
-        title: 'Access'
+        url: '/settings/access',
+        title: 'Access settings'
     },
 ]

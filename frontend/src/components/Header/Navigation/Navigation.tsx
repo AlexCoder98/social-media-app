@@ -25,7 +25,6 @@ const Navigation = () => {
                 {navigationType.map((navLink, i) =>
                     <NavigationLink
                         key={i + 1}
-                        // to={navLink.content === 'Profile' ? `${navLink.url}/${userId}` : navLink.url}
                         to={navLink.url}
                         content={navLink.content}
                         title={navLink.title}
