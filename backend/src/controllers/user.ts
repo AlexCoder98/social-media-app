@@ -98,3 +98,28 @@ export const postEditProfile = async (req: Request, res: Response, next: NextFun
         next(err);
     }
 }
+
+export const getSettings = async (req: Request, res: Response, next: NextFunction) => {
+    const { userId } = req;
+    try {
+        const user = await User.findById(userId);
+        if (!user) {
+            const message = 'Error. Failed to fetch user!';
+            const error = new CustomError(message, 404);
+            throw error;
+        }
+
+        const resObj = {
+            name: user.name,
+            surname: user.surname,
+            profileImage: user.profileImage
+        };
+
+        res
+            .status(200)
+            .json(resObj);
+
+    } catch (err) {
+        next(err);
+    }
+}

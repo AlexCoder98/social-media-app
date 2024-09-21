@@ -5,11 +5,18 @@ import { body } from 'express-validator';
 import { User } from '../models/user';
 import { isAuthenticated } from '../middleware/auth';
 
-import { getUser, getEditProfile, postEditProfile } from '../controllers/user';
+import {
+    getUser,
+    getEditProfile,
+    postEditProfile,
+    getSettings
+} from '../controllers/user';
 
 const router = express.Router();
 
 router.get('/profile', isAuthenticated, getUser);
+
+router.get('/settings', isAuthenticated, getSettings);
 
 router.get('/profile/:userId/edit', isAuthenticated, getEditProfile);
 
