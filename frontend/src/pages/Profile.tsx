@@ -24,7 +24,7 @@ const ProfilePage = () => {
         dispatch(getUser(reqData))
     }, [userId]);
 
-    const { name, surname, profileImage, status, aboutMe } = user;
+    const { name, surname, profileImage, status, bio } = user;
 
     const handleSignOut = () => {
         dispatch(signOut('false'))
@@ -73,7 +73,7 @@ const ProfilePage = () => {
                     </div>
                     <hr className="app__separator" />
                     <article className="profile__body">
-                        <p className="profile__text">{aboutMe ? aboutMe : 'No additional info provided :('}</p>
+                        <p className="profile__text">{bio ? bio : 'No additional info provided :('}</p>
                     </article>
                 </section>
             </main>

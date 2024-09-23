@@ -28,6 +28,7 @@
 
 .settings__main {
     display: flex;
+    max-width: 900px
 }
 
 .settings__aside {

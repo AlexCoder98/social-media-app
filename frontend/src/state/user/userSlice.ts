@@ -15,7 +15,7 @@ const initialState: UserInitialStateType = {
     password: '',
     profileImage: '',
     status: '',
-    aboutMe: '',
+    bio: '',
 }
 
 const userSlice = createSlice({
@@ -32,7 +32,7 @@ const userSlice = createSlice({
                 state.surname = payload.surname;
                 state.profileImage = payload.profileImage;
                 state.status = payload.status;
-                state.aboutMe = payload.aboutMe;
+                state.bio = payload.bio;
             })
             .addCase(getUser.rejected, (state, { payload }) => {
                 console.log(payload);
@@ -47,7 +47,7 @@ const userSlice = createSlice({
                 // state.password = payload.password;
                 state.profileImage = payload.profileImage;
                 state.status = payload.status;
-                state.aboutMe = payload.aboutMe;
+                state.bio = payload.bio;
             })
             .addCase(getEditProfile.rejected, (state, { payload }) => {
                 console.log(payload);
@@ -61,7 +61,7 @@ const userSlice = createSlice({
                 state.email = payload.email;
                 state.profileImage = payload.profileImage;
                 state.status = payload.status;
-                state.aboutMe = payload.aboutMe;
+                state.bio = payload.bio;
             })
             .addCase(postEditProfile.rejected, (state, { payload }) => {
                 console.log(payload);

@@ -108,3 +108,56 @@ export const getSettings = createAsyncThunk(
         }
     }
 );
+
+export const getGeneralSettings = createAsyncThunk(
+    'user/getGeneralSettings',
+    async (accessToken: string, thunkAPI) => {
+        try {
+            const response = await fetch(`http://localhost:8080/settings/general`, {
+                method: 'GET',
+                headers: {
+                    Authorization: `Bearer ${accessToken}`,
+                    'Content-Type': 'application/json'
+                }
+            });
+
+            const result = await response.json();
+            if (response.status !== 200) {
+                throw new Error((result as RequestResponseType).message);
+            } else {
+                return result as FetchUserFromDbResType;
+            }
+        } catch (err) {
+            return thunkAPI.rejectWithValue((err as Error).message);
+        }
+    }
+)
+
+export const postGeneralSettigns = createAsyncThunk(
+    'user/postGeneralSettings',
+    async (reqData:
+        { userObj: FetchUserFromDbResType } &
+        { accessToken: string },
+        thunkAPI
+    ) => {
+        try {
+            const response = await fetch(`http://localhost:8080/settings/general`, {
+                method: 'PUT',
+                headers: {
+                    Authorization: `Bearer ${reqData.accessToken}`,
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(reqData.userObj)
+            });
+
+            const result = await response.json();
+            if (response.status !== 200) {
+                throw new Error((result as RequestResponseType).message);
+            } else {
+                return (result as { message: string }).message;
+            }
+        } catch (err) {
+            return thunkAPI.rejectWithValue((err as Error).message);
+        }
+    }
+)

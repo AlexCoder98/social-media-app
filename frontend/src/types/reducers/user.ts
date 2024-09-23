@@ -5,7 +5,7 @@ export type UserInitialStateType = {
     password?: string;
     profileImage?: string;
     status?: string;
-    aboutMe?: string;
+    bio?: string;
 }
 export type UserReqType = {
     accessToken: string;
@@ -17,7 +17,7 @@ export type FetchUserFromDbResType = {
     surname: string;
     profileImage: string;
     status: string;
-    aboutMe: string;
+    bio: string;
 }
 
 export type FetchSettingsHeaderType = {
