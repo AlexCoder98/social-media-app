@@ -16,7 +16,7 @@ const userSchema = new Schema<UserSchemaType>({
     },
     status: String,
     profileImage: String,
-    aboutMe: String,
+    bio: String,
     posts: [
         {
             type: Schema.Types.ObjectId,

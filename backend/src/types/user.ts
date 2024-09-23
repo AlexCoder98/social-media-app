@@ -10,7 +10,7 @@ export interface UserSchemaType {
     posts: Types.Array<PostSchemaType>,
     profileImage?: string;
     status?: string;
-    aboutMe?: string,
+    bio: string,
 }
 
 export type ReqBodyUserType = {
@@ -20,5 +20,5 @@ export type ReqBodyUserType = {
     password: string;
     status: string;
     profileImage: string;
-    aboutMe: string;
+    bio: string;
 }

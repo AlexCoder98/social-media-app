@@ -9,7 +9,9 @@ import {
     getUser,
     getEditProfile,
     postEditProfile,
-    getSettings
+    getSettings,
+    getGeneralSettings,
+    postGeneralSettings
 } from '../controllers/user';
 
 const router = express.Router();
@@ -17,6 +19,23 @@ const router = express.Router();
 router.get('/profile', isAuthenticated, getUser);
 
 router.get('/settings', isAuthenticated, getSettings);
+
+router.get('/settings/general', isAuthenticated, getGeneralSettings);
+
+router.put(
+    '/settings/general',
+    isAuthenticated,
+    body('name')
+        .trim()
+        .notEmpty()
+        .isLength({ min: 2 })
+        .withMessage('Name is too short'),
+    body('surname')
+        .trim()
+        .notEmpty()
+        .isLength({ min: 2 })
+        .withMessage('Surname is too short'),
+    postGeneralSettings);
 
 router.get('/profile/:userId/edit', isAuthenticated, getEditProfile);
 
