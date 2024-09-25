@@ -25,3 +25,10 @@ export type FetchSettingsHeaderType = {
     surname: string;
     profileImage: string;
 }
+
+export type AccessSettingsPostReqType = {
+    email: string;
+    oldPassword: string,
+    newPassword: string,
+    newPasswordConfirmation: string,
+}
