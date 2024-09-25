@@ -184,3 +184,95 @@ export const postGeneralSettings = async (req: Request, res: Response, next: Nex
         next(err);
     }
 }
+
+export const getAccessSettings = async (req: Request, res: Response, next: NextFunction) => {
+    const { userId } = req;
+    try {
+        const user = await User.findById(userId);
+        if (!user) {
+            const message = 'Error. User was not found';
+            const error = new CustomError(message, 401);
+            throw error;
+        }
+
+        res
+            .status(200)
+            .json(user.email);
+    } catch (err) {
+        next(err);
+    }
+}
+
+export const postAccessSettings = async (req: Request, res: Response, next: NextFunction) => {
+    const { email, oldPassword, newPassword, newPasswordConfirmation } = req.body;
+    const { userId } = req;
+
+    console.log('Made a request');
+
+    try {
+        const errors = validationResult(req);
+        if (!errors.isEmpty()) {
+            const message = errors.array()[0].msg;
+            const error = new CustomError(message, 403);
+            throw error;
+        }
+
+        const user = await User.findById(userId);
+
+        console.log(user);
+
+        if (!user) {
+            const message = 'Error. User was not found';
+            const error = new CustomError(message, 401);
+            throw error;
+        }
+
+        if (email === user.email) {
+            const filteredUsers = await User.find({ _id: { $ne: userId } });
+            const doesEmailExist = filteredUsers.find(user => user.email === email);
+            if (doesEmailExist) {
+                const message = 'User with provided email address already exists';
+                const error = new CustomError(message, 409);
+                throw error;
+            }
+        }
+
+        console.log(email);
+
+        user.email = email;
+
+        console.log(user.email);
+
+        if (oldPassword.length > 0) {
+            const isPasswordEqual = await bcrypt.compare(oldPassword, user.password);
+            if (!isPasswordEqual) {
+                const message = 'Error. Old password is not correct';
+                const error = new CustomError(message, 403);
+                throw error;
+            }
+
+            if (newPassword.length < 3) {
+                const message = 'New password is too short';
+                const error = new CustomError(message, 403);
+                throw error;
+            }
+
+            if (newPasswordConfirmation !== newPassword) {
+                const message = 'Error. New password confirmation failed';
+                const error = new CustomError(message, 403);
+                throw error;
+            }
+
+            const hashedPassword = await bcrypt.hash(newPassword, 10);
+            user.password = hashedPassword;
+        }
+
+        await user.save();
+
+        res
+            .status(200)
+            .json({ "message": "Access data has been changed successfully" });
+    } catch (err) {
+        next(err);
+    }
+}

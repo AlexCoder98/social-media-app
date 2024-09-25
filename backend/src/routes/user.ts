@@ -11,7 +11,9 @@ import {
     postEditProfile,
     getSettings,
     getGeneralSettings,
-    postGeneralSettings
+    postGeneralSettings,
+    getAccessSettings,
+    postAccessSettings
 } from '../controllers/user';
 
 const router = express.Router();
@@ -36,6 +38,18 @@ router.put(
         .isLength({ min: 2 })
         .withMessage('Surname is too short'),
     postGeneralSettings);
+
+router.get('/settings/access', isAuthenticated, getAccessSettings);
+
+router.put(
+    '/settings/access',
+    isAuthenticated,
+    body('email')
+        .trim()
+        .notEmpty()
+        .isEmail()
+        .withMessage('Invalid email.'),
+    postAccessSettings);
 
 router.get('/profile/:userId/edit', isAuthenticated, getEditProfile);
 
