@@ -1,6 +1,6 @@
 import { InputElementProps } from '../../../types/form-input';
 
-const InputElement = ({ method, type, id, placeholder, tagType, value, label }: InputElementProps) => {
+const InputElement = ({ method, type, id, placeholder, tagType, value, label, isDisabled }: InputElementProps) => {
     return (
         <div className="app__form-input-container">
             {label && <label htmlFor={id} className="app__label">{label}</label>}
@@ -14,6 +14,7 @@ const InputElement = ({ method, type, id, placeholder, tagType, value, label }: 
                         placeholder={placeholder}
                         onChange={method}
                         value={value}
+                        disabled={isDisabled}
                     />
                 ) : (
                     <textarea

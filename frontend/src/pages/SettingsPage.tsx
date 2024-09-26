@@ -47,9 +47,14 @@ const SettingsPage = () => {
                             src={settingsHeaderData.profileImage}
                             alt="Profile" />
                     </div>
-                    <h2>
-                        <span className="profile__first-name">{settingsHeaderData.name}</span> <span className="profile__last-name">{settingsHeaderData.surname}</span>
-                    </h2>
+                    <Link
+                        to="/profile"
+                        title="Go to profile page"
+                    >
+                        <h2>
+                            <span className="profile__first-name">{settingsHeaderData.name}</span> <span className="profile__last-name">{settingsHeaderData.surname}</span>
+                        </h2>
+                    </Link>
                 </section>
                 <section className="settings__buttons">
                     <Link

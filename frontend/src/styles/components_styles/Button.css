@@ -66,3 +66,13 @@
 .app__button.edit-profile:hover {
     background-color: var(--addButtonHoverBgc);
 }
+
+.app__button.disabled {
+    background-color: var(--addButtonBgc);
+    opacity: .6;
+    cursor: auto;
+}
+
+.app__button.disabled:hover {
+    background-color: var(--addButtonBgc);
+}

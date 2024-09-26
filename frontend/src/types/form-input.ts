@@ -6,4 +6,5 @@ export type InputElementProps = {
     method: (e: React.FormEvent) => void;
     value?: string;
     label?: string;
+    isDisabled?: boolean;
 }

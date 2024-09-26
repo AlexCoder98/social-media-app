@@ -4,4 +4,5 @@ export type ButtonProps = {
     title: string;
     type?: "button" | "reset" | "submit";
     method?: () => void
+    isDisabled?: boolean;
 }
