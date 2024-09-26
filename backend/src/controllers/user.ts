@@ -206,9 +206,6 @@ export const getAccessSettings = async (req: Request, res: Response, next: NextF
 export const postAccessSettings = async (req: Request, res: Response, next: NextFunction) => {
     const { email, oldPassword, newPassword, newPasswordConfirmation } = req.body;
     const { userId } = req;
-
-    console.log('Made a request');
-
     try {
         const errors = validationResult(req);
         if (!errors.isEmpty()) {
@@ -218,8 +215,6 @@ export const postAccessSettings = async (req: Request, res: Response, next: Next
         }
 
         const user = await User.findById(userId);
-
-        console.log(user);
 
         if (!user) {
             const message = 'Error. User was not found';
@@ -235,13 +230,9 @@ export const postAccessSettings = async (req: Request, res: Response, next: Next
                 const error = new CustomError(message, 409);
                 throw error;
             }
+        } else {
+            user.email = email;
         }
-
-        console.log(email);
-
-        user.email = email;
-
-        console.log(user.email);
 
         if (oldPassword.length > 0) {
             const isPasswordEqual = await bcrypt.compare(oldPassword, user.password);
