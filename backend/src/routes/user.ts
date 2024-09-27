@@ -2,18 +2,15 @@ import express from 'express';
 
 import { body } from 'express-validator';
 
-import { User } from '../models/user';
 import { isAuthenticated } from '../middleware/auth';
 
 import {
     getUser,
-    getEditProfile,
-    postEditProfile,
     getSettings,
-    getGeneralSettings,
-    postGeneralSettings,
-    getAccessSettings,
-    postAccessSettings
+    getProfileSettings,
+    postProfileSettings,
+    getAuthenticationSettings,
+    postAuthenticationSettings
 } from '../controllers/user';
 
 const router = express.Router();
@@ -22,10 +19,10 @@ router.get('/profile', isAuthenticated, getUser);
 
 router.get('/settings', isAuthenticated, getSettings);
 
-router.get('/settings/general', isAuthenticated, getGeneralSettings);
+router.get('/settings/profile', isAuthenticated, getProfileSettings);
 
 router.put(
-    '/settings/general',
+    '/settings/profile',
     isAuthenticated,
     body('name')
         .trim()
@@ -37,58 +34,18 @@ router.put(
         .notEmpty()
         .isLength({ min: 2 })
         .withMessage('Surname is too short'),
-    postGeneralSettings);
+    postProfileSettings);
 
-router.get('/settings/access', isAuthenticated, getAccessSettings);
+router.get('/settings/authentication', isAuthenticated, getAuthenticationSettings);
 
 router.put(
-    '/settings/access',
+    '/settings/authentication',
     isAuthenticated,
     body('email')
         .trim()
         .notEmpty()
         .isEmail()
         .withMessage('Invalid email.'),
-    postAccessSettings);
-
-router.get('/profile/:userId/edit', isAuthenticated, getEditProfile);
-
-router.put(
-    '/profile/:userId/edit',
-    isAuthenticated,
-    body('name')
-        .trim()
-        .notEmpty()
-        .withMessage('Name field cannot be empty')
-        .isLength({ min: 2 })
-        .withMessage('Invalid name'),
-    body('surname')
-        .trim()
-        .notEmpty()
-        .withMessage('Name field cannot be empty')
-        .isLength({ min: 2 })
-        .withMessage('Invalid name'),
-    body('email')
-        .trim()
-        .isEmail()
-        .withMessage('Invalid email')
-        .custom(async value => {
-            const user = await User.findOne({ email: value });
-            if (user) {
-                throw new Error('E-mail already in use');
-            }
-        }),
-    body('password')
-        .trim()
-        .isLength({ min: 3 })
-        .withMessage('Invalid password'),
-    body('confirmPassword')
-        .trim()
-        .custom(async (value, { req }) => {
-            if (value != req.body.password) {
-                throw new Error('Password confirmation failed');
-            }
-        }),
-    postEditProfile);
+    postAuthenticationSettings);
 
 export default router;
