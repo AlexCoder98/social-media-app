@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 
 import { useAppDispatch } from "../hooks/redux";
-import { getGeneralSettings, postGeneralSettigns } from "../state/user/actions";
+import { getProfileSettings, postProfileSettigns } from "../state/user/actions";
 
 import AsideHeader from "../components/SettingsAside/Header";
 import InputElement from "../components/Forms/InputElement/InputElement";
@@ -10,7 +10,7 @@ import Button from "../components/Button/Button";
 import { FetchUserFromDbResType } from '../types/reducers/user';
 
 const GeneralSettingsPage = () => {
-    const [generalSetingsValues, setGeneralSettingsValues] = useState({
+    const [profileSettingsValues, setProfileSettingsValues] = useState({
         name: '',
         surname: '',
         profileImage: '',
@@ -22,28 +22,27 @@ const GeneralSettingsPage = () => {
     const [successMsg, setSuccessMsg] = useState<string>('');
 
     const dispatch = useAppDispatch();
-
     const accessToken = sessionStorage.getItem('accessToken')!;
 
     useEffect(() => {
-        dispatch(getGeneralSettings(accessToken)).then(result => {
+        dispatch(getProfileSettings(accessToken)).then(result => {
             const { requestStatus } = result.meta;
             if (requestStatus === 'fulfilled') {
                 const { name, surname, profileImage, status, bio } = result.payload as FetchUserFromDbResType;
-                setGeneralSettingsValues({
+                setProfileSettingsValues({
                     name: name,
                     surname: surname,
                     profileImage: profileImage,
                     status: status,
                     bio: bio
-                })
+                });
             }
         })
-    }, [])
+    }, []);
 
     const handleInputChange = (e: React.FormEvent) => {
         const { name, value } = e.target as HTMLInputElement;
-        setGeneralSettingsValues((prevValues) => ({
+        setProfileSettingsValues((prevValues) => ({
             ...prevValues,
             [name]: value
         }));
@@ -51,17 +50,18 @@ const GeneralSettingsPage = () => {
 
     const handleOnSubmit = (e: React.SyntheticEvent) => {
         e.preventDefault();
+        const { name, surname, profileImage, status, bio } = profileSettingsValues;
         const reqData = {
             userObj: {
-                name: generalSetingsValues.name,
-                surname: generalSetingsValues.surname,
-                profileImage: generalSetingsValues.profileImage,
-                status: generalSetingsValues.status,
-                bio: generalSetingsValues.bio,
+                name: name,
+                surname: surname,
+                profileImage: profileImage,
+                status: status,
+                bio: bio,
             },
             accessToken: accessToken,
         };
-        dispatch(postGeneralSettigns(reqData)).then(result => {
+        dispatch(postProfileSettigns(reqData)).then(result => {
             const { requestStatus } = result.meta;
             if (requestStatus === 'rejected') {
                 setErrorMsg(result.payload as string);
@@ -88,7 +88,7 @@ const GeneralSettingsPage = () => {
                 onSubmit={handleOnSubmit}
             >
                 <AsideHeader
-                    content={'General'}
+                    content={'Profile'}
                 />
                 <main className="aside__main">
                     <InputElement
@@ -98,7 +98,7 @@ const GeneralSettingsPage = () => {
                         label="Name"
                         type="text"
                         method={handleInputChange}
-                        value={generalSetingsValues.name}
+                        value={profileSettingsValues.name}
                     />
                     <InputElement
                         id="surname"
@@ -107,7 +107,7 @@ const GeneralSettingsPage = () => {
                         label="Surname"
                         type="text"
                         method={handleInputChange}
-                        value={generalSetingsValues.surname}
+                        value={profileSettingsValues.surname}
                     />
                     <InputElement
                         id="profileImage"
@@ -116,7 +116,7 @@ const GeneralSettingsPage = () => {
                         label="Profile image"
                         type="text"
                         method={handleInputChange}
-                        value={generalSetingsValues.profileImage}
+                        value={profileSettingsValues.profileImage}
                     />
                     <InputElement
                         id="status"
@@ -125,7 +125,7 @@ const GeneralSettingsPage = () => {
                         label="Status"
                         type="text"
                         method={handleInputChange}
-                        value={generalSetingsValues.status}
+                        value={profileSettingsValues.status}
                     />
                     <InputElement
                         id="bio"
@@ -134,7 +134,7 @@ const GeneralSettingsPage = () => {
                         label="Bio"
                         type="text"
                         method={handleInputChange}
-                        value={generalSetingsValues.bio}
+                        value={profileSettingsValues.bio}
                     />
                 </main>
                 <footer className="aside__footer">

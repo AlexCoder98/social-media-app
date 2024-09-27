@@ -1,7 +1,7 @@
 import NavigationLink from "../Header/Navigation/NavigationLink";
 import { editProfileNavigationData } from "../../helpers/navigation-data";
 
-import '../../styles/components_styles/ProfileSettingsNavigation.css';
+import '../../styles/components_styles/profile_settings/ProfileSettingsNavigation.css';
 
 const ProfileSettingsNavigation = () => {
     return (

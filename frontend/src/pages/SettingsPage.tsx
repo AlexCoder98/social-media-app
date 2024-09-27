@@ -51,7 +51,7 @@ const SettingsPage = () => {
                         to="/profile"
                         title="Go to profile page"
                     >
-                        <h2>
+                        <h2 className="settings__h2">
                             <span className="profile__first-name">{settingsHeaderData.name}</span> <span className="profile__last-name">{settingsHeaderData.surname}</span>
                         </h2>
                     </Link>
@@ -61,7 +61,7 @@ const SettingsPage = () => {
                         to="/profile"
                         className="app__button back"
                         title="Go to profile page"
-                    >Go back</Link>
+                    >Go to profile page</Link>
                 </section>
             </header>
             <main className="settings__main">

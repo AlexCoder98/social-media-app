@@ -1,14 +1,16 @@
 import { useState, useEffect, useRef } from "react";
 
 import { useAppDispatch } from "../hooks/redux";
-import { getAccessSettings, postAccessSettings } from "../state/user/actions";
+import { getAuthenticationSettings, postAuthenticationSettings } from "../state/user/actions";
 
 import AsideHeader from "../components/SettingsAside/Header";
 import InputElement from "../components/Forms/InputElement/InputElement";
 import Button from "../components/Button/Button";
 
+import '../styles/components_styles/profile_settings/AsideMain.css';
+
 const AccessSettings = () => {
-    const [accessSettingsValues, setAccessSettingsValues] = useState({
+    const [authenticationSettingsValues, setAuthenticationSettingsValues] = useState({
         email: '',
         oldPassword: '',
         newPassword: '',
@@ -23,12 +25,12 @@ const AccessSettings = () => {
     const dispatch = useAppDispatch();
     const accessToken = sessionStorage.getItem('accessToken')!;
 
-    const prevAccessSettingsValues = useRef(accessSettingsValues);
+    const prevAccessSettingsValues = useRef(authenticationSettingsValues);
 
     useEffect(() => {
-        dispatch(getAccessSettings(accessToken)).then(result => {
+        dispatch(getAuthenticationSettings(accessToken)).then(result => {
             if (result.meta.requestStatus === 'fulfilled') {
-                setAccessSettingsValues(prev => ({
+                setAuthenticationSettingsValues(prev => ({
                     ...prev,
                     email: result.payload as string,
                 }));
@@ -39,18 +41,18 @@ const AccessSettings = () => {
 
     useEffect(() => {
         if (
-            accessSettingsValues.email !== prevAccessSettingsValues.current.email ||
-            accessSettingsValues.oldPassword !== prevAccessSettingsValues.current.oldPassword
+            authenticationSettingsValues.email !== prevAccessSettingsValues.current.email ||
+            authenticationSettingsValues.oldPassword !== prevAccessSettingsValues.current.oldPassword
         ) {
             setIsDisabled(false)
         } else {
             setIsDisabled(true);
         }
-    }, [accessSettingsValues])
+    }, [authenticationSettingsValues]);
 
     const handleInputChange = (e: React.FormEvent) => {
         const { name, value } = e.target as HTMLInputElement;
-        setAccessSettingsValues((prevValues) => ({
+        setAuthenticationSettingsValues((prevValues) => ({
             ...prevValues,
             [name]: value
         }));
@@ -58,16 +60,17 @@ const AccessSettings = () => {
 
     const handleOnSubmit = (e: React.SyntheticEvent) => {
         e.preventDefault();
+        const { email, oldPassword, newPassword, newPasswordConfirmation } = authenticationSettingsValues;
         const reqData = {
             formData: {
-                email: accessSettingsValues.email,
-                oldPassword: accessSettingsValues.oldPassword,
-                newPassword: accessSettingsValues.newPassword,
-                newPasswordConfirmation: accessSettingsValues.newPasswordConfirmation,
+                email: email,
+                oldPassword: oldPassword,
+                newPassword: newPassword,
+                newPasswordConfirmation: newPasswordConfirmation,
             },
             accessToken: accessToken,
         }
-        dispatch(postAccessSettings(reqData)).then(result => {
+        dispatch(postAuthenticationSettings(reqData)).then(result => {
             const { requestStatus } = result.meta;
             if (requestStatus === 'rejected') {
                 const message = result.payload as string;
@@ -78,7 +81,7 @@ const AccessSettings = () => {
             }
             if (requestStatus === 'fulfilled') {
                 const message = result.payload as string;
-                setAccessSettingsValues(prev => ({
+                setAuthenticationSettingsValues(prev => ({
                     ...prev,
                     oldPassword: '',
                     newPassword: '',
@@ -102,50 +105,49 @@ const AccessSettings = () => {
                 onSubmit={handleOnSubmit}
             >
                 <AsideHeader
-                    content={"Access"}
+                    content={"Authentication"}
                 />
                 <main className="aside__main">
-                    <InputElement
-                        id={"email"}
-                        tagType={"input"}
-                        type={"text"}
-                        label={"Email"}
-                        placeholder={"Email"}
-                        method={handleInputChange}
-                        value={accessSettingsValues.email}
-                    />
-                    <InputElement
-                        id={"oldPassword"}
-                        tagType={"input"}
-                        type={"password"}
-                        label={"Old password"}
-                        placeholder={"Old password"}
-                        method={handleInputChange}
-                        value={accessSettingsValues.oldPassword}
-                    // isDisabled={true}
-                    />
-                    {accessSettingsValues.oldPassword.length > 0 && (
+                    <section className="aside__h4-input-container">
+                        <h4 className="aside__h4">Email</h4>
+                        <InputElement
+                            id={"email"}
+                            tagType={"input"}
+                            type={"text"}
+                            placeholder={"Email"}
+                            method={handleInputChange}
+                            value={authenticationSettingsValues.email}
+                        />
+                    </section>
+                    <section className="aside__h4-input-container">
+                        <h4 className="aside__h4">Password</h4>
+                        <InputElement
+                            id={"oldPassword"}
+                            tagType={"input"}
+                            type={"password"}
+                            placeholder={"Old password"}
+                            method={handleInputChange}
+                            value={authenticationSettingsValues.oldPassword}
+                        />
                         <InputElement
                             id={"newPassword"}
                             tagType={"input"}
                             type={"password"}
-                            label={"New password"}
                             placeholder={"New password"}
                             method={handleInputChange}
-                            value={accessSettingsValues.newPassword}
+                            value={authenticationSettingsValues.newPassword}
+                            isDisabled={isDisabled}
                         />
-                    )}
-                    {accessSettingsValues.newPassword && (
                         <InputElement
                             id={"newPasswordConfirmation"}
                             tagType={"input"}
                             type={"password"}
-                            label={"Confirm new password"}
                             placeholder={"Confirm new password"}
                             method={handleInputChange}
-                            value={accessSettingsValues.newPasswordConfirmation}
+                            value={authenticationSettingsValues.newPasswordConfirmation}
+                            isDisabled={isDisabled}
                         />
-                    )}
+                    </section>
                 </main>
                 <footer className="aside__footer">
                     <Button
@@ -158,7 +160,6 @@ const AccessSettings = () => {
                 </footer>
             </form>
         </>
-
     )
 }
 

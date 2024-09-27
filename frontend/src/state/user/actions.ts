@@ -110,11 +110,11 @@ export const getSettings = createAsyncThunk(
     }
 );
 
-export const getGeneralSettings = createAsyncThunk(
-    'user/getGeneralSettings',
+export const getProfileSettings = createAsyncThunk(
+    'user/getProfileSettings',
     async (accessToken: string, thunkAPI) => {
         try {
-            const response = await fetch(`http://localhost:8080/settings/general`, {
+            const response = await fetch(`http://localhost:8080/settings/profile`, {
                 method: 'GET',
                 headers: {
                     Authorization: `Bearer ${accessToken}`,
@@ -134,15 +134,15 @@ export const getGeneralSettings = createAsyncThunk(
     }
 )
 
-export const postGeneralSettigns = createAsyncThunk(
-    'user/postGeneralSettings',
+export const postProfileSettigns = createAsyncThunk(
+    'user/postProfileSettings',
     async (reqData:
         { userObj: FetchUserFromDbResType } &
         { accessToken: string },
         thunkAPI
     ) => {
         try {
-            const response = await fetch(`http://localhost:8080/settings/general`, {
+            const response = await fetch(`http://localhost:8080/settings/profile`, {
                 method: 'PUT',
                 headers: {
                     Authorization: `Bearer ${reqData.accessToken}`,
@@ -163,11 +163,11 @@ export const postGeneralSettigns = createAsyncThunk(
     }
 )
 
-export const getAccessSettings = createAsyncThunk(
-    'user/getAccessSettings',
+export const getAuthenticationSettings = createAsyncThunk(
+    'user/getAuthenticationSettings',
     async (accessToken: string, thunkAPI) => {
         try {
-            const response = await fetch(`http://localhost:8080/settings/access`, {
+            const response = await fetch(`http://localhost:8080/settings/authentication`, {
                 method: 'GET',
                 headers: {
                     Authorization: `Bearer ${accessToken}`,
@@ -187,15 +187,15 @@ export const getAccessSettings = createAsyncThunk(
     }
 )
 
-export const postAccessSettings = createAsyncThunk(
-    'user/postAccessSettings',
+export const postAuthenticationSettings = createAsyncThunk(
+    'user/postAuthenticationSettings',
     async (reqData:
         { formData: AccessSettingsPostReqType } &
         { accessToken: string },
         thunkAPI
     ) => {
         try {
-            const response = await fetch(`http://localhost:8080/settings/access`, {
+            const response = await fetch(`http://localhost:8080/settings/authentication`, {
                 method: 'PUT',
                 headers: {
                     Authorization: `Bearer ${reqData.accessToken}`,

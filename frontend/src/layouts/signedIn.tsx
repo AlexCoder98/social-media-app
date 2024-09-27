@@ -1,5 +1,5 @@
 import { lazy } from 'react';
-import { Outlet, Route, Routes } from 'react-router-dom';
+import { Route, Routes } from 'react-router-dom';
 
 const MainPage = lazy(() => import('../pages/Main'));
 const PostsPage = lazy(() => import('../pages/Posts'));
@@ -8,8 +8,8 @@ const EditPostPage = lazy(() => import('../pages/EditPost'));
 const CreatePostPage = lazy(() => import('../pages/CreatePost'));
 const ProfilePage = lazy(() => import('../pages/Profile'));
 const SettingsPage = lazy(() => import('../pages/SettingsPage'));
-const EditPublicInformationPage = lazy(() => import('../pages/GeneralSettings'));
-const EditAccessPage = lazy(() => import('../pages/AccessSettings'));
+const EditPublicInformationPage = lazy(() => import('../pages/ProfileSettings'));
+const EditAccessPage = lazy(() => import('../pages/AuthenticationSettings'));
 const NotFoundPage = lazy(() => import('../pages/404'));
 
 const SignedInLayout = () => {
@@ -22,19 +22,10 @@ const SignedInLayout = () => {
                 <Route path=':postId/edit' element={<EditPostPage />} />
                 <Route path='create-new' element={<CreatePostPage />} />
             </Route>
-            {/* <Route path="/profile/:userId">
-                <Route index element={<ProfilePage />} />
-                <Route path='edit' element={<EditProfilePage />} />
-            </Route> */}
-            {/* <Route path="/profile"> */}
-            {/* <Route index element={<ProfilePage />} /> */}
-            {/* <Route path='settings' element={<EditProfilePage />} /> */}
-            {/* </Route> */}
             <Route path="/profile" element={<ProfilePage />} />
-            {/* <Route path="/settings" element={<SettingsPage />} /> */}
             <Route path="/settings" element={<SettingsPage />} >
-                <Route path="general" element={<EditPublicInformationPage />} />
-                <Route path="access" element={<EditAccessPage />} />
+                <Route path="profile" element={<EditPublicInformationPage />} />
+                <Route path="authentication" element={<EditAccessPage />} />
             </Route>
             <Route path='*' element={<NotFoundPage />} />
         </Routes>

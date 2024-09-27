@@ -1,9 +1,6 @@
 .app__profile-settings-navigation {
     width: 250px;
-    min-height: 50vh;
     padding-right: 1rem;
-    margin-right: 1rem;
-    border-right: 1px solid #ddd;
 }
 
 .profile-settings-navigation__links-list {
