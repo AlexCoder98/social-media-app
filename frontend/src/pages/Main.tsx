@@ -17,9 +17,6 @@ const MainPage = () => {
 
     const { posts } = useAppSelector(state => state.post);
 
-    console.log('POSTS ON MAIN PAGE');
-    console.log(posts);
-
     return (
         <div className="app__page main">
             <header className="app__main-page-header">

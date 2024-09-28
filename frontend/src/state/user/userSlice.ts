@@ -24,9 +24,6 @@ const userSlice = createSlice({
     reducers: {},
     extraReducers: (builder) => {
         builder
-            .addCase(getUser.pending, () => {
-                console.log('Fetching the user...');
-            })
             .addCase(getUser.fulfilled, (state, { payload }) => {
                 state.name = payload.name;
                 state.surname = payload.surname;
@@ -34,26 +31,13 @@ const userSlice = createSlice({
                 state.status = payload.status;
                 state.bio = payload.bio;
             })
-            .addCase(getUser.rejected, (state, { payload }) => {
-                console.log(payload);
-            })
-            .addCase(getEditProfile.pending, () => {
-                console.log('Fetching...')
-            })
             .addCase(getEditProfile.fulfilled, (state, { payload }) => {
                 state.name = payload.name;
                 state.surname = payload.surname;
                 state.email = payload.email;
-                // state.password = payload.password;
                 state.profileImage = payload.profileImage;
                 state.status = payload.status;
                 state.bio = payload.bio;
-            })
-            .addCase(getEditProfile.rejected, (state, { payload }) => {
-                console.log(payload);
-            })
-            .addCase(postEditProfile.pending, () => {
-                console.log('Updating user profile...')
             })
             .addCase(postEditProfile.fulfilled, (state, { payload }) => {
                 state.name = payload.name;
@@ -62,9 +46,6 @@ const userSlice = createSlice({
                 state.profileImage = payload.profileImage;
                 state.status = payload.status;
                 state.bio = payload.bio;
-            })
-            .addCase(postEditProfile.rejected, (state, { payload }) => {
-                console.log(payload);
             })
     }
 })

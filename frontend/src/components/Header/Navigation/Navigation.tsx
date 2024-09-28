@@ -4,12 +4,15 @@ import NavigationLink from './NavigationLink';
 
 import { useAppSelector } from '../../../hooks/redux';
 
-import { navigationLoggedOutLinksData, navigationLoggedInLinksData } from '../../../helpers/navigation-data';
+import {
+    navigationLoggedOutLinksData,
+    navigationLoggedInLinksData
+} from '../../../helpers/navigation-data';
 
 import '../../../styles/components_styles/Navigation.css';
 
 const Navigation = () => {
-    const { isAuth, userId } = useAppSelector((state) => state.authentication);
+    const { isAuth } = useAppSelector((state) => state.authentication);
     const navigationType = isAuth === 'true' ? navigationLoggedInLinksData : navigationLoggedOutLinksData;
 
     return (

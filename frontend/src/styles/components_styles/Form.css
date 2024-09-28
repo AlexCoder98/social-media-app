@@ -5,12 +5,6 @@
     --formInputFocusBoxShadowColor: #353535;
     --formResetPassswordColor: #353535;
     --borderColor: #d0d0d0;
-    --errorMessageColor: #ee0909;
-    --errorMessageBgc: #fcc0c0;
-    --errorMessageBorderColor: #ee0909;
-    --successMessageColor: #00920a;
-    --successMessageBgc: #9dee9d;
-    --successMessageBorderColor: #00920a;
 }
 
 .app__form.sign-in,
@@ -38,18 +32,6 @@
     padding: .5rem 2.5rem;
     font-size: 20px;
     border-radius: 5px;
-}
-
-.app__form-message.error {
-    color: var(--errorMessageColor);
-    background-color: var(--errorMessageBgc);
-    outline: 1px solid var(--errorMessageBorderColor);
-}
-
-.app__form-message.success {
-    color: var(--successMessageColor);
-    background-color: var(--successMessageBgc);
-    outline: 1px solid var(--successMessageBorderColor);
 }
 
 .app__form-h2 {

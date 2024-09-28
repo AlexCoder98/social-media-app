@@ -8,8 +8,6 @@ import '../styles/components_styles/Button.css';
 const NotFoundPage = () => {
     const { isAuth } = useAppSelector((state) => state.authentication);
 
-    console.log('isAuth: ' + isAuth);
-
     return (
         <div className="app__404-page-wrapper">
             <header className="app__404-page-header">

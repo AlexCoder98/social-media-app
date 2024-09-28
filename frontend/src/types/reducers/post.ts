@@ -14,8 +14,6 @@ export type PostInitialStateType = {
 export type PostsInitialStateType = {
     posts: PostInitialStateType[];
     post: PostInitialStateType | null;
-    error: string;
-    message: string;
 }
 
 export type PostReqType = {

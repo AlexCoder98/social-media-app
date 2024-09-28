@@ -2,6 +2,7 @@ export type AuthInitialStateType = {
     isAuth: string;
     accessToken: string | null;
     userId: string | null;
+    loading: boolean;
 };
 
 export type SignUpDataType = {

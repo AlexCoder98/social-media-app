@@ -15,6 +15,10 @@ textarea {
     font-family: "Nunito", "Arial", sans-serif;
 }
 
+.app__wrapper {
+    scroll-behavior: smooth;
+}
+
 .app__h1 {
     font-size: 30px;
 }

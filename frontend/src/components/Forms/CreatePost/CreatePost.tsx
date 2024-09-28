@@ -4,6 +4,7 @@ import { useAppDispatch } from '../../../hooks/redux';
 
 import InputElement from '../InputElement/InputElement';
 import Button from '../../Button/Button';
+import Message from '../../Message/Message';
 
 import { postCreatePost } from '../../../state/post/actions';
 
@@ -17,6 +18,7 @@ const CreatePostForm = () => {
     });
 
     const [errorMsg, setErrorMsg] = useState<string>('');
+    const [successMsg, setSuccessMsg] = useState<string>('');
 
     const accessToken = sessionStorage.getItem('accessToken');
     const dispatch = useAppDispatch();
@@ -43,13 +45,6 @@ const CreatePostForm = () => {
 
         dispatch(postCreatePost(postReqData)).then(result => {
             const { requestStatus } = result.meta;
-
-            console.log('REQUEST STATUS');
-            console.log(requestStatus);
-
-            console.log('PAYLOAD');
-            console.log(result.payload);
-
             if (requestStatus === 'rejected') {
                 const message = result.payload as string;
                 setErrorMsg(message);
@@ -58,26 +53,28 @@ const CreatePostForm = () => {
                 }, 2000);
             }
             if (requestStatus === 'fulfilled') {
+                const message = result.payload as string;
+                setSuccessMsg(message);
                 setCreatePostFormValues({
                     title: '',
                     image: '',
                     description: ''
                 });
                 setTimeout(() => {
+                    setSuccessMsg('');
                     navigate(-1);
-                }, 1000);
+                }, 2000);
             }
-        })
-    }
+        });
+    };
 
     return (
         <>
-            {errorMsg && <p className="app__form-message error">{errorMsg}</p>}
+            <Message error={errorMsg} success={successMsg} />
             <form
                 method="POST"
                 className="app__form create-post"
                 onSubmit={handleOnSubmit}
-                style={{ margin: '0 auto' }}
             >
                 <header className="app__form-header">
                     <h2 className="app__form-h2">Create a Post</h2>
