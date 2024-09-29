@@ -34,6 +34,12 @@ router.put(
         .notEmpty()
         .isLength({ min: 2 })
         .withMessage('Surname is too short'),
+    body('status')
+        .isLength({ max: 30 })
+        .withMessage('Status is too long'),
+    body('bio')
+        .isLength({ max: 900 })
+        .withMessage('Biography is too long'),
     postProfileSettings);
 
 router.get('/settings/authentication', isAuthenticated, getAuthenticationSettings);
@@ -44,8 +50,9 @@ router.put(
     body('email')
         .trim()
         .notEmpty()
+        .withMessage('Email cannot be empty')
         .isEmail()
-        .withMessage('Invalid email.'),
+        .withMessage('Invalid email'),
     postAuthenticationSettings);
 
 export default router;

@@ -20,11 +20,13 @@ router.post(
     body('title')
         .trim()
         .notEmpty()
-        .isLength({ min: 3 })
-        .withMessage('Post title has to have at least 3 characters.'),
+        .withMessage('Post title cannot be empty')
+        .isLength({ min: 3, max: 50 })
+        .withMessage('Post title has to be at least 3 and max 50 characters long'),
     body('description')
         .trim()
         .notEmpty()
+        .withMessage('Post description cannot be empty')
         .isLength({ min: 5 })
         .withMessage('Post description has to have at least 5 characters.'),
     postCreatePost

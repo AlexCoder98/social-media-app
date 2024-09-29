@@ -44,6 +44,13 @@ export const postSignUp = async (req: Request, res: Response, next: NextFunction
 export const postSignIn = async (req: Request, res: Response, next: NextFunction) => {
     const { email, password } = req.body;
     try {
+        const errors = validationResult(req);
+        if (!errors.isEmpty()) {
+            const message = errors.array()[0].msg;
+            const error = new CustomError(message, 401);
+            throw error;
+        }
+
         const user = await User.findOne({ email: email });
         if (!user) {
             const message = 'User with provided email does not exist';
@@ -99,8 +106,7 @@ export const postResetPassword = async (req: Request, res: Response, next: NextF
 
         res
             .status(200)
-            .json({ "message": "Password has been resetted successfully!" });
-
+            .json({ "message": "Password has been changed successfully" });
     } catch (err) {
         next(err);
     }

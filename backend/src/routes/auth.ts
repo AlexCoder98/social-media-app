@@ -17,13 +17,13 @@ router.post(
         .notEmpty()
         .withMessage('Name field cannot be empty')
         .isLength({ min: 2 })
-        .withMessage('Invalid name'),
+        .withMessage('Name is too short'),
     body('surname')
         .trim()
         .notEmpty()
         .withMessage('Surname field cannot be empty')
         .isLength({ min: 2 })
-        .withMessage('Invalid surname'),
+        .withMessage('Surname is too short'),
     body('email')
         .trim()
         .isEmail()
@@ -37,7 +37,7 @@ router.post(
     body('password')
         .trim()
         .isLength({ min: 3 })
-        .withMessage('Invalid password'),
+        .withMessage('Password is too short'),
     body('passwordConfirmation')
         .trim()
         .custom(async (value, { req }) => {
@@ -52,6 +52,8 @@ router.post(
     '/sign-in',
     body('email')
         .trim()
+        .notEmpty()
+        .withMessage('Email field cannot be empty')
         .isEmail()
         .withMessage('Invalid email'),
     body('password')
@@ -69,7 +71,7 @@ router.post(
     body('newPassword')
         .trim()
         .isLength({ min: 3 })
-        .withMessage('Invalid password'),
+        .withMessage('Password is too short'),
     body('newPasswordConfirmation')
         .custom(async (value, { req }) => {
             if (value !== req.body.newPassword) {

@@ -5,14 +5,12 @@ import { validationResult } from 'express-validator';
 import { User } from '../models/user';
 import CustomError from '../utils/error';
 
-import { ReqBodyUserType } from '../types/user';
-
 export const getUser = async (req: Request, res: Response, next: NextFunction) => {
     const { userId } = req;
     try {
         const user = await User.findById(userId);
         if (!user) {
-            const message = 'Error. Failed to fetch user';
+            const message = 'Failed to fetch the user';
             const error = new CustomError(message, 401);
             throw error;
         }
@@ -38,7 +36,7 @@ export const getSettings = async (req: Request, res: Response, next: NextFunctio
     try {
         const user = await User.findById(userId);
         if (!user) {
-            const message = 'Error. Failed to fetch user!';
+            const message = 'Failed to fetch the user';
             const error = new CustomError(message, 404);
             throw error;
         }
@@ -63,7 +61,7 @@ export const getProfileSettings = async (req: Request, res: Response, next: Next
     try {
         const user = await User.findById(userId);
         if (!user) {
-            const message = 'Error. User not found';
+            const message = 'User not found';
             const error = new CustomError(message, 401);
             throw error;
         }
@@ -98,7 +96,7 @@ export const postProfileSettings = async (req: Request, res: Response, next: Nex
 
         const user = await User.findById(userId);
         if (!user) {
-            const message = 'Error. User not found';
+            const message = 'User not found';
             const error = new CustomError(message, 401);
             throw error;
         }
@@ -113,7 +111,7 @@ export const postProfileSettings = async (req: Request, res: Response, next: Nex
 
         res
             .status(200)
-            .json({ "message": "Profile has been updated successfully" })
+            .json({ "message": "Profile data has been updated" });
     } catch (err) {
         next(err);
     }
@@ -124,7 +122,7 @@ export const getAuthenticationSettings = async (req: Request, res: Response, nex
     try {
         const user = await User.findById(userId);
         if (!user) {
-            const message = 'Error. User was not found';
+            const message = 'User not found';
             const error = new CustomError(message, 401);
             throw error;
         }
@@ -151,7 +149,7 @@ export const postAuthenticationSettings = async (req: Request, res: Response, ne
         const user = await User.findById(userId);
 
         if (!user) {
-            const message = 'Error. User was not found';
+            const message = 'User not found';
             const error = new CustomError(message, 401);
             throw error;
         }
@@ -171,7 +169,7 @@ export const postAuthenticationSettings = async (req: Request, res: Response, ne
         if (oldPassword.length > 0) {
             const isPasswordEqual = await bcrypt.compare(oldPassword, user.password);
             if (!isPasswordEqual) {
-                const message = 'Error. Old password is not correct';
+                const message = 'Old password is not correct';
                 const error = new CustomError(message, 403);
                 throw error;
             }
@@ -183,7 +181,7 @@ export const postAuthenticationSettings = async (req: Request, res: Response, ne
             }
 
             if (newPasswordConfirmation !== newPassword) {
-                const message = 'Error. New password confirmation failed';
+                const message = 'Password confirmation failed';
                 const error = new CustomError(message, 403);
                 throw error;
             }
@@ -196,7 +194,7 @@ export const postAuthenticationSettings = async (req: Request, res: Response, ne
 
         res
             .status(200)
-            .json({ "message": "Access data has been changed successfully" });
+            .json({ "message": "Authentication data has been changed" });
     } catch (err) {
         next(err);
     }

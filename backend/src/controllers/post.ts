@@ -49,6 +49,7 @@ export const getPosts = async (req: Request, res: Response, next: NextFunction) 
         const posts = await Post
             .find({ 'creator': userId })
             .populate('creator', ['name', 'surname', 'profileImage'])
+            .sort({ 'createdAt': 'desc' });
 
         if (!posts) {
             const message = 'No posts found.';
@@ -86,6 +87,7 @@ export const getAllPosts = async (req: Request, res: Response, next: NextFunctio
         const posts = await Post
             .find()
             .populate('creator', ['name', 'surname', 'profileImage'])
+            .sort({ 'createdAt': 'desc' });
 
         if (!posts) {
             const message = 'No posts found.';
@@ -216,7 +218,7 @@ export const postEditPost = async (req: Request, res: Response, next: NextFuncti
 
         const post = await Post.findById(postId);
         if (!post) {
-            const message = 'Post not found.';
+            const message = 'Post not found';
             const error = new CustomError(message, 404);
             throw error;
         }
@@ -227,7 +229,13 @@ export const postEditPost = async (req: Request, res: Response, next: NextFuncti
 
         await post.save();
 
-        res.status(200).json({ "message": "Post was updated." });
+        const updatedPost = {
+            title: post.title,
+            image: post.image,
+            description: post.description
+        }
+
+        res.status(200).json({ updatedPost: updatedPost, message: 'Post has been updated successfully' });
     } catch (err) {
         next(err);
     }
