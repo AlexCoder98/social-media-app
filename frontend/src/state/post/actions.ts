@@ -179,7 +179,7 @@ export const postEditPost = createAsyncThunk(
             if (response.status !== 200) {
                 throw new Error((result as RequestResponseType).message);
             } else {
-                return result as string;
+                return result as { updatedPost: EditPostType, message: string };
             }
 
         } catch (err) {

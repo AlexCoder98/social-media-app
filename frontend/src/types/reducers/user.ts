@@ -12,7 +12,7 @@ export type UserReqType = {
     userId: string;
 }
 
-export type FetchUserFromDbResType = {
+export type ProfileSettingsType = {
     name: string;
     surname: string;
     profileImage: string;
@@ -20,13 +20,13 @@ export type FetchUserFromDbResType = {
     bio: string;
 }
 
-export type FetchSettingsHeaderType = {
+export type SettingsHeaderType = {
     name: string;
     surname: string;
     profileImage: string;
 }
 
-export type AccessSettingsPostReqType = {
+export type AuthenticationSettingsType = {
     email: string;
     oldPassword: string,
     newPassword: string,

@@ -6,10 +6,11 @@ import { getProfileSettings, postProfileSettigns } from "../state/user/actions";
 import AsideHeader from "../components/SettingsAside/Header";
 import InputElement from "../components/Forms/InputElement/InputElement";
 import Button from "../components/Button/Button";
+import Message from "../components/Message/Message";
 
-import { FetchUserFromDbResType } from '../types/reducers/user';
+import { ProfileSettingsType } from '../types/reducers/user';
 
-const GeneralSettingsPage = () => {
+const ProfileSettingsPage = () => {
     const [profileSettingsValues, setProfileSettingsValues] = useState({
         name: '',
         surname: '',
@@ -28,7 +29,7 @@ const GeneralSettingsPage = () => {
         dispatch(getProfileSettings(accessToken)).then(result => {
             const { requestStatus } = result.meta;
             if (requestStatus === 'fulfilled') {
-                const { name, surname, profileImage, status, bio } = result.payload as FetchUserFromDbResType;
+                const { name, surname, profileImage, status, bio } = result.payload as ProfileSettingsType;
                 setProfileSettingsValues({
                     name: name,
                     surname: surname,
@@ -64,24 +65,25 @@ const GeneralSettingsPage = () => {
         dispatch(postProfileSettigns(reqData)).then(result => {
             const { requestStatus } = result.meta;
             if (requestStatus === 'rejected') {
-                setErrorMsg(result.payload as string);
+                const message = result.payload as string;
+                setErrorMsg(message);
                 setTimeout(() => {
                     setErrorMsg('');
-                }, 2000);
+                }, 3000);
             };
             if (requestStatus === 'fulfilled') {
-                setSuccessMsg(result.payload as string);
+                const message = result.payload as string;
+                setSuccessMsg(message);
                 setTimeout(() => {
                     setSuccessMsg('');
-                }, 2000);
+                }, 3000);
             }
         });
     }
 
     return (
         <>
-            {errorMsg && <p className="app__form-message error">{errorMsg}</p>}
-            {successMsg && <p className="app__form-message success">{successMsg}</p>}
+            <Message error={errorMsg} success={successMsg} />
             <form
                 className="settings__form"
                 method="PUT"
@@ -150,4 +152,4 @@ const GeneralSettingsPage = () => {
     )
 }
 
-export default GeneralSettingsPage;
+export default ProfileSettingsPage;

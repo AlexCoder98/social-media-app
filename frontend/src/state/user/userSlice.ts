@@ -1,9 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 import {
-    getUser,
-    getEditProfile,
-    postEditProfile
+    getUser
 } from './actions';
 
 import { UserInitialStateType } from '../../types/reducers/user';
@@ -30,23 +28,7 @@ const userSlice = createSlice({
                 state.profileImage = payload.profileImage;
                 state.status = payload.status;
                 state.bio = payload.bio;
-            })
-            .addCase(getEditProfile.fulfilled, (state, { payload }) => {
-                state.name = payload.name;
-                state.surname = payload.surname;
-                state.email = payload.email;
-                state.profileImage = payload.profileImage;
-                state.status = payload.status;
-                state.bio = payload.bio;
-            })
-            .addCase(postEditProfile.fulfilled, (state, { payload }) => {
-                state.name = payload.name;
-                state.surname = payload.surname;
-                state.email = payload.email;
-                state.profileImage = payload.profileImage;
-                state.status = payload.status;
-                state.bio = payload.bio;
-            })
+            });
     }
 })
 

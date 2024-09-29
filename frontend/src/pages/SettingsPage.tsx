@@ -8,7 +8,7 @@ import { useAppDispatch } from "../hooks/redux";
 
 import { getSettings } from "../state/user/actions";
 
-import { FetchSettingsHeaderType } from "../types/reducers/user";
+import { SettingsHeaderType } from "../types/reducers/user";
 
 import '../styles/pages_styles/Settings.css';
 import '../styles/components_styles/Button.css';
@@ -27,7 +27,7 @@ const SettingsPage = () => {
         const accessToken = sessionStorage.getItem('accessToken')!;
         dispatch(getSettings(accessToken)).then(result => {
             if (result.meta.requestStatus === 'fulfilled') {
-                const headerData = result.payload as FetchSettingsHeaderType;
+                const headerData = result.payload as SettingsHeaderType;
                 setSettingsHeaderData({
                     name: headerData.name,
                     surname: headerData.surname,
@@ -44,7 +44,7 @@ const SettingsPage = () => {
                     <div className="settings__img-wrapper">
                         <img
                             className="settings__profile-image"
-                            src={settingsHeaderData.profileImage}
+                            src={settingsHeaderData.profileImage ? settingsHeaderData.profileImage : 'https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png'}
                             alt="Profile" />
                     </div>
                     <Link

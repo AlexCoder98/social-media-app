@@ -21,7 +21,7 @@
     border-radius: 5px;
     border: 1px solid;
     box-shadow: 0 0 10px 3px var(--messageBoxShadowColor);
-    animation: showHideMessage 2s linear both, moveMessage .3s ease-out both;
+    animation: showHideMessage 3s linear both, moveMessage .3s ease-out both;
 }
 
 .app__message.error {
@@ -46,7 +46,7 @@
     }
 
     100% {
-        top: -7%;
+        top: -2%;
     }
 }
 

@@ -26,17 +26,11 @@ const postSlice = createSlice({
             .addCase(getPosts.fulfilled, (state, { payload }) => {
                 state.posts = payload;
             })
-            .addCase(getAllPosts.pending, () => {
-                console.log('Fetching all posts...');
-            })
             .addCase(getAllPosts.fulfilled, (state, { payload }) => {
                 state.posts = payload;
             })
             .addCase(getPost.fulfilled, (state, { payload }) => {
                 state.post = payload;
-            })
-            .addCase(deletePost.pending, () => {
-                console.log('Deleting the post...');
             })
             .addCase(getEditPost.fulfilled, (state, { payload }) => {
                 state.post = payload;

@@ -3,6 +3,7 @@ import { useParams, useNavigate } from 'react-router-dom';
 
 import InputElement from '../InputElement/InputElement';
 import Button from '../../Button/Button';
+import Message from '../../Message/Message';
 
 import { useAppDispatch } from '../../../hooks/redux';
 import { getEditPost, postEditPost } from '../../../state/post/actions';
@@ -18,6 +19,7 @@ const EditPostForm = () => {
     });
 
     const [errorMsg, setErrorMsg] = useState<string>('');
+    const [successMsg, setSuccessMsg] = useState<string>('');
 
     const accessToken = sessionStorage.getItem('accessToken');
     const { postId } = useParams();
@@ -70,24 +72,27 @@ const EditPostForm = () => {
                 setErrorMsg(message);
                 setTimeout(() => {
                     setErrorMsg('');
-                }, 2000);
+                }, 3000);
             }
             if (requestStatus === 'fulfilled') {
+                const { updatedPost, message } = result.payload as { updatedPost: EditPostType, message: string };
+                setSuccessMsg(message);
                 setEditPostFormValues({
-                    title: '',
-                    image: '',
-                    description: '',
+                    title: updatedPost.title,
+                    image: updatedPost.image,
+                    description: updatedPost.description,
                 });
                 setTimeout(() => {
+                    setSuccessMsg('');
                     navigate(-1);
-                }, 1000);
+                }, 3000);
             }
         })
     }
 
     return (
         <>
-            {errorMsg && <p className="app__form-message error">{errorMsg}</p>}
+            <Message error={errorMsg} success={successMsg} />
             <form
                 method="POST"
                 className="app__form edit-post"

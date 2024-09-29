@@ -3,6 +3,7 @@ import { Link, useNavigate } from 'react-router-dom';
 
 import InputElement from '../InputElement/InputElement';
 import Button from '../../Button/Button';
+import Message from '../../Message/Message';
 
 import { signIn } from '../../../state/authentication/actions';
 import { useAppDispatch } from '../../../hooks/redux';
@@ -45,7 +46,7 @@ const SignInForm = () => {
                 setErrorMsg(message);
                 setTimeout(() => {
                     setErrorMsg('');
-                }, 1000);
+                }, 3000);
             }
             if (requestStatus === 'fulfilled') {
                 const { accessToken, userId, isAuth } = result.payload as { accessToken: string, userId: string, isAuth: string };
@@ -63,7 +64,7 @@ const SignInForm = () => {
 
     return (
         <>
-            {errorMsg && <p className="app__form-message error">{errorMsg}</p>}
+            <Message error={errorMsg} />
             <form
                 method="POST"
                 className="app__form sign-in"

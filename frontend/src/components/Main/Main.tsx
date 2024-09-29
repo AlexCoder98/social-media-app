@@ -13,13 +13,13 @@ const Main = () => {
     const { isAuth } = useAppSelector((state) => state.authentication);
     return (
         <main className="app__main">
-            <section className="app__main-content">
+            <div className="app__main-content">
                 <Suspense fallback={<Loading />}>
                     {
                         isAuth === 'false' ? <SignedOutLayout /> : <SignedInLayout />
                     }
                 </Suspense>
-            </section>
+            </div>
         </main>
     )
 }

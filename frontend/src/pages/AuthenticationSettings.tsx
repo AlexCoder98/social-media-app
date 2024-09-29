@@ -6,6 +6,7 @@ import { getAuthenticationSettings, postAuthenticationSettings } from "../state/
 import AsideHeader from "../components/SettingsAside/Header";
 import InputElement from "../components/Forms/InputElement/InputElement";
 import Button from "../components/Button/Button";
+import Message from "../components/Message/Message";
 
 import '../styles/components_styles/profile_settings/AsideMain.css';
 
@@ -77,7 +78,7 @@ const AccessSettings = () => {
                 setErrorMsg(message);
                 setTimeout(() => {
                     setErrorMsg('');
-                }, 2000);
+                }, 3000);
             }
             if (requestStatus === 'fulfilled') {
                 const message = result.payload as string;
@@ -90,15 +91,14 @@ const AccessSettings = () => {
                 setSuccessMsg(message);
                 setTimeout(() => {
                     setSuccessMsg('');
-                }, 2000);
+                }, 3000);
             }
         })
     }
 
     return (
         <>
-            {errorMsg && <p className="app__form-message error">{errorMsg}</p>}
-            {successMsg && <p className="app__form-message success">{successMsg}</p>}
+            <Message error={errorMsg} success={successMsg} />
             <form
                 className="settings__form"
                 method="PUT"

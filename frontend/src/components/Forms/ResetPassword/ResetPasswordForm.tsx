@@ -4,6 +4,7 @@ import { useState } from 'react';
 
 import InputElement from '../InputElement/InputElement';
 import Button from '../../Button/Button';
+import Message from '../../Message/Message';
 
 import { useAppDispatch } from '../../../hooks/redux';
 import { resetPassword } from '../../../state/authentication/actions';
@@ -47,7 +48,7 @@ const ResetPasswordForm = () => {
                 setErrorMsg(message);
                 setTimeout(() => {
                     setErrorMsg('');
-                }, 2000);
+                }, 3000);
             };
             if (requestStatus === 'fulfilled') {
                 const message = result.payload as string;
@@ -60,15 +61,14 @@ const ResetPasswordForm = () => {
                 setTimeout(() => {
                     setSuccessMsg('');
                     navigate('/sign-in');
-                }, 1500);
+                }, 3000);
             };
         })
     };
 
     return (
         <>
-            {errorMsg && <p className="app__form-message error">{errorMsg}</p>}
-            {successMsg && <p className="app__form-message success">{successMsg}</p>}
+            <Message error={errorMsg} success={successMsg} />
             <form
                 method="POST"
                 className="app__form reset-password"

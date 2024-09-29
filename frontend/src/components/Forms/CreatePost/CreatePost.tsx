@@ -50,7 +50,7 @@ const CreatePostForm = () => {
                 setErrorMsg(message);
                 setTimeout(() => {
                     setErrorMsg('');
-                }, 2000);
+                }, 3000);
             }
             if (requestStatus === 'fulfilled') {
                 const message = result.payload as string;
@@ -63,7 +63,7 @@ const CreatePostForm = () => {
                 setTimeout(() => {
                     setSuccessMsg('');
                     navigate(-1);
-                }, 2000);
+                }, 3000);
             }
         });
     };

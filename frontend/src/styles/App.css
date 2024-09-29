@@ -27,3 +27,7 @@ textarea {
     font-size: 28px;
     text-align: center;
 }
+
+.app__form-container {
+    padding-top: 5rem;
+}
