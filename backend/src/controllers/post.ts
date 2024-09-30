@@ -86,8 +86,8 @@ export const getAllPosts = async (req: Request, res: Response, next: NextFunctio
     try {
         const posts = await Post
             .find()
+            .sort({ 'createdAt': 'desc' })
             .populate('creator', ['name', 'surname', 'profileImage'])
-            .sort({ 'createdAt': 'desc' });
 
         if (!posts) {
             const message = 'No posts found.';
