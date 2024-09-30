@@ -1,8 +1,10 @@
 import { useLayoutEffect } from 'react';
-
-import { getAllPosts } from '../state/post/actions';
+import InfiniteScroll from 'react-infinite-scroll-component';
 
 import Post from '../components/Main/Post/Post';
+
+
+import { getAllPosts } from '../state/post/actions';
 import { useAppSelector, useAppDispatch } from '../hooks/redux';
 import '../styles/pages_styles/LoggedInMainPage.css';
 import '../styles/components_styles/Posts.css';
@@ -12,17 +14,27 @@ const MainPage = () => {
     const dispatch = useAppDispatch();
 
     useLayoutEffect(() => {
-        dispatch(getAllPosts(accessToken))
+        dispatch(getAllPosts(accessToken));
     }, [accessToken]);
 
     const { posts } = useAppSelector(state => state.post);
 
+    const fetchPosts = () => {
+        dispatch(getAllPosts(accessToken));
+    }
     return (
         <div className="app__page main">
             <header className="app__main-page-header">
                 <h1 className="app__h1">Main Page</h1>
             </header>
-            {posts.length ? (
+            {/* {posts.length ? ( */}
+            <InfiniteScroll
+                dataLength={posts.length}
+                next={fetchPosts}
+                hasMore={true}
+                loader={<h3>Loading...</h3>}
+                endMessage={<p>No more data to load...</p>}
+            >
                 <ul className="app__posts-list">
                     {posts.map((post, i) => (
                         <Post
@@ -40,9 +52,10 @@ const MainPage = () => {
                         />
                     ))}
                 </ul>
-            ) : (
-                <h2 className="app__h2" style={{ margin: '5rem 0' }}>No posts yet</h2>
-            )}
+            </InfiniteScroll>
+            {/* // ) : (
+            //     <h2 className="app__h2" style={{ margin: '5rem 0' }}>No posts yet</h2>
+            // )} */}
         </div>
     )
 }

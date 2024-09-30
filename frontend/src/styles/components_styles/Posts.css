@@ -14,9 +14,13 @@
 
 .app__posts-list {
     margin: 2rem auto;
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    justify-content: space-between;
-    column-gap: 5rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2rem;
     list-style: none;
+}
+
+.app__posts-list>* {
+    max-width: 450px;
 }
