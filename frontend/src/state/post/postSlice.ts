@@ -10,7 +10,7 @@ import {
     postEditPost
 } from './actions';
 
-import { PostsInitialStateType } from '../../types/reducers/post';
+import { PostResponseType, PostsInitialStateType } from '../../types/reducers/post';
 
 const initialState: PostsInitialStateType = {
     posts: [],
@@ -27,7 +27,12 @@ const postSlice = createSlice({
                 state.posts = payload;
             })
             .addCase(getAllPosts.fulfilled, (state, { payload }) => {
-                state.posts = payload;
+                // console.log('POSTS BEFORE UPDT');
+                // console.log([...state.posts]);
+                state.posts = [...state.posts].concat(payload);
+                // console.log('POSTS AFTER UPDT');
+                // console.log([...state.posts]);
+                // state.posts = payload.concat(state.posts);
             })
             .addCase(getPost.fulfilled, (state, { payload }) => {
                 state.post = payload;

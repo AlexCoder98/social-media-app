@@ -1,4 +1,4 @@
-import { useLayoutEffect } from 'react';
+import { useState, useEffect, useLayoutEffect } from 'react';
 import InfiniteScroll from 'react-infinite-scroll-component';
 
 import Post from '../components/Main/Post/Post';
@@ -8,20 +8,30 @@ import { getAllPosts } from '../state/post/actions';
 import { useAppSelector, useAppDispatch } from '../hooks/redux';
 import '../styles/pages_styles/LoggedInMainPage.css';
 import '../styles/components_styles/Posts.css';
+import { PostResponseType } from '../types/reducers/post';
 
 const MainPage = () => {
+    const [page, setPage] = useState<number>(1);
     const accessToken = sessionStorage.getItem('accessToken') as string;
     const dispatch = useAppDispatch();
 
-    useLayoutEffect(() => {
-        dispatch(getAllPosts(accessToken));
-    }, [accessToken]);
+    const reqData = {
+        accessToken: accessToken,
+        page: page,
+    };
+
+    useEffect(() => {
+        dispatch(getAllPosts(reqData));
+        setPage(page + 1);
+    }, []);
 
     const { posts } = useAppSelector(state => state.post);
-
     const fetchPosts = () => {
-        dispatch(getAllPosts(accessToken));
+        // console.log('Function fired...');
+        dispatch(getAllPosts(reqData));
+        setPage(page + 1);
     }
+
     return (
         <div className="app__page main">
             <header className="app__main-page-header">

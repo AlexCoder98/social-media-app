@@ -61,9 +61,9 @@ export const getPosts = createAsyncThunk(
 
 export const getAllPosts = createAsyncThunk(
     'post/getAllPosts',
-    async (accessToken: string, thunkAPI) => {
+    async ({ accessToken, page }: { accessToken: string, page: number }, thunkAPI) => {
         try {
-            const response = await fetch(`http://localhost:8080/main-page`, {
+            const response = await fetch(`http://localhost:8080/main-page?page=${page}`, {
                 method: 'GET',
                 headers: {
                     Authorization: `Bearer ${accessToken}`,
