@@ -83,10 +83,18 @@ export const getPosts = async (req: Request, res: Response, next: NextFunction) 
 };
 
 export const getAllPosts = async (req: Request, res: Response, next: NextFunction) => {
+    const { page } = req.query;
+    // console.log('Initialization');
+    // console.log('PAGE ' + page);
+
+    const perPage = 2;
+
     try {
         const posts = await Post
             .find()
             .sort({ 'createdAt': 'desc' })
+            .limit(perPage)
+            .skip((+page! - 1) * perPage)
             .populate('creator', ['name', 'surname', 'profileImage'])
 
         if (!posts) {
