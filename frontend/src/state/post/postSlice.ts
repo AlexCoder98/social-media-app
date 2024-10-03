@@ -13,26 +13,32 @@ import {
 import { PostResponseType, PostsInitialStateType } from '../../types/reducers/post';
 
 const initialState: PostsInitialStateType = {
-    posts: [],
+    allPosts: [],
+    usersPosts: [],
     post: null,
+    hasMore: false,
+    page: 1,
 };
 
 const postSlice = createSlice({
     name: 'post',
     initialState,
-    reducers: {},
+    reducers: {
+        increment(state) {
+            state.page++;
+        },
+        reset(state) {
+            state.page = 1;
+        }
+    },
     extraReducers: (builder) => {
         builder
             .addCase(getPosts.fulfilled, (state, { payload }) => {
-                state.posts = payload;
+                state.usersPosts = payload;
             })
             .addCase(getAllPosts.fulfilled, (state, { payload }) => {
-                // console.log('POSTS BEFORE UPDT');
-                // console.log([...state.posts]);
-                state.posts = [...state.posts].concat(payload);
-                // console.log('POSTS AFTER UPDT');
-                // console.log([...state.posts]);
-                // state.posts = payload.concat(state.posts);
+                state.allPosts = [...state.allPosts].concat(payload.allPosts as PostResponseType[]);
+                state.hasMore = payload.hasMore;
             })
             .addCase(getPost.fulfilled, (state, { payload }) => {
                 state.post = payload;
@@ -45,5 +51,7 @@ const postSlice = createSlice({
             })
     }
 });
+
+export const { increment, reset } = postSlice.actions;
 
 export default postSlice.reducer;

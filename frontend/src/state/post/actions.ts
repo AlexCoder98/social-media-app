@@ -63,6 +63,8 @@ export const getAllPosts = createAsyncThunk(
     'post/getAllPosts',
     async ({ accessToken, page }: { accessToken: string, page: number }, thunkAPI) => {
         try {
+            console.log('PAGE IN ACTION ' + page);
+
             const response = await fetch(`http://localhost:8080/main-page?page=${page}`, {
                 method: 'GET',
                 headers: {
@@ -76,7 +78,7 @@ export const getAllPosts = createAsyncThunk(
             if (response.status !== 200) {
                 throw new Error((result as RequestResponseType).message);
             } else {
-                return result as PostResponseType[];
+                return result as { allPosts: PostResponseType[], hasMore: boolean };
             }
         } catch (err) {
             return thunkAPI.rejectWithValue((err as Error).message);

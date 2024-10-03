@@ -18,7 +18,7 @@ const PostsPage = () => {
         dispatch(getPosts(accessToken));
     }, [accessToken]);
 
-    const { posts } = useAppSelector(state => state.post);
+    const { usersPosts } = useAppSelector(state => state.post);
 
     return (
         <div className="app__page posts">
@@ -32,9 +32,9 @@ const PostsPage = () => {
                     >New</Link>
                 </section>
             </header>
-            {posts.length ? (
+            {usersPosts.length ? (
                 <ul className="app__posts-list">
-                    {posts.map((post, i) => (
+                    {usersPosts.map((post, i) => (
                         <Post
                             key={i + 1}
                             id={post.id}

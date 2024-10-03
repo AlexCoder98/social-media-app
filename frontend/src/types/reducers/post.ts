@@ -12,8 +12,11 @@ export type PostInitialStateType = {
 }
 
 export type PostsInitialStateType = {
-    posts: PostInitialStateType[];
+    allPosts: PostInitialStateType[];
+    usersPosts: PostInitialStateType[];
     post: PostInitialStateType | null;
+    hasMore: boolean;
+    page: number;
 }
 
 export type PostReqType = {

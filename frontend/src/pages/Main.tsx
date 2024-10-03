@@ -5,15 +5,18 @@ import Post from '../components/Main/Post/Post';
 
 
 import { getAllPosts } from '../state/post/actions';
+import { increment, reset } from '../state/post/postSlice';
 import { useAppSelector, useAppDispatch } from '../hooks/redux';
 import '../styles/pages_styles/LoggedInMainPage.css';
 import '../styles/components_styles/Posts.css';
 import { PostResponseType } from '../types/reducers/post';
 
 const MainPage = () => {
-    const [page, setPage] = useState<number>(1);
+    // const [page, setPage] = useState<number>(1);
     const accessToken = sessionStorage.getItem('accessToken') as string;
     const dispatch = useAppDispatch();
+
+    const { page } = useAppSelector(state => state.post);
 
     const reqData = {
         accessToken: accessToken,
@@ -21,15 +24,25 @@ const MainPage = () => {
     };
 
     useEffect(() => {
+        console.log('Fired');
         dispatch(getAllPosts(reqData));
-        setPage(page + 1);
+        // setPage(page + 1);
+        dispatch(increment());
     }, []);
 
-    const { posts } = useAppSelector(state => state.post);
+    console.log('PAGE NUMBER IS ' + page);
+
+    const { allPosts, hasMore } = useAppSelector(state => state.post);
+
+    console.log(allPosts);
+
     const fetchPosts = () => {
-        // console.log('Function fired...');
+        console.log('Function fired...');
         dispatch(getAllPosts(reqData));
-        setPage(page + 1);
+        if (hasMore) {
+            dispatch(increment());
+        }
+        // setPage(page + 1);
     }
 
     return (
@@ -39,14 +52,14 @@ const MainPage = () => {
             </header>
             {/* {posts.length ? ( */}
             <InfiniteScroll
-                dataLength={posts.length}
+                dataLength={allPosts.length}
                 next={fetchPosts}
-                hasMore={true}
+                hasMore={hasMore}
                 loader={<h3>Loading...</h3>}
                 endMessage={<p>No more data to load...</p>}
             >
                 <ul className="app__posts-list">
-                    {posts.map((post, i) => (
+                    {allPosts.map((post, i) => (
                         <Post
                             key={i + 1}
                             id={post.id}
