@@ -84,12 +84,16 @@ export const getPosts = async (req: Request, res: Response, next: NextFunction) 
 
 export const getAllPosts = async (req: Request, res: Response, next: NextFunction) => {
     const { page } = req.query;
-    // console.log('Initialization');
-    // console.log('PAGE ' + page);
 
     const perPage = 2;
-
+    // console.log('PAGE');
+    // console.log(page);
     try {
+        const postsLength = await Post.countDocuments();
+        // console.log('POSTS LENGTH ' + postsLength);
+
+        const hasMore = ((+page! * perPage) - 1);
+        // console.log('hasNext ' + hasMore);
         const posts = await Post
             .find()
             .sort({ 'createdAt': 'desc' })
@@ -122,7 +126,11 @@ export const getAllPosts = async (req: Request, res: Response, next: NextFunctio
             }
         });
 
-        res.status(200).json(postsForResponse);
+        const resData = {
+            allPosts: postsForResponse,
+            hasMore: postsLength >= hasMore ? true : false,
+        }
+        res.status(200).json(resData);
     } catch (err) {
         next(err);
     }
