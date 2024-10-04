@@ -83,22 +83,18 @@ export const getPosts = async (req: Request, res: Response, next: NextFunction) 
 };
 
 export const getAllPosts = async (req: Request, res: Response, next: NextFunction) => {
-    const { page } = req.query;
-
-    const perPage = 2;
-    // console.log('PAGE');
-    // console.log(page);
+    // Pagination
+    const pageNumber = +req.query.page!;
+    const perPage = 3;
     try {
         const postsLength = await Post.countDocuments();
-        // console.log('POSTS LENGTH ' + postsLength);
+        const hasMore = ((pageNumber * perPage) - 1) <= postsLength;
 
-        const hasMore = ((+page! * perPage) - 1);
-        // console.log('hasNext ' + hasMore);
         const posts = await Post
             .find()
             .sort({ 'createdAt': 'desc' })
             .limit(perPage)
-            .skip((+page! - 1) * perPage)
+            .skip((pageNumber - 1) * perPage)
             .populate('creator', ['name', 'surname', 'profileImage'])
 
         if (!posts) {
@@ -128,8 +124,9 @@ export const getAllPosts = async (req: Request, res: Response, next: NextFunctio
 
         const resData = {
             allPosts: postsForResponse,
-            hasMore: postsLength >= hasMore ? true : false,
+            hasMore: hasMore,
         }
+
         res.status(200).json(resData);
     } catch (err) {
         next(err);
