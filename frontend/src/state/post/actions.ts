@@ -63,8 +63,6 @@ export const getAllPosts = createAsyncThunk(
     'post/getAllPosts',
     async ({ accessToken, page }: { accessToken: string, page: number }, thunkAPI) => {
         try {
-            console.log('PAGE IN ACTION ' + page);
-
             const response = await fetch(`http://localhost:8080/main-page?page=${page}`, {
                 method: 'GET',
                 headers: {

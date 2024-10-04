@@ -1,0 +1,11 @@
+.app__no-more-data-container {
+    width: auto;
+    margin: 0 auto;
+    text-align: center;
+    border-top: 1px solid #ddd;
+}
+
+.app__no-more-data {
+    margin-top: .5rem;
+    font-size: 14px;
+}

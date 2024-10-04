@@ -24,11 +24,13 @@ const postSlice = createSlice({
     name: 'post',
     initialState,
     reducers: {
-        increment(state) {
+        incrementPage(state) {
             state.page++;
         },
-        reset(state) {
+        resetAllPosts(state) {
             state.page = 1;
+            state.allPosts = [];
+            state.hasMore = true;
         }
     },
     extraReducers: (builder) => {
@@ -52,6 +54,6 @@ const postSlice = createSlice({
     }
 });
 
-export const { increment, reset } = postSlice.actions;
+export const { incrementPage, resetAllPosts } = postSlice.actions;
 
 export default postSlice.reducer;
