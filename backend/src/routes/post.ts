@@ -4,13 +4,13 @@ import { body } from 'express-validator';
 
 import { isAuthenticated } from '../middleware/auth';
 
-import { postCreatePost, getPosts, getAllPosts, getPost, deletePost, getEditPost, postEditPost } from '../controllers/post';
+import { postCreatePost, getUserPosts, getAllPosts, getPost, deletePost, getEditPost, postEditPost } from '../controllers/post';
 
 const router = express.Router();
 
 router.get('/main-page', isAuthenticated, getAllPosts);
 
-router.get('/posts', isAuthenticated, getPosts);
+router.get('/posts', isAuthenticated, getUserPosts);
 
 router.delete('/posts', isAuthenticated, deletePost);
 

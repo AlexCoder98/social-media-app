@@ -43,13 +43,22 @@ export const postCreatePost = async (req: Request, res: Response, next: NextFunc
     }
 }
 
-export const getPosts = async (req: Request, res: Response, next: NextFunction) => {
+export const getUserPosts = async (req: Request, res: Response, next: NextFunction) => {
     const { userId } = req;
+
+    // Pagination
+    const pageNumber = +req.query.page!;
+    const perPage = 3;
     try {
+        const postsLength = await Post.countDocuments({ 'creator': userId });
+        const hasMore = ((pageNumber * perPage) - 1) <= postsLength;
+
         const posts = await Post
             .find({ 'creator': userId })
-            .populate('creator', ['name', 'surname', 'profileImage'])
-            .sort({ 'createdAt': 'desc' });
+            .sort({ 'createdAt': 'desc' })
+            .limit(perPage)
+            .skip((pageNumber - 1) * perPage)
+            .populate('creator', ['name', 'surname', 'profileImage']);
 
         if (!posts) {
             const message = 'No posts found.';
@@ -76,7 +85,12 @@ export const getPosts = async (req: Request, res: Response, next: NextFunction) 
             }
         });
 
-        res.status(200).json(postsForResponse);
+        const resData = {
+            userPosts: postsForResponse,
+            hasMore: hasMore,
+        }
+
+        res.status(200).json(resData);
     } catch (err) {
         next(err);
     }
