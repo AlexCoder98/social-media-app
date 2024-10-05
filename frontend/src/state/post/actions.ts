@@ -34,11 +34,11 @@ export const postCreatePost = createAsyncThunk(
     }
 );
 
-export const getPosts = createAsyncThunk(
+export const getUserPosts = createAsyncThunk(
     'post/getPosts',
-    async (accessToken: string, thunkAPI) => {
+    async ({ accessToken, page }: { accessToken: string, page: number }, thunkAPI) => {
         try {
-            const response = await fetch(`http://localhost:8080/posts`, {
+            const response = await fetch(`http://localhost:8080/posts?page=${page}`, {
                 method: 'GET',
                 headers: {
                     Authorization: `Bearer ${accessToken}`,
@@ -51,7 +51,7 @@ export const getPosts = createAsyncThunk(
             if (response.status !== 200) {
                 throw new Error((result as RequestResponseType).message);
             } else {
-                return result as PostResponseType[];
+                return result as { userPosts: PostResponseType[], hasMore: boolean };
             }
         } catch (err) {
             return thunkAPI.rejectWithValue((err as Error).message);

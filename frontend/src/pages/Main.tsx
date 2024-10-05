@@ -28,7 +28,7 @@ const MainPage = () => {
 
     const { allPosts, page, hasMore } = useAppSelector(state => state.post);
 
-    const fetchPosts = () => {
+    const fetchMorePosts = () => {
         setTimeout(() => {
             dispatch(getAllPosts({
                 accessToken: accessToken,
@@ -37,7 +37,7 @@ const MainPage = () => {
             if (hasMore) {
                 dispatch(incrementPage());
             }
-        }, 3000);
+        }, 2000);
     }
 
     return (
@@ -48,7 +48,7 @@ const MainPage = () => {
             {allPosts.length ? (
                 <InfiniteScroll
                     dataLength={allPosts.length}
-                    next={fetchPosts}
+                    next={fetchMorePosts}
                     hasMore={hasMore}
                     loader={<FetchingData />}
                     endMessage={<NoMoreData />}

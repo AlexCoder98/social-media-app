@@ -13,7 +13,7 @@ export type PostInitialStateType = {
 
 export type PostsInitialStateType = {
     allPosts: PostInitialStateType[];
-    usersPosts: PostInitialStateType[];
+    userPosts: PostInitialStateType[];
     post: PostInitialStateType | null;
     hasMore: boolean;
     page: number;

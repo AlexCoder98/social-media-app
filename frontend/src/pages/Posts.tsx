@@ -1,24 +1,47 @@
-import { useLayoutEffect } from "react";
+import { useEffect } from "react";
 import { Link } from "react-router-dom";
 
-import { getPosts } from "../state/post/actions";
+import InfiniteScroll from "react-infinite-scroll-component";
 
 import Post from "../components/Main/Post/Post";
+import NoMoreData from "../components/Message/NoMoreData";
+import FetchingData from "../components/Message/FetchingData";
+
+import { getUserPosts } from "../state/post/actions";
+import { incrementPage, resetUserPosts } from "../state/post/postSlice";
+
 
 import { useAppDispatch, useAppSelector } from "../hooks/redux";
 
 import '../styles/components_styles/Posts.css';
 import '../styles/components_styles/Button.css';
 
-const PostsPage = () => {
-    const dispatch = useAppDispatch();
+const UserPostsPage = () => {
     const accessToken = sessionStorage.getItem('accessToken') as string;
+    const dispatch = useAppDispatch();
 
-    useLayoutEffect(() => {
-        dispatch(getPosts(accessToken));
-    }, [accessToken]);
+    useEffect(() => {
+        dispatch(resetUserPosts());
+        dispatch(getUserPosts({
+            accessToken: accessToken,
+            page: 1
+        }));
+        dispatch(incrementPage())
+    }, []);
 
-    const { usersPosts } = useAppSelector(state => state.post);
+    const { userPosts, page, hasMore } = useAppSelector(state => state.post);
+
+    const fetchMorePosts = () => {
+        setTimeout(() => {
+            dispatch(getUserPosts({
+                accessToken: accessToken,
+                page: page
+            }));
+            if (hasMore) {
+                dispatch(incrementPage());
+            }
+        }, 2000);
+    }
 
     return (
         <div className="app__page posts">
@@ -32,24 +55,32 @@ const PostsPage = () => {
                     >New</Link>
                 </section>
             </header>
-            {usersPosts.length ? (
-                <ul className="app__posts-list">
-                    {usersPosts.map((post, i) => (
-                        <Post
-                            key={i + 1}
-                            id={post.id}
-                            title={post.title}
-                            image={post.image}
-                            description={post.description}
-                            creator={{
-                                name: post.creator.name,
-                                surname: post.creator.surname,
-                                profileImage: post.creator.profileImage
-                            }}
-                            creationDate={post.creationDate}
-                        />
-                    ))}
-                </ul>
+            {userPosts.length ? (
+                <InfiniteScroll
+                    dataLength={userPosts.length}
+                    next={fetchMorePosts}
+                    hasMore={hasMore}
+                    loader={<FetchingData />}
+                    endMessage={<NoMoreData />}
+                >
+                    <ul className="app__posts-list">
+                        {userPosts.map((post, i) => (
+                            <Post
+                                key={i + 1}
+                                id={post.id}
+                                title={post.title}
+                                image={post.image}
+                                description={post.description}
+                                creator={{
+                                    name: post.creator.name,
+                                    surname: post.creator.surname,
+                                    profileImage: post.creator.profileImage
+                                }}
+                                creationDate={post.creationDate}
+                            />
+                        ))}
+                    </ul>
+                </InfiniteScroll>
             ) : (
                 <h2 className="app__h2" style={{ margin: '5rem 0' }}>No posts yet</h2>
             )}
@@ -57,4 +88,4 @@ const PostsPage = () => {
     )
 }
 
-export default PostsPage;
+export default UserPostsPage;

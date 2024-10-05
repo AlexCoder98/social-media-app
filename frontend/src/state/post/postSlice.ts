@@ -2,7 +2,7 @@ import { createSlice } from '@reduxjs/toolkit';
 
 import {
     postCreatePost,
-    getPosts,
+    getUserPosts,
     getAllPosts,
     getPost,
     deletePost,
@@ -14,7 +14,7 @@ import { PostResponseType, PostsInitialStateType } from '../../types/reducers/po
 
 const initialState: PostsInitialStateType = {
     allPosts: [],
-    usersPosts: [],
+    userPosts: [],
     post: null,
     hasMore: false,
     page: 1,
@@ -30,13 +30,19 @@ const postSlice = createSlice({
         resetAllPosts(state) {
             state.page = 1;
             state.allPosts = [];
-            state.hasMore = true;
+            state.hasMore = false;
+        },
+        resetUserPosts(state) {
+            state.page = 1;
+            state.userPosts = [];
+            state.hasMore = false;
         }
     },
     extraReducers: (builder) => {
         builder
-            .addCase(getPosts.fulfilled, (state, { payload }) => {
-                state.usersPosts = payload;
+            .addCase(getUserPosts.fulfilled, (state, { payload }) => {
+                state.userPosts = [...state.userPosts].concat(payload.userPosts as PostResponseType[]);
+                state.hasMore = payload.hasMore;
             })
             .addCase(getAllPosts.fulfilled, (state, { payload }) => {
                 state.allPosts = [...state.allPosts].concat(payload.allPosts as PostResponseType[]);
@@ -54,6 +60,6 @@ const postSlice = createSlice({
     }
 });
 
-export const { incrementPage, resetAllPosts } = postSlice.actions;
+export const { incrementPage, resetAllPosts, resetUserPosts } = postSlice.actions;
 
 export default postSlice.reducer;

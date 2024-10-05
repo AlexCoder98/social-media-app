@@ -33,9 +33,6 @@ const authSlice = createSlice({
             .addCase(signUp.rejected, (state, { payload }) => {
                 state.loading = false;
             })
-            .addCase(signIn.pending, () => {
-                console.log('Loading...');
-            })
             .addCase(signIn.fulfilled, (state, { payload }) => {
                 state.isAuth = payload.isAuth;
                 state.accessToken = payload.accessToken;
@@ -45,9 +42,6 @@ const authSlice = createSlice({
                 state.userId = null;
                 state.accessToken = null;
                 state.isAuth = 'false';
-            })
-            .addCase(signOut.pending, () => {
-                console.log('Loading...');
             })
             .addCase(signOut.fulfilled, (state, { payload }) => {
                 state.isAuth = payload.isAuth!;
