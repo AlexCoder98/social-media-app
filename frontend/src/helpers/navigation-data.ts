@@ -2,6 +2,7 @@ type NavigationLinksType = {
     content: string;
     url: string;
     title: string;
+    iconName?: string;
 }[]
 
 export const navigationLoggedOutLinksData: NavigationLinksType = [
@@ -19,19 +20,22 @@ export const navigationLoggedOutLinksData: NavigationLinksType = [
 
 export const navigationLoggedInLinksData: NavigationLinksType = [
     {
-        content: 'Main page',
-        url: '/main-page',
-        title: 'Main'
+        content: 'Home',
+        url: '/home',
+        title: 'Home page',
+        iconName: 'house'
     },
     {
-        content: 'Posts',
-        url: '/posts',
-        title: 'Posts'
+        content: 'My Posts',
+        url: '/my-posts',
+        title: 'My posts',
+        iconName: 'photo-film'
     },
     {
         content: 'Profile',
         url: '/profile',
-        title: 'Profile'
+        title: 'Profile',
+        iconName: 'user'
     },
 ]
 
@@ -39,11 +43,13 @@ export const editProfileNavigationData: NavigationLinksType = [
     {
         content: 'Profile',
         url: '/settings/profile',
-        title: 'Profile settings'
+        title: 'Profile settings',
+        iconName: 'user'
     },
     {
         content: 'Authentication',
         url: '/settings/authentication',
-        title: 'Authentication settings'
+        title: 'Authentication settings',
+        iconName: 'lock'
     },
 ]

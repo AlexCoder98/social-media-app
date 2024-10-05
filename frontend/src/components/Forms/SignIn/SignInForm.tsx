@@ -57,7 +57,7 @@ const SignInForm = () => {
                     email: '',
                     password: ''
                 });
-                navigate('/main-page');
+                navigate('/home');
             }
         });
     }

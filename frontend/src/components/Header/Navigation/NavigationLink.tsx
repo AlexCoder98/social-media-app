@@ -1,8 +1,23 @@
 import { NavLink } from 'react-router-dom';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import {
+    library,
+    IconLookup,
+    IconDefinition,
+    findIconDefinition
+} from '@fortawesome/fontawesome-svg-core';
+import { fas } from '@fortawesome/free-solid-svg-icons'
+
 
 import { NavigationLinkProps } from '../../../types/nav-link';
 
-const NavigationLink = ({ to, content, title }: NavigationLinkProps) => {
+library.add(fas);
+
+const NavigationLink = ({ to, content, title, iconName }: NavigationLinkProps) => {
+
+    const iconLookUp: IconLookup = { prefix: 'fas', iconName: iconName! }
+    const iconDefinition: IconDefinition = findIconDefinition(iconLookUp)
+
     return (
         <li className="app__navigation-item-container">
             <NavLink
@@ -12,6 +27,11 @@ const NavigationLink = ({ to, content, title }: NavigationLinkProps) => {
                 }}
                 title={title}
             >
+                {iconName && (
+                    <span className="icon-container">
+                        <FontAwesomeIcon icon={iconDefinition} />
+                    </span>
+                )}
                 {content}
             </NavLink>
         </li>

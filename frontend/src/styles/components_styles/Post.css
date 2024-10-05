@@ -1,17 +1,19 @@
 .app__post {
     width: 100%;
     border: 1px solid #ddd;
-    border-radius: 5px;
+    border-radius: 15px;
 }
 
-.post-head,
-.post-description-wrapper,
-.post-bottom {
+.post__description-wrapper,
+.post__bottom {
     padding: 10px;
 }
 
 .post__creation-details-wrapper {
     display: flex;
+    align-items: center;
+    padding: 10px;
+    border-bottom: 1px solid #ddd;
 }
 
 .post__creator-photo {
@@ -26,35 +28,52 @@
 .post__creation-details {
     flex-grow: 1;
     display: flex;
-    margin-bottom: 20px;
+    align-self: center;
     line-height: 25px;
 }
 
 .post__creator-name {
     flex-grow: 1;
-}
-
-.post__creator-name,
-.post__creation-date {
     font-size: 12px;
+    font-weight: bolder;
 }
 
-.post-h3 {
+.post__creation-date {
+    font-size: 10px;
+}
+
+.post__h3 {
+    padding: 10px;
     text-align: center;
     font-size: 22px;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
 }
 
-.post-img-wrapper {
+.post__img-wrapper {
     height: 250px;
-    background-position: center;
-    background-size: cover;
+    overflow: hidden;
 }
 
-.post-description-wrapper {
+.post__image {
+    width: 100%;
+    height: 250px;
+    object-fit: cover;
+    object-position: center;
+    transition: .3s linear;
+}
+
+.post__img-wrapper:hover .post__image {
+    transform: rotate(15deg) scale(1.5);
+    filter: brightness(60%);
+}
+
+.post__description-wrapper {
     text-align: center;
 }
 
-.post-bottom {
+.post__bottom {
     display: flex;
     justify-content: space-around;
 }

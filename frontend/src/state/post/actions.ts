@@ -13,7 +13,7 @@ export const postCreatePost = createAsyncThunk(
     'post/addPost',
     async (reqData: PostReqType, thunkAPI) => {
         try {
-            const response = await fetch(`http://localhost:8080/posts/create-new`, {
+            const response = await fetch(`http://localhost:8080/my-posts/create-new`, {
                 method: 'POST',
                 headers: {
                     Authorization: `Bearer ${reqData.accessToken}`,
@@ -38,7 +38,7 @@ export const getUserPosts = createAsyncThunk(
     'post/getPosts',
     async ({ accessToken, page }: { accessToken: string, page: number }, thunkAPI) => {
         try {
-            const response = await fetch(`http://localhost:8080/posts?page=${page}`, {
+            const response = await fetch(`http://localhost:8080/my-posts?page=${page}`, {
                 method: 'GET',
                 headers: {
                     Authorization: `Bearer ${accessToken}`,
@@ -63,7 +63,7 @@ export const getAllPosts = createAsyncThunk(
     'post/getAllPosts',
     async ({ accessToken, page }: { accessToken: string, page: number }, thunkAPI) => {
         try {
-            const response = await fetch(`http://localhost:8080/main-page?page=${page}`, {
+            const response = await fetch(`http://localhost:8080/home?page=${page}`, {
                 method: 'GET',
                 headers: {
                     Authorization: `Bearer ${accessToken}`,
@@ -88,7 +88,7 @@ export const getPost = createAsyncThunk(
     'post/getPost',
     async (reqData: GetPostReqType, thunkAPI) => {
         try {
-            const respone = await fetch(`http://localhost:8080/posts/${reqData.postId}`, {
+            const respone = await fetch(`http://localhost:8080/my-posts/${reqData.postId}`, {
                 method: 'GET',
                 headers: {
                     Authorization: `Bearer ${reqData.accessToken}`,
@@ -113,7 +113,7 @@ export const deletePost = createAsyncThunk(
     'post/deletePost',
     async (reqData: GetPostReqType, thunkAPI) => {
         try {
-            const response = await fetch(`http://localhost:8080/posts/${reqData.postId}`, {
+            const response = await fetch(`http://localhost:8080/my-posts/${reqData.postId}`, {
                 method: 'DELETE',
                 headers: {
                     Authorization: `Bearer ${reqData.accessToken}`,
@@ -138,7 +138,7 @@ export const getEditPost = createAsyncThunk(
     'post/getEditPost',
     async (reqData: GetPostReqType, thunkAPI) => {
         try {
-            const respone = await fetch(`http://localhost:8080/posts/${reqData.postId}/edit`, {
+            const respone = await fetch(`http://localhost:8080/my-posts/${reqData.postId}/edit`, {
                 method: 'GET',
                 headers: {
                     Authorization: `Bearer ${reqData.accessToken}`,
@@ -166,7 +166,7 @@ export const postEditPost = createAsyncThunk(
         accessData: GetPostReqType
     }, thunkAPI) => {
         try {
-            const response = await fetch(`http://localhost:8080/posts/${updatedPost.accessData.postId}/edit`, {
+            const response = await fetch(`http://localhost:8080/my-posts/${updatedPost.accessData.postId}/edit`, {
                 method: 'PUT',
                 headers: {
                     Authorization: `Bearer ${updatedPost.accessData.accessToken}`,

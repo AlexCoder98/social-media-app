@@ -12,6 +12,11 @@
 
 .profile-settings-navigation__links-list .app__nav-link {
     margin: 0;
-    padding: .3rem;
+    padding: .3rem 10px;
     font-size: 16px;
+}
+
+.app__profile-settings-navigation .icon-container {
+    margin-right: .5rem;
+    font-size: 14px;
 }

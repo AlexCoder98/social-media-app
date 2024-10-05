@@ -15,8 +15,8 @@ const NotFoundPage = lazy(() => import('../pages/404'));
 const SignedInLayout = () => {
     return (
         <Routes>
-            <Route path='/main-page' element={<MainPage />} />
-            <Route path='/posts'>
+            <Route path='/home' element={<MainPage />} />
+            <Route path='/my-posts'>
                 <Route index element={<PostsPage />} />
                 <Route path=':postId' element={<PostPage />} />
                 <Route path=':postId/edit' element={<EditPostPage />} />

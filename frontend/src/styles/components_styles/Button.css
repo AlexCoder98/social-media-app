@@ -22,7 +22,7 @@
     color: var(--actionButtonColor);
     border: none;
     background-color: var(--actionButtonBgc);
-    border-radius: 5px;
+    border-radius: 15px;
     transition: .2s ease-out;
 }
 
@@ -38,7 +38,7 @@
     background-color: var(--buttonBgc);
     border: none;
     color: var(--buttonColor);
-    border-radius: 5px;
+    border-radius: 15px;
     transition: .2s ease-out;
     cursor: pointer;
 }

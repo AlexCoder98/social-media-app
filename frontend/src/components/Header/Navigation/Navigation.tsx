@@ -9,6 +9,8 @@ import {
     navigationLoggedInLinksData
 } from '../../../helpers/navigation-data';
 
+import { IconType } from '../../../types/nav-link';
+
 import '../../../styles/components_styles/Navigation.css';
 
 const Navigation = () => {
@@ -31,6 +33,7 @@ const Navigation = () => {
                         to={navLink.url}
                         content={navLink.content}
                         title={navLink.title}
+                        iconName={navLink.iconName as IconType}
                     />
                 )}
             </ul>

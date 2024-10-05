@@ -27,14 +27,20 @@
 }
 
 .app__nav-link {
-    display: block;
+    display: flex;
+    align-items: center;
     margin: 0 .5rem;
     padding: .5rem 2rem;
     font-size: 20px;
     text-decoration: none;
     color: var(--navLinkColor);
     transition: .2s linear;
-    border-radius: 5px;
+    border-radius: 15px;
+}
+
+.app__main-navigation .icon-container {
+    margin-right: .5rem;
+    font-size: 16px;
 }
 
 .app__nav-link:hover {

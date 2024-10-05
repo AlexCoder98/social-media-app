@@ -9,7 +9,7 @@ const Post = ({ id, title, image, description, creator, creationDate }: PostProp
 
     return (
         <li className="app__post">
-            <header className="post-head">
+            <header className="post__head">
                 <section className="post__creation-details-wrapper">
                     <img
                         className="post__creator-photo"
@@ -20,27 +20,27 @@ const Post = ({ id, title, image, description, creator, creationDate }: PostProp
                         <p className="post__creator-name">{creator.name} {creator.surname}</p>
                         <p className="post__creation-date">{creationDate}</p>
                     </div>
-
                 </section>
-                <h3 className="post-h3">
+                <h3 className="post__h3">
                     {title}
                 </h3>
             </header>
-            <main className="post-body">
-                <div
-                    className="post-img-wrapper"
-                    style={{ backgroundImage: `url(${image})` }}
-                >
+            <main className="post__body">
+                <div className="post__img-wrapper">
+                    <img
+                        className="post__image"
+                        src={image}
+                        alt={`Post - ${title}`} />
                 </div>
-                <div className="post-description-wrapper">
-                    <p className="post-description">
+                <div className="post__description-wrapper">
+                    <p className="post__description">
                         {description}
                     </p>
                 </div>
             </main>
             {
                 location.pathname.endsWith('posts') && (
-                    <footer className="post-bottom">
+                    <footer className="post__bottom">
                         <Link
                             to={id}
                             className="app__button post"
