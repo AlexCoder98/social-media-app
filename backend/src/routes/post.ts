@@ -8,14 +8,14 @@ import { postCreatePost, getUserPosts, getAllPosts, getPost, deletePost, getEdit
 
 const router = express.Router();
 
-router.get('/main-page', isAuthenticated, getAllPosts);
+router.get('/home', isAuthenticated, getAllPosts);
 
-router.get('/posts', isAuthenticated, getUserPosts);
+router.get('/my-posts', isAuthenticated, getUserPosts);
 
-router.delete('/posts', isAuthenticated, deletePost);
+router.delete('/my-posts', isAuthenticated, deletePost);
 
 router.post(
-    '/posts/create-new',
+    '/my-posts/create-new',
     isAuthenticated,
     body('title')
         .trim()
@@ -32,14 +32,14 @@ router.post(
     postCreatePost
 );
 
-router.get('/posts/:postId', isAuthenticated, getPost);
+router.get('/my-posts/:postId', isAuthenticated, getPost);
 
-router.delete('/posts/:postId', isAuthenticated, deletePost);
+router.delete('/my-posts/:postId', isAuthenticated, deletePost);
 
-router.get('/posts/:postId/edit', isAuthenticated, getEditPost);
+router.get('/my-posts/:postId/edit', isAuthenticated, getEditPost);
 
 router.put(
-    '/posts/:postId/edit',
+    '/my-posts/:postId/edit',
     isAuthenticated,
     body('title')
         .trim()
