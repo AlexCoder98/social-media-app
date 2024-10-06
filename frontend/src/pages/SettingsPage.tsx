@@ -1,5 +1,4 @@
 import { useState, useEffect } from "react";
-
 import { Outlet, Link } from "react-router-dom";
 
 import ProfileSettingsNavigation from "../components/SettingsAside/ProfileSettingsNavigation";

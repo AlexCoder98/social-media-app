@@ -20,8 +20,7 @@ const ProfilePage = () => {
     const dispatch = useAppDispatch();
     const navigate = useNavigate();
 
-    const editIcon = useFontAwesomeIcon('pen-to-square');
-    const exitIcon = useFontAwesomeIcon('right-from-bracket');
+    const settingsIcon = useFontAwesomeIcon('gear');
 
     useLayoutEffect(() => {
         const reqData = {
@@ -50,11 +49,11 @@ const ProfilePage = () => {
                     <Link
                         className="app__button edit-profile"
                         to="/settings/profile"
-                        title="Edit your profile"
-                    >Edit profile
-                        {editIcon && (
+                        title="Profile settings"
+                    >Settings
+                        {settingsIcon && (
                             <span className="icon-container">
-                                <FontAwesomeIcon icon={editIcon} />
+                                <FontAwesomeIcon icon={settingsIcon} />
                             </span>
                         )}</Link>
                     <Button

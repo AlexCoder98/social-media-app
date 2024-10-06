@@ -16,14 +16,13 @@ import '../../../styles/components_styles/Navigation.css';
 const Navigation = () => {
     const { isAuth } = useAppSelector((state) => state.authentication);
     const navigationType = isAuth === 'true' ? navigationLoggedInLinksData : navigationLoggedOutLinksData;
-
-    console.log(navigationType);
+    const linkPath = isAuth === 'true' ? 'home' : '/';
 
     return (
         <nav className="app__main-navigation">
             <div className="app__logo-container">
                 <Link
-                    to={isAuth === 'false' ? '/' : 'home'}
+                    to={linkPath}
                     className="app__nav-link"
                     title="Home page"
                 >mySocialMediaApp</Link>

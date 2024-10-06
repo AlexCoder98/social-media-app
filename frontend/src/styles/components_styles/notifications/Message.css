@@ -18,7 +18,7 @@
     align-items: center;
     min-width: 300px;
     padding: 1rem 1.5rem;
-    border-radius: 5px;
+    border-radius: 15px;
     border: 1px solid;
     box-shadow: 0 0 10px 3px var(--messageBoxShadowColor);
     animation: showHideMessage 3s linear both, moveMessage .3s ease-out both;

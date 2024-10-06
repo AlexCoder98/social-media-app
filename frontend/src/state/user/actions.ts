@@ -89,11 +89,15 @@ export const postProfileSettigns = createAsyncThunk(
         thunkAPI
     ) => {
         try {
+
+            console.log(reqData.userObj);
+
             const response = await fetch(`http://localhost:8080/settings/profile`, {
                 method: 'PUT',
                 headers: {
                     Authorization: `Bearer ${reqData.accessToken}`,
-                    'Content-Type': 'application/json'
+                    // 'Content-Type': 'application/json'
+                    'Content-Type': `multipart/form-data`
                 },
                 body: JSON.stringify(reqData.userObj)
             });

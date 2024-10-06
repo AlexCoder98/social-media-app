@@ -8,9 +8,6 @@ import { useFontAwesomeIcon } from '../../../hooks/useFontAwesomeIcon';
 const NavigationLink = ({ to, content, title, iconName }: NavigationLinkProps) => {
     const icon = useFontAwesomeIcon(iconName!);
 
-    console.log(title);
-    console.log(icon);
-
     return (
         <li className="app__navigation-item-container">
             <NavLink

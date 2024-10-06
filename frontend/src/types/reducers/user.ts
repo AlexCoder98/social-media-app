@@ -15,7 +15,7 @@ export type UserReqType = {
 export type ProfileSettingsType = {
     name: string;
     surname: string;
-    profileImage: string;
+    profileImage?: File | null | string;
     status: string;
     bio: string;
 }

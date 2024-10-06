@@ -25,7 +25,7 @@ const userSlice = createSlice({
             .addCase(getUser.fulfilled, (state, { payload }) => {
                 state.name = payload.name;
                 state.surname = payload.surname;
-                state.profileImage = payload.profileImage;
+                state.profileImage = payload.profileImage as string;
                 state.status = payload.status;
                 state.bio = payload.bio;
             });

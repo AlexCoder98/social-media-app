@@ -14,10 +14,12 @@ const ProfileSettingsPage = () => {
     const [profileSettingsValues, setProfileSettingsValues] = useState({
         name: '',
         surname: '',
-        profileImage: '',
+        // profileImage: '',
         status: '',
         bio: ''
     });
+
+    const [file, setFile] = useState<File | null>(null);
 
     const [errorMsg, setErrorMsg] = useState<string>('');
     const [successMsg, setSuccessMsg] = useState<string>('');
@@ -33,7 +35,7 @@ const ProfileSettingsPage = () => {
                 setProfileSettingsValues({
                     name: name,
                     surname: surname,
-                    profileImage: profileImage,
+                    // profileImage: profileImage as string,
                     status: status,
                     bio: bio
                 });
@@ -43,20 +45,33 @@ const ProfileSettingsPage = () => {
 
     const handleInputChange = (e: React.FormEvent) => {
         const { name, value } = e.target as HTMLInputElement;
+        const file = (e.target as HTMLInputElement).files!;
+
+        console.log('File');
+        if (file) {
+            console.log(file[0]);
+        }
+
+        setFile(file[0]);
+
         setProfileSettingsValues((prevValues) => ({
             ...prevValues,
-            [name]: value
+            // [name]: name !== 'file' ? value : file[0] as File,
+            [name]: value,
         }));
     }
 
     const handleOnSubmit = (e: React.SyntheticEvent) => {
         e.preventDefault();
-        const { name, surname, profileImage, status, bio } = profileSettingsValues;
+        const { name, surname, status, bio } = profileSettingsValues;
+
+        // console.log('Profile image ' + profileImage);
+
         const reqData = {
             userObj: {
                 name: name,
                 surname: surname,
-                profileImage: profileImage,
+                profileImage: file,
                 status: status,
                 bio: bio,
             },
@@ -87,6 +102,7 @@ const ProfileSettingsPage = () => {
             <form
                 className="settings__form"
                 method="PUT"
+                encType="multipart/form-data"
                 onSubmit={handleOnSubmit}
             >
                 <AsideHeader
@@ -111,7 +127,7 @@ const ProfileSettingsPage = () => {
                         method={handleInputChange}
                         value={profileSettingsValues.surname}
                     />
-                    <InputElement
+                    {/* <InputElement
                         id="profileImage"
                         tagType="input"
                         placeholder="Profile image"
@@ -119,6 +135,15 @@ const ProfileSettingsPage = () => {
                         type="text"
                         method={handleInputChange}
                         value={profileSettingsValues.profileImage}
+                    /> */}
+                    <InputElement
+                        id="profileImage"
+                        tagType="input"
+                        placeholder="Profile image file"
+                        label="Profile image file"
+                        type="file"
+                        method={handleInputChange}
+                    // value={profileSettingsValues.profileImage}
                     />
                     <InputElement
                         id="status"
