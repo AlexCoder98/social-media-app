@@ -23,7 +23,7 @@
     padding: 1rem 2rem;
     background-color: var(--formBgc);
     border: 1px solid var(--borderColor);
-    border-radius: 5px;
+    border-radius: 15px;
 }
 
 .app__form-h2 {
@@ -51,7 +51,7 @@
     color: var(--formInputColor);
     outline: none;
     border: 1px solid var(--borderColor);
-    border-radius: 5px;
+    border-radius: 15px;
     transition: .2s ease-in;
 }
 
