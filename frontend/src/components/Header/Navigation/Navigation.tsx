@@ -9,7 +9,7 @@ import {
     navigationLoggedInLinksData
 } from '../../../helpers/navigation-data';
 
-import { IconType } from '../../../types/nav-link';
+import { IconName } from '@fortawesome/fontawesome-svg-core';
 
 import '../../../styles/components_styles/Navigation.css';
 
@@ -17,11 +17,13 @@ const Navigation = () => {
     const { isAuth } = useAppSelector((state) => state.authentication);
     const navigationType = isAuth === 'true' ? navigationLoggedInLinksData : navigationLoggedOutLinksData;
 
+    console.log(navigationType);
+
     return (
         <nav className="app__main-navigation">
             <div className="app__logo-container">
                 <Link
-                    to={isAuth === 'false' ? '/' : 'main-page'}
+                    to={isAuth === 'false' ? '/' : 'home'}
                     className="app__nav-link"
                     title="Home page"
                 >mySocialMediaApp</Link>
@@ -33,7 +35,7 @@ const Navigation = () => {
                         to={navLink.url}
                         content={navLink.content}
                         title={navLink.title}
-                        iconName={navLink.iconName as IconType}
+                        iconName={navLink.iconName as IconName}
                     />
                 )}
             </ul>

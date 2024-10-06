@@ -155,6 +155,7 @@ const AccessSettings = () => {
                         type={"submit"}
                         content={"Save"}
                         title={!isDisabled ? "Save changes" : ""}
+                        iconName={"floppy-disk"}
                         isDisabled={isDisabled}
                     />
                 </footer>

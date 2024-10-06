@@ -1,8 +1,14 @@
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+
+import { useFontAwesomeIcon } from "../../hooks/useFontAwesomeIcon";
+
 import { ButtonProps } from "../../types/button";
 
 import '../../styles/components_styles/Button.css';
 
-const Button = ({ method, className, content, type, title, isDisabled }: ButtonProps) => {
+const Button = ({ method, className, content, type, title, isDisabled, iconName }: ButtonProps) => {
+    const icon = useFontAwesomeIcon(iconName!)
+
     return (
         <button
             className={className}
@@ -12,6 +18,11 @@ const Button = ({ method, className, content, type, title, isDisabled }: ButtonP
             disabled={isDisabled}
         >
             {content}
+            {icon && (
+                <span className="icon-container">
+                    <FontAwesomeIcon icon={icon} />
+                </span>
+            )}
         </button>
     )
 }

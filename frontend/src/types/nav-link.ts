@@ -1,8 +1,8 @@
-export type IconType = 'house' | 'photo-film' | 'user';
+import { IconName } from "@fortawesome/fontawesome-svg-core";
 
 export type NavigationLinkProps = {
     to: string;
     content: string;
-    iconName?: IconType | null;
+    iconName?: IconName | null;
     title?: string;
 }

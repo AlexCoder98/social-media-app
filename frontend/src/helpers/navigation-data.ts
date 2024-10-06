@@ -2,19 +2,19 @@ type NavigationLinksType = {
     content: string;
     url: string;
     title: string;
-    iconName?: string;
+    iconName?: string | null;
 }[]
 
 export const navigationLoggedOutLinksData: NavigationLinksType = [
     {
         content: 'Sign in',
         url: '/sign-in',
-        title: 'Sign In'
+        title: 'Sign In',
     },
     {
         content: 'Sign up',
         url: '/sign-up',
-        title: 'Sign up'
+        title: 'Sign up',
     },
 ];
 
@@ -39,7 +39,7 @@ export const navigationLoggedInLinksData: NavigationLinksType = [
     },
 ]
 
-export const editProfileNavigationData: NavigationLinksType = [
+export const profileSettingsNavigationData: NavigationLinksType = [
     {
         content: 'Profile',
         url: '/settings/profile',

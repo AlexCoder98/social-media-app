@@ -1,11 +1,15 @@
 import { useLayoutEffect } from "react";
 import { useNavigate, Link } from "react-router-dom";
 
+import Button from "../components/Button/Button";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+
 import { getUser } from "../state/user/actions";
 import { signOut } from "../state/authentication/actions";
 import { useAppDispatch, useAppSelector } from "../hooks/redux";
+import { useFontAwesomeIcon } from "../hooks/useFontAwesomeIcon";
 
-import Button from "../components/Button/Button";
+import { IconName } from "@fortawesome/fontawesome-svg-core";
 
 import '../styles/pages_styles/ProfilePage.css';
 
@@ -15,6 +19,9 @@ const ProfilePage = () => {
     const user = useAppSelector(state => state.user);
     const dispatch = useAppDispatch();
     const navigate = useNavigate();
+
+    const editIcon = useFontAwesomeIcon('pen-to-square');
+    const exitIcon = useFontAwesomeIcon('right-from-bracket');
 
     useLayoutEffect(() => {
         const reqData = {
@@ -44,12 +51,18 @@ const ProfilePage = () => {
                         className="app__button edit-profile"
                         to="/settings/profile"
                         title="Edit your profile"
-                    >Edit profile</Link>
+                    >Edit profile
+                        {editIcon && (
+                            <span className="icon-container">
+                                <FontAwesomeIcon icon={editIcon} />
+                            </span>
+                        )}</Link>
                     <Button
                         className={"app__button"}
                         content={"Sign out"}
                         type={"button"}
                         title={"Sign out"}
+                        iconName={"right-from-bracket"}
                         method={handleSignOut}
                     />
                 </section>

@@ -145,6 +145,7 @@ const ProfileSettingsPage = () => {
                         type={"submit"}
                         content={"Save"}
                         title={"Save changes"}
+                        iconName={"floppy-disk"}
                     />
                 </footer>
             </form>

@@ -10,8 +10,10 @@ import FetchingData from "../components/Message/FetchingData";
 import { getUserPosts } from "../state/post/actions";
 import { incrementPage, resetUserPosts } from "../state/post/postSlice";
 
-
 import { useAppDispatch, useAppSelector } from "../hooks/redux";
+import { useFontAwesomeIcon } from "../hooks/useFontAwesomeIcon";
+
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 import '../styles/components_styles/Posts.css';
 import '../styles/components_styles/Button.css';
@@ -19,6 +21,7 @@ import '../styles/components_styles/Button.css';
 const UserPostsPage = () => {
     const accessToken = sessionStorage.getItem('accessToken') as string;
     const dispatch = useAppDispatch();
+    const icon = useFontAwesomeIcon('plus');
 
     useEffect(() => {
         dispatch(resetUserPosts());
@@ -52,7 +55,13 @@ const UserPostsPage = () => {
                         to={"create-new"}
                         className="app__button add"
                         title="Create new post"
-                    >New</Link>
+                    >New
+                        {icon && (
+                            <span className="icon-container">
+                                <FontAwesomeIcon icon={icon} />
+                            </span>
+                        )}
+                    </Link>
                 </section>
             </header>
             {userPosts.length ? (

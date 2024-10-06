@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 
+import { IconName } from '@fortawesome/fontawesome-svg-core';
 import {
     library,
     IconLookup,
@@ -7,18 +8,17 @@ import {
     findIconDefinition
 } from '@fortawesome/fontawesome-svg-core';
 import { fas } from '@fortawesome/free-solid-svg-icons'
-import { IconType } from '../types/nav-link';
 
 library.add(fas);
 
-export const useFontAwesomeIcon = (iconName: IconType | null) => {
-    const [icon, setIcon] = useState<IconType | null>(null);
+export const useFontAwesomeIcon = (iconName: IconName | null) => {
+    const [icon, setIcon] = useState<IconName | null>(null);
 
     useEffect(() => {
         setIcon(iconName);
-    }, []);
+    }, [iconName]);
 
-    const iconLookUp: IconLookup = { prefix: 'fas', iconName: icon as IconType }
+    const iconLookUp: IconLookup = { prefix: 'fas', iconName: icon as IconName }
     const iconDefinition: IconDefinition = findIconDefinition(iconLookUp);
 
     return iconDefinition;

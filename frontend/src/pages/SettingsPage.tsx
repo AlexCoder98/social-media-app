@@ -4,7 +4,10 @@ import { Outlet, Link } from "react-router-dom";
 
 import ProfileSettingsNavigation from "../components/SettingsAside/ProfileSettingsNavigation";
 
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+
 import { useAppDispatch } from "../hooks/redux";
+import { useFontAwesomeIcon } from "../hooks/useFontAwesomeIcon";
 
 import { getSettings } from "../state/user/actions";
 
@@ -20,6 +23,8 @@ const SettingsPage = () => {
         surname: '',
         profileImage: ''
     });
+
+    const goBackIcon = useFontAwesomeIcon('arrow-left');
 
     const dispatch = useAppDispatch();
 
@@ -61,7 +66,13 @@ const SettingsPage = () => {
                         to="/profile"
                         className="app__button back"
                         title="Go to profile page"
-                    >Go to profile page</Link>
+                    >
+                        {goBackIcon && (
+                            <span className="icon-container" style={{ marginRight: '5px', marginLeft: 'none' }}>
+                                <FontAwesomeIcon icon={goBackIcon} />
+                            </span>
+                        )}
+                        Go to profile page</Link>
                 </section>
             </header>
             <main className="settings__main">
