@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 
 import { useAppDispatch } from "../hooks/redux";
-import { getProfileSettings, postProfileSettigns } from "../state/user/actions";
+import { getProfileSettings, postProfileSettigns, uploadFile } from "../state/user/actions";
 
 import AsideHeader from "../components/SettingsAside/Header";
 import InputElement from "../components/Forms/InputElement/InputElement";
@@ -14,7 +14,6 @@ const ProfileSettingsPage = () => {
     const [profileSettingsValues, setProfileSettingsValues] = useState({
         name: '',
         surname: '',
-        // profileImage: '',
         status: '',
         bio: ''
     });
@@ -31,11 +30,10 @@ const ProfileSettingsPage = () => {
         dispatch(getProfileSettings(accessToken)).then(result => {
             const { requestStatus } = result.meta;
             if (requestStatus === 'fulfilled') {
-                const { name, surname, profileImage, status, bio } = result.payload as ProfileSettingsType;
+                const { name, surname, status, bio } = result.payload as ProfileSettingsType;
                 setProfileSettingsValues({
                     name: name,
                     surname: surname,
-                    // profileImage: profileImage as string,
                     status: status,
                     bio: bio
                 });
@@ -45,55 +43,59 @@ const ProfileSettingsPage = () => {
 
     const handleInputChange = (e: React.FormEvent) => {
         const { name, value } = e.target as HTMLInputElement;
-        const file = (e.target as HTMLInputElement).files!;
-
-        console.log('File');
-        if (file) {
-            console.log(file[0]);
-        }
-
-        setFile(file[0]);
-
         setProfileSettingsValues((prevValues) => ({
             ...prevValues,
-            // [name]: name !== 'file' ? value : file[0] as File,
             [name]: value,
         }));
     }
 
+    const fileSelectedHandler = (e: React.FormEvent) => {
+        const selectedFile = (e.target as HTMLInputElement).files![0];
+        setFile(selectedFile);
+    }
+
     const handleOnSubmit = (e: React.SyntheticEvent) => {
         e.preventDefault();
-        const { name, surname, status, bio } = profileSettingsValues;
+        if (file) {
+            const formData = new FormData();
+            formData.append('profileImage', file);
 
-        // console.log('Profile image ' + profileImage);
-
-        const reqData = {
-            userObj: {
-                name: name,
-                surname: surname,
-                profileImage: file,
-                status: status,
-                bio: bio,
-            },
-            accessToken: accessToken,
-        };
-        dispatch(postProfileSettigns(reqData)).then(result => {
-            const { requestStatus } = result.meta;
-            if (requestStatus === 'rejected') {
-                const message = result.payload as string;
-                setErrorMsg(message);
-                setTimeout(() => {
-                    setErrorMsg('');
-                }, 3000);
-            };
-            if (requestStatus === 'fulfilled') {
-                const message = result.payload as string;
-                setSuccessMsg(message);
-                setTimeout(() => {
-                    setSuccessMsg('');
-                }, 3000);
+            const reqData = {
+                accessToken: accessToken,
+                image: formData,
             }
-        });
+
+            dispatch(uploadFile(reqData));
+        }
+        // const { name, surname, status, bio } = profileSettingsValues;
+
+        // const reqData = {
+        //     userObj: {
+        //         name: name,
+        //         surname: surname,
+        //         profileImage: file,
+        //         status: status,
+        //         bio: bio,
+        //     },
+        //     accessToken: accessToken,
+        // };
+        // dispatch(postProfileSettigns(reqData)).then(result => {
+        //     const { requestStatus } = result.meta;
+        //     if (requestStatus === 'rejected') {
+        //         const message = result.payload as string;
+        //         setErrorMsg(message);
+        //         setTimeout(() => {
+        //             setErrorMsg('');
+        //         }, 3000);
+        //     };
+        //     if (requestStatus === 'fulfilled') {
+        //         const message = result.payload as string;
+        //         setSuccessMsg(message);
+        //         setTimeout(() => {
+        //             setSuccessMsg('');
+        //         }, 3000);
+        //     }
+        // });
     }
 
     return (
@@ -142,7 +144,7 @@ const ProfileSettingsPage = () => {
                         placeholder="Profile image file"
                         label="Profile image file"
                         type="file"
-                        method={handleInputChange}
+                        method={fileSelectedHandler}
                     // value={profileSettingsValues.profileImage}
                     />
                     <InputElement
