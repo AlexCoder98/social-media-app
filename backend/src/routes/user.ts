@@ -13,8 +13,6 @@ import {
     postAuthenticationSettings
 } from '../controllers/user';
 
-import { uploadFile } from '../middleware/multer';
-
 const router = express.Router();
 
 router.get('/profile', isAuthenticated, getUser);
@@ -26,7 +24,6 @@ router.get('/settings/profile', isAuthenticated, getProfileSettings);
 router.put(
     '/settings/profile',
     isAuthenticated,
-    uploadFile.single('profileImage'),
     body('name')
         .trim()
         .notEmpty()
