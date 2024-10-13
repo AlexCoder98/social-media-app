@@ -23,7 +23,7 @@
     border: none;
     background-color: var(--actionButtonBgc);
     border-radius: 15px;
-    transition: .2s ease-out;
+    transition: .2s linear;
 }
 
 .app__action-button:hover {

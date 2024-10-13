@@ -13,7 +13,7 @@ const Post = ({ id, title, image, description, creator, creationDate }: PostProp
                 <section className="post__creation-details-wrapper">
                     <img
                         className="post__creator-photo"
-                        src={creator.profileImage}
+                        src={`http://localhost:8080/${creator.profileImage}`}
                         alt={`${creator.name} ${creator.surname} avatar`}
                     />
                     <div className="post__creation-details">

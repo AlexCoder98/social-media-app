@@ -35,7 +35,7 @@ const SettingsPage = () => {
                 setSettingsHeaderData({
                     name: headerData.name,
                     surname: headerData.surname,
-                    profileImage: headerData.profileImage,
+                    profileImage: `http://localhost:8080/${headerData.profileImage}`,
                 });
             }
         });

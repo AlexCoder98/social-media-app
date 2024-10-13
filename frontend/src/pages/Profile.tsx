@@ -9,8 +9,6 @@ import { signOut } from "../state/authentication/actions";
 import { useAppDispatch, useAppSelector } from "../hooks/redux";
 import { useFontAwesomeIcon } from "../hooks/useFontAwesomeIcon";
 
-import { IconName } from "@fortawesome/fontawesome-svg-core";
-
 import '../styles/pages_styles/ProfilePage.css';
 
 const ProfilePage = () => {
@@ -31,6 +29,9 @@ const ProfilePage = () => {
     }, [userId]);
 
     const { name, surname, profileImage, status, bio } = user;
+
+    console.log('PROFILE IMAGE');
+    console.log(profileImage);
 
     const handleSignOut = () => {
         dispatch(signOut('false'))

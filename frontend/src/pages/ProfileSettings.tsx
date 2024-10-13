@@ -14,6 +14,7 @@ const ProfileSettingsPage = () => {
     const [profileSettingsValues, setProfileSettingsValues] = useState({
         name: '',
         surname: '',
+        profileImage: '',
         status: '',
         bio: ''
     });
@@ -30,10 +31,11 @@ const ProfileSettingsPage = () => {
         dispatch(getProfileSettings(accessToken)).then(result => {
             const { requestStatus } = result.meta;
             if (requestStatus === 'fulfilled') {
-                const { name, surname, status, bio } = result.payload as ProfileSettingsType;
+                const { name, surname, profileImage, status, bio } = result.payload as ProfileSettingsType;
                 setProfileSettingsValues({
                     name: name,
                     surname: surname,
+                    profileImage: profileImage,
                     status: status,
                     bio: bio
                 });
@@ -56,46 +58,60 @@ const ProfileSettingsPage = () => {
 
     const handleOnSubmit = (e: React.SyntheticEvent) => {
         e.preventDefault();
-        if (file) {
-            const formData = new FormData();
-            formData.append('profileImage', file);
-
-            const reqData = {
-                accessToken: accessToken,
-                image: formData,
-            }
-
-            dispatch(uploadFile(reqData));
+        const formData = new FormData();
+        formData.append('profileImage', file!);
+        if (profileSettingsValues.profileImage !== '') {
+            formData.append('oldProfileImage', profileSettingsValues.profileImage);
         }
-        // const { name, surname, status, bio } = profileSettingsValues;
 
-        // const reqData = {
-        //     userObj: {
-        //         name: name,
-        //         surname: surname,
-        //         profileImage: file,
-        //         status: status,
-        //         bio: bio,
-        //     },
-        //     accessToken: accessToken,
-        // };
-        // dispatch(postProfileSettigns(reqData)).then(result => {
-        //     const { requestStatus } = result.meta;
-        //     if (requestStatus === 'rejected') {
-        //         const message = result.payload as string;
-        //         setErrorMsg(message);
-        //         setTimeout(() => {
-        //             setErrorMsg('');
-        //         }, 3000);
-        //     };
-        //     if (requestStatus === 'fulfilled') {
-        //         const message = result.payload as string;
-        //         setSuccessMsg(message);
-        //         setTimeout(() => {
-        //             setSuccessMsg('');
-        //         }, 3000);
-        //     }
-        // });
+        const reqData = {
+            accessToken: accessToken,
+            formData: formData,
+        }
+
+        dispatch(uploadFile(reqData)).then(result => {
+            const { requestStatus } = result.meta;
+            if (requestStatus === 'fulfilled') {
+                const { message, path } = result.payload as { message: string, path: string; }
+                setSuccessMsg(message);
+                setTimeout(() => {
+                    setErrorMsg('');
+                }, 3000);
+
+                const { name, surname, profileImage, status, bio } = profileSettingsValues;
+
+                const reqData = {
+                    userObj: {
+                        name: name,
+                        surname: surname,
+                        profileImage: path ? path : profileImage,
+                        status: status,
+                        bio: bio,
+                    },
+                    accessToken: accessToken,
+                };
+
+                return reqData;
+            }
+        }).then((data) => {
+            dispatch(postProfileSettigns(data!)).then(result => {
+                const { requestStatus } = result.meta;
+                if (requestStatus === 'rejected') {
+                    const message = result.payload as string;
+                    setErrorMsg(message);
+                    setTimeout(() => {
+                        setErrorMsg('');
+                    }, 3000);
+                };
+                if (requestStatus === 'fulfilled') {
+                    const message = result.payload as string;
+                    setSuccessMsg(message);
+                    setTimeout(() => {
+                        setSuccessMsg('');
+                    }, 3000);
+                }
+            });
+        })
     }
 
     return (
@@ -129,23 +145,12 @@ const ProfileSettingsPage = () => {
                         method={handleInputChange}
                         value={profileSettingsValues.surname}
                     />
-                    {/* <InputElement
-                        id="profileImage"
-                        tagType="input"
-                        placeholder="Profile image"
-                        label="Profile image"
-                        type="text"
-                        method={handleInputChange}
-                        value={profileSettingsValues.profileImage}
-                    /> */}
                     <InputElement
                         id="profileImage"
                         tagType="input"
-                        placeholder="Profile image file"
-                        label="Profile image file"
+                        label="Profile image"
                         type="file"
                         method={fileSelectedHandler}
-                    // value={profileSettingsValues.profileImage}
                     />
                     <InputElement
                         id="status"

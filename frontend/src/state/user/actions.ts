@@ -96,8 +96,7 @@ export const postProfileSettigns = createAsyncThunk(
                 method: 'PUT',
                 headers: {
                     Authorization: `Bearer ${reqData.accessToken}`,
-                    // 'Content-Type': 'application/json'
-                    'Content-Type': `multipart/form-data`,
+                    'Content-Type': 'application/json'
                 },
                 body: JSON.stringify(reqData.userObj)
             });
@@ -169,29 +168,24 @@ export const postAuthenticationSettings = createAsyncThunk(
 
 export const uploadFile = createAsyncThunk(
     'user/uploadFile',
-    async (reqData: { image: FormData, accessToken: string }, thunkAPI) => {
+    async (reqData: { formData: FormData, accessToken: string }, thunkAPI) => {
         try {
-            console.log('IMAGE IN ACTION');
-            console.log(reqData.image);
-
             const response = await fetch('http://localhost:8080/upload', {
                 method: 'PUT',
                 headers: {
                     Authorization: `Bearer ${reqData.accessToken}`,
                 },
-                body: reqData.image
+                body: reqData.formData
             });
 
             const result = await response.json();
             if (response.status !== 200) {
-                console.log(result);
-                console.log('NOT 200');
+                throw new Error('Error. Incorrect file extension');
             } else {
-                console.log('STATUS 200');
-                console.log(result);
+                return result as { message: string; path: string; }
             }
         } catch (err) {
-
+            return thunkAPI.rejectWithValue((err as Error).message);
         }
     }
 )

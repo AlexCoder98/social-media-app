@@ -11,6 +11,7 @@
 html,
 button,
 input,
+input::-webkit-file-upload-button,
 textarea {
     font-family: "Nunito", "Arial", sans-serif;
 }
