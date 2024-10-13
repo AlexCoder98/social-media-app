@@ -1,9 +1,6 @@
 import multer, { FileFilterCallback } from 'multer';
 
 const fileFilter = (req: any, file: Express.Multer.File, cb: FileFilterCallback) => {
-    console.log('File type');
-    console.log(file.mimetype);
-
     if (
         file.mimetype === 'image/png' ||
         file.mimetype === 'image/jpg' ||
@@ -21,7 +18,6 @@ const storage = multer.diskStorage({
         cb(null, 'images/users_images');
     },
     filename: (req, file, cb) => {
-        console.log('File name in storage ' + file);
         cb(null, `${new Date().toISOString()}_${file.originalname}`);
     }
 })

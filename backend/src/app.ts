@@ -15,6 +15,7 @@ import userRoutes from './routes/user';
 import postRoutes from './routes/post';
 
 import { uploadFile } from './middleware/multer';
+import { deleteFile } from './utils/deleteFile';
 
 const app: Express = express();
 
@@ -22,8 +23,9 @@ const MONGODB_URI = `mongodb+srv://${MONGODB_NAME}:${MONGODB_PASSWORD}@cluster0.
 
 
 app.use(express.json());
-app.use(uploadFile.single('profileImage'))
-// app.use('/images', express.static(path.join(__dirname, 'images')));
+app.use(uploadFile.single('profileImage'));
+
+app.use('/images/users_images', express.static(path.join(__dirname, '..', 'images', 'users_images')));
 
 app.use(allowCrossDomain);
 app.use(isAuthenticated);
@@ -35,13 +37,15 @@ app.put(
             throw new Error('Not authorized');
         }
         if (!req.file) {
-            return res.status(200).json({ message: 'Not file provided' });
+            return res.status(200).json({ message: 'No file provided' });
         }
-        console.log('REQ BODY');
-        console.log(req.body);
-        console.log('REQ FILE');
-        console.log(req.file);
-        // res.json({ message: 'Request recieved' });
+        if (req.body.oldProfileImage) {
+            deleteFile(req.body.oldProfileImage);
+        };
+        return res.status(200).json({
+            message: 'Image has been uploaded',
+            path: req.file.path
+        });
     })
 
 app.use(authRoutes);

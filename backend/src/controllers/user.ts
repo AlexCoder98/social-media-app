@@ -84,12 +84,7 @@ export const getProfileSettings = async (req: Request, res: Response, next: Next
 }
 
 export const postProfileSettings = async (req: Request, res: Response, next: NextFunction) => {
-    const { name, surname, status, bio } = req.body;
-    const profileImage = req.file;
-    console.log('PROFILE IMAGE');
-    console.log(profileImage);
-    console.log(req.body);
-
+    const { name, surname, profileImage, status, bio } = req.body;
     const { userId } = req;
     try {
         const errors = validationResult(req);
@@ -108,7 +103,7 @@ export const postProfileSettings = async (req: Request, res: Response, next: Nex
 
         user.name = name;
         user.surname = surname;
-        // user.profileImage = profileImage;
+        user.profileImage = profileImage;
         user.status = status;
         user.bio = bio;
 
