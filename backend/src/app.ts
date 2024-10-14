@@ -46,7 +46,7 @@ app.put(
             message: 'Image has been uploaded',
             path: req.file.path
         });
-    })
+    });
 
 app.use(authRoutes);
 app.use(userRoutes);
