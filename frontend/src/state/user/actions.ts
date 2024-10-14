@@ -89,9 +89,6 @@ export const postProfileSettigns = createAsyncThunk(
         thunkAPI
     ) => {
         try {
-
-            console.log(reqData.userObj);
-
             const response = await fetch(`http://localhost:8080/settings/profile`, {
                 method: 'PUT',
                 headers: {
@@ -102,6 +99,7 @@ export const postProfileSettigns = createAsyncThunk(
             });
 
             const result = await response.json();
+
             if (response.status !== 200) {
                 throw new Error((result as RequestResponseType).message);
             } else {
@@ -179,6 +177,7 @@ export const uploadFile = createAsyncThunk(
             });
 
             const result = await response.json();
+
             if (response.status !== 200) {
                 throw new Error('Error. Incorrect file extension');
             } else {

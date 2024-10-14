@@ -20,9 +20,16 @@ const CreatePostForm = () => {
     const [errorMsg, setErrorMsg] = useState<string>('');
     const [successMsg, setSuccessMsg] = useState<string>('');
 
+    const [file, setFile] = useState<File | null>(null);
+
     const accessToken = sessionStorage.getItem('accessToken');
     const dispatch = useAppDispatch();
     const navigate = useNavigate();
+
+    const fileSelectedHandler = async (e: React.FormEvent) => {
+        const selectedFile = (e.target as HTMLInputElement).files![0];
+        setFile(selectedFile);
+    }
 
     const handleInputChange = (e: React.FormEvent) => {
         const { name, value } = e.target as HTMLInputElement;
@@ -88,7 +95,7 @@ const CreatePostForm = () => {
                             id={input.id}
                             placeholder={input.placeholder}
                             value={createPostFormValues[input.id as keyof typeof createPostFormValues]}
-                            method={handleInputChange}
+                            method={input.type === 'text' ? handleInputChange : fileSelectedHandler}
                         />
                     ))}
                 </main>

@@ -51,7 +51,7 @@ const ProfileSettingsPage = () => {
         }));
     }
 
-    const fileSelectedHandler = (e: React.FormEvent) => {
+    const fileSelectedHandler = async (e: React.FormEvent) => {
         const selectedFile = (e.target as HTMLInputElement).files![0];
         setFile(selectedFile);
     }
@@ -72,7 +72,7 @@ const ProfileSettingsPage = () => {
         dispatch(uploadFile(reqData)).then(result => {
             const { requestStatus } = result.meta;
             if (requestStatus === 'fulfilled') {
-                const { message, path } = result.payload as { message: string, path: string; }
+                const { message, path } = result.payload as { message: string; path: string; }
                 setSuccessMsg(message);
                 setTimeout(() => {
                     setErrorMsg('');

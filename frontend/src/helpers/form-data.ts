@@ -89,6 +89,12 @@ export const postFormData: FormInputsData[] = [
         placeholder: 'Post image'
     },
     {
+        tagType: 'input',
+        type: 'file',
+        id: 'postImage',
+        placeholder: 'Post image'
+    },
+    {
         tagType: 'textarea',
         type: 'text',
         id: 'description',

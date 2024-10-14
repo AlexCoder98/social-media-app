@@ -41,6 +41,8 @@ const SettingsPage = () => {
         });
     }, []);
 
+    console.log('reload');
+
     return (
         <div className="app__page settings">
             <header className="settings__header">
