@@ -164,8 +164,8 @@ export const postAuthenticationSettings = createAsyncThunk(
     }
 )
 
-export const uploadFile = createAsyncThunk(
-    'user/uploadFile',
+export const uploadProfileImage = createAsyncThunk(
+    'user/uploadProfileImage',
     async (reqData: { formData: FormData, accessToken: string }, thunkAPI) => {
         try {
             const response = await fetch('http://localhost:8080/upload', {

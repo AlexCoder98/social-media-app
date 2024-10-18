@@ -187,3 +187,33 @@ export const postEditPost = createAsyncThunk(
         }
     }
 )
+
+export const uploadPostImage = createAsyncThunk(
+    'post/uploadPostImage',
+    async (reqData: { formData: FormData, accessToken: string }, thunkAPI) => {
+
+        console.log(reqData);
+
+        try {
+            const response = await fetch('http://localhost:8080/upload', {
+                method: 'POST',
+                headers: {
+                    Authorization: `Bearer ${reqData.accessToken}`,
+                },
+                body: reqData.formData
+            });
+
+            const result = await response.json();
+
+            if (response.status !== 200) {
+                throw new Error('Error. Something went wrong');
+            } else {
+                return result as { message: string, path: string };
+            }
+
+
+        } catch (err) {
+            return thunkAPI.rejectWithValue((err as Error).message);
+        }
+    }
+)

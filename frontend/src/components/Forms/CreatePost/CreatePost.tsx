@@ -6,7 +6,7 @@ import InputElement from '../InputElement/InputElement';
 import Button from '../../Button/Button';
 import Message from '../../Message/Message';
 
-import { postCreatePost } from '../../../state/post/actions';
+import { postCreatePost, uploadPostImage } from '../../../state/post/actions';
 
 import { postFormData } from '../../../helpers/form-data';
 
@@ -41,38 +41,46 @@ const CreatePostForm = () => {
 
     const handleOnSubmit = (e: React.SyntheticEvent) => {
         e.preventDefault();
-        const postReqData = {
+        const formData = new FormData();
+        formData.append('postImage', file!);
+        const reqData = {
+            formData: formData,
             accessToken: accessToken!,
-            post: {
-                title: createPostFormValues['title'],
-                image: createPostFormValues['image'],
-                description: createPostFormValues['description'],
-            }
-        }
+        };
 
-        dispatch(postCreatePost(postReqData)).then(result => {
-            const { requestStatus } = result.meta;
-            if (requestStatus === 'rejected') {
-                const message = result.payload as string;
-                setErrorMsg(message);
-                setTimeout(() => {
-                    setErrorMsg('');
-                }, 3000);
-            }
-            if (requestStatus === 'fulfilled') {
-                const message = result.payload as string;
-                setSuccessMsg(message);
-                setCreatePostFormValues({
-                    title: '',
-                    image: '',
-                    description: ''
-                });
-                setTimeout(() => {
-                    setSuccessMsg('');
-                    navigate(-1);
-                }, 3000);
-            }
-        });
+        dispatch(uploadPostImage(reqData));
+        // const postReqData = {
+        //     accessToken: accessToken!,
+        //     post: {
+        //         title: createPostFormValues['title'],
+        //         image: createPostFormValues['image'],
+        //         description: createPostFormValues['description'],
+        //     }
+        // }
+
+        // dispatch(postCreatePost(postReqData)).then(result => {
+        //     const { requestStatus } = result.meta;
+        //     if (requestStatus === 'rejected') {
+        //         const message = result.payload as string;
+        //         setErrorMsg(message);
+        //         setTimeout(() => {
+        //             setErrorMsg('');
+        //         }, 3000);
+        //     }
+        //     if (requestStatus === 'fulfilled') {
+        //         const message = result.payload as string;
+        //         setSuccessMsg(message);
+        //         setCreatePostFormValues({
+        //             title: '',
+        //             image: '',
+        //             description: ''
+        //         });
+        //         setTimeout(() => {
+        //             setSuccessMsg('');
+        //             navigate(-1);
+        //         }, 3000);
+        //     }
+        // });
     };
 
     return (
@@ -81,6 +89,7 @@ const CreatePostForm = () => {
             <form
                 method="POST"
                 className="app__form create-post"
+                encType="multipart/form-data"
                 onSubmit={handleOnSubmit}
             >
                 <header className="app__form-header">

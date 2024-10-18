@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 
 import { useAppDispatch } from "../hooks/redux";
-import { getProfileSettings, postProfileSettigns, uploadFile } from "../state/user/actions";
+import { getProfileSettings, postProfileSettigns, uploadProfileImage } from "../state/user/actions";
 
 import AsideHeader from "../components/SettingsAside/Header";
 import InputElement from "../components/Forms/InputElement/InputElement";
@@ -69,7 +69,7 @@ const ProfileSettingsPage = () => {
             formData: formData,
         }
 
-        dispatch(uploadFile(reqData)).then(result => {
+        dispatch(uploadProfileImage(reqData)).then(result => {
             const { requestStatus } = result.meta;
             if (requestStatus === 'fulfilled') {
                 const { message, path } = result.payload as { message: string; path: string; }
