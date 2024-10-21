@@ -29,7 +29,7 @@ const Post = ({ id, title, image, description, creator, creationDate }: PostProp
                 <div className="post__img-wrapper">
                     <img
                         className="post__image"
-                        src={image}
+                        src={`http://localhost:8080/${image}`}
                         alt={`Post - ${title}`} />
                 </div>
                 <div className="post__description-wrapper">

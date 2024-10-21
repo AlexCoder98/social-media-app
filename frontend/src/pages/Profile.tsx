@@ -30,9 +30,6 @@ const ProfilePage = () => {
 
     const { name, surname, profileImage, status, bio } = user;
 
-    console.log('PROFILE IMAGE');
-    console.log(profileImage);
-
     const handleSignOut = () => {
         dispatch(signOut('false'))
             .then(result => {

@@ -169,7 +169,7 @@ export const uploadProfileImage = createAsyncThunk(
     async (reqData: { formData: FormData, accessToken: string }, thunkAPI) => {
         try {
             const response = await fetch('http://localhost:8080/upload', {
-                method: 'PUT',
+                method: 'POST',
                 headers: {
                     Authorization: `Bearer ${reqData.accessToken}`,
                 },

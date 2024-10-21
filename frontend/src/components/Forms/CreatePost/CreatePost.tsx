@@ -13,7 +13,6 @@ import { postFormData } from '../../../helpers/form-data';
 const CreatePostForm = () => {
     const [createPostFormValues, setCreatePostFormValues] = useState({
         title: '',
-        image: '',
         description: '',
     });
 
@@ -48,39 +47,57 @@ const CreatePostForm = () => {
             accessToken: accessToken!,
         };
 
-        dispatch(uploadPostImage(reqData));
-        // const postReqData = {
-        //     accessToken: accessToken!,
-        //     post: {
-        //         title: createPostFormValues['title'],
-        //         image: createPostFormValues['image'],
-        //         description: createPostFormValues['description'],
-        //     }
-        // }
+        dispatch(uploadPostImage(reqData))
+            .then(result => {
+                const { requestStatus } = result.meta;
+                if (requestStatus === 'fulfilled') {
+                    const { path } = result.payload as { message: string; path: string };
 
-        // dispatch(postCreatePost(postReqData)).then(result => {
-        //     const { requestStatus } = result.meta;
-        //     if (requestStatus === 'rejected') {
-        //         const message = result.payload as string;
-        //         setErrorMsg(message);
-        //         setTimeout(() => {
-        //             setErrorMsg('');
-        //         }, 3000);
-        //     }
-        //     if (requestStatus === 'fulfilled') {
-        //         const message = result.payload as string;
-        //         setSuccessMsg(message);
-        //         setCreatePostFormValues({
-        //             title: '',
-        //             image: '',
-        //             description: ''
-        //         });
-        //         setTimeout(() => {
-        //             setSuccessMsg('');
-        //             navigate(-1);
-        //         }, 3000);
-        //     }
-        // });
+                    const reqData = {
+                        accessToken: accessToken!,
+                        post: {
+                            title: createPostFormValues['title'],
+                            image: path,
+                            description: createPostFormValues['description'],
+                        }
+                    }
+                    return reqData;
+                }
+                if (requestStatus === 'rejected') {
+                    const { message } = result.payload as { message: string };
+                    setErrorMsg(message);
+                    setTimeout(() => {
+                        setErrorMsg('');
+                    }, 3000);
+                }
+            })
+            .then(data => {
+                dispatch(postCreatePost(data!))
+                    .then(result => {
+                        const { requestStatus } = result.meta;
+                        if (requestStatus === 'rejected') {
+                            const message = result.payload as string;
+                            setErrorMsg(message);
+                            setTimeout(() => {
+                                setErrorMsg('');
+                            }, 3000);
+                        }
+                        if (requestStatus === 'fulfilled') {
+                            const message = result.payload as string;
+                            setSuccessMsg(message);
+                            setCreatePostFormValues({
+                                title: '',
+                                description: ''
+                            });
+                            setFile(null);
+                            setTimeout(() => {
+                                setSuccessMsg('');
+                                navigate(-1);
+                            }, 3000);
+                        }
+                    });
+            })
+            .catch(err => console.log(err));
     };
 
     return (

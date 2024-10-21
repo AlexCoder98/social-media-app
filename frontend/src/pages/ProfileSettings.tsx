@@ -61,7 +61,7 @@ const ProfileSettingsPage = () => {
         const formData = new FormData();
         formData.append('profileImage', file!);
         if (profileSettingsValues.profileImage !== '') {
-            formData.append('oldProfileImage', profileSettingsValues.profileImage);
+            formData.append('oldImagePath', profileSettingsValues.profileImage);
         }
 
         const reqData = {

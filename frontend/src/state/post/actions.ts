@@ -191,9 +191,6 @@ export const postEditPost = createAsyncThunk(
 export const uploadPostImage = createAsyncThunk(
     'post/uploadPostImage',
     async (reqData: { formData: FormData, accessToken: string }, thunkAPI) => {
-
-        console.log(reqData);
-
         try {
             const response = await fetch('http://localhost:8080/upload', {
                 method: 'POST',
@@ -207,10 +204,8 @@ export const uploadPostImage = createAsyncThunk(
 
             if (response.status !== 200) {
                 throw new Error('Error. Something went wrong');
-            } else {
-                return result as { message: string, path: string };
             }
-
+            return result as { message: string, path: string };
 
         } catch (err) {
             return thunkAPI.rejectWithValue((err as Error).message);
