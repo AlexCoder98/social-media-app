@@ -5,6 +5,7 @@ declare global {
         interface Request {
             userId: string;
             isAuth: boolean;
+            fieldName: string;
         }
     }
 };

@@ -23,12 +23,13 @@ const MONGODB_URI = `mongodb+srv://${MONGODB_NAME}:${MONGODB_PASSWORD}@cluster0.
 
 
 app.use(express.json());
-app.use(uploadFile.any());
-// app.use(uploadFile.single('profileImage'));
-// app.use(uploadPostImage.single('postImage'));
+app.use(uploadFile.fields([
+    { name: 'profileImage', maxCount: 1 },
+    { name: 'postImage' }
+]));
 
-app.use('/public/images/users_images', express.static(path.join(__dirname, '..', 'public', 'images', 'users_images')));
-app.use('/public/images/posts_images', express.static(path.join(__dirname, '..', 'public', 'images', 'posts_images')));
+app.use('/public/images/users', express.static(path.join(__dirname, '..', 'public', 'images', 'users')));
+app.use('/public/images/posts', express.static(path.join(__dirname, '..', 'public', 'images', 'posts')));
 
 app.use(allowCrossDomain);
 app.use(isAuthenticated);
@@ -36,50 +37,29 @@ app.use(isAuthenticated);
 app.post(
     '/upload',
     (req: Request, res: Response, next: NextFunction) => {
-        console.log('Fire');
-        console.log(req.files);
+        const fieldName = req.fieldName;
+        const files = req.files as { [fieldname: string]: Express.Multer.File[] };
 
-        if (!req.isAuth) {
-            console.log('FIREE')
-            throw new Error('Not authorized');
+        try {
+            if (!req.isAuth) {
+                throw new Error('Not authorized');
+            }
+            if (!files[fieldName]) {
+                return res.status(200).json({ message: 'No file provided' });
+            }
+            if (req.body.oldImagePath) {
+                deleteFile(req.body.oldImagePath);
+            };
+
+            const imagePath = files[fieldName][0].path;
+            return res.status(200).json({
+                message: 'Image has been uploaded',
+                path: imagePath
+            });
+        } catch (err) {
+            next(err);
         }
-        if (!req.file) {
-            console.log('FIREE 2');
-            return res.status(200).json({ message: 'No file provided' });
-        }
-        if (req.body.oldProfileImage) {
-            deleteFile(req.body.oldProfileImage);
-        };
-
-
-        console.log(req.file.path);
-
-        return res.status(200).json({
-            message: 'Image has been uploaded',
-            path: req.file.path
-        });
     });
-
-// app.use(
-//     '/upload-post-image',
-//     (req: Request, res: Response, next: NextFunction) => {
-//         console.log('Fire');
-//         console.log(req.file);
-
-//         if (!req.isAuth) {
-//             throw new Error('Not authorized');
-//         }
-//         if (!req.file) {
-//             return res.status(200).json({ message: 'No file provided' });
-//         }
-//         if (req.body.oldProfileImage) {
-//             deleteFile(req.body.oldProfileImage);
-//         };
-//         return res.status(200).json({
-//             message: 'Image has been uploaded',
-//             path: req.file.path
-//         });
-//     });
 
 app.use(authRoutes);
 app.use(userRoutes);

@@ -16,31 +16,19 @@ const fileFilter = (req: any, file: Express.Multer.File, cb: FileFilterCallback)
 const storage = multer.diskStorage({
     destination: (req, file, cb) => {
         let dir = file.fieldname;
-        console.log(dir);
-        console.log(file);
-
-        if (dir === 'profileImage') {
-            cb(null, 'public/images/users_images');
-        } else if (dir === 'postImage') {
-
-            cb(null, 'public/images/posts_images');
+        switch (dir) {
+            case 'profileImage':
+                cb(null, 'public/images/users');
+                break;
+            case 'postImage':
+                cb(null, 'public/images/posts');
+                break;
         }
+        req.fieldName = file.fieldname;
     },
     filename: (req, file, cb) => {
         cb(null, `${new Date().toISOString()}_${file.originalname}`);
     }
 });
 
-// const postsImagesStorage = multer.diskStorage({
-//     destination: (req, file, cb) => {
-//         console.log(file);
-
-//         cb(null, 'public/images/posts_images');
-//     },
-//     filename: (req, file, cb) => {
-//         cb(null, `${new Date().toISOString()}_${file.originalname}`);
-//     }
-// });
-
 export const uploadFile = multer({ storage: storage, fileFilter: fileFilter });
-// export const uploadPostImage = multer({ storage: postsImagesStorage, fileFilter: fileFilter });
