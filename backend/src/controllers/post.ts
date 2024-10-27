@@ -183,7 +183,7 @@ export const deletePost = async (req: Request, res: Response, next: NextFunction
     try {
         const post = await Post.deleteOne({ _id: postId });
         if (!post) {
-            const message = 'Error. Post not found.';
+            const message = 'Error. Post not found';
             const error = new CustomError(message, 404);
             throw error;
         }
@@ -198,7 +198,7 @@ export const deletePost = async (req: Request, res: Response, next: NextFunction
         user.posts.pull(postId);
         await user.save();
 
-        res.status(200).json({ "message": "Post has been removed from the Database." });
+        res.status(200).json({ message: 'Post has been deleted' });
     } catch (err) {
         next(err);
     }
