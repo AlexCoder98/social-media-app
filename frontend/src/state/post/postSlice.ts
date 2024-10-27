@@ -57,6 +57,9 @@ const postSlice = createSlice({
             .addCase(getEditPost.rejected, (state, { payload }) => {
                 state.post = null;
             })
+            .addCase(deletePost.fulfilled, (state) => {
+                state.post = null;
+            })
     }
 });
 

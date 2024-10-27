@@ -69,32 +69,38 @@ const ProfileSettingsPage = () => {
             formData: formData,
         }
 
-        dispatch(uploadProfileImage(reqData)).then(result => {
-            const { requestStatus } = result.meta;
-            if (requestStatus === 'fulfilled') {
-                const { message, path } = result.payload as { message: string; path: string; }
-                setSuccessMsg(message);
-                setTimeout(() => {
-                    setErrorMsg('');
-                }, 3000);
+        dispatch(uploadProfileImage(reqData))
+            .then(result => {
+                const { requestStatus } = result.meta;
+                if (requestStatus === 'fulfilled') {
+                    const { message, path } = result.payload as {
+                        message: string; path: string;
+                    }
+                    setSuccessMsg(message);
+                    setTimeout(() => {
+                        setErrorMsg('');
+                    }, 3000);
 
-                const { name, surname, profileImage, status, bio } = profileSettingsValues;
+                    const { name, surname, profileImage, status, bio } = profileSettingsValues;
 
-                const reqData = {
-                    userObj: {
-                        name: name,
-                        surname: surname,
-                        profileImage: path ? path : profileImage,
-                        status: status,
-                        bio: bio,
-                    },
-                    accessToken: accessToken,
-                };
+                    const reqData = {
+                        userObj: {
+                            name: name,
+                            surname: surname,
+                            profileImage: path ? path : profileImage,
+                            status: status,
+                            bio: bio,
+                        },
+                        accessToken: accessToken,
+                    };
 
-                return reqData;
-            }
-        }).then((data) => {
-            dispatch(postProfileSettigns(data!)).then(result => {
+                    return reqData;
+                }
+            })
+            .then((data) => {
+                return dispatch(postProfileSettigns(data!))
+            })
+            .then(result => {
                 const { requestStatus } = result.meta;
                 if (requestStatus === 'rejected') {
                     const message = result.payload as string;
@@ -111,7 +117,6 @@ const ProfileSettingsPage = () => {
                     }, 3000);
                 }
             });
-        })
     }
 
     return (

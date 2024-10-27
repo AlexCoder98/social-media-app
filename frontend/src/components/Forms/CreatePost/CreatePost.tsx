@@ -51,7 +51,9 @@ const CreatePostForm = () => {
             .then(result => {
                 const { requestStatus } = result.meta;
                 if (requestStatus === 'fulfilled') {
-                    const { path } = result.payload as { message: string; path: string };
+                    const { path } = result.payload as {
+                        message: string; path: string
+                    };
 
                     const reqData = {
                         accessToken: accessToken!,
@@ -72,30 +74,30 @@ const CreatePostForm = () => {
                 }
             })
             .then(data => {
-                dispatch(postCreatePost(data!))
-                    .then(result => {
-                        const { requestStatus } = result.meta;
-                        if (requestStatus === 'rejected') {
-                            const message = result.payload as string;
-                            setErrorMsg(message);
-                            setTimeout(() => {
-                                setErrorMsg('');
-                            }, 3000);
-                        }
-                        if (requestStatus === 'fulfilled') {
-                            const message = result.payload as string;
-                            setSuccessMsg(message);
-                            setCreatePostFormValues({
-                                title: '',
-                                description: ''
-                            });
-                            setFile(null);
-                            setTimeout(() => {
-                                setSuccessMsg('');
-                                navigate(-1);
-                            }, 3000);
-                        }
+                return dispatch(postCreatePost(data!))
+            })
+            .then(result => {
+                const { requestStatus } = result.meta;
+                if (requestStatus === 'rejected') {
+                    const message = result.payload as string;
+                    setErrorMsg(message);
+                    setTimeout(() => {
+                        setErrorMsg('');
+                    }, 3000);
+                }
+                if (requestStatus === 'fulfilled') {
+                    const message = result.payload as string;
+                    setSuccessMsg(message);
+                    setCreatePostFormValues({
+                        title: '',
+                        description: ''
                     });
+                    setFile(null);
+                    setTimeout(() => {
+                        setSuccessMsg('');
+                        navigate(-1);
+                    }, 3000);
+                }
             })
             .catch(err => console.log(err));
     };

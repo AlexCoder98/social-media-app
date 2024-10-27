@@ -6,10 +6,11 @@ import Button from '../../Button/Button';
 import Message from '../../Message/Message';
 
 import { useAppDispatch } from '../../../hooks/redux';
-import { getEditPost, postEditPost } from '../../../state/post/actions';
+import { getEditPost, uploadPostImage, postEditPost } from '../../../state/post/actions';
 
 import { postFormData } from '../../../helpers/form-data';
 import { EditPostType } from '../../../types/post';
+import { title } from 'process';
 
 const EditPostForm = () => {
     const [editPostFormValues, setEditPostFormValues] = useState({
@@ -20,6 +21,7 @@ const EditPostForm = () => {
 
     const [errorMsg, setErrorMsg] = useState<string>('');
     const [successMsg, setSuccessMsg] = useState<string>('');
+    const [file, setFile] = useState<File | null>(null);
 
     const accessToken = sessionStorage.getItem('accessToken');
     const { postId } = useParams();
@@ -44,6 +46,11 @@ const EditPostForm = () => {
         })
     }, [postId])
 
+    const fileSelectedHandler = async (e: React.FormEvent) => {
+        const selectedFile = (e.target as HTMLInputElement).files![0];
+        setFile(selectedFile);
+    }
+
     const handleInputChange = (e: React.FormEvent) => {
         const { name, value } = e.target as HTMLInputElement;
         setEditPostFormValues((prevEditPostFormValues) => ({
@@ -52,42 +59,76 @@ const EditPostForm = () => {
         }));
     }
 
+    console.log(editPostFormValues);
+
     const handleOnSubmit = (e: React.SyntheticEvent) => {
         e.preventDefault();
+        const formData = new FormData();
+        formData.append('postImage', file!);
+        console.log('OLD PATH');
+        console.log(editPostFormValues.image);
+        if (editPostFormValues.image !== '') {
+            formData.append('oldImagePath', editPostFormValues.image)
+        };
+
         const reqData = {
-            post: {
-                title: editPostFormValues['title'],
-                image: editPostFormValues['image'],
-                description: editPostFormValues['description'],
-            },
-            accessData: {
-                accessToken: accessToken!,
-                postId: postId!,
-            }
+            formData: formData,
+            accessToken: accessToken!,
         }
-        dispatch(postEditPost(reqData)).then(result => {
-            const { requestStatus } = result.meta;
-            if (requestStatus === 'rejected') {
-                const message = result.payload as string;
-                setErrorMsg(message);
-                setTimeout(() => {
-                    setErrorMsg('');
-                }, 3000);
-            }
-            if (requestStatus === 'fulfilled') {
-                const { updatedPost, message } = result.payload as { updatedPost: EditPostType, message: string };
-                setSuccessMsg(message);
-                setEditPostFormValues({
-                    title: updatedPost.title,
-                    image: updatedPost.image,
-                    description: updatedPost.description,
-                });
-                setTimeout(() => {
-                    setSuccessMsg('');
-                    navigate(-1);
-                }, 3000);
-            }
-        })
+
+        dispatch(uploadPostImage(reqData))
+            .then(result => {
+                const { requestStatus } = result.meta;
+                if (requestStatus === 'fulfilled') {
+                    const { path } = result.payload as { message: string; path: string };
+
+                    const { title, image, description } = editPostFormValues;
+
+                    const reqData = {
+                        post: {
+                            title: title,
+                            image: path ? path : image,
+                            description: description
+                        },
+                        accessData: {
+                            accessToken: accessToken!,
+                            postId: postId!,
+                        }
+                    }
+                    return reqData;
+                }
+            })
+            .then(data => {
+                return dispatch(postEditPost(data!));
+            })
+            .then(result => {
+                console.log(result.payload);
+                const { requestStatus } = result.meta;
+                if (requestStatus === 'rejected') {
+                    const message = result.payload as string;
+                    setErrorMsg(message);
+                    setTimeout(() => {
+                        setErrorMsg('');
+                    }, 3000);
+                }
+                if (requestStatus === 'fulfilled') {
+                    const { updatedPost, message } = result.payload as {
+                        updatedPost: EditPostType,
+                        message: string
+                    };
+                    setSuccessMsg(message);
+                    setEditPostFormValues({
+                        title: updatedPost.title,
+                        image: updatedPost.image,
+                        description: updatedPost.description,
+                    });
+                    setTimeout(() => {
+                        setSuccessMsg('');
+                        navigate(-1);
+                    }, 3000);
+                }
+            })
+            .catch(err => console.log(err));
     }
 
     return (
@@ -96,6 +137,7 @@ const EditPostForm = () => {
             <form
                 method="POST"
                 className="app__form edit-post"
+                encType="multipart/form-data"
                 onSubmit={handleOnSubmit}
             >
                 <header className="app__form-header">
@@ -109,7 +151,7 @@ const EditPostForm = () => {
                             type={input.type!}
                             id={input.id}
                             placeholder={input.placeholder}
-                            method={handleInputChange}
+                            method={input.type === 'text' ? handleInputChange : fileSelectedHandler}
                             value={editPostFormValues[input.id as keyof EditPostType]}
                         />
                     ))}

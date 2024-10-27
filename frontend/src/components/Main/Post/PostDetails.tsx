@@ -1,13 +1,19 @@
-import { useLayoutEffect } from "react";
+import { useState, useLayoutEffect } from "react";
 import { useParams, Link, useNavigate } from "react-router-dom";
+
+import Message from "../../Message/Message";
 
 import { useAppSelector, useAppDispatch } from "../../../hooks/redux";
 
 import { getPost, deletePost } from "../../../state/post/actions";
-
 import '../../../styles/components_styles/PostDetails.css';
 
 const SinglePost = () => {
+    const [errorMsg, setErrorMsg] = useState<string>('');
+    const [successMsg, setSuccessMsg] = useState<string>('');
+
+    console.log(errorMsg, successMsg);
+
     const accessToken = sessionStorage.getItem('accessToken');
     const { postId } = useParams();
     const navigate = useNavigate();
@@ -19,23 +25,36 @@ const SinglePost = () => {
     }
 
     useLayoutEffect(() => {
-        dispatch(getPost(reqData)).then(result => {
-            console.log(result.meta.requestStatus);
-        });
-    }, [postId])
+        dispatch(getPost(reqData));
+    }, [])
 
     const { post } = useAppSelector(state => state.post);
 
     const handleOnDeletePost = () => {
-        dispatch(deletePost(reqData)).then(result => {
-            if (result.meta.requestStatus === 'fulfilled') {
-                navigate('/posts');
-            }
-        })
+        dispatch(deletePost(reqData))
+            .then(result => {
+                const { requestStatus } = result.meta;
+                if (requestStatus === 'rejected') {
+                    const message = 'Error. Cannot delete post';
+                    setErrorMsg(message);
+                    setTimeout(() => {
+                        setErrorMsg('')
+                    }, 3000);
+                }
+                if (result.meta.requestStatus === 'fulfilled') {
+                    const message = result.payload as string;
+                    setSuccessMsg(message);
+                    setTimeout(() => {
+                        setSuccessMsg('');
+                        // navigate('/my-posts');
+                    }, 3000);
+                }
+            })
     }
 
     return (
         <>
+            <Message error={errorMsg} success={successMsg} />
             {
                 post ? (
                     <div className="app__post-single" >
@@ -45,7 +64,7 @@ const SinglePost = () => {
                         <main className="app__post-single-body">
                             <div
                                 className="app__post-single-img-wrapper"
-                                style={{ backgroundImage: `url(${post?.image})` }}
+                                style={{ backgroundImage: `url(http://localhost:8080/${post?.image})` }}
                             >
                             </div>
                             <div className="app__post-single-text-container">
@@ -66,7 +85,7 @@ const SinglePost = () => {
                             >Delete</button>
                         </footer>
                     </div >
-                ) : <h1>Fetching the post...</h1>}
+                ) : <h1>Post with id {postId} no longer exists.</h1>}
         </>
     )
 }
