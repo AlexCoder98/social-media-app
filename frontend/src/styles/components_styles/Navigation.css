@@ -8,7 +8,7 @@
 .app__main-navigation {
     display: flex;
     justify-content: flex-end;
-    padding: .8rem 4rem;
+    padding: 1.5rem 4rem;
     border-bottom: 1px solid var(--borderColor);
 }
 
@@ -36,6 +36,7 @@
     color: var(--navLinkColor);
     transition: .2s linear;
     border-radius: 15px;
+    box-shadow: 0 0 5px 1px #ddd;
 }
 
 .app__main-navigation .icon-container {
