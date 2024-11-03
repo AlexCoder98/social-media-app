@@ -1,36 +1,17 @@
 .app__main {
     width: 80%;
     margin: 40px auto;
-    min-height: 50rem;
+    min-height: 46rem;
+    background:
+        radial-gradient(35.36% 35.36% at 100% 25%, #0000 66%, #fafafa 68% 70%, #0000 72%) 48px 48px/calc(2*48px) calc(2*48px),
+        radial-gradient(35.36% 35.36% at 0 75%, #0000 66%, #fafafa 68% 70%, #0000 72%) 48px 48px/calc(2*48px) calc(2*48px),
+        radial-gradient(35.36% 35.36% at 100% 25%, #0000 66%, #fafafa 68% 70%, #0000 72%) 0 0/calc(2*48px) calc(2*48px),
+        radial-gradient(35.36% 35.36% at 0 75%, #0000 66%, #fafafa 68% 70%, #0000 72%) 0 0/calc(2*48px) calc(2*48px),
+        repeating-conic-gradient(#ffffff 0 25%, #0000 0 50%) 0 0/calc(2*48px) calc(2*48px),
+        radial-gradient(#0000 66%, #fafafa 68% 70%, #0000 72%) 0 calc(48px/2)/48px 48px #ffffff;
+
 }
 
 .app__main-content {
     position: relative;
 }
-
-/*
-.app__main-background {
-    position: absolute;
-    width: 800px;
-    top: 0;
-    left: calc(50% - 400px);
-    right: 50%;
-    transform-origin: center;
-    animation: rotatePlanet 120s linear infinite;
-    transition: .3s ease-in-out;
-    z-index: -1;
-}
-
-.app__main-background.aside {
-    left: 0;
-}
-
-@keyframes rotatePlanet {
-    0% {
-        transform: rotate(0)
-    }
-
-    100% {
-        transform: rotate(360deg);
-    }
-} */

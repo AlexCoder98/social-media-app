@@ -1,0 +1,33 @@
+.app__page.start {
+    display: flex;
+    flex-direction: column;
+    justify-content: stretch;
+}
+
+.start__heading-container {
+    position: relative;
+    padding: 1rem 0;
+}
+
+/* .start__heading-container h1 {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+} */
+
+.start__link {
+    margin: 7rem auto;
+    padding: 1rem 2rem;
+    font-size: 18px;
+    text-transform: uppercase;
+    text-decoration: none;
+    color: #fff;
+    background-color: #24ae24;
+    border-radius: 15px;
+    cursor: pointer;
+    transition: .2s linear;
+}
+
+.start__link:hover {
+    background-color: #1a901a;
+}
