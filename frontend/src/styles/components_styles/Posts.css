@@ -20,7 +20,3 @@
     gap: 2rem;
     list-style: none;
 }
-
-.app__posts-list>* {
-    max-width: 450px;
-}

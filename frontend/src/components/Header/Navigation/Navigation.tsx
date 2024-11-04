@@ -23,7 +23,7 @@ const Navigation = () => {
             <div className="app__logo-container">
                 <Link
                     to={linkPath}
-                    className="app__nav-link"
+                    className="app__nav-link logo"
                     title="Home page"
                 >mySocialMediaApp</Link>
             </div>

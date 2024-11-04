@@ -53,3 +53,39 @@
     color: var(--navLinkHoverColor);
     background-color: var(--navLinkHoverBgc);
 }
+
+@media(max-width: 1024px) {
+    .app__main-navigation {
+        padding: 1.5rem 2rem;
+    }
+
+    .app__navigation-variant {
+        display: flex;
+        list-style: none;
+    }
+
+    .app__nav-link {
+        padding: .5rem 2rem;
+        font-size: 16px;
+    }
+}
+
+@media(max-width: 768px) {
+    .app__main-navigation {
+        padding: 1rem 2rem;
+    }
+
+    .app__navigation-variant {
+        display: flex;
+        list-style: none;
+    }
+
+    .app__nav-link:not(.app__nav-link.logo):not(.profile-settings-navigation__links-list .app__nav-link) {
+        padding: .5rem 2rem;
+        font-size: 0;
+    }
+
+    .app__main-navigation .icon-container {
+        margin: 0 auto;
+    }
+}

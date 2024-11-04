@@ -12,8 +12,8 @@ const Footer = () => {
             <p className="footer__text">Copyright
                 <span className="icon-container">
                     <FontAwesomeIcon icon={icon} />
-                </span>
-                <span className="footer__year">{new Date().getFullYear()}</span>
+                </span> -
+                <span className="footer__year">{new Date().getFullYear()}</span>-
                 mySocialMediaApp. All rights reserved.
             </p>
         </footer>

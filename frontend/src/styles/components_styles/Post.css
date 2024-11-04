@@ -1,5 +1,6 @@
 .app__post {
     width: 100%;
+    max-width: 450px;
     border: 1px solid #ddd;
     border-radius: 15px;
     box-shadow: 0 0 10px 3px #ddd;
@@ -79,4 +80,49 @@
 .post__bottom {
     display: flex;
     justify-content: space-around;
+}
+
+@media(max-width: 1024px) {
+    .app__post {
+        max-width: 400px;
+    }
+
+    .post__h3 {
+        font-size: 21px;
+    }
+
+    .post__img-wrapper {
+        height: 220px;
+    }
+
+    .post__image {
+        height: 220px;
+    }
+
+    .post__description-wrapper .post__description {
+        font-size: 13px;
+        line-height: 1.2;
+    }
+}
+
+@media(max-width: 768px) {
+    .app__post {
+        max-width: 370px;
+    }
+
+    .post__h3 {
+        font-size: 20px;
+    }
+
+    .post__img-wrapper {
+        height: 200px;
+    }
+
+    .post__image {
+        height: 200px;
+    }
+
+    .post__description-wrapper .post__description {
+        font-size: 12px;
+    }
 }

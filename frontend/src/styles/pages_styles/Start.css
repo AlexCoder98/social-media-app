@@ -1,7 +1,7 @@
 .app__page.start {
     display: flex;
     flex-direction: column;
-    justify-content: stretch;
+    padding: 5rem 0;
 }
 
 .start__heading-container {
@@ -9,11 +9,36 @@
     padding: 1rem 0;
 }
 
-/* .start__heading-container h1 {
+.start__heading-container h1 {
     position: absolute;
-    top: 20px;
+    font-size: 40px;
+    font-weight: 300;
+    color: #353535;
+}
+
+.start__heading-container[data-number="1"] h1 {
+    bottom: 50px;
     left: 20px;
-} */
+    animation: moveFirstH1 15s linear both infinite;
+}
+
+.start__heading-container[data-number="2"] h1 {
+    top: 15px;
+    right: 20px;
+    animation: moveSecondH1 15s 3s linear both infinite;
+}
+
+.start__heading-container[data-number="3"] h1 {
+    top: 0;
+    left: 20px;
+    animation: moveThirdH1 15s 6s linear both infinite;
+}
+
+.start__heading-container[data-number="4"] h1 {
+    top: 100px;
+    right: 20px;
+    animation: moveFourthH1 15s 9s linear both infinite;
+}
 
 .start__link {
     margin: 7rem auto;
@@ -30,4 +55,93 @@
 
 .start__link:hover {
     background-color: #1a901a;
+    transform: scale(1.05);
+}
+
+@keyframes moveFirstH1 {
+    0% {
+        transform: translate(0);
+        opacity: 1;
+    }
+
+    50% {
+        transform: translate(7%, 22%);
+        opacity: 0;
+    }
+
+    60% {
+        transform: translate(7%, 22%);
+        opacity: 0;
+    }
+
+    100% {
+        transform: translate(0);
+        opacity: 1;
+    }
+}
+
+@keyframes moveSecondH1 {
+    0% {
+        transform: translate(0);
+        opacity: 1;
+    }
+
+    50% {
+        transform: translate(-13%, 30%);
+        opacity: 0;
+    }
+
+    60% {
+        transform: translate(-13%, 30%);
+        opacity: 0;
+    }
+
+    100% {
+        transform: translate(0);
+        opacity: 1;
+    }
+}
+
+@keyframes moveThirdH1 {
+    0% {
+        transform: translate(0);
+        opacity: 1;
+    }
+
+    50% {
+        transform: translate(13%, 14%);
+        opacity: 0;
+    }
+
+    60% {
+        transform: translate(13%, 14%);
+        opacity: 0;
+    }
+
+    100% {
+        transform: translate(0);
+        opacity: 1;
+    }
+}
+
+@keyframes moveFourthH1 {
+    0% {
+        transform: translate(0);
+        opacity: 1;
+    }
+
+    50% {
+        transform: translate(-13%, 28%);
+        opacity: 0;
+    }
+
+    60% {
+        transform: translate(-13%, 58%);
+        opacity: 0;
+    }
+
+    100% {
+        transform: translate(0);
+        opacity: 1;
+    }
 }

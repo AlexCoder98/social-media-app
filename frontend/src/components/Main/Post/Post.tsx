@@ -8,7 +8,7 @@ const Post = ({ id, title, image, description, creator, creationDate }: PostProp
     const location = useLocation();
 
     return (
-        <li className="app__post">
+        <li className="app__post" data-id={id}>
             <header className="post__head">
                 <section className="post__creation-details-wrapper">
                     <img
@@ -39,7 +39,7 @@ const Post = ({ id, title, image, description, creator, creationDate }: PostProp
                 </div>
             </main>
             {
-                location.pathname.endsWith('posts') && (
+                location.pathname.endsWith('my-posts') && (
                     <footer className="post__bottom">
                         <Link
                             to={id}

@@ -17,13 +17,13 @@
     width: 100%;
     padding: .7rem 4rem;
     font-size: 18px;
-    cursor: pointer;
     text-transform: uppercase;
     color: var(--actionButtonColor);
     border: none;
     background-color: var(--actionButtonBgc);
     border-radius: 15px;
     transition: .2s linear;
+    cursor: pointer;
 }
 
 .app__action-button:hover {
@@ -80,4 +80,23 @@
 
 .app__button.disabled:hover {
     background-color: var(--addButtonBgc);
+}
+
+@media(max-width: 1024px) {
+    .app__action-button {
+        font-size: 16px;
+    }
+
+    .app__action-button:hover {
+        background-color: var(--actionButtonHoverBgc);
+    }
+
+    .app__button {
+        font-size: 16px;
+    }
+
+    .app__button .icon-container {
+        margin-left: 7px;
+        font-size: 16px;
+    }
 }

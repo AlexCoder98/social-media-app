@@ -15,8 +15,7 @@
 }
 
 .app__post-single {
-    width: 600px;
-    max-width: 50%;
+    max-width: 450px;
     margin: 0 auto;
     border: 1px solid #ddd;
     border-radius: 15px;
@@ -75,5 +74,33 @@
 
     100% {
         opacity: 1;
+    }
+}
+
+@media(max-width: 768px) {
+    .app__post-single {
+        max-width: 420px;
+    }
+
+    .app__post-single-h3 {
+        font-size: 22px;
+        font-weight: 500;
+        color: #141414;
+    }
+
+    .app__post-single-bottom {
+        padding: 10px;
+    }
+
+    .app__post-single-img-wrapper {
+        height: 280px;
+    }
+
+    .app__post-single-text-container .app__paragraph {
+        line-height: 1.3;
+    }
+
+    .app__post-single-bottom>* {
+        width: 28%;
     }
 }

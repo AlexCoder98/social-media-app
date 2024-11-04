@@ -12,6 +12,9 @@
 
 }
 
-.app__main-content {
-    position: relative;
+@media(max-width: 768px) {
+    .app__main {
+        width: 100%;
+        padding: 0 2rem;
+    }
 }
