@@ -20,3 +20,16 @@
     margin-right: .5rem;
     font-size: 14px;
 }
+
+@media(max-width: 768px) {
+    .app__profile-settings-navigation {
+        width: 100%;
+        padding-right: 0;
+        margin: 1.5rem 0;
+    }
+
+    .profile-settings-navigation__links-list {
+        flex-direction: row;
+        gap: 10px;
+    }
+}

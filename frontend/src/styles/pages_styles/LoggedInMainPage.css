@@ -3,3 +3,9 @@
     padding-bottom: .5rem;
     border-bottom: 1px solid var(--borderColor);
 }
+
+@media(max-width: 768px) {
+    .app__main-page-header .app__h1 {
+        font-size: 28px;
+    }
+}

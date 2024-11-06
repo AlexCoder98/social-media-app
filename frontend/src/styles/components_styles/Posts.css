@@ -20,3 +20,9 @@
     gap: 2rem;
     list-style: none;
 }
+
+@media(max-width: 768px) {
+    .app__posts-page-header .app__h1 {
+        font-size: 28px;
+    }
+}

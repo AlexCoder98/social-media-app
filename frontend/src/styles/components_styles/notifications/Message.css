@@ -10,7 +10,7 @@
 
 .app__message {
     position: absolute;
-    top: -15%;
+    top: 5%;
     left: 50%;
     transform: translateX(-50%);
     display: flex;
@@ -42,11 +42,11 @@
 
 @keyframes moveMessage {
     0% {
-        top: -15%;
+        top: 0;
     }
 
     100% {
-        top: -2%;
+        top: 12%;
     }
 }
 
@@ -65,5 +65,15 @@
 
     100% {
         opacity: 0;
+    }
+}
+
+@media(max-width: 768px) {
+    .app__message {
+        padding: .7rem 1.5rem;
+    }
+
+    .app__message-text {
+        font-size: 14px;
     }
 }

@@ -75,7 +75,7 @@ const ResetPasswordForm = () => {
                 onSubmit={handleFormSubmit}
             >
                 <header className="app__form-header">
-                    <h2 className="app__form-h2">Reset your Password</h2>
+                    <h2 className="app__form-h2">Reset Password</h2>
                 </header>
                 <main className="app__form-main">
                     {resetPasswordFormInputsData.map((input, i) => (

@@ -72,7 +72,7 @@ const HomePage = () => {
                     </ul>
                 </InfiniteScroll>
             ) : (
-                <h2 className="app__h2" style={{ margin: '5rem 0' }}>No posts yet</h2>
+                <p style={{ textAlign: 'center', margin: '50% 0' }}>No posts yet</p>
             )}
         </div>
     )

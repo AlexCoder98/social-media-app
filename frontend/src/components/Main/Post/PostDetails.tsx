@@ -12,8 +12,6 @@ const SinglePost = () => {
     const [errorMsg, setErrorMsg] = useState<string>('');
     const [successMsg, setSuccessMsg] = useState<string>('');
 
-    console.log(errorMsg, successMsg);
-
     const accessToken = sessionStorage.getItem('accessToken');
     const { postId } = useParams();
     const navigate = useNavigate();
@@ -46,7 +44,7 @@ const SinglePost = () => {
                     setSuccessMsg(message);
                     setTimeout(() => {
                         setSuccessMsg('');
-                        // navigate('/my-posts');
+                        navigate('/my-posts');
                     }, 3000);
                 }
             })
@@ -85,7 +83,7 @@ const SinglePost = () => {
                             >Delete</button>
                         </footer>
                     </div >
-                ) : <h1>Post with id {postId} no longer exists.</h1>}
+                ) : <p style={{ textAlign: 'center', margin: '50% 0' }}>Post with id <b>{postId}</b> no longer exists.</p>}
         </>
     )
 }

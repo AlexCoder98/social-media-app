@@ -22,11 +22,13 @@ textarea {
 
 .app__h1 {
     font-size: 30px;
+    color: #353535;
 }
 
 .app__h2 {
     font-size: 28px;
     text-align: center;
+    color: #353535;
 }
 
 .app__form-container {

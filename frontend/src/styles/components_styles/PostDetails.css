@@ -21,6 +21,7 @@
     border-radius: 15px;
     animation: appearance 1s ease-out both;
     box-shadow: 0 0 15px 5px #ddd;
+    background-color: #fff;
 }
 
 
@@ -32,7 +33,7 @@
 .app__post-single-h3 {
     font-size: 24px;
     font-weight: 500;
-    color: #141414;
+    color: #353535;
 }
 
 .app__post-single-bottom {
@@ -54,6 +55,7 @@
     font-size: 14px;
     line-height: 1.5;
     text-align: justify;
+    color: #353535;
 }
 
 .app__post-single-bottom {
@@ -78,6 +80,10 @@
 }
 
 @media(max-width: 768px) {
+    .app__post-page-header .app__h1 {
+        font-size: 28px;
+    }
+
     .app__post-single {
         max-width: 420px;
     }
@@ -85,7 +91,6 @@
     .app__post-single-h3 {
         font-size: 22px;
         font-weight: 500;
-        color: #141414;
     }
 
     .app__post-single-bottom {

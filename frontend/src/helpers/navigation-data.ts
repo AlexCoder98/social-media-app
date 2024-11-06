@@ -10,11 +10,13 @@ export const navigationLoggedOutLinksData: NavigationLinksType = [
         content: 'Sign in',
         url: '/sign-in',
         title: 'Sign In',
+        iconName: 'arrow-right-to-bracket'
     },
     {
         content: 'Sign up',
         url: '/sign-up',
         title: 'Sign up',
+        iconName: 'user-plus'
     },
 ];
 

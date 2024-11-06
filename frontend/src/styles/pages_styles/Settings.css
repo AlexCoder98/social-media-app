@@ -28,7 +28,7 @@
 
 .settings__user-data>a {
     text-decoration: none;
-    color: black;
+    color: #353535;
 }
 
 .settings__user-data>a:hover {
@@ -57,4 +57,36 @@
 
 .settings__aside .app__input {
     margin-top: 5px;
+    background-color: #fff;
+}
+
+@media(max-width: 768px) {
+    .settings__header {
+        margin-bottom: 0;
+    }
+
+    .settings__user-data .settings__h2 {
+        font-size: 26px;
+    }
+
+    .settings__main {
+        flex-direction: column;
+    }
+
+    .settings__aside {
+        flex-grow: none;
+        padding-left: 0;
+        padding-top: 1rem;
+        border-left: none;
+        border-top: 1px solid #ddd;
+    }
+
+    .aside__main {
+        margin: 1rem 0;
+    }
+
+    .settings__aside .app__input {
+        margin-top: 5px;
+        background-color: #fff;
+    }
 }

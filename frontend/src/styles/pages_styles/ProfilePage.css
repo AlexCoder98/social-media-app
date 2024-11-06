@@ -39,6 +39,7 @@
     border: 1px solid #ddd;
     border-radius: 50%;
     overflow: hidden;
+    background-color: #fff;
 }
 
 .profile__photo {
@@ -76,7 +77,11 @@
     }
 }
 
-@media(max-width: 1024px) {
+@media(max-width: 768px) {
+
+    .app__profile-page-header .app__h1 {
+        font-size: 28px;
+    }
 
     .profile__photo-wrapper {
         height: 220px;

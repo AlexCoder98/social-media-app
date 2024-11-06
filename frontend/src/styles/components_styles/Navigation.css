@@ -1,6 +1,6 @@
 :root {
     --navLinkColor: #353535;
-    --navLinkHoverColor: #fff;
+    --navLinkHoverColor: #f1f1f1;
     --navLinkHoverBgc: #353535;
     --borderColor: #d0d0d0;
 }
@@ -66,12 +66,13 @@
 
     .app__nav-link {
         padding: .5rem 2rem;
-        font-size: 16px;
+        font-size: 18px;
     }
 }
 
 @media(max-width: 768px) {
     .app__main-navigation {
+        justify-content: center;
         padding: 1rem 2rem;
     }
 

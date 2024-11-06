@@ -1,11 +1,11 @@
 :root {
-    --actionButtonColor: #fff;
+    --actionButtonColor: #f1f1f1;
     --actionButtonBgc: #353535;
     --actionButtonHoverBgc: #424242;
-    --buttonColor: #fff;
+    --buttonColor: #f1f1f1;
     --buttonBgc: #353535;
     --buttonHoverBgc: #424242;
-    --deleteButtonColor: #fff;
+    --deleteButtonColor: #f1f1f1;
     --deleteButtonBgc: #ea1313;
     --deleteButtonHoverBgc: #b10808;
     --addButtonBgc: #24ae24;

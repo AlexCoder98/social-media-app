@@ -9,8 +9,9 @@
 
 .app__form.sign-in,
 .app__form.sign-up,
-.app__form.reset-password {
-    width: 40%;
+.app__form.reset-password,
+.app__form.create-post,
+.app__form.edit-post {
     max-width: 450px;
 }
 
@@ -68,7 +69,7 @@
     padding: .7rem 2rem;
     font-size: 16px;
     font-weight: bolder;
-    color: #fff;
+    color: #f1f1f1;
     background-color: #353535;
     border-radius: 15px;
     cursor: pointer;
@@ -99,4 +100,27 @@ textarea.app__input {
 
 .app__form-footer {
     width: 100%;
+}
+
+@media(max-width: 768px) {
+
+    .app__form.sign-in,
+    .app__form.sign-up,
+    .app__form.reset-password,
+    .app__form.create-post,
+    .app__form.edit-post {
+        max-width: 400px;
+    }
+
+    .app__form-h2 {
+        font-size: 26px;
+    }
+
+    .app__input {
+        padding: .6rem;
+    }
+
+    .app__input[type="file"]::-webkit-file-upload-button {
+        padding: .5rem 1.5rem;
+    }
 }

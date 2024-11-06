@@ -145,3 +145,20 @@
         opacity: 1;
     }
 }
+
+@media(max-width: 768px) {
+
+    .app__page.start {
+        padding: 3rem 0;
+    }
+
+    .start__heading-container h1 {
+        font-size: 34px;
+    }
+
+    .start__link {
+        padding: 1rem 1.5rem;
+        font-size: 17px;
+    }
+
+}
