@@ -1,6 +1,6 @@
 .app__post {
     width: 100%;
-    max-width: 450px;
+    max-width: 500px;
     background-color: #fff;
     border: 1px solid #ddd;
     border-radius: 15px;
@@ -25,7 +25,7 @@
     margin-right: .5rem;
     object-fit: cover;
     object-position: center;
-    border-radius: 50%;
+    /* border-radius: 50%; */
 }
 
 .post__creation-details {
@@ -62,15 +62,15 @@
 
 .post__image {
     width: 100%;
-    height: 250px;
+    height: auto;
     object-fit: cover;
     object-position: center;
     transition: .3s linear;
 }
 
 .post__img-wrapper:hover .post__image {
-    transform: rotate(15deg) scale(1.5);
-    filter: brightness(60%);
+    /* transform: rotate(15deg) scale(1.5); */
+    filter: brightness(80%);
 }
 
 .post__description-wrapper .post__description {
