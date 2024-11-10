@@ -174,10 +174,10 @@ export const postAuthenticationSettings = async (req: Request, res: Response, ne
                 throw error;
             }
 
-            if (newPassword.length < 3) {
-                const message = 'New password is too short';
-                const error = new CustomError(message, 403);
-                throw error;
+            const regex = /^(?=.*[0-9])(?=.*[!@#$%^&*()_])(?=.*[A-Z])(?=.*[a-z])[A-Za-z0-9!@#$%^&*()_]{7,}$/g;
+            if (!newPassword.match(regex)) {
+                const message = 'Password has to be at least 7 characters long, must contain at least one upper and lower case letter, digit and special sign';
+                throw new Error(message);
             }
 
             if (newPasswordConfirmation !== newPassword) {

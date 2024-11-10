@@ -36,8 +36,13 @@ router.post(
         }),
     body('password')
         .trim()
-        .isLength({ min: 3 })
-        .withMessage('Password is too short'),
+        .custom(async (value) => {
+            const regex = /^(?=.*[0-9])(?=.*[!@#$%^&*()_])(?=.*[A-Z])(?=.*[a-z])[A-Za-z0-9!@#$%^&*()_]{7,}$/g;
+            if (!(value as string).match(regex)) {
+                const message = 'Password has to be at least 7 characters long, must contain at least one upper and lower case letter, digit and special sign';
+                throw new Error(message);
+            }
+        }),
     body('passwordConfirmation')
         .trim()
         .custom(async (value, { req }) => {
@@ -67,11 +72,23 @@ router.post(
     body('email')
         .trim()
         .isEmail()
-        .withMessage('Invalid email'),
+        .withMessage('Invalid email')
+        .custom(async (value) => {
+            const user = await User.exists({ email: value });
+            if (!user) {
+                const message = 'User with provided email does not exist';
+                throw new Error(message);
+            }
+        }),
     body('newPassword')
         .trim()
-        .isLength({ min: 3 })
-        .withMessage('Password is too short'),
+        .custom(async (value) => {
+            const regex = /^(?=.*[0-9])(?=.*[!@#$%^&*()_])(?=.*[A-Z])(?=.*[a-z])[A-Za-z0-9!@#$%^&*()_]{7,}$/g;
+            if (!(value as string).match(regex)) {
+                const message = 'Password has to be at least 7 characters long, must contain at least one upper and lower case letter, digit and special sign';
+                throw new Error(message);
+            }
+        }),
     body('newPasswordConfirmation')
         .custom(async (value, { req }) => {
             if (value !== req.body.newPassword) {
