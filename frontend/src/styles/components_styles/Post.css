@@ -25,7 +25,7 @@
     margin-right: .5rem;
     object-fit: cover;
     object-position: center;
-    /* border-radius: 50%; */
+    border-radius: 50%;
 }
 
 .post__creation-details {

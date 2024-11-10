@@ -38,6 +38,7 @@
 
 .app__message-text {
     font-size: 16px;
+    text-align: center;
 }
 
 @keyframes moveMessage {
