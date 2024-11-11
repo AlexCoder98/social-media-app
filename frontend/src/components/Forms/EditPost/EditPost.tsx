@@ -59,14 +59,10 @@ const EditPostForm = () => {
         }));
     }
 
-    console.log(editPostFormValues);
-
     const handleOnSubmit = (e: React.SyntheticEvent) => {
         e.preventDefault();
         const formData = new FormData();
         formData.append('postImage', file!);
-        console.log('OLD PATH');
-        console.log(editPostFormValues.image);
         if (editPostFormValues.image !== '') {
             formData.append('oldImagePath', editPostFormValues.image)
         };
@@ -102,7 +98,6 @@ const EditPostForm = () => {
                 return dispatch(postEditPost(data!));
             })
             .then(result => {
-                console.log(result.payload);
                 const { requestStatus } = result.meta;
                 if (requestStatus === 'rejected') {
                     const message = result.payload as string;
