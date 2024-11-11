@@ -5,6 +5,8 @@ import { validationResult } from 'express-validator';
 import { User } from '../models/user';
 import CustomError from '../utils/error';
 
+import { passwordRegex } from '../utils/regex';
+
 export const getUser = async (req: Request, res: Response, next: NextFunction) => {
     const { userId } = req;
     try {
@@ -173,9 +175,8 @@ export const postAuthenticationSettings = async (req: Request, res: Response, ne
                 const error = new CustomError(message, 403);
                 throw error;
             }
-
-            const regex = /^(?=.*[0-9])(?=.*[!@#$%^&*()_])(?=.*[A-Z])(?=.*[a-z])[A-Za-z0-9!@#$%^&*()_]{7,}$/g;
-            if (!newPassword.match(regex)) {
+            ;
+            if (!newPassword.match(passwordRegex)) {
                 const message = 'Password has to be at least 7 characters long, must contain at least one upper and lower case letter, digit and special sign';
                 throw new Error(message);
             }
