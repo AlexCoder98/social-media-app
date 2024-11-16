@@ -4,7 +4,6 @@ import {
     signUp,
     signIn,
     signOut,
-    resetPassword
 } from './actions';
 
 import { AuthInitialStateType } from '../../types/reducers/auth';

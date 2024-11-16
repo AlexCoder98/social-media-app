@@ -13,8 +13,9 @@ import { useAppSelector, useAppDispatch } from '../hooks/redux';
 import '../styles/pages_styles/LoggedInMainPage.css';
 import '../styles/components_styles/Posts.css';
 
+const accessToken = sessionStorage.getItem('accessToken') as string;
+
 const HomePage = () => {
-    const accessToken = sessionStorage.getItem('accessToken') as string;
     const dispatch = useAppDispatch();
 
     useEffect(() => {

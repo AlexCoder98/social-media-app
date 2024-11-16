@@ -12,8 +12,6 @@ import { useFontAwesomeIcon } from "../hooks/useFontAwesomeIcon";
 import '../styles/pages_styles/ProfilePage.css';
 
 const ProfilePage = () => {
-    const accessToken = sessionStorage.getItem('accessToken');
-    const userId = sessionStorage.getItem('userId');
     const user = useAppSelector(state => state.user);
     const dispatch = useAppDispatch();
     const navigate = useNavigate();
@@ -21,12 +19,14 @@ const ProfilePage = () => {
     const settingsIcon = useFontAwesomeIcon('gear');
 
     useLayoutEffect(() => {
+        const accessToken = sessionStorage.getItem('accessToken');
+        const userId = sessionStorage.getItem('userId');
         const reqData = {
             accessToken: accessToken!,
             userId: userId!
         };
         dispatch(getUser(reqData))
-    }, [userId]);
+    }, []);
 
     const { name, surname, profileImage, status, bio } = user;
 

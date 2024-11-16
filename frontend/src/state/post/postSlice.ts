@@ -1,13 +1,11 @@
 import { createSlice } from '@reduxjs/toolkit';
 
 import {
-    postCreatePost,
     getUserPosts,
     getAllPosts,
     getPost,
     deletePost,
-    getEditPost,
-    postEditPost
+    getEditPost
 } from './actions';
 
 import { PostResponseType, PostsInitialStateType } from '../../types/reducers/post';

@@ -10,6 +10,8 @@ import Message from "../components/Message/Message";
 
 import { ProfileSettingsType } from '../types/reducers/user';
 
+const accessToken = sessionStorage.getItem('accessToken')!;
+
 const ProfileSettingsPage = () => {
     const [profileSettingsValues, setProfileSettingsValues] = useState({
         name: '',
@@ -25,7 +27,6 @@ const ProfileSettingsPage = () => {
     const [successMsg, setSuccessMsg] = useState<string>('');
 
     const dispatch = useAppDispatch();
-    const accessToken = sessionStorage.getItem('accessToken')!;
 
     useEffect(() => {
         dispatch(getProfileSettings(accessToken)).then(result => {

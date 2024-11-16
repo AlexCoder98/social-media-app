@@ -1,3 +1,10 @@
+:root {
+    --navLinkColor: #353535;
+    --navLinkHoverColor: #f1f1f1;
+    --navLinkHoverBgc: #353535;
+    --borderColor: #d0d0d0;
+}
+
 .app__profile-settings-navigation {
     width: 250px;
     padding-right: 1rem;
@@ -14,6 +21,18 @@
     margin: 0;
     padding: .3rem 10px;
     font-size: 16px;
+    color: var(--navLinkColor);
+    background-color: #fff;
+}
+
+.profile-settings-navigation__links-list .app__nav-link:hover {
+    color: var(--navLinkHoverColor);
+    background-color: var(--navLinkHoverBgc);
+}
+
+.profile-settings-navigation__links-list .app__nav-link.active {
+    color: var(--navLinkHoverColor);
+    background-color: var(--navLinkHoverBgc);
 }
 
 .app__profile-settings-navigation .icon-container {

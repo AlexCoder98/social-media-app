@@ -150,7 +150,6 @@ export const getEditPost = createAsyncThunk(
             if (respone.status !== 200) {
                 throw new Error((result as RequestResponseType).message);
             } else {
-                console.log(result);
                 return result as PostResponseType;
             }
         } catch (err) {

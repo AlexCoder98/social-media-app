@@ -10,7 +10,8 @@ import { getEditPost, uploadPostImage, postEditPost } from '../../../state/post/
 
 import { postFormData } from '../../../helpers/form-data';
 import { EditPostType } from '../../../types/post';
-import { title } from 'process';
+
+const accessToken = sessionStorage.getItem('accessToken');
 
 const EditPostForm = () => {
     const [editPostFormValues, setEditPostFormValues] = useState({
@@ -23,7 +24,6 @@ const EditPostForm = () => {
     const [successMsg, setSuccessMsg] = useState<string>('');
     const [file, setFile] = useState<File | null>(null);
 
-    const accessToken = sessionStorage.getItem('accessToken');
     const { postId } = useParams();
     const dispatch = useAppDispatch();
     const navigate = useNavigate();
@@ -44,7 +44,7 @@ const EditPostForm = () => {
                 });
             }
         })
-    }, [postId])
+    }, [postId]);
 
     const fileSelectedHandler = async (e: React.FormEvent) => {
         const selectedFile = (e.target as HTMLInputElement).files![0];

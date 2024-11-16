@@ -10,6 +10,8 @@ import { postCreatePost, uploadPostImage } from '../../../state/post/actions';
 
 import { postFormData } from '../../../helpers/form-data';
 
+const accessToken = sessionStorage.getItem('accessToken');
+
 const CreatePostForm = () => {
     const [createPostFormValues, setCreatePostFormValues] = useState({
         title: '',
@@ -21,7 +23,6 @@ const CreatePostForm = () => {
 
     const [file, setFile] = useState<File | null>(null);
 
-    const accessToken = sessionStorage.getItem('accessToken');
     const dispatch = useAppDispatch();
     const navigate = useNavigate();
 

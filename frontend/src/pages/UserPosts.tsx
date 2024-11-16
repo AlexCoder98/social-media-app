@@ -18,8 +18,9 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import '../styles/components_styles/Posts.css';
 import '../styles/components_styles/Button.css';
 
+const accessToken = sessionStorage.getItem('accessToken') as string;
+
 const UserPostsPage = () => {
-    const accessToken = sessionStorage.getItem('accessToken') as string;
     const dispatch = useAppDispatch();
     const icon = useFontAwesomeIcon('plus');
 

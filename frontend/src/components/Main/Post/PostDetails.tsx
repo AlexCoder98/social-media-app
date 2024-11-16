@@ -8,27 +8,31 @@ import { useAppSelector, useAppDispatch } from "../../../hooks/redux";
 import { getPost, deletePost } from "../../../state/post/actions";
 import '../../../styles/components_styles/PostDetails.css';
 
+const accessToken = sessionStorage.getItem('accessToken');
+
 const SinglePost = () => {
     const [errorMsg, setErrorMsg] = useState<string>('');
     const [successMsg, setSuccessMsg] = useState<string>('');
 
-    const accessToken = sessionStorage.getItem('accessToken');
     const { postId } = useParams();
     const navigate = useNavigate();
     const dispatch = useAppDispatch();
 
-    const reqData = {
-        accessToken: accessToken!,
-        postId: postId!,
-    }
-
     useLayoutEffect(() => {
+        const reqData = {
+            accessToken: accessToken!,
+            postId: postId!,
+        };
         dispatch(getPost(reqData));
-    }, [])
+    }, [postId])
 
     const { post } = useAppSelector(state => state.post);
 
     const handleOnDeletePost = () => {
+        const reqData = {
+            accessToken: accessToken!,
+            postId: postId!,
+        };
         dispatch(deletePost(reqData))
             .then(result => {
                 const { requestStatus } = result.meta;
