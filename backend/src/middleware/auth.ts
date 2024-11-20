@@ -11,7 +11,7 @@ export const isAuthenticated = (req: Request, res: Response, next: NextFunction)
 
     let decodedToken;
     try {
-        decodedToken = jwt.verify(token, 'supersecretstring');
+        decodedToken = jwt.verify(token, process.env.JWT_SECRET!);
     } catch (err) {
         req.isAuth = false;
         return next();

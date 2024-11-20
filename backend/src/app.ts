@@ -2,11 +2,11 @@ import path from 'path';
 
 import express, { Express, NextFunction, Request, Response } from 'express';
 import mongoose from 'mongoose';
+import dotenv from 'dotenv';
 
 import { allowCrossDomain } from './middleware/cors';
 import { isAuthenticated } from './middleware/auth';
-
-import { PORT, MONGODB_NAME, MONGODB_PASSWORD, MONGODB_COLLECTION_NAME } from './credentials/credentials';
+import { uploadFile } from './middleware/multer';
 
 import { errorHandler } from './controllers/error';
 
@@ -14,13 +14,15 @@ import authRoutes from './routes/auth';
 import userRoutes from './routes/user';
 import postRoutes from './routes/post';
 
-import { uploadFile } from './middleware/multer';
 import { deleteFile } from './utils/deleteFile';
+
+dotenv.config();
+
+const { PORT, MONGODB_NAME, MONGODB_PASSWORD, MONGODB_COLLECTION_NAME } = process.env;
 
 const app: Express = express();
 
 const MONGODB_URI = `mongodb+srv://${MONGODB_NAME}:${MONGODB_PASSWORD}@cluster0.940kmdl.mongodb.net/${MONGODB_COLLECTION_NAME}`;
-
 
 app.use(express.json());
 app.use(uploadFile.fields([

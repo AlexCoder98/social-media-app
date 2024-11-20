@@ -60,7 +60,7 @@ export const postSignIn = async (req: Request, res: Response, next: NextFunction
 
         const isPasswordValid = await bcrypt.compare(password, user.password);
         if (!isPasswordValid) {
-            const message = 'Invalid password provided.';
+            const message = 'Invalid password provided';
             const error = new CustomError(message, 401);
             throw error;
         }
@@ -68,7 +68,7 @@ export const postSignIn = async (req: Request, res: Response, next: NextFunction
         const accessToken = jwt.sign({
             email: user.email,
             userId: user._id.toString(),
-        }, 'supersecretstring');
+        }, process.env.JWT_SECRET!);
 
         res
             .status(200)
