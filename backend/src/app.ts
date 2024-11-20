@@ -2,7 +2,7 @@ import path from 'path';
 
 import express, { Express, NextFunction, Request, Response } from 'express';
 import mongoose from 'mongoose';
-import dotenv from 'dotenv';
+import 'dotenv/config';
 
 import { allowCrossDomain } from './middleware/cors';
 import { isAuthenticated } from './middleware/auth';
@@ -15,8 +15,6 @@ import userRoutes from './routes/user';
 import postRoutes from './routes/post';
 
 import { deleteFile } from './utils/deleteFile';
-
-dotenv.config();
 
 const { PORT, MONGODB_NAME, MONGODB_PASSWORD, MONGODB_COLLECTION_NAME } = process.env;
 
