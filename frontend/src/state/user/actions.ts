@@ -4,7 +4,8 @@ import {
     UserReqType,
     ProfileSettingsType,
     SettingsHeaderType,
-    AuthenticationSettingsType
+    AuthenticationSettingsType,
+    LocationSettingsType
 } from '../../types/reducers/user';
 
 import { RequestResponseType } from "../../types/reducers/auth";
@@ -150,6 +151,41 @@ export const postAuthenticationSettings = createAsyncThunk(
                     'Content-Type': 'application/json'
                 },
                 body: JSON.stringify(reqData.formData)
+            });
+
+            const result = await response.json();
+            if (response.status !== 200) {
+                throw new Error((result as RequestResponseType).message);
+            } else {
+                return (result as { message: string }).message;
+            }
+        } catch (err) {
+            return thunkAPI.rejectWithValue((err as Error).message);
+        }
+    }
+)
+
+export const getLocationSettings = createAsyncThunk(
+    'user/getLocationSettings',
+    async () => {
+
+    }
+)
+
+export const postLocationSettings = createAsyncThunk(
+    'user/postLocationSettings',
+    async (reqData:
+        { accessToken: string, formData: LocationSettingsType },
+        thunkAPI
+    ) => {
+        try {
+            const response = await fetch(`http://localhost:8080/settings/location`, {
+                method: 'PUT',
+                headers: {
+                    Authorization: `Bearer ${reqData.accessToken}`,
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(reqData.formData),
             });
 
             const result = await response.json();

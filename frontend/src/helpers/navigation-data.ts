@@ -49,6 +49,12 @@ export const profileSettingsNavigationData: NavigationLinksType = [
         iconName: 'user'
     },
     {
+        content: 'Location',
+        url: '/settings/location',
+        title: 'Location settings',
+        iconName: 'location-dot'
+    },
+    {
         content: 'Authentication',
         url: '/settings/authentication',
         title: 'Authentication settings',

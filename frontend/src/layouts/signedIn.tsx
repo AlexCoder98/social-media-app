@@ -8,8 +8,9 @@ const EditPostPage = lazy(() => import('../pages/EditPost'));
 const CreatePostPage = lazy(() => import('../pages/CreatePost'));
 const ProfilePage = lazy(() => import('../pages/Profile'));
 const SettingsPage = lazy(() => import('../pages/SettingsPage'));
-const EditPublicInformationPage = lazy(() => import('../pages/ProfileSettings'));
-const EditAccessPage = lazy(() => import('../pages/AuthenticationSettings'));
+const ProfileSettings = lazy(() => import('../pages/ProfileSettings'));
+const AuthenticationSettings = lazy(() => import('../pages/AuthenticationSettings'));
+const LocationSettings = lazy(() => import('../pages/LocationSettings'));
 const NotFoundPage = lazy(() => import('../pages/404'));
 
 const SignedInLayout = () => {
@@ -24,8 +25,9 @@ const SignedInLayout = () => {
             </Route>
             <Route path="/profile" element={<ProfilePage />} />
             <Route path="/settings" element={<SettingsPage />} >
-                <Route path="profile" element={<EditPublicInformationPage />} />
-                <Route path="authentication" element={<EditAccessPage />} />
+                <Route path="profile" element={<ProfileSettings />} />
+                <Route path="location" element={<LocationSettings />} />
+                <Route path="authentication" element={<AuthenticationSettings />} />
             </Route>
             <Route path='*' element={<NotFoundPage />} />
         </Routes>

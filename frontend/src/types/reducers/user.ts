@@ -32,3 +32,8 @@ export type AuthenticationSettingsType = {
     newPassword: string,
     newPasswordConfirmation: string,
 }
+
+export type LocationSettingsType = {
+    country: string;
+    city: string;
+};
