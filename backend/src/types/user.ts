@@ -10,7 +10,11 @@ export interface UserSchemaType {
     posts: Types.Array<PostSchemaType>,
     profileImage?: string;
     status?: string;
-    bio: string,
+    bio: string;
+    location: {
+        country: string;
+        city: string;
+    }
 }
 
 export type ReqBodyUserType = {

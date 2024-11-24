@@ -200,3 +200,27 @@ export const postAuthenticationSettings = async (req: Request, res: Response, ne
         next(err);
     }
 }
+
+export const postLocationSettings = async (req: Request, res: Response, next: NextFunction) => {
+    const { country, city } = req.body;
+    const { userId } = req;
+    try {
+        const user = await User.findById(userId);
+        if (!user) {
+            const message = 'User not found';
+            const error = new CustomError(message, 401);
+            throw error;
+        }
+
+        user.location.country = country;
+        user.location.city = city;
+
+        await user.save();
+
+        res
+            .status(200)
+            .json({ "message": "Location data has been changed" });
+    } catch (err) {
+        next(err);
+    }
+}

@@ -17,6 +17,10 @@ const userSchema = new Schema<UserSchemaType>({
     status: String,
     profileImage: String,
     bio: String,
+    location: {
+        country: String,
+        city: String,
+    },
     posts: [
         {
             type: Schema.Types.ObjectId,

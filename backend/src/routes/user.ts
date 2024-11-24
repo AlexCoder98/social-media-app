@@ -10,7 +10,8 @@ import {
     getProfileSettings,
     postProfileSettings,
     getAuthenticationSettings,
-    postAuthenticationSettings
+    postAuthenticationSettings,
+    postLocationSettings
 } from '../controllers/user';
 
 const router = express.Router();
@@ -54,5 +55,9 @@ router.put(
         .isEmail()
         .withMessage('Invalid email'),
     postAuthenticationSettings);
+
+router.get('/settings/location', isAuthenticated);
+
+router.put('/settings/location', isAuthenticated, postLocationSettings);
 
 export default router;
