@@ -9,6 +9,7 @@ import {
 } from '../controllers/auth';
 
 import { passwordRegex } from '../utils/regex';
+import { messages } from '../helpers/messages';
 
 const router = express.Router();
 
@@ -17,38 +18,37 @@ router.post(
     body('name')
         .trim()
         .notEmpty()
-        .withMessage('Name field cannot be empty')
+        .withMessage(messages.emptyName)
         .isLength({ min: 2 })
-        .withMessage('Name is too short'),
+        .withMessage(messages.shortName),
     body('surname')
         .trim()
         .notEmpty()
-        .withMessage('Surname field cannot be empty')
+        .withMessage(messages.emptySurname)
         .isLength({ min: 2 })
-        .withMessage('Surname is too short'),
+        .withMessage(messages.shortSurname),
     body('email')
         .trim()
         .isEmail()
-        .withMessage('Invalid email')
+        .withMessage(messages.invalidEmail)
         .custom(async value => {
             const user = await User.findOne({ email: value });
             if (user) {
-                throw new Error('E-mail already in use');
+                throw new Error(messages.emailInUse);
             }
         }),
     body('password')
         .trim()
         .custom(async (value) => {
             if (!(value as string).match(passwordRegex)) {
-                const message = 'Password has to be at least 7 characters long, must contain at least one upper and lower case letter, digit and special sign';
-                throw new Error(message);
+                throw new Error(messages.notPassedPasswordRegex);
             }
         }),
     body('passwordConfirmation')
         .trim()
         .custom(async (value, { req }) => {
             if (value !== req.body.password) {
-                throw new Error('Password confirmation failed');
+                throw new Error(messages.failedPasswordConfirmation);
             }
         }),
     postSignUp
@@ -59,13 +59,13 @@ router.post(
     body('email')
         .trim()
         .notEmpty()
-        .withMessage('Email field cannot be empty')
+        .withMessage(messages.emptyEmail)
         .isEmail()
-        .withMessage('Invalid email'),
+        .withMessage(messages.invalidEmail),
     body('password')
         .trim()
         .isLength({ min: 3 })
-        .withMessage('Invalid password'),
+        .withMessage(messages.invalidPassword),
     postSignIn);
 
 router.post(
@@ -73,26 +73,24 @@ router.post(
     body('email')
         .trim()
         .isEmail()
-        .withMessage('Invalid email')
+        .withMessage(messages.invalidEmail)
         .custom(async (value) => {
             const user = await User.exists({ email: value });
             if (!user) {
-                const message = 'User with provided email does not exist';
-                throw new Error(message);
+                throw new Error(messages.emailNotInDb);
             }
         }),
     body('newPassword')
         .trim()
         .custom(async (value) => {
             if (!(value as string).match(passwordRegex)) {
-                const message = 'Password has to be at least 7 characters long, must contain at least one upper and lower case letter, digit and special sign';
-                throw new Error(message);
+                throw new Error(messages.notPassedPasswordRegex);
             }
         }),
     body('newPasswordConfirmation')
         .custom(async (value, { req }) => {
             if (value !== req.body.newPassword) {
-                throw new Error('Password confirmation failed');
+                throw new Error(messages.failedPasswordConfirmation);
             }
         }),
     postResetPassword);

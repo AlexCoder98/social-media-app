@@ -6,6 +6,8 @@ import { isAuthenticated } from '../middleware/auth';
 
 import { postCreatePost, getUserPosts, getAllPosts, getPost, deletePost, getEditPost, postEditPost } from '../controllers/post';
 
+import { messages } from '../helpers/messages';
+
 const router = express.Router();
 
 router.get('/home', isAuthenticated, getAllPosts);
@@ -20,15 +22,15 @@ router.post(
     body('title')
         .trim()
         .notEmpty()
-        .withMessage('Post title cannot be empty')
+        .withMessage(messages.emptyPostTitle)
         .isLength({ min: 3, max: 50 })
-        .withMessage('Post title has to be at least 3 and max 50 characters long'),
+        .withMessage(messages.postTitleLength),
     body('description')
         .trim()
         .notEmpty()
-        .withMessage('Post description cannot be empty')
+        .withMessage(messages.emptyPostDesc)
         .isLength({ min: 5 })
-        .withMessage('Post description has to have at least 5 characters.'),
+        .withMessage(messages.postDescLength),
     postCreatePost
 );
 
@@ -45,12 +47,12 @@ router.put(
         .trim()
         .notEmpty()
         .isLength({ min: 3 })
-        .withMessage('Post title has to have at least 3 characters.'),
+        .withMessage(messages.postTitleLength),
     body('description')
         .trim()
         .notEmpty()
         .isLength({ min: 5 })
-        .withMessage('Post description has to have at least 5 characters.'),
+        .withMessage(messages.postDescLength),
     postEditPost
 );
 

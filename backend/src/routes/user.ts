@@ -14,6 +14,8 @@ import {
     postLocationSettings
 } from '../controllers/user';
 
+import { messages } from '../helpers/messages';
+
 const router = express.Router();
 
 router.get('/profile', isAuthenticated, getUser);
@@ -29,18 +31,18 @@ router.put(
         .trim()
         .notEmpty()
         .isLength({ min: 2 })
-        .withMessage('Name is too short'),
+        .withMessage(messages.shortName),
     body('surname')
         .trim()
         .notEmpty()
         .isLength({ min: 2 })
-        .withMessage('Surname is too short'),
+        .withMessage(messages.shortSurname),
     body('status')
         .isLength({ max: 30 })
-        .withMessage('Status is too long'),
+        .withMessage(messages.longStatus),
     body('bio')
         .isLength({ max: 900 })
-        .withMessage('Biography is too long'),
+        .withMessage(messages.longBio),
     postProfileSettings);
 
 router.get('/settings/authentication', isAuthenticated, getAuthenticationSettings);
@@ -51,9 +53,9 @@ router.put(
     body('email')
         .trim()
         .notEmpty()
-        .withMessage('Email cannot be empty')
+        .withMessage(messages.emptyEmail)
         .isEmail()
-        .withMessage('Invalid email'),
+        .withMessage(messages.invalidEmail),
     postAuthenticationSettings);
 
 router.get('/settings/location', isAuthenticated);
