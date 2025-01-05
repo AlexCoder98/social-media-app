@@ -7,7 +7,7 @@ import Message from '../../Message/Message';
 
 import { signIn } from '../../../state/authentication/actions';
 import { useAppDispatch } from '../../../hooks/redux';
-
+import { setSuccessMessage, setErrorMessage } from '../../../state/message/messageSlice';
 import { signInFormInputsData } from '../../../helpers/form-data';
 
 import '../../../styles/components_styles/Form.css';
@@ -22,7 +22,7 @@ const SignInForm = () => {
         password: '',
     });
 
-    const [errorMsg, setErrorMsg] = useState<string>('');
+    // const [errorMsg, setErrorMsg] = useState<string>('');
 
     const handleInputChange = (e: React.FormEvent) => {
         const { name, value } = e.target as HTMLInputElement;
@@ -43,9 +43,9 @@ const SignInForm = () => {
             const { requestStatus } = result.meta;
             if (requestStatus === 'rejected') {
                 const message = result.payload as string;
-                setErrorMsg(message);
+                dispath(setErrorMessage(message));
                 setTimeout(() => {
-                    setErrorMsg('');
+                    dispath(setErrorMessage(null));
                 }, 3000);
             }
             if (requestStatus === 'fulfilled') {
@@ -64,7 +64,6 @@ const SignInForm = () => {
 
     return (
         <>
-            <Message error={errorMsg} />
             <form
                 method="POST"
                 className="app__form sign-in"
