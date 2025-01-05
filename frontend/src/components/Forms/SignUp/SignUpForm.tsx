@@ -3,7 +3,6 @@ import { Link, useNavigate } from 'react-router-dom';
 
 import InputElement from '../InputElement/InputElement';
 import Button from '../../Button/Button';
-import Message from '../../Message/Message';
 
 import { useAppDispatch } from '../../../hooks/redux';
 import { signUp } from '../../../state/authentication/actions';
@@ -43,31 +42,33 @@ const SignUpForm = () => {
             passwordConfirmation: signUpFormValues.passwordConfirmation,
         }
 
-        await dispatch(signUp(newUser)).then(result => {
-            const { requestStatus } = result.meta;
-            if (requestStatus === 'rejected') {
-                const message = result.payload as string;
-                dispatch(setErrorMessage(message));
-                setTimeout(() => {
-                    dispatch(setErrorMessage(null));
-                }, 3000);
-            }
-            if (requestStatus === 'fulfilled') {
-                const message = result.payload as string;
-                dispatch(setSuccessMessage(message));
-                setSignUpFormValues({
-                    name: '',
-                    surname: '',
-                    email: '',
-                    password: '',
-                    passwordConfirmation: ''
-                });
-                setTimeout(() => {
-                    dispatch(setSuccessMessage(null));
-                    navigate('/sign-in');
-                }, 3000);
-            }
-        });
+        await dispatch(signUp(newUser))
+            .then(result => {
+                const { requestStatus } = result.meta;
+                if (requestStatus === 'rejected') {
+                    const message = result.payload as string;
+                    dispatch(setErrorMessage(message));
+                    setTimeout(() => {
+                        dispatch(setErrorMessage(null));
+                    }, 3000);
+                }
+                if (requestStatus === 'fulfilled') {
+                    const message = result.payload as string;
+                    dispatch(setSuccessMessage(message));
+                    setSignUpFormValues({
+                        name: '',
+                        surname: '',
+                        email: '',
+                        password: '',
+                        passwordConfirmation: ''
+                    });
+                    setTimeout(() => {
+                        dispatch(setSuccessMessage(null));
+                        navigate('/sign-in');
+                    }, 3000);
+                }
+            })
+            .catch(err => console.log(err));
     }
 
     return (

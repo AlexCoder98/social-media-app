@@ -1,13 +1,12 @@
-import { useNavigate } from 'react-router-dom';
-
 import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 import InputElement from '../InputElement/InputElement';
 import Button from '../../Button/Button';
-import Message from '../../Message/Message';
 
 import { useAppDispatch } from '../../../hooks/redux';
 import { resetPassword } from '../../../state/authentication/actions';
+import { setSuccessMessage, setErrorMessage } from '../../../state/message/messageSlice';
 
 import { resetPasswordFormInputsData } from '../../../helpers/form-data';
 
@@ -21,9 +20,6 @@ const ResetPasswordForm = () => {
         newPassword: '',
         newPasswordConfirmation: ''
     });
-
-    const [errorMsg, setErrorMsg] = useState<string>('');
-    const [successMsg, setSuccessMsg] = useState<string>('');
 
     const handleInputChange = (e: React.FormEvent) => {
         const { name, value } = e.target as HTMLInputElement;
@@ -45,21 +41,21 @@ const ResetPasswordForm = () => {
             const { requestStatus } = result.meta;
             if (requestStatus === 'rejected') {
                 const message = result.payload as string;
-                setErrorMsg(message);
+                dispatch(setErrorMessage(message));
                 setTimeout(() => {
-                    setErrorMsg('');
+                    dispatch(setErrorMessage(null));
                 }, 3000);
             };
             if (requestStatus === 'fulfilled') {
                 const message = result.payload as string;
-                setSuccessMsg(message);
+                dispatch(setSuccessMessage(message));
                 setResetPasswordFormValues({
                     email: '',
                     newPassword: '',
                     newPasswordConfirmation: ''
                 });
                 setTimeout(() => {
-                    setSuccessMsg('');
+                    dispatch(setSuccessMessage(null));
                     navigate('/sign-in');
                 }, 3000);
             };
@@ -67,41 +63,38 @@ const ResetPasswordForm = () => {
     };
 
     return (
-        <>
-            <Message error={errorMsg} success={successMsg} />
-            <form
-                method="POST"
-                className="app__form reset-password"
-                onSubmit={handleFormSubmit}
-            >
-                <header className="app__form-header">
-                    <h2 className="app__form-h2">Reset Password</h2>
-                </header>
-                <main className="app__form-main">
-                    {resetPasswordFormInputsData.map((input, i) => (
-                        <InputElement
-                            tagType={"input"}
-                            key={i + 1}
-                            type={input.type!}
-                            id={input.id}
-                            placeholder={input.placeholder}
-                            value={resetPasswordFormValues[input.id as keyof typeof resetPasswordFormValues]}
-                            method={handleInputChange}
-                        />
-                    ))}
-                </main>
-                <footer className="app__form-footer">
-                    <div className="app__form-input-container">
-                        <Button
-                            className={"app__action-button submit"}
-                            type={"submit"}
-                            content={"Reset password"}
-                            title={"Reset password"}
-                        />
-                    </div>
-                </footer>
-            </form>
-        </>
+        <form
+            method="POST"
+            className="app__form reset-password"
+            onSubmit={handleFormSubmit}
+        >
+            <header className="app__form-header">
+                <h2 className="app__form-h2">Reset Password</h2>
+            </header>
+            <main className="app__form-main">
+                {resetPasswordFormInputsData.map((input, i) => (
+                    <InputElement
+                        tagType={"input"}
+                        key={i + 1}
+                        type={input.type!}
+                        id={input.id}
+                        placeholder={input.placeholder}
+                        value={resetPasswordFormValues[input.id as keyof typeof resetPasswordFormValues]}
+                        method={handleInputChange}
+                    />
+                ))}
+            </main>
+            <footer className="app__form-footer">
+                <div className="app__form-input-container">
+                    <Button
+                        className={"app__action-button submit"}
+                        type={"submit"}
+                        content={"Reset password"}
+                        title={"Reset password"}
+                    />
+                </div>
+            </footer>
+        </form>
     )
 }
 
