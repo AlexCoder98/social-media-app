@@ -46,7 +46,9 @@ const SignInForm = () => {
                 }, 3000);
             }
             if (requestStatus === 'fulfilled') {
-                const { accessToken, userId, isAuth, message } = result.payload as { accessToken: string, userId: string, isAuth: string, message: string };
+                const { accessToken, userId, isAuth, message } = result.payload as {
+                    accessToken: string, userId: string, isAuth: string, message: string
+                };
                 dispath(setSuccessMessage(message));
                 sessionStorage.setItem('accessToken', accessToken);
                 sessionStorage.setItem('userId', userId);

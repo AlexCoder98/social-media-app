@@ -7,6 +7,7 @@ import Message from '../../Message/Message';
 
 import { useAppDispatch } from '../../../hooks/redux';
 import { signUp } from '../../../state/authentication/actions';
+import { setSuccessMessage, setErrorMessage } from '../../../state/message/messageSlice';
 
 import { signUpFormInputsData } from '../../../helpers/form-data';
 
@@ -20,9 +21,6 @@ const SignUpForm = () => {
         password: '',
         passwordConfirmation: ''
     });
-
-    const [errorMsg, setErrorMsg] = useState<string>('');
-    const [successMsg, setSuccessMsg] = useState<string>('');
 
     const dispatch = useAppDispatch();
     const navigate = useNavigate();
@@ -49,14 +47,14 @@ const SignUpForm = () => {
             const { requestStatus } = result.meta;
             if (requestStatus === 'rejected') {
                 const message = result.payload as string;
-                setErrorMsg(message);
+                dispatch(setErrorMessage(message));
                 setTimeout(() => {
-                    setErrorMsg('');
+                    dispatch(setErrorMessage(null));
                 }, 3000);
             }
             if (requestStatus === 'fulfilled') {
                 const message = result.payload as string;
-                setSuccessMsg(message);
+                dispatch(setSuccessMessage(message));
                 setSignUpFormValues({
                     name: '',
                     surname: '',
@@ -65,7 +63,7 @@ const SignUpForm = () => {
                     passwordConfirmation: ''
                 });
                 setTimeout(() => {
-                    setSuccessMsg('');
+                    dispatch(setSuccessMessage(null));
                     navigate('/sign-in');
                 }, 3000);
             }
@@ -74,7 +72,6 @@ const SignUpForm = () => {
 
     return (
         <>
-            <Message error={errorMsg} success={successMsg} />
             <form
                 method="POST"
                 className="app__form sign-up"
