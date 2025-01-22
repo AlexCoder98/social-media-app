@@ -7,6 +7,7 @@ const SignUpPage = lazy(() => import('../pages/SignUp'));
 const ResetPasswordPage = lazy(() => import('../pages/ResetPassword'));
 const HomePage = lazy(() => import('../pages/Home'));
 const PostsPage = lazy(() => import('../pages/Posts'));
+const FriendsPage = lazy(() => import('../pages/Friends'));
 const UserPage = lazy(() => import('../pages/User'));
 const NotFoundPage = lazy(() => import('../pages/404'));
 
@@ -19,6 +20,7 @@ const Router = () => {
             <Route path='/reset-password' element={<ResetPasswordPage />} />
             <Route path='/home' element={<HomePage />} />
             <Route path='/posts' element={<PostsPage />} />
+            <Route path='/friends' element={<FriendsPage />} />
             <Route path='/user/:userId' element={<UserPage />} />
             <Route path='*' element={<NotFoundPage />} />
         </Routes>
