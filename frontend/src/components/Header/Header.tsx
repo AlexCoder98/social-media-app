@@ -1,8 +1,12 @@
 import Navigation from "./Navigation";
 
+import '../../styles/header/header.scss';
+
 const Header = () => {
     return (
-        <Navigation />
+        <header className="app__header">
+            <Navigation />
+        </header>
     )
 };
 

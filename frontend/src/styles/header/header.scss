@@ -1,0 +1,39 @@
+@use '../variables/colors' as vars;
+
+.app__header {
+    position: fixed;
+    width: 100%;
+    box-shadow: 0 4px 10px -2px vars.$block-boxShadow;
+
+    .app__navigation {
+        display: flex;
+        align-items: center;
+        width: 100%;
+        padding: 0 5rem;
+        background-color: vars.$secondary-bgc;
+
+        &>* {
+            display: flex;
+        }
+
+        .navigation__logo-section {
+            align-items: center;
+
+            .navigation__logo-link {
+                font-size: 40px;
+            }
+        }
+
+        .navigation__navigation-links-container {
+            min-width: 600px;
+            height: 5rem;
+            margin: 0 auto;
+            justify-content: space-around;
+            list-style: none;
+
+            &>* {
+                flex-grow: 1;
+            }
+        }
+    }
+}

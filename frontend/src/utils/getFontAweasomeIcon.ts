@@ -3,14 +3,16 @@ import {
     IconLookup,
     IconDefinition,
     findIconDefinition,
-    IconName
+    IconName,
+    IconPrefix
 } from "@fortawesome/fontawesome-svg-core";
 import { fas } from '@fortawesome/free-solid-svg-icons'
+import { fab } from '@fortawesome/free-brands-svg-icons';
 
-library.add(fas);
+library.add(fas, fab);
 
-export const getFontAwesomeIcon = (icon: IconName | null) => {
-    const iconLookUp: IconLookup = { prefix: 'fas', iconName: icon as IconName };
+export const getFontAwesomeIcon = (prefix: IconPrefix, icon: IconName | null) => {
+    const iconLookUp: IconLookup = { prefix: prefix, iconName: icon! };
     const iconDefinition: IconDefinition = findIconDefinition(iconLookUp);
 
     return iconDefinition;

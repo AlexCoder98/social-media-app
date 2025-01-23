@@ -2,8 +2,10 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 import { getFontAwesomeIcon } from "../../../utils/getFontAweasomeIcon";
 
+import '../../../styles/shared/inputs/search-user-input.scss';
+
 const SearchUsersInput = () => {
-    const searchIcon = getFontAwesomeIcon('magnifying-glass');
+    const searchIcon = getFontAwesomeIcon('fas', 'magnifying-glass');
 
     return (
         <div className="navigation__input-container">
