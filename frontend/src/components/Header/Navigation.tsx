@@ -60,7 +60,7 @@ const Navigation = () => {
                     title="Go to the user page"
                     className="user-section__link"
                 >
-                    Name Surname
+                    <span className="link__text">Name Surname</span>
                 </Link>
                 <Link
                     to="/user/1"
