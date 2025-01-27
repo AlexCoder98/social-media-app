@@ -69,7 +69,7 @@ const Navigation = () => {
                 >
                     <div className="link__user-image-wrapper">
                         <img
-                            src="#"
+                            src="https://images.unsplash.com/photo-1635805737707-575885ab0820?q=80&w=3387&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
                             className="user-image-wrapper__user-image"
                             alt="User Image"
                         />

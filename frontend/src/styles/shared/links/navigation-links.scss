@@ -1,8 +1,23 @@
+@use '../../variables/colors' as vars;
+@use '../../mixins' as mixs;
+
+.navigation-links-container__link-container {
+    padding: .5rem;
+}
+
 .link-container__link {
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    @include mixs.flexItem(flex, center, center);
     height: 100%;
     font-size: 22px;
-    background-color: skyblue;
+    color: vars.$primary-textColor;
+    border-radius: 25px;
+    transition: .2s linear;
+
+    &:hover {
+        @include mixs.colorEffect(vars.$primary-hover-textColor, vars.$primary-textColor);
+    }
+}
+
+.active:not(.navigation__logo-link) {
+    @include mixs.colorEffect(vars.$primary-hover-textColor, vars.$primary-textColor);
 }

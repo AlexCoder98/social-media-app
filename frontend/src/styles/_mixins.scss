@@ -3,3 +3,25 @@
     width: $size;
     border-radius: $borderRadius;
 }
+
+@mixin roundedBorder($border, $borderRadius) {
+    border: $border;
+    border-radius: $borderRadius;
+}
+
+@mixin colorEffect($textColor, $bgc) {
+    color: $textColor;
+    background-color: $bgc;
+}
+
+@mixin positionElement($position, $xProperty, $xValue, $yProperty, $yValue) {
+    position: $position;
+    #{$xProperty}: $xValue;
+    #{$yProperty}: $yValue;
+}
+
+@mixin flexItem($display, $alignItems, $justifyContent) {
+    display: $display;
+    align-items: $alignItems;
+    justify-content: $justifyContent;
+}
