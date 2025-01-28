@@ -7,26 +7,7 @@ import { getFontAwesomeIcon } from "../../utils/getFontAweasomeIcon";
 import SearchUsersInput from "../shared/inputs/SearchUsersInput";
 import NavigationLink from "../shared/links/NavigationLink";
 
-const signInNavigationData = [
-    {
-        path: '/home',
-        content: 'house',
-        title: 'Home Page',
-        className: ''
-    },
-    {
-        path: '/posts',
-        content: 'newspaper',
-        title: 'My Posts',
-        className: ''
-    },
-    {
-        path: '/friends',
-        content: 'users',
-        title: 'Friends',
-        className: ''
-    }
-]
+import { signInNavigationData } from "../../helpers/nav-data";
 
 const SignInNavBar = () => {
     const icon = getFontAwesomeIcon('fab', 'hive');

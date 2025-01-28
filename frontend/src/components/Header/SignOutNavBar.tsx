@@ -6,20 +6,7 @@ import NavigationLink from "../shared/links/NavigationLink";
 
 import { getFontAwesomeIcon } from "../../utils/getFontAweasomeIcon";
 
-const signOutNavigationData = [
-    {
-        path: '/sign-in',
-        content: 'right-to-bracket',
-        title: 'Sign In',
-        className: ''
-    },
-    {
-        path: '/sign-up',
-        content: 'user-plus',
-        title: 'Sign Up',
-        className: ''
-    },
-];
+import { signOutNavigationData } from "../../helpers/nav-data";
 
 const SignOutNavBar = () => {
     const icon = getFontAwesomeIcon('fab', 'hive');
