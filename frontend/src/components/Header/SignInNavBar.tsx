@@ -7,7 +7,7 @@ import { getFontAwesomeIcon } from "../../utils/getFontAweasomeIcon";
 import SearchUsersInput from "../shared/inputs/SearchUsersInput";
 import NavigationLink from "../shared/links/NavigationLink";
 
-const navigationData = [
+const signInNavigationData = [
     {
         path: '/home',
         content: 'house',
@@ -28,7 +28,7 @@ const navigationData = [
     }
 ]
 
-const Navigation = () => {
+const SignInNavBar = () => {
     const icon = getFontAwesomeIcon('fab', 'hive');
     return (
         <nav className="app__navigation">
@@ -43,14 +43,14 @@ const Navigation = () => {
                 <SearchUsersInput />
             </div>
             <ul className="navigation__navigation-links-container">
-                {navigationData.map((el, i) => (
+                {signInNavigationData.map((link, i) => (
                     <NavigationLink
                         key={i}
-                        path={el.path}
+                        path={link.path}
                         prefix={'fas'}
-                        content={el.content}
-                        title={el.title}
-                        className={el.className}
+                        content={link.content}
+                        title={link.title}
+                        className={link.className}
                     />
                 ))}
             </ul>
@@ -80,4 +80,4 @@ const Navigation = () => {
     )
 }
 
-export default Navigation;
+export default SignInNavBar;

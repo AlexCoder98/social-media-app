@@ -69,5 +69,24 @@
                 }
             }
         }
+
+        &.align-right {
+            display: none;
+
+            .navigation__logo-section {
+                flex-grow: 1;
+                width: auto;
+            }
+
+            .navigation__navigation-links-container {
+                max-width: 200px;
+                margin: none;
+                flex-grow: none;
+
+                &>* {
+                    flex-grow: 1;
+                }
+            }
+        }
     }
 }

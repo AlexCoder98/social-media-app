@@ -1,11 +1,13 @@
-import Navigation from "./Navigation";
+import SignInNavBar from "./SignInNavBar";
+import SignOutNavBar from "./SignOutNavBar";
 
 import '../../styles/header/header.scss';
 
 const Header = () => {
     return (
         <header className="app__header">
-            <Navigation />
+            <SignInNavBar />
+            <SignOutNavBar />
         </header>
     )
 };
