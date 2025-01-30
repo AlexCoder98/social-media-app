@@ -15,7 +15,7 @@ const TextInput = ({ id, type, name, value, placeholderValue, labelValue }: ITex
         <div className="app__input-container">
             {labelValue && (
                 <label
-                    htmlFor="id"
+                    htmlFor={id}
                     className="input-container__label"
                 >
                     {labelValue}

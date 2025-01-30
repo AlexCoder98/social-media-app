@@ -1,4 +1,10 @@
+import { Link } from "react-router";
+
 import TextInput from "../../shared/inputs/TextIntput";
+import CheckBoxInput from "../../shared/inputs/CheckBox";
+import Button from "../../shared/buttons/Button";
+
+import { EButtonTypesType } from "../../../types/button";
 
 import { signInFormData } from "../../../helpers/form-data";
 
@@ -24,9 +30,26 @@ const SignInForm = () => {
                 ))}
             </div>
             <div className="form__extra-content-holder">
-                Some text goes here
+                <CheckBoxInput
+                    id={'remember'}
+                    name={'remember'}
+                    isChecked={false}
+                    labelValue={'Remember me'}
+                />
+                <Link
+                    to="/reset-password"
+                    className="form__link"
+                    title="Reset password"
+                >
+                    Forgot password?
+                </Link>
             </div>
-            <button>Submit</button>
+            <Button
+                className={'form__button submit'}
+                content={'Sign In'}
+                type={EButtonTypesType.Submit}
+                title={'Sign in now'}
+            />
         </form>
     );
 };
