@@ -1,5 +1,6 @@
-
 import { EInputTypesType } from '../../../types/input';
+
+import '../../../styles/shared/inputs/text-input.scss';
 
 interface ITextInputProps {
     id: string;
@@ -12,7 +13,7 @@ interface ITextInputProps {
 
 const TextInput = ({ id, type, name, value, placeholderValue, labelValue }: ITextInputProps) => {
     return (
-        <div className="app__input-container">
+        <div className="app__input-container text-input">
             {labelValue && (
                 <label
                     htmlFor={id}
@@ -22,6 +23,7 @@ const TextInput = ({ id, type, name, value, placeholderValue, labelValue }: ITex
                 </label>
             )}
             <input
+                className="input-container__input"
                 id={id}
                 type={type}
                 name={name}

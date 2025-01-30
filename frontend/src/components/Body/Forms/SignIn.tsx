@@ -8,6 +8,8 @@ import { EButtonTypesType } from "../../../types/button";
 
 import { signInFormData } from "../../../helpers/form-data";
 
+import '../../../styles/body/forms/primary-form.scss';
+
 const SignInForm = () => {
     return (
         <form

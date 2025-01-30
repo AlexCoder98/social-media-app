@@ -1,0 +1,20 @@
+@use '../../variables/colors.scss' as vars;
+
+.app__form {
+    width: 27rem;
+    height: 33rem;
+    margin: 8rem auto;
+    padding: 1rem;
+    display: flex;
+    flex-direction: column;
+    background-color: vars.$secondary-bgc;
+    box-shadow: 0 0 5px vars.$block-boxShadow;
+    border-radius: 5px;
+
+    .form__h2 {
+        align-self: center;
+        margin-bottom: 2rem;
+        font-size: 30px;
+        color: vars.$primary-textColor;
+    }
+}

@@ -5,7 +5,7 @@ export const signInFormData = [
         id: 'email',
         type: EInputTypesType.Email,
         name: 'email',
-        value: 'some email',
+        value: 'dasd',
         placeholderValue: 'Email',
         labelValue: 'Email'
     },
@@ -13,7 +13,7 @@ export const signInFormData = [
         id: 'password',
         type: EInputTypesType.Password,
         name: 'password',
-        value: 'some password',
+        value: '',
         placeholderValue: 'Password',
         labelValue: 'Password'
     },

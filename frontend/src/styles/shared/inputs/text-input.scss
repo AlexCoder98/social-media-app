@@ -1,0 +1,36 @@
+@use '../../variables/colors' as vars;
+
+.app__input-container.text-input {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: .7rem;
+    color: vars.$primary-textColor;
+
+    .input-container__label {
+        margin: 0 0 .3rem .2rem;
+        font-size: 16px;
+        font-weight: bolder;
+    }
+
+    .input-container__input {
+        padding: 10px;
+        font-size: 16px;
+        border-radius: 5px;
+        border: 1px solid vars.$block-borderColor;
+        outline: none;
+        transition: .2s linear;
+
+        &:focus {
+            background-color: #f3f3f3;
+        }
+
+        &::placeholder {
+            font-size: 14px;
+            transition: .2s linear;
+        }
+
+        &:focus::placeholder {
+            font-size: 12px;
+        }
+    }
+}
