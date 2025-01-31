@@ -1,0 +1,16 @@
+@use '../../variables/colors.scss' as vars;
+@use '../../mixins' as mixs;
+
+.form__button[data-type="submit"] {
+    @include mixs.colorEffect(vars.$submit-button-textColor, vars.$submit-button-bgc);
+    @include mixs.roundedBorder(none, 5px);
+    padding: .8rem;
+    font-size: 18px;
+    text-transform: uppercase;
+    transition: .2s linear;
+    cursor: pointer;
+
+    &:hover {
+        background-color: vars.$submit-hoverButton-bgc;
+    }
+}

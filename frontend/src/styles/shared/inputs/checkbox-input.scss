@@ -1,0 +1,17 @@
+@use '../../variables/colors' as vars;
+
+.app__input-container.checkbox {
+    display: flex;
+    align-items: center;
+    gap: .3rem;
+    margin-left: 2px;
+
+    .input-container__label {
+        font-size: 12px;
+        color: vars.$primary-textColor;
+    }
+
+    &>* {
+        cursor: pointer;
+    }
+}

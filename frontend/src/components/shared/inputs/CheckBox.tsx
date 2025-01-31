@@ -1,3 +1,5 @@
+import '../../../styles/shared/inputs/checkbox-input.scss';
+
 interface ICheckBoxInputProps {
     id: string;
     name: string;
@@ -7,7 +9,7 @@ interface ICheckBoxInputProps {
 
 const CheckBoxInput = ({ id, name, isChecked, labelValue }: ICheckBoxInputProps) => {
     return (
-        <div className="app__input-container">
+        <div className="app__input-container checkbox">
             <input
                 id={id}
                 type="checkbox"

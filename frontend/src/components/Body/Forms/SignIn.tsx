@@ -2,9 +2,7 @@ import { Link } from "react-router";
 
 import TextInput from "../../shared/inputs/TextIntput";
 import CheckBoxInput from "../../shared/inputs/CheckBox";
-import Button from "../../shared/buttons/Button";
-
-import { EButtonTypesType } from "../../../types/button";
+import SubmitButton from "../../shared/buttons/Submit";
 
 import { signInFormData } from "../../../helpers/form-data";
 
@@ -46,10 +44,8 @@ const SignInForm = () => {
                     Forgot password?
                 </Link>
             </div>
-            <Button
-                className={'form__button submit'}
+            <SubmitButton
                 content={'Sign In'}
-                type={EButtonTypesType.Submit}
                 title={'Sign in now'}
             />
         </form>
