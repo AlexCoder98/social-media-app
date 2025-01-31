@@ -3,7 +3,7 @@
 
 .app__form {
     width: 27rem;
-    height: 33rem;
+    min-height: 33rem;
     margin: 8rem auto;
     padding: 2rem;
     display: flex;
@@ -22,6 +22,7 @@
     .form__extra-content-holder {
         @include mixs.flexItem(flex, flex-start, space-between);
         flex-grow: 1;
+        margin-bottom: 3rem;
 
         .form__link {
             height: fit-content;
