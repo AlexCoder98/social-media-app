@@ -1,5 +1,5 @@
-import SignInNavBar from "./SignInNavBar";
-import SignOutNavBar from "./SignOutNavBar";
+import SignInNavBar from "./SignIn/SignInNavBar";
+import SignOutNavBar from "./SignOut/SignOutNavBar";
 
 import '../../styles/header/header.scss';
 

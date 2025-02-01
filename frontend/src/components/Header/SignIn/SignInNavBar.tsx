@@ -2,12 +2,12 @@ import { NavLink, Link } from "react-router";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
-import { getFontAwesomeIcon } from "../../utils/getFontAweasomeIcon";
+import { getFontAwesomeIcon } from "../../../utils/getFontAweasomeIcon";
 
-import SearchUsersInput from "../shared/inputs/SearchUsersInput";
-import NavigationLink from "../shared/links/NavigationLink";
+import SearchUsersInput from "../../shared/inputs/SearchUsersInput";
+import NavigationLink from "../../shared/links/NavigationLink";
 
-import { signInNavigationData } from "../../helpers/nav-data";
+import { signInNavigationData } from "../../../helpers/nav-data";
 
 const SignInNavBar = () => {
     const icon = getFontAwesomeIcon('fab', 'hive');

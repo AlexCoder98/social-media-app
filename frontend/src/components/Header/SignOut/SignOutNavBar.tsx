@@ -2,11 +2,11 @@ import { NavLink } from "react-router";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
-import NavigationLink from "../shared/links/NavigationLink";
+import NavigationLink from "../../shared/links/NavigationLink";
 
-import { getFontAwesomeIcon } from "../../utils/getFontAweasomeIcon";
+import { getFontAwesomeIcon } from "../../../utils/getFontAweasomeIcon";
 
-import { signOutNavigationData } from "../../helpers/nav-data";
+import { signOutNavigationData } from "../../../helpers/nav-data";
 
 const SignOutNavBar = () => {
     const icon = getFontAwesomeIcon('fab', 'hive');
