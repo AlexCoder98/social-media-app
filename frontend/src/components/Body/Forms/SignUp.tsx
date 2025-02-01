@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import { Link } from 'react-router';
 
 import TextInput from '../../shared/inputs/TextIntput';
@@ -9,6 +10,27 @@ import { signUpFormData } from '../../../helpers/form-data';
 import '../../../styles/body/forms/primary-form.scss';
 
 const SignUpForm = () => {
+    const [signUpFormValues, setSignUpFormValues] = useState({
+        name: '',
+        surname: '',
+        email: '',
+        password: '',
+        passwordConfirmation: '',
+    });
+    const [isChecked, setIsChecked] = useState(false);
+
+    const handleOnInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+        const { id, value } = e.target;
+        setSignUpFormValues(prev => ({
+            ...prev,
+            [id]: value,
+        }));
+    }
+
+    const handleOnCheckboxChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+        setIsChecked(e.target.checked);
+    };
+
     return (
         <form
             action="#"
@@ -24,7 +46,8 @@ const SignUpForm = () => {
                         type={el.type}
                         name={el.name}
                         placeholderValue={el.placeholderValue}
-                        value={el.value}
+                        value={signUpFormValues[el.id as keyof typeof signUpFormValues]}
+                        onChange={handleOnInputChange}
                         labelValue={el.labelValue}
                     />
                 ))}
@@ -33,7 +56,8 @@ const SignUpForm = () => {
                 <CheckBoxInput
                     id={'accept-consent'}
                     name={'accept-consent'}
-                    isChecked={false}
+                    isChecked={isChecked}
+                    onChange={handleOnCheckboxChange}
                     labelValue={'I agree to the Terms of Users'}
                 />
                 <Link

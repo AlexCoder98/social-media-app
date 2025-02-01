@@ -1,3 +1,5 @@
+import { useState } from 'react';
+
 import TextInput from '../../shared/inputs/TextIntput';
 import SubmitButton from '../../shared/buttons/Submit';
 
@@ -6,6 +8,20 @@ import { resetPasswordFormData } from '../../../helpers/form-data';
 import '../../../styles/body/forms/primary-form.scss';
 
 const ResetPasswordForm = () => {
+    const [resetPasswordFormValues, setResetPasswordFormValues] = useState({
+        email: '',
+        newPassword: '',
+        confirmNewPassword: '',
+    });
+
+    const handleOnInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+        const { id, value } = e.target;
+        setResetPasswordFormValues(prev => ({
+            ...prev,
+            [id]: value,
+        }));
+    };
+
     return (
         <form
             action="#"
@@ -21,7 +37,8 @@ const ResetPasswordForm = () => {
                         type={el.type}
                         name={el.name}
                         placeholderValue={el.placeholderValue}
-                        value={el.value}
+                        value={resetPasswordFormValues[el.id as keyof typeof resetPasswordFormValues]}
+                        onChange={handleOnInputChange}
                         labelValue={el.labelValue}
                     />
                 ))}
