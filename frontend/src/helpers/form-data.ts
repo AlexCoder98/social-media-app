@@ -60,4 +60,31 @@ export const signUpFormData = [
         placeholderValue: 'Confirm password',
         labelValue: 'Confirm password',
     },
-]
+];
+
+export const resetPasswordFormData = [
+    {
+        id: 'email',
+        type: EInputTypesType.Email,
+        name: 'email',
+        value: 'dasd',
+        placeholderValue: 'Email',
+        labelValue: 'Email'
+    },
+    {
+        id: 'newPassword',
+        type: EInputTypesType.Password,
+        name: 'newPassword',
+        value: '',
+        placeholderValue: 'New password',
+        labelValue: 'New password'
+    },
+    {
+        id: 'confirmNewPassword',
+        type: EInputTypesType.Password,
+        name: 'confirmNewPassword',
+        value: '',
+        placeholderValue: 'Confirm new password',
+        labelValue: 'Confirm new password'
+    },
+];
