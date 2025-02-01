@@ -4,10 +4,11 @@ interface ICheckBoxInputProps {
     id: string;
     name: string;
     isChecked: boolean;
+    onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
     labelValue?: string;
 }
 
-const CheckBoxInput = ({ id, name, isChecked, labelValue }: ICheckBoxInputProps) => {
+const CheckBoxInput = ({ id, name, isChecked, onChange, labelValue }: ICheckBoxInputProps) => {
     return (
         <div className="app__input-container checkbox">
             <input
@@ -15,6 +16,7 @@ const CheckBoxInput = ({ id, name, isChecked, labelValue }: ICheckBoxInputProps)
                 type="checkbox"
                 name={name}
                 checked={isChecked}
+                onChange={onChange}
             />
             {labelValue && (
                 <label

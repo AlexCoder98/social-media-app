@@ -6,12 +6,13 @@ interface ITextInputProps {
     id: string;
     type: EInputTypesType;
     name: string;
-    value: string;
     placeholderValue: string;
+    value: string;
+    onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
     labelValue?: string;
 }
 
-const TextInput = ({ id, type, name, value, placeholderValue, labelValue }: ITextInputProps) => {
+const TextInput = ({ id, type, name, placeholderValue, value, onChange, labelValue }: ITextInputProps) => {
     return (
         <div className="app__input-container text-input">
             {labelValue && (
@@ -29,6 +30,7 @@ const TextInput = ({ id, type, name, value, placeholderValue, labelValue }: ITex
                 name={name}
                 placeholder={placeholderValue}
                 value={value}
+                onChange={onChange}
             />
         </div>
     );

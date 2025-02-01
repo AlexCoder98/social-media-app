@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { Link } from "react-router";
 
 import TextInput from "../../shared/inputs/TextIntput";
@@ -9,6 +10,24 @@ import { signInFormData } from "../../../helpers/form-data";
 import '../../../styles/body/forms/primary-form.scss';
 
 const SignInForm = () => {
+    const [signInFormValues, setSignInFormValues] = useState({
+        email: '',
+        password: ''
+    });
+    const [isChecked, setIsChecked] = useState(false);
+
+    const handleOnInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+        const { id, value } = e.target;
+        setSignInFormValues(prev => ({
+            ...prev,
+            [id]: value,
+        }));
+    };
+
+    const handleOnCheckboxChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+        setIsChecked(e.target.checked);
+    };
+
     return (
         <form
             action="#"
@@ -24,7 +43,8 @@ const SignInForm = () => {
                         type={el.type}
                         name={el.name}
                         placeholderValue={el.placeholderValue}
-                        value={el.value}
+                        value={signInFormValues[el.id as keyof typeof signInFormValues]}
+                        onChange={handleOnInputChange}
                         labelValue={el.labelValue}
                     />
                 ))}
@@ -33,7 +53,8 @@ const SignInForm = () => {
                 <CheckBoxInput
                     id={'remember'}
                     name={'remember'}
-                    isChecked={false}
+                    isChecked={isChecked}
+                    onChange={handleOnCheckboxChange}
                     labelValue={'Remember me'}
                 />
                 <Link
