@@ -11,10 +11,12 @@ const Body = () => {
     return (
         <main className="app__body">
             <Router />
-            <ValidationMessage
-                successMsg={successMessage}
-                errorMsg={errorMessage}
-            />
+            {successMessage || errorMessage && (
+                <ValidationMessage
+                    successMsg={successMessage}
+                    errorMsg={errorMessage}
+                />
+            )}
         </main>
     )
 }
