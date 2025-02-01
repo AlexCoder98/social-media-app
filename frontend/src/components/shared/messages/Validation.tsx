@@ -1,11 +1,11 @@
+import '../../../styles/shared/messages/validation-message.scss';
+
 interface IValidationMessageProps {
     successMsg: string | null;
     errorMsg: string | null;
 }
 
 const ValidationMessage = ({ successMsg, errorMsg }: IValidationMessageProps) => {
-
-
     return (
         <div className={`app__validation-message ${errorMsg ? 'error' : 'success'}`}>
             <p className="validation-message__text">

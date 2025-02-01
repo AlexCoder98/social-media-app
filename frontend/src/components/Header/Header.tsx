@@ -7,7 +7,7 @@ const Header = () => {
     return (
         <header className="app__header">
             <SignInNavBar />
-            <SignOutNavBar />
+            {/* <SignOutNavBar /> */}
         </header>
     )
 };
