@@ -28,11 +28,17 @@ const SignInForm = () => {
         setIsChecked(e.target.checked);
     };
 
+    const handleOnSubmit = (e: React.FormEvent) => {
+        e.preventDefault();
+        console.log(signInFormValues);
+    }
+
     return (
         <form
-            action="#"
+            method="POST"
             className="app__form"
             data-form-name="sign-in"
+            onSubmit={handleOnSubmit}
         >
             <h2 className="form__h2">Sign In</h2>
             <div className="form__input-fields-holder">

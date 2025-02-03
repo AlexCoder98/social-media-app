@@ -1,8 +1,8 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 
 interface IInitialAuthState {
-    accessToken: null;
-    userId: null;
+    accessToken: string | null;
+    userId: string | null;
 }
 
 const initialState: IInitialAuthState = {

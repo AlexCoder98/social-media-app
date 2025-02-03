@@ -13,7 +13,7 @@ export const signInFormData = [
         type: EInputTypesType.Password,
         name: 'password',
         placeholderValue: 'Password',
-        labelValue: 'Password'
+        labelValue: 'Password',
     },
 ];
 
