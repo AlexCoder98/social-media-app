@@ -5,11 +5,14 @@ import TextInput from "../../shared/inputs/TextIntput";
 import CheckBoxInput from "../../shared/inputs/CheckBox";
 import SubmitButton from "../../shared/buttons/Submit";
 
+// import { useSignInMutation } from "../../../state/api/appApiSlice";
+
 import { signInFormData } from "../../../helpers/form-data";
 
 import '../../../styles/body/forms/primary-form.scss';
 
 const SignInForm = () => {
+    // const [signIn, { data, isError, isLoading }] = useSignInMutation({});
     const [signInFormValues, setSignInFormValues] = useState({
         email: '',
         password: ''
@@ -28,9 +31,20 @@ const SignInForm = () => {
         setIsChecked(e.target.checked);
     };
 
-    const handleOnSubmit = (e: React.FormEvent) => {
+    const handleOnSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
-        console.log(signInFormValues);
+        try {
+            const reqData = {
+                email: signInFormValues.email,
+                password: signInFormValues.password,
+            };
+
+            // const result = await signIn(reqData);
+
+            // console.log(result);
+        } catch (error) {
+            console.log(error);
+        }
     }
 
     return (

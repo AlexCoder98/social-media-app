@@ -2,12 +2,14 @@ import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 
 interface IInitialAuthState {
     accessToken: string | null;
+    isAuth: boolean;
     userId: string | null;
 }
 
 const initialState: IInitialAuthState = {
-    accessToken: null,
-    userId: null,
+    accessToken: sessionStorage.getItem('accessToken'),
+    isAuth: sessionStorage.getItem('accessToken') ? true : false,
+    userId: sessionStorage.getItem('userId'),
 }
 
 const authSlice = createSlice({

@@ -16,7 +16,7 @@ export const appApiSlice = createApi({
         baseUrl: 'http://localhost:8080',
     }),
     endpoints: (builder) => ({
-        signIn: builder.mutation<TReqType, TResType>({
+        signIn: builder.mutation<TResType, TReqType>({
             query: (reqData) => ({
                 url: '/sign-in',
                 method: 'POST',
