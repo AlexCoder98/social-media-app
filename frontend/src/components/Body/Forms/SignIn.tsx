@@ -5,19 +5,25 @@ import TextInput from "../../shared/inputs/TextIntput";
 import CheckBoxInput from "../../shared/inputs/CheckBox";
 import SubmitButton from "../../shared/buttons/Submit";
 
-// import { useSignInMutation } from "../../../state/api/appApiSlice";
+import { useSignInMutation } from "../../../state/api/appApiSlice";
+import { signIn } from "../../../state/auth/authSlice";
+
+import { useAppDispatch } from "../../../hooks/redux";
+import { setErrorMessage, setSuccessMessage } from "../../../state/message/messageSlice";
 
 import { signInFormData } from "../../../helpers/form-data";
 
 import '../../../styles/body/forms/primary-form.scss';
 
 const SignInForm = () => {
-    // const [signIn, { data, isError, isLoading }] = useSignInMutation({});
+    const [getSignedInUserData] = useSignInMutation({});
     const [signInFormValues, setSignInFormValues] = useState({
         email: '',
         password: ''
     });
     const [isChecked, setIsChecked] = useState(false);
+
+    const dispatch = useAppDispatch();
 
     const handleOnInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         const { id, value } = e.target;
@@ -39,11 +45,23 @@ const SignInForm = () => {
                 password: signInFormValues.password,
             };
 
-            // const result = await signIn(reqData);
+            const { data, error } = await getSignedInUserData(reqData);
+            if (error) {
+                const { data: { message } } = error as { data: { message: string } };
+                throw new Error(message);
+            }
 
-            // console.log(result);
+            await dispatch(signIn(data));
+            // dispatch(setSuccessMessage('Signed In!'));
+            // setTimeout(() => {
+            //     setSuccessMessage(null);
+            // }, 3000);
         } catch (error) {
-            console.log(error);
+            const errorMsg = (error as Error).message;
+            dispatch(setErrorMessage(errorMsg));
+            setTimeout(() => {
+                dispatch(setErrorMessage(null));
+            }, 3000);
         }
     }
 

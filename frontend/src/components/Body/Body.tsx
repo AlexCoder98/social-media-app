@@ -8,6 +8,9 @@ import '../../styles/body/body.scss';
 const Body = () => {
     const { successMessage, errorMessage } = useAppSelector(state => state.messageReducer);
 
+    console.log(successMessage);
+    console.log(errorMessage);
+
     return (
         <main className="app__body">
             <Router />

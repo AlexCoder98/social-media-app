@@ -1,14 +1,6 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 
-type TReqType = {
-    email: string;
-    password: string;
-}
-
-type TResType = {
-    accessToken: string;
-    userId: string;
-}
+import { TSignInReqData, TSignInResData } from "../../types/api-slice/auth";
 
 export const appApiSlice = createApi({
     reducerPath: 'appApi',
@@ -16,7 +8,7 @@ export const appApiSlice = createApi({
         baseUrl: 'http://localhost:8080',
     }),
     endpoints: (builder) => ({
-        signIn: builder.mutation<TResType, TReqType>({
+        signIn: builder.mutation<TSignInResData, TSignInReqData>({
             query: (reqData) => ({
                 url: '/sign-in',
                 method: 'POST',
