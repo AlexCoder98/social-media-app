@@ -43,6 +43,7 @@ export const postSignUp = async (req: Request, res: Response, next: NextFunction
 
 export const postSignIn = async (req: Request, res: Response, next: NextFunction) => {
     const { email, password } = req.body;
+
     try {
         const errors = validationResult(req);
         if (!errors.isEmpty()) {
@@ -75,7 +76,6 @@ export const postSignIn = async (req: Request, res: Response, next: NextFunction
             .json({
                 accessToken: accessToken,
                 userId: user._id.toString(),
-                isAuth: 'true'
             });
     } catch (err) {
         next(err);
@@ -106,7 +106,7 @@ export const postResetPassword = async (req: Request, res: Response, next: NextF
 
         res
             .status(200)
-            .json({ "message": "Password has been changed successfully" });
+            .json({ message: 'Password has been changed successfully' });
     } catch (err) {
         next(err);
     }

@@ -175,7 +175,7 @@ export const postAuthenticationSettings = async (req: Request, res: Response, ne
                 const error = new CustomError(message, 403);
                 throw error;
             }
-            ;
+
             if (!newPassword.match(passwordRegex)) {
                 const message = 'Password has to be at least 7 characters long, must contain at least one upper and lower case letter, digit and special sign';
                 throw new Error(message);
