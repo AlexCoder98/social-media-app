@@ -8,6 +8,7 @@ export const appApiSlice = createApi({
     baseQuery: fetchBaseQuery({
         baseUrl: 'http://localhost:8080',
     }),
+    tagTypes: ['User'],
     endpoints: (builder) => ({
         fetchUserSectionNavData: builder.query<TUserSectionNavData, TSignInResData>({
             query: (reqData) => ({
@@ -16,6 +17,7 @@ export const appApiSlice = createApi({
                     Authorization: `Bearer ${reqData.accessToken}`,
                 }
             }),
+            providesTags: ['User'],
         }),
         signIn: builder.mutation<TSignInResData, TSignInReqData>({
             query: (reqData) => ({

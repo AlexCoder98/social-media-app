@@ -2,7 +2,7 @@
 @use '../../mixins' as mixs;
 
 .navigation__input-container {
-    @include mixs.roundedBorder(1px solid vars.$block-borderColor, 25px);
+    @include mixs.roundedBorder(1px solid vars.$block-borderColor, 5px);
     display: flex;
     align-items: center;
     margin-left: 2rem;
