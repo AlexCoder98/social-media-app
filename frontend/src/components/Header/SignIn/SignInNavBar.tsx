@@ -1,4 +1,4 @@
-import { NavLink, Link } from "react-router";
+import { NavLink, Link, useNavigate } from "react-router";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
@@ -7,10 +7,41 @@ import { getFontAwesomeIcon } from "../../../utils/getFontAweasomeIcon";
 import SearchUsersInput from "../../shared/inputs/SearchUsersInput";
 import NavigationLink from "../../shared/links/NavigationLink";
 
+import { useAppDispatch } from "../../../hooks/redux";
+import { signOut } from "../../../state/auth/authSlice";
+import { setSuccessMessage, setErrorMessage } from "../../../state/message/messageSlice";
+
 import { signInNavigationData } from "../../../helpers/nav-data";
 
 const SignInNavBar = () => {
+    const dispatch = useAppDispatch();
+    const navigate = useNavigate();
+
     const icon = getFontAwesomeIcon('fab', 'hive');
+
+    const handleOnClick = async () => {
+        try {
+            const result = await dispatch(signOut());
+            const { meta: { requestStatus }, payload } = result;
+
+            if (requestStatus === 'rejected') {
+                const message = 'Something went wrong. Cannot sign out!';
+                throw new Error(message);
+            }
+
+            dispatch(setSuccessMessage(payload));
+            setTimeout(() => {
+                dispatch(setSuccessMessage(null));
+            }, 3000);
+            navigate('/');
+        } catch (error) {
+            dispatch(setErrorMessage((error as Error).message));
+            setTimeout(() => {
+                dispatch(setErrorMessage(null));
+            }, 3000);
+        }
+    }
+
     return (
         <nav className="app__navigation">
             <div className="navigation__logo-section">
@@ -57,6 +88,9 @@ const SignInNavBar = () => {
                     </div>
                 </Link>
             </div>
+            <button
+                onClick={handleOnClick}
+            >Sign out</button>
         </nav>
     )
 }

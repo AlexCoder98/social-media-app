@@ -17,11 +17,17 @@ const authSlice = createSlice({
     initialState: initialState,
     reducers: {},
     extraReducers: (builder) => {
-        builder.addCase(signIn.fulfilled, (state, { payload }) => {
-            state.accessToken = payload.accessToken;
-            state.isAuth = true;
-            state.userId = payload.userId;
-        });
+        builder
+            .addCase(signIn.fulfilled, (state, { payload }) => {
+                state.accessToken = payload.accessToken;
+                state.isAuth = true;
+                state.userId = payload.userId;
+            })
+            .addCase(signOut.fulfilled, (state) => {
+                state.accessToken = null;
+                state.isAuth = false;
+                state.userId = null;
+            })
     }
 });
 
@@ -36,6 +42,15 @@ export const signIn = createAsyncThunk(
             accessToken: sessionStorage.getItem('accessToken'),
             userId: sessionStorage.getItem('userId'),
         };
+    }
+);
+
+export const signOut = createAsyncThunk(
+    'auth/signOut',
+    async () => {
+        sessionStorage.removeItem('accessToken');
+        sessionStorage.removeItem('userId');
+        return 'Successfully signed out';
     }
 );
 
