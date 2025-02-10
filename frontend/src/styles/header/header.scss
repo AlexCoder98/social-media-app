@@ -5,6 +5,7 @@
     @include mixs.positionElement(fixed, top, 0, left, 0);
     width: 100%;
     box-shadow: 0 4px 10px -2px vars.$block-boxShadow;
+    z-index: 1;
 
     .app__navigation {
         display: flex;
@@ -66,6 +67,7 @@
 
                 &:first-of-type:hover {
                     text-decoration: underline;
+                    color: vars.$primary-textColor;
                 }
             }
         }

@@ -1,6 +1,7 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 
 import { TSignInReqData, TSignInResData } from "../../types/api-slice/auth";
+import { TUserSectionNavData } from "../../types/api-slice/user";
 
 export const appApiSlice = createApi({
     reducerPath: 'appApi',
@@ -8,6 +9,14 @@ export const appApiSlice = createApi({
         baseUrl: 'http://localhost:8080',
     }),
     endpoints: (builder) => ({
+        fetchUserSectionNavData: builder.query<TUserSectionNavData, TSignInResData>({
+            query: (reqData) => ({
+                url: `/user/${reqData.userId}`,
+                headers: {
+                    Authorization: `Bearer ${reqData.accessToken}`,
+                }
+            }),
+        }),
         signIn: builder.mutation<TSignInResData, TSignInReqData>({
             query: (reqData) => ({
                 url: '/sign-in',
@@ -21,4 +30,4 @@ export const appApiSlice = createApi({
     })
 });
 
-export const { useSignInMutation } = appApiSlice;
+export const { useSignInMutation, useFetchUserSectionNavDataQuery } = appApiSlice;
