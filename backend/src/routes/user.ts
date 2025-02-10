@@ -5,6 +5,7 @@ import { body } from 'express-validator';
 import { isAuthenticated } from '../middleware/auth';
 
 import {
+    fetchUser,
     getUser,
     getSettings,
     getProfileSettings,
@@ -17,6 +18,8 @@ import {
 import { messages } from '../helpers/messages';
 
 const router = express.Router();
+
+router.get('/user/:userId', isAuthenticated, fetchUser);
 
 router.get('/profile', isAuthenticated, getUser);
 

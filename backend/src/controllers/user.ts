@@ -7,6 +7,28 @@ import CustomError from '../utils/error';
 
 import { passwordRegex } from '../utils/regex';
 
+export const fetchUser = async (req: Request, res: Response, next: NextFunction) => {
+    const { userId } = req;
+    try {
+        const user = await User.findById(userId);
+        if (!user) {
+            const message = 'Failed to fetch the user';
+            const error = new CustomError(message, 404);
+            throw error;
+        }
+
+        const resUserObj = {
+            name: user.name,
+            surname: user.surname,
+            profileImage: user.profileImage,
+        };
+
+        res.status(200).json(resUserObj);
+    } catch (error) {
+        next(error);
+    }
+}
+
 export const getUser = async (req: Request, res: Response, next: NextFunction) => {
     const { userId } = req;
     try {
