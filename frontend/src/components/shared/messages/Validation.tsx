@@ -6,6 +6,9 @@ interface IValidationMessageProps {
 }
 
 const ValidationMessage = ({ successMsg, errorMsg }: IValidationMessageProps) => {
+
+    console.log(successMsg, errorMsg);
+
     return (
         <div className={`app__validation-message ${errorMsg ? 'error' : 'success'}`}>
             <p className="validation-message__text">

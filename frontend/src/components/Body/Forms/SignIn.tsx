@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Link } from "react-router";
+import { Link, useNavigate } from "react-router";
 
 import TextInput from "../../shared/inputs/TextIntput";
 import CheckBoxInput from "../../shared/inputs/CheckBox";
@@ -24,6 +24,7 @@ const SignInForm = () => {
     const [isChecked, setIsChecked] = useState(false);
 
     const dispatch = useAppDispatch();
+    const navigate = useNavigate();
 
     const handleOnInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         const { id, value } = e.target;
@@ -51,11 +52,17 @@ const SignInForm = () => {
                 throw new Error(message);
             }
 
-            await dispatch(signIn(data));
-            // dispatch(setSuccessMessage('Signed In!'));
-            // setTimeout(() => {
-            //     setSuccessMessage(null);
-            // }, 3000);
+            const result = await dispatch(signIn(data));
+            const { meta: { requestStatus } } = result;
+            if (requestStatus === 'rejected') {
+                const message = 'Something went wrong. Try again!';
+                throw new Error(message);
+            }
+            dispatch(setSuccessMessage('Signed In!'));
+            setTimeout(() => {
+                setSuccessMessage(null);
+            }, 3000);
+            navigate('/home');
         } catch (error) {
             const errorMsg = (error as Error).message;
             dispatch(setErrorMessage(errorMsg));
