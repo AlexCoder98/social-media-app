@@ -1,6 +1,13 @@
+import RegularPost from "../components/Body/Posts/RegularPost";
+
 const PostsPage = () => {
     return (
-        <div>Posts Page</div>
+        <div
+            className="app__page"
+            data-page-name="posts"
+        >
+            <RegularPost />
+        </div>
     )
 }
 
