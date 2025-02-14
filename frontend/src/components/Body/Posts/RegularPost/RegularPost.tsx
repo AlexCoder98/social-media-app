@@ -1,4 +1,8 @@
-import { TPostData } from "../../../types/api-slice/post";
+import PostCreator from "./PostCreatorBlock";
+
+import { TPostData } from "../../../../types/api-slice/post";
+
+import '../../../../styles/body/posts/regular-post.scss';
 
 const RegularPost = (
     { id, title, description, image, creationDate, creator }: TPostData
@@ -9,9 +13,13 @@ const RegularPost = (
             data-id={id}
         >
             <div className="post__header">
-                <div className="post__creator-data-container">
-                    Creator Data
-                </div>
+                <PostCreator
+                    id={creator.id}
+                    name={creator.name}
+                    surname={creator.surname}
+                    profileImage={creator.profileImage}
+                    creationDate={creationDate}
+                />
                 <div className="post__functional-buttons-container">
                     <button>FN Button</button>
                 </div>

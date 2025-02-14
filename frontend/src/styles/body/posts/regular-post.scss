@@ -1,0 +1,30 @@
+@use '../../variables/colors' as vars;
+@use '../../mixins' as mixs;
+
+.app__post {
+    display: flex;
+    flex-direction: column;
+    width: 600px;
+    background-color: vars.$secondary-bgc;
+    box-shadow: 0 0 10px vars.$block-boxShadow;
+    border-radius: 5px;
+
+    .post__header {
+        padding: .5rem;
+    }
+
+    .post__body {
+        .post__text-content-wrapper {
+            padding: .5rem;
+        }
+
+        .post__image {
+            max-width: 100%;
+        }
+    }
+
+    .post__footer {
+        padding: .5rem;
+    }
+
+}

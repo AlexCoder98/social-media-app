@@ -1,4 +1,5 @@
 type TPostCreator = {
+    id: string;
     name: string;
     surname: string;
     profileImage: string;
