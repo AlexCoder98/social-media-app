@@ -1,6 +1,7 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 
 import { TSignInReqData, TSignInResData } from "../../types/api-slice/auth";
+import { TPostData } from "../../types/api-slice/post";
 import { TUserSectionNavData } from "../../types/api-slice/user";
 
 export const appApiSlice = createApi({
@@ -19,6 +20,14 @@ export const appApiSlice = createApi({
             }),
             providesTags: ['User'],
         }),
+        getUserPosts: builder.query<TPostData[], string>({
+            query: (accessToken) => ({
+                url: '/my-posts',
+                headers: {
+                    Authorization: `Bearer ${accessToken}`,
+                }
+            })
+        }),
         signIn: builder.mutation<TSignInResData, TSignInReqData>({
             query: (reqData) => ({
                 url: '/sign-in',
@@ -32,4 +41,6 @@ export const appApiSlice = createApi({
     })
 });
 
-export const { useSignInMutation, useFetchUserSectionNavDataQuery } = appApiSlice;
+export const {
+    useFetchUserSectionNavDataQuery, useSignInMutation, useGetUserPostsQuery
+} = appApiSlice;

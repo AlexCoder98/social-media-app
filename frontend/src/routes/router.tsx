@@ -27,7 +27,7 @@ const Router = () => {
             </Route>
             <Route element={<ProtectedRoutes />}>
                 <Route path='/home' element={<HomePage />} />
-                <Route path='/posts' element={<PostsPage />} />
+                <Route path='/my-posts' element={<PostsPage />} />
                 <Route path='/friends' element={<FriendsPage />} />
                 <Route path='/user/:userId' element={<UserPage />} />
             </Route>

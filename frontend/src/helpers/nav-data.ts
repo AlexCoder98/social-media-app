@@ -6,7 +6,7 @@ export const signInNavigationData = [
         className: ''
     },
     {
-        path: '/posts',
+        path: '/my-posts',
         content: 'newspaper',
         title: 'My Posts',
         className: ''
