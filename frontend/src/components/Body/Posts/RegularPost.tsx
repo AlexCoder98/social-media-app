@@ -20,7 +20,20 @@ const RegularPost = () => {
                     </div>
                     <button>Show more...</button>
                 </div>
-                <div></div>
+                <div className="post__image-wrapper">
+                    <img
+                        className="post__image"
+                        src=""
+                        alt="Some Alternative text"
+                    />
+                </div>
+            </div>
+            <div className="post__footer">
+                <div className="post__buttons-container">
+                    <button>Like</button>
+                    <button>Leave a comment</button>
+                    <button>Share</button>
+                </div>
             </div>
         </div>
     );
