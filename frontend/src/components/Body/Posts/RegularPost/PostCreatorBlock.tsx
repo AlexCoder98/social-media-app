@@ -1,3 +1,5 @@
+import { Link } from "react-router";
+
 interface IPostCreatorProps {
     id: string;
     name: string;
@@ -9,11 +11,33 @@ interface IPostCreatorProps {
 const PostCreator = (
     { id, name, surname, profileImage, creationDate }: IPostCreatorProps
 ) => {
-    console.log(name, surname);
-
     return (
         <div className="post__creator-data-container">
-            Creator Data
+            <div className="post__creator-image-container">
+                <Link
+                    to={`/user/${id}`}
+                    className="post__creator-image-link"
+                    title={`${name} ${surname} profile`}
+                >
+                    <div className="post__creator-image-wrapper">
+                        <img
+                            className="post__creator-image"
+                            src={`http://localhost:8080/${profileImage}`}
+                            alt={`${name} ${surname} image`}
+                        />
+                    </div>
+                </Link>
+            </div>
+            <div className="post__creator-name-container">
+                <Link
+                    to={`/user/${id}`}
+                    className="post__creator-name-link"
+                    title={`${name} ${surname} profile`}
+                >
+                    {name} {surname}
+                </Link>
+                <p className="post__creation-date">{creationDate}</p>
+            </div>
         </div>
     );
 };
