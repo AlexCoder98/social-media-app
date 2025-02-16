@@ -1,4 +1,5 @@
 import PostCreator from "./PostCreatorBlock";
+import ToggleButton from "../../../shared/buttons/ToggleButton";
 
 import { TPostData } from "../../../../types/api-slice/post";
 
@@ -7,6 +8,11 @@ import '../../../../styles/body/posts/regular-post.scss';
 const RegularPost = (
     { id, title, description, image, creationDate, creator }: TPostData
 ) => {
+
+    const showOptions = () => {
+        console.log('Click');
+    }
+
     return (
         <div
             className="app__post"
@@ -21,7 +27,12 @@ const RegularPost = (
                     creationDate={creationDate}
                 />
                 <div className="post__functional-buttons-container">
-                    <button>FN Button</button>
+                    <ToggleButton
+                        className={'post__toggle-button'}
+                        onClick={showOptions}
+                        prefix={'fa'}
+                        content={'ellipsis'}
+                    />
                 </div>
             </div>
             <div className="post__body">

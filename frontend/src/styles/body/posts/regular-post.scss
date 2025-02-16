@@ -13,13 +13,12 @@
         padding: .5rem;
         display: flex;
         align-items: center;
-        border-bottom: 1px solid vars.$block-borderColor;
 
         .post__creator-data-container {
+            flex-grow: 1;
             display: flex;
             align-items: center;
             gap: .5rem;
-            width: 80%;
 
             .post__creator-image-link {
                 display: block;
@@ -62,7 +61,23 @@
             }
         }
 
+        .post__functional-buttons-container {
 
+            .post__toggle-button {
+                padding: 5px;
+                font-size: 20px;
+                color: vars.$primary-textColor;
+                background-color: transparent;
+                border: none;
+                border-radius: 50%;
+                transition: .2s linear;
+                cursor: pointer;
+
+                &:hover {
+                    background-color: vars.$toggle-hoverButton-bgc;
+                }
+            }
+        }
     }
 
     .post__body {
