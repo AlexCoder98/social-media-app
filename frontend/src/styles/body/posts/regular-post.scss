@@ -11,6 +11,58 @@
 
     .post__header {
         padding: .5rem;
+        display: flex;
+        align-items: center;
+        border-bottom: 1px solid vars.$block-borderColor;
+
+        .post__creator-data-container {
+            display: flex;
+            align-items: center;
+            gap: .5rem;
+            width: 80%;
+
+            .post__creator-image-link {
+                display: block;
+
+                .post__creator-image-wrapper {
+                    @include mixs.circle(35px, 50%);
+                    transition: .2s linear;
+
+                    .post__creator-image {
+                        @include mixs.circle(100%, 50%);
+                        object-fit: cover;
+                        object-position: center;
+                    }
+                }
+
+                &:hover .post__creator-image-wrapper {
+                    filter: brightness(.8);
+                }
+            }
+
+            .post__creator-name-container {
+
+                .post__creator-name-link {
+                    margin-bottom: .2rem;
+                    font-size: 14px;
+                    font-weight: bolder;
+                    text-decoration: none;
+                    color: vars.$primary-textColor;
+
+                    &:hover {
+                        text-decoration: underline;
+                    }
+                }
+
+                .post__creation-date {
+                    font-size: 10px;
+                    font-weight: bolder;
+                    color: vars.$secondary-textColor;
+                }
+            }
+        }
+
+
     }
 
     .post__body {
