@@ -1,0 +1,35 @@
+@use '../../variables/colors' as vars;
+@use '../../mixins' as mixs;
+
+.app__loader {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+    width: fit-content;
+    margin: 17rem auto;
+    color: vars.$primary-textColor;
+
+    .loader__spinner-wrapper {
+        .loader__spinner {
+            @include mixs.circle(50px, 50%);
+            @include mixs.roundedBorder(4px dotted vars.$primary-textColor, 50%);
+            animation: moveSpinner 4s ease-in-out both infinite;
+        }
+    }
+
+    .loader__text {
+        font-size: 20px;
+        font-weight: bolder;
+    }
+}
+
+@keyframes moveSpinner {
+    0% {
+        transform: rotate(0deg);
+    }
+
+    100% {
+        transform: rotate(360deg);
+    }
+}

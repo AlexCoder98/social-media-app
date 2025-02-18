@@ -1,4 +1,5 @@
 import RegularPost from "../components/Body/Posts/RegularPost/RegularPost";
+import Loader from "../components/shared/messages/Loader";
 
 import { useAppSelector } from "../hooks/redux";
 import { useGetAllPostsQuery } from "../state/api/appApiSlice";
@@ -16,7 +17,7 @@ const HomePage = () => {
             className="app__page"
             data-page-name="home"
         >
-            {isLoading ? <h1>Loading...</h1> : (
+            {isLoading ? <Loader /> : (
                 <ul className="app__posts-list">
                     {posts ? posts.map(post => (
                         <RegularPost
