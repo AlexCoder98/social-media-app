@@ -81,17 +81,53 @@
     }
 
     .post__body {
+        border-bottom: 1px solid vars.$block-borderColor;
+
         .post__text-content-wrapper {
             padding: .5rem;
+
+            .post__text-content {
+                font-size: 14px;
+                color: vars.$primary-textColor;
+            }
         }
 
-        .post__image {
-            max-width: 100%;
+        .post__image-wrapper {
+            height: 300px;
+            overflow-y: hidden;
+
+            .post__image {
+                object-fit: cover;
+                object-position: top center;
+                max-width: 100%;
+            }
         }
+
+        .post__reactions-section {
+            display: flex;
+            gap: .5rem;
+            padding: .5rem;
+
+            .post__reaction {
+                font-size: 14px;
+                color: vars.$secondary-textColor;
+
+                &[data-reaction="like"] {
+                    flex-grow: 1;
+                }
+            }
+        }
+
     }
 
     .post__footer {
         padding: .5rem;
+
+        .post__buttons-container {
+            display: flex;
+            justify-content: space-between;
+            gap: .5rem;
+        }
     }
 
 }

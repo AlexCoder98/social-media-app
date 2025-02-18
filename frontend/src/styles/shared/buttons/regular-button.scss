@@ -1,0 +1,29 @@
+@use '../../variables/colors' as vars;
+@use '../../mixins' as mixs;
+
+.post__regular-button {
+    @include mixs.roundedBorder(none, 5px);
+    @include mixs.colorEffect(vars.$primary-textColor, transparent);
+    flex-grow: 1;
+    padding: 1rem 1.5rem;
+    font-size: 16px;
+    font-weight: bolder;
+    transition: .2s linear;
+    cursor: pointer;
+
+    &:hover {
+        color: vars.$post-buttons-hover-color;
+    }
+
+    &.like:hover {
+        background-color: vars.$like-button-bgc;
+    }
+
+    &.comment:hover {
+        background-color: vars.$comment-button-bgc;
+    }
+
+    &.share:hover {
+        background-color: vars.$share-button-bgc;
+    }
+}

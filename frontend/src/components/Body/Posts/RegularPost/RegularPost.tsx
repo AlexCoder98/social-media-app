@@ -1,5 +1,6 @@
 import PostCreator from "./PostCreatorBlock";
 import ToggleButton from "../../../shared/buttons/ToggleButton";
+import RegularButton from "../../../shared/buttons/RegularButton";
 
 import { TPostData } from "../../../../types/api-slice/post";
 
@@ -40,7 +41,6 @@ const RegularPost = (
                     <div className="post__text-content-holder">
                         <p className="post__text-content">{description}</p>
                     </div>
-                    <button>Show more...</button>
                 </div>
                 <div className="post__image-wrapper">
                     <img
@@ -49,12 +49,35 @@ const RegularPost = (
                         alt={title}
                     />
                 </div>
+                <div className="post__reactions-section">
+                    <p className="post__reaction" data-reaction="like">0 likes</p>
+                    <p className="post__reaction" data-reaction="comment">0 comments</p>
+                    <p className="post__reaction" data-reaction="sharing">0 shares</p>
+                </div>
             </div>
             <div className="post__footer">
                 <div className="post__buttons-container">
-                    <button>Like</button>
-                    <button>Leave a comment</button>
-                    <button>Share</button>
+                    <RegularButton
+                        className={'post__regular-button like'}
+                        title={'Give a like!'}
+                        content={'Like it'}
+                        prefix={'fa-regular'}
+                        iconName={'thumbs-up'}
+                    />
+                    <RegularButton
+                        className={'post__regular-button comment'}
+                        title={'Leave a comment'}
+                        content={'Comment'}
+                        prefix={'fa-regular'}
+                        iconName={'comment'}
+                    />
+                    <RegularButton
+                        className={'post__regular-button share'}
+                        title={'Share this post'}
+                        content={'Share'}
+                        prefix={'fa-regular'}
+                        iconName={'share-from-square'}
+                    />
                 </div>
             </div>
         </div>
