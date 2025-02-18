@@ -20,6 +20,14 @@ export const appApiSlice = createApi({
             }),
             providesTags: ['User'],
         }),
+        getAllPosts: builder.query<TPostData[], string>({
+            query: (accessToken) => ({
+                url: 'home',
+                headers: {
+                    Authorization: `Bearer ${accessToken}`,
+                }
+            })
+        }),
         getUserPosts: builder.query<TPostData[], string>({
             query: (accessToken) => ({
                 url: '/my-posts',
@@ -42,5 +50,5 @@ export const appApiSlice = createApi({
 });
 
 export const {
-    useFetchUserSectionNavDataQuery, useSignInMutation, useGetUserPostsQuery
+    useFetchUserSectionNavDataQuery, useSignInMutation, useGetAllPostsQuery, useGetUserPostsQuery
 } = appApiSlice;

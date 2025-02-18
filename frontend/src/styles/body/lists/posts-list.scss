@@ -1,6 +1,15 @@
+@use '../../variables/colors' as vars;
+
 .app__posts-list {
     display: flex;
     flex-direction: column;
     align-items: center;
     gap: 3rem;
+
+    .no-posts {
+        margin-top: 17rem;
+        font-size: 30px;
+        font-weight: bolder;
+        color: vars.$primary-textColor;
+    }
 }

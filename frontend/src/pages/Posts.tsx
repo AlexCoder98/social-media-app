@@ -29,7 +29,7 @@ const PostsPage = () => {
                         creationDate={post.creationDate}
                     />
                 )) : (
-                    <h2>No posts yet!</h2>
+                    <p className="no-posts">No posts yet!</p>
                 )}
             </ul>
 
